@@ -7,7 +7,7 @@ export default function Button({
   handleClick,
 }: {
   text: string;
-  handleClick: () => void;
+  handleClick?: () => void;
   color?: "colored" | "white" | "gray";
 }) {
   return (
@@ -26,17 +26,14 @@ const getColorStyles = (color: string) => {
         border: 1px solid var(--The-julge-purple-40, #905cb9);
 
         :active {
-          background: var(--The-julge-gray-10, #f2f2f3);
+          background: var(--The-julge-purple-10, #f2f2f3);
         }
       `;
     case "gray":
       return css`
         background: var(--The-julge-gray-40, #a4a1aa);
         color: var(--The-julge-gray-00, #fff);
-
-        :active {
-          background: var(--The-julge-gray-50, #7d7986);
-        }
+        cursor: not-allowed;
       `;
     default:
       return css`
