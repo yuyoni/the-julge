@@ -1,6 +1,4 @@
-import notificationCircle from "@/public/notification_circle.svg";
 import styled from "@emotion/styled";
-import Image from "next/image";
 import { Notification } from "./types/type";
 
 export default function Notification({
@@ -11,7 +9,24 @@ export default function Notification({
 }: Notification) {
   return (
     <Wrapper>
-      <Image src={notificationCircle} alt="notification_status_icon" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="5"
+        height="5"
+        viewBox="0 0 5 5"
+        fill="none"
+      >
+        <circle
+          cx="2.5"
+          cy="2.5"
+          r="2.5"
+          fill={
+            result === "accepted"
+              ? "var(--The-julge-blue-20, #0080FF)"
+              : "var(--The-julge-red, #EC5A46)"
+          }
+        />
+      </svg>
       <p>
         {name}
         {formattedTime} 공고 지원이 {result === "accepted" ? "승인" : "거절"}
