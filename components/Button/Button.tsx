@@ -48,7 +48,6 @@ const getColorStyles = (color: string) => {
 };
 
 const Container = styled.button<{
-  $width?: number;
   $color?: "colored" | "white" | "gray";
 }>`
   display: inline-flex;
