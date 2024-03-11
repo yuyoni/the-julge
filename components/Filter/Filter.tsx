@@ -1,8 +1,8 @@
 import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
-import Image from "next/image";
 import { useState } from "react";
 import Button from "../Button/Button";
+import CloseButton from "../Button/CloseButton";
 import LocationBadgeBox from "./LocationBadgeBox";
 import LocationOption from "./LocationOption";
 
@@ -36,13 +36,10 @@ export default function Filter({
       <Wrapper>
         <Header>
           <Title>상세 필터</Title>
-          <Image
+          <CloseButton
             src={closeIcon}
-            alt="exit"
-            onClick={() => {
-              handleModalClose(false);
-            }}
-            style={{ cursor: "pointer" }}
+            alt="close_icon"
+            handleClick={handleModalClose}
           />
         </Header>
         <Subtitle>위치</Subtitle>

@@ -3,7 +3,7 @@ type SelectedLocationList = LocationString[];
 
 interface FilterProps {
   isModalVisible: boolean;
-  handleModalClose: (isModalVisible: boolean) => void;
+  handleModalClose: () => void;
 }
 
 interface LocationOptionProps {
