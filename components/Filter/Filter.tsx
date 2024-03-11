@@ -14,6 +14,8 @@ export default function Filter({
   handleModalClose: (isModalVisible: boolean) => void;
 }) {
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+  const [startsAtValue, setStartsAtValue] = useState<string>("");
+  const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
 
   const toggleLocation = (location: string) => {
     if (selectedLocations.includes(location)) {
@@ -23,6 +25,12 @@ export default function Filter({
     } else {
       setSelectedLocations([...selectedLocations, location]);
     }
+  };
+
+  const clearFilters = () => {
+    setSelectedLocations([]);
+    setStartsAtValue("");
+    setHourlyPayValue("");
   };
 
   return (
@@ -36,6 +44,7 @@ export default function Filter({
             onClick={() => {
               handleModalClose(false);
             }}
+            style={{ cursor: "pointer" }}
           />
         </Header>
         <Subtitle>위치</Subtitle>
@@ -61,19 +70,23 @@ export default function Filter({
         </BadgeContainer>
         <BorderLine />
         <Subtitle>시작일</Subtitle>
-        <Input type="text" placeholder="입력" />
+        <Input
+          type="text"
+          placeholder="입력"
+          value={startsAtValue}
+          onChange={(e) => setStartsAtValue(e.target.value)}
+        />
         <BorderLine />
         <Subtitle>금액</Subtitle>
-        <Input type="text" placeholder="입력" />
+        <Input
+          type="text"
+          placeholder="입력"
+          value={hourlyPayValue}
+          onChange={(e) => setHourlyPayValue(e.target.value)}
+        />
         <ButtonContainer>
           <ButtonWrapper $width={82}>
-            <Button
-              text="초기화"
-              handleClick={() => {
-                console.log("초기화");
-              }}
-              color="white"
-            />
+            <Button text="초기화" handleClick={clearFilters} color="white" />
           </ButtonWrapper>
           <ButtonWrapper $width={260}>
             <Button

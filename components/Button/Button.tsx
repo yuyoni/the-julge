@@ -51,7 +51,7 @@ const Container = styled.button<{
   $color?: "colored" | "white" | "gray";
 }>`
   display: inline-flex;
-  padding: 14px 18px;
+  padding: 12px 12px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
