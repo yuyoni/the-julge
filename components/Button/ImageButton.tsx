@@ -1,16 +1,16 @@
 import Image from "next/image";
 
-interface CloseButtonProps {
+interface ImageButtonProps {
   src: string;
   alt: string;
   handleClick?: () => void;
 }
 
-export default function CloseButton({
+export default function ImageButton({
   src,
   alt,
   handleClick,
-}: CloseButtonProps) {
+}: ImageButtonProps) {
   return (
     <button onClick={handleClick}>
       <Image src={src} alt={alt} />

@@ -2,7 +2,7 @@ import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Button from "../Button/Button";
-import CloseButton from "../Button/CloseButton";
+import ImageButton from "../Button/ImageButton";
 import LocationBadgeBox from "./LocationBadgeBox";
 import LocationOption from "./LocationOption";
 
@@ -36,7 +36,7 @@ export default function Filter({
       <Wrapper>
         <Header>
           <Title>상세 필터</Title>
-          <CloseButton
+          <ImageButton
             src={closeIcon}
             alt="close_icon"
             handleClick={handleModalClose}
