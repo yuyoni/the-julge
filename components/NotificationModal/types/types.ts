@@ -1,11 +1,11 @@
-export type Notification = {
+export interface Notification {
   name: string;
   result: string;
   elapsedTime: string;
   formattedTime: string;
-};
+}
 
-export type NotificationItem = {
+export interface NotificationItem {
   item: {
     id: string;
     createdAt: string;
@@ -22,4 +22,4 @@ export type NotificationItem = {
       };
     };
   };
-};
+}
