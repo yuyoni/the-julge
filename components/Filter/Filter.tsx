@@ -1,23 +1,21 @@
+import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import closeIcon from "@/public/images/close_icon.svg";
-import LocationBadge from "./LocationBadge";
-import Button from "../Button/Button";
-import LOCATIONS from "./constants/constants";
 import { useState } from "react";
+import Button from "../Button/Button";
+import LocationBadgeBox from "./LocationBadgeBox";
+import LocationOption from "./LocationOption";
 
 export default function Filter({
   isModalVisible,
   handleModalClose,
-}: {
-  isModalVisible: boolean;
-  handleModalClose: (isModalVisible: boolean) => void;
-}) {
-  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+}: FilterProps) {
+  const [selectedLocations, setSelectedLocations] =
+    useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
   const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
 
-  const toggleLocation = (location: string) => {
+  const toggleLocation = (location: LocationString) => {
     if (selectedLocations.includes(location)) {
       setSelectedLocations(
         selectedLocations.filter((item) => item !== location),
@@ -48,26 +46,14 @@ export default function Filter({
           />
         </Header>
         <Subtitle>위치</Subtitle>
-        <Container>
-          {LOCATIONS.map((location) => (
-            <LocationOption
-              key={location}
-              onClick={() => toggleLocation(location)}
-              $isSelected={selectedLocations.includes(location)}
-            >
-              {location}
-            </LocationOption>
-          ))}
-        </Container>
-        <BadgeContainer>
-          {selectedLocations.map((location) => (
-            <LocationBadge
-              key={location}
-              text={location}
-              handleClick={toggleLocation}
-            />
-          ))}
-        </BadgeContainer>
+        <LocationOption
+          selectedLocations={selectedLocations}
+          toggleLocation={toggleLocation}
+        />
+        <LocationBadgeBox
+          selectedLocations={selectedLocations}
+          toggleLocation={toggleLocation}
+        />
         <BorderLine />
         <Subtitle>시작일</Subtitle>
         <Input
@@ -133,41 +119,6 @@ const Subtitle = styled.span`
   font-size: 16px;
 `;
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 20px 16px;
-  overflow-y: scroll;
-  border-radius: 6px;
-  border: 1px solid var(--The-julge-gray-20, #e5e4e7);
-  background: var(--The-julge-white, #fff);
-  font-size: 14px;
-
-  width: 350px;
-  height: 258px;
-`;
-
-const LocationOption = styled.div<{ $isSelected: boolean }>`
-  cursor: pointer;
-  padding: 8px 8px;
-  margin: 4px;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 16px;
-  background-color: ${({ $isSelected }) =>
-    $isSelected ? "var(--The-julge-purple-40)" : "transparent"};
-  color: ${({ $isSelected }) =>
-    $isSelected ? "var(--The-julge-gray-00)" : "var(--The-julge-black)"};
-`;
-
-const BadgeContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  padding: 10px;
-  gap: 8px;
-`;
-
 const BorderLine = styled.div`
   width: 100%;
   height: 2px;
@@ -176,6 +127,7 @@ const BorderLine = styled.div`
   background: var(--The-julge-gray-10, #f2f2f3);
 `;
 
+// Input 공통 컴포넌트로 변경예정
 const Input = styled.input`
   display: flex;
   padding: 16px 20px;
