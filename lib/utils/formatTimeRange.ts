@@ -4,10 +4,14 @@ export default function formatTimeRange(startsAt: string, workhour: number) {
 
   endsTime.setHours(endsTime.getHours() + workhour);
 
-  const formattedStartsAt = startsTime.toLocaleString("ko-KR", {
-    timeZone: "UTC",
-  });
-  const formattedEndsAt = endsTime.toLocaleString("ko-KR", { timeZone: "UTC" });
+  const formattedStartsAt = startsTime
+    .toLocaleString("ko-KR", {
+      timeZone: "UTC",
+    })
+    .slice(0, -3);
+  const formattedEndsAt = endsTime
+    .toLocaleString("ko-KR", { timeZone: "UTC" })
+    .slice(0, -3);
 
   return `(${formattedStartsAt} ~ ${formattedEndsAt})`;
 }
