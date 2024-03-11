@@ -9,7 +9,7 @@ import {
   FilterProps,
   LocationString,
   SelectedLocationList,
-} from "./types/type";
+} from "./types/types";
 
 export default function Filter({
   isModalVisible,

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import LOCATIONS from "./constants/constants";
-import { LocationOptionProps } from "./types/type";
+import { LocationOptionProps } from "./types/types";
 
 export default function LocationOption({
   selectedLocations,
