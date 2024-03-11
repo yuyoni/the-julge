@@ -61,7 +61,6 @@ export default function Filter({
         </BadgeContainer>
         <BorderLine />
         <Subtitle>시작일</Subtitle>
-        <BadgeContainer />
         <Input type="text" placeholder="입력" />
         <BorderLine />
         <Subtitle>금액</Subtitle>
@@ -93,6 +92,10 @@ export default function Filter({
 
 const Wrapper = styled.div`
   display: flex;
+  position: absolute;
+  top: 100px;
+  right: 238px;
+
   width: 390px;
   padding: 24px 20px;
   flex-direction: column;
