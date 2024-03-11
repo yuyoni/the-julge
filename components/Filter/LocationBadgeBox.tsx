@@ -1,6 +1,7 @@
 import closeIcon from "@/public/images/purple_close_icon.svg";
 import styled from "@emotion/styled";
 import ImageButton from "../Button/ImageButton";
+import { LocationBadgeBoxProps } from "./types/type";
 
 export default function LocationBadgeBox({
   selectedLocations,

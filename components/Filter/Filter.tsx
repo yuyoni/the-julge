@@ -5,6 +5,11 @@ import Button from "../Button/Button";
 import ImageButton from "../Button/ImageButton";
 import LocationBadgeBox from "./LocationBadgeBox";
 import LocationOption from "./LocationOption";
+import {
+  FilterProps,
+  LocationString,
+  SelectedLocationList,
+} from "./types/type";
 
 export default function Filter({
   isModalVisible,

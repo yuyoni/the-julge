@@ -1,17 +1,17 @@
-type LocationString = string;
-type SelectedLocationList = LocationString[];
+export type LocationString = string;
+export type SelectedLocationList = LocationString[];
 
-interface FilterProps {
+export interface FilterProps {
   isModalVisible: boolean;
   handleModalClose: () => void;
 }
 
-interface LocationOptionProps {
+export interface LocationOptionProps {
   selectedLocations: SelectedLocationList;
   toggleLocation: (location: LocationString) => void;
 }
 
-interface LocationBadgeBoxProps {
+export interface LocationBadgeBoxProps {
   selectedLocations: SelectedLocationList;
   toggleLocation: (location: LocationString) => void;
 }
