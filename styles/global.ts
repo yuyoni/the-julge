@@ -53,6 +53,9 @@ export const globalStyles = css`
     /* Box Shadow */
     --shadow-1pt: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
     --shadow-2pt: 0px 2px 8px 0px rgba(120, 116, 134, 0.25);
+
+    /* overlay box */
+    --The-julge-overlay-box: rgba(0, 0, 0, 0.7);
   }
 
   * {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { h1 } from "../styles/fontsStyle";
+import { h1 } from "@/styles/fontsStyle";
 
 export default function Overlay() {
   return (
@@ -15,7 +15,7 @@ const OverlayWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--The-julge-overlay-box);
   display: flex;
   align-items: center;
   justify-content: center;
