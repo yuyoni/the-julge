@@ -1,17 +1,18 @@
 import styled from "@emotion/styled";
+import getWageIncreaseText from "../utils/getWageIncreaseText";
 
-function getWageIncreaseText(hourlyPay: number, originalHourlyPay: number) {
-  const increaseRate =
-    ((hourlyPay - originalHourlyPay) / originalHourlyPay) * 100;
+interface WageFlagProps {
+  hourlyPay: number;
+  originalHourlyPay: number;
+}
 
-  if (increaseRate >= 100) {
-    return "시급 100% ▲";
-  } else if (increaseRate >= 50) {
-    return "시급 50% ▲";
-  } else if (increaseRate >= 30) {
-    return "시급 30% ▲";
-  }
-  return null;
+export default function WageFlag({
+  hourlyPay,
+  originalHourlyPay,
+}: WageFlagProps) {
+  const wageIncreaseText = getWageIncreaseText(hourlyPay, originalHourlyPay);
+
+  return wageIncreaseText && <WageFlagStyle>{wageIncreaseText}</WageFlagStyle>;
 }
 
 const WageFlagStyle = styled.div`
@@ -25,15 +26,3 @@ const WageFlagStyle = styled.div`
   font-size: 13px;
   line-height: 15px;
 `;
-
-export default function WageFlag({
-  hourlyPay,
-  originalHourlyPay,
-}: {
-  hourlyPay: number;
-  originalHourlyPay: number;
-}) {
-  const wageIncreaseText = getWageIncreaseText(hourlyPay, originalHourlyPay);
-
-  return wageIncreaseText && <WageFlagStyle>{wageIncreaseText}</WageFlagStyle>;
-}
