@@ -21,7 +21,7 @@ const WageFlagStyle = styled.div`
   color: white;
   top: 12px;
   left: 12px;
-  padding: 4px 7px;
+  padding: 6px 12px;
   font-size: 13px;
   line-height: 15px;
 `;
@@ -35,5 +35,5 @@ export default function WageFlag({
 }) {
   const wageIncreaseText = getWageIncreaseText(hourlyPay, originalHourlyPay);
 
-  return wageIncreaseText && <WageFlagStyle>시급 50% ▲</WageFlagStyle>;
+  return wageIncreaseText && <WageFlagStyle>{wageIncreaseText}</WageFlagStyle>;
 }
