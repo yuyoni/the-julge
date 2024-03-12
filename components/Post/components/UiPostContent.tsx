@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { body1Regular, h2, h3 } from "../styles/fontsStyle";
+import Image from "next/image";
+import { body1Regular, h2 } from "@/styles/fontsStyle";
 
 export interface PostUiPostContentProps {
   name: string;
@@ -20,9 +21,23 @@ export default function UiPostContent({
     <PostContent>
       <PostName>{name}</PostName>
       <Time>
+        <Image
+          src="/images/clock-icon 1.svg"
+          alt="시계아이콘"
+          height={20}
+          width={20}
+        />
         {duration} ({workhour}시간)
       </Time>
-      <Location>{address}</Location>
+      <Location>
+        <Image
+          src="/images/location.svg"
+          alt="지도아이콘"
+          height={20}
+          width={20}
+        />
+        {address}
+      </Location>
       <Wage>{hourlyPay.toLocaleString("ko-KR")}원</Wage>
     </PostContent>
   );
