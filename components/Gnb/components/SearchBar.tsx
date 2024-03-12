@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { julgeCaptionStyle } from "../types/text";
+import { julgeCaptionStyle } from "../styles/textStyles";
 import React, { useState } from "react";
 
-const SearchBar = () => {
+export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
 
@@ -30,7 +30,7 @@ const SearchBar = () => {
       onKeyDown={handlePressEnter}
     />
   );
-};
+}
 
 const SearchInput = styled.input`
   grid-area: search;
@@ -66,5 +66,3 @@ const SearchInput = styled.input`
     font-style: caption;
   }
 `;
-
-export default SearchBar;

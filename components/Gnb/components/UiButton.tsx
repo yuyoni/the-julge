@@ -1,4 +1,4 @@
-import { julgeBodyBold } from "../types/text";
+import { julgeBodyBold } from "../styles/textStyles";
 import styled from "@emotion/styled";
 
 interface ButtonProps {

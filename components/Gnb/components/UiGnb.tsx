@@ -1,12 +1,32 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
-import HeaderButtons from "./components/HeaderButtons";
-import SearchBar from "./components/SearchBar";
+import HeaderButtons from "./HeaderButtons";
+import SearchBar from "./SearchBar";
 
 interface GnbProps {
   userType?: "employee" | "employer" | "guest" | undefined;
   hasNotification: boolean;
   handleClickMovePage: (pathname?: string) => void;
+}
+
+export default function UiGnb({
+  userType,
+  hasNotification,
+  handleClickMovePage,
+}: GnbProps) {
+  return (
+    <GnbWrapper>
+      <Logo href="/">
+        <Image src="/images/logo.svg" alt="더줄게" width={112} height={40} />
+      </Logo>
+      <SearchBar />
+      <HeaderButtons
+        userType={userType}
+        handleClickMovePage={handleClickMovePage}
+        hasNotification={hasNotification}
+      />
+    </GnbWrapper>
+  );
 }
 
 const GnbWrapper = styled.div`
@@ -34,7 +54,6 @@ const GnbWrapper = styled.div`
   }
 `;
 
-//Logo
 const Logo = styled.a`
   grid-area: logo;
   width: 112px;
@@ -51,23 +70,3 @@ const Logo = styled.a`
     margin-right: auto;
   }
 `;
-
-export default function UiGnb({
-  userType,
-  hasNotification,
-  handleClickMovePage,
-}: GnbProps) {
-  return (
-    <GnbWrapper>
-      <Logo href="/">
-        <Image src="/images/logo.svg" alt="더줄게" width={112} height={40} />
-      </Logo>
-      <SearchBar />
-      <HeaderButtons
-        userType={userType}
-        handleClickMovePage={handleClickMovePage}
-        hasNotification={hasNotification}
-      />
-    </GnbWrapper>
-  );
-}
