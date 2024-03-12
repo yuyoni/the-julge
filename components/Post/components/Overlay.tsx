@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { h1 } from "../styles/fontsStyle";
 
 export default function Overlay() {
   return (
@@ -28,9 +29,7 @@ const OverlayDiv = styled.div`
 `;
 
 const OverlayText = styled.div`
-  font-size: 24px;
-  font-weight: 500;
-  color: rgb(255, 255, 255);
-  line-height: 35px;
+  color: var(--The-julge-gray-00);
   text-transform: capitalize;
+  ${h1}
 `;
