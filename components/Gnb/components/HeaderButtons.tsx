@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import UiButton from "./UiButton";
 import NotiButton from "./NotiButton";
+
 interface HeaderButtonsProps {
   userType?: "employee" | "employer" | "guest" | undefined;
   hasNotification: boolean;

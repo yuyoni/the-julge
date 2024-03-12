@@ -1,4 +1,4 @@
-import { julgeBodyBold } from "../styles/textStyles";
+import { julgeBodyBold } from "../styles/fonstStyle";
 import styled from "@emotion/styled";
 
 interface ButtonProps {
@@ -8,13 +8,6 @@ interface ButtonProps {
 }
 
 export default function UiButton({ name, id, handleClickButton }: ButtonProps) {
-  const Button = styled.button`
-    height: 20px;
-    background-color: transparent;
-    line-height: 20px;
-    ${julgeBodyBold};
-  `;
-
   const handleClickMovePage = () => {
     handleClickButton(id as string);
   };
@@ -25,3 +18,10 @@ export default function UiButton({ name, id, handleClickButton }: ButtonProps) {
     </Button>
   );
 }
+
+const Button = styled.button`
+  height: 20px;
+  background-color: transparent;
+  line-height: 20px;
+  ${julgeBodyBold};
+`;

@@ -1,23 +1,23 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { julgeCaptionStyle } from "../styles/textStyles";
+import { julgeCaptionStyle } from "../styles/fonstStyle";
 import React, { useState } from "react";
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
-  const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+  const handlePressKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
       if (searchTerm) {
         router.push(`/search?keyword=${searchTerm}`);
       }
     }
-    if (e.key === "Escape") {
+    if (event.key === "Escape") {
       setSearchTerm("");
     }
   };
@@ -27,7 +27,7 @@ export default function SearchBar() {
       value={searchTerm}
       placeholder="가게 이름으로 찾아보세요"
       onChange={handleChangeInput}
-      onKeyDown={handlePressEnter}
+      onKeyDown={handlePressKey}
     />
   );
 }
@@ -41,7 +41,7 @@ const SearchInput = styled.input`
   padding-left: 40px;
 
   &:placeholder {
-    color: var(--The-julge-gray-40, #a4a1aa);
+    color: var(--The-julge-gray-40);
   }
 
   &:focus {
@@ -49,7 +49,7 @@ const SearchInput = styled.input`
   }
 
   &:hover {
-    background-color: var(--The-julge-gray-10, #a4a1aa);
+    background-color: var(--The-julge-gray-10);
   }
 
   ${julgeCaptionStyle}
