@@ -8,7 +8,7 @@ export default function Signin() {
   return (
     <CenteredContainer>
       <Wrapper>
-        <Image src={logo} alt="logo_button" width={208} height={38} />
+        <Image src={logo} alt="logo_button" width={248} height={45} />
         <SigninForm />
         <ToSignup />
       </Wrapper>
