@@ -1,5 +1,15 @@
 import styled from "@emotion/styled";
 
+export default function Overlay() {
+  return (
+    <OverlayWrapper>
+      <OverlayDiv>
+        <OverlayText>마감 완료</OverlayText>
+      </OverlayDiv>
+    </OverlayWrapper>
+  );
+}
+
 const OverlayWrapper = styled.div`
   position: absolute;
   width: 100%;
@@ -24,13 +34,3 @@ const OverlayText = styled.div`
   line-height: 35px;
   text-transform: capitalize;
 `;
-
-export default function Overlay() {
-  return (
-    <OverlayWrapper>
-      <OverlayDiv>
-        <OverlayText>마감 완료</OverlayText>
-      </OverlayDiv>
-    </OverlayWrapper>
-  );
-}

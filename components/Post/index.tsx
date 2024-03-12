@@ -1,12 +1,6 @@
 import styled from "@emotion/styled";
 import UiImage from "./components/UiImage";
 import UiPostContent from "./components/UiPostContent";
-const CardLink = styled.a`
-  display: flex;
-  flex-direction: column;
-  color: rgb(51, 51, 51);
-  cursor: pointer;
-`;
 
 export interface PostProps {
   noticeId: string;
@@ -53,3 +47,10 @@ export default function Post({ item }: { item: PostProps }) {
     </CardLink>
   );
 }
+
+const CardLink = styled.a`
+  display: flex;
+  flex-direction: column;
+  color: rgb(51, 51, 51);
+  cursor: pointer;
+`;

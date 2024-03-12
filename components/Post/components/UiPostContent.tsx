@@ -1,6 +1,33 @@
 import styled from "@emotion/styled";
 import { body1Regular, h2, h3 } from "../styles/fontsStyle";
 
+export interface PostUiPostContentProps {
+  name: string;
+  duration: string;
+  workhour: number;
+  address: string;
+  hourlyPay: number;
+}
+
+export default function UiPostContent({
+  name,
+  duration,
+  workhour,
+  address,
+  hourlyPay,
+}: PostUiPostContentProps) {
+  return (
+    <PostContent>
+      <PostName>{name}</PostName>
+      <Time>
+        {duration} ({workhour}시간)
+      </Time>
+      <Location>{address}</Location>
+      <Wage>{hourlyPay.toLocaleString("ko-KR")}원</Wage>
+    </PostContent>
+  );
+}
+
 const PostContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,29 +58,3 @@ const Wage = styled.div`
   ${h2}
   text-align:right;
 `;
-export interface PostUiPostContentProps {
-  name: string;
-  duration: string;
-  workhour: number;
-  address: string;
-  hourlyPay: number;
-}
-
-export default function UiPostContent({
-  name,
-  duration,
-  workhour,
-  address,
-  hourlyPay,
-}: PostUiPostContentProps) {
-  return (
-    <PostContent>
-      <PostName>{name}</PostName>
-      <Time>
-        {duration} ({workhour}시간)
-      </Time>
-      <Location>{address}</Location>
-      <Wage>{hourlyPay.toLocaleString("ko-KR")}원</Wage>
-    </PostContent>
-  );
-}
