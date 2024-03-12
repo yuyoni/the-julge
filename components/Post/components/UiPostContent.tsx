@@ -28,7 +28,8 @@ const PostName = styled.div`
   ${h2}
 `;
 const Wage = styled.div`
-  ${h3}
+  ${h2}
+  text-align:right;
 `;
 export interface PostUiPostContentProps {
   name: string;
@@ -52,7 +53,7 @@ export default function UiPostContent({
         {duration} ({workhour}시간)
       </Time>
       <Location>{address}</Location>
-      <Wage>{hourlyPay}원</Wage>
+      <Wage>{hourlyPay.toLocaleString("ko-KR")}원</Wage>
     </PostContent>
   );
 }
