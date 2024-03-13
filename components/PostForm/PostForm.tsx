@@ -7,6 +7,7 @@ import Button from "../Button/Button";
 import ImageButton from "../Button/ImageButton";
 import FormContainer from "./FormContainer";
 import { PostFormProps } from "./types/types";
+import { ChangeEvent, useState } from "react";
 
 export default function PostForm({
   isPostFormVisible,
@@ -14,10 +15,28 @@ export default function PostForm({
 }: PostFormProps) {
   const router = useRouter();
   const { showToast } = useToast();
+  const [formData, setFormData] = useState({
+    wage: "",
+    start_at: "",
+    work_time: "",
+    description: "",
+  });
+
+  const handleInputChange = (key: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
+  };
 
   const handleRegisterClick = () => {
-    router.push("/"); // 임시로 루트 페이지로 가도록 설정. 추후 공고 상세 페이지 생기면 공고상세 path로 이동해야함
-    showToast("등록되었습니다!");
+    const confirmed = window.confirm(
+      `\n시급: ${formData.wage}\n시작 일시: ${formData.start_at}\n업무 시간: ${formData.work_time}\n공고 설명: ${formData.description}\n\n등록하시겠습니까?`,
+    );
+    if (confirmed) {
+      router.push("/");
+      showToast("등록되었습니다!");
+    }
   };
 
   return (
@@ -35,19 +54,42 @@ export default function PostForm({
           <FormContainer
             label="시급*"
             gridArea="wage"
-            inputProps={{ placeholder: "15,000", unit: "원" }}
+            inputProps={{
+              placeholder: "15,000",
+              unit: "원",
+              onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                handleInputChange("wage", event.target.value),
+            }}
           />
           <FormContainer
             label="시작 일시*"
             gridArea="start_at"
-            inputProps={{ type: "date", placeholder: "2023-07-01 15:00" }}
+            inputProps={{
+              type: "date",
+              placeholder: "2023-07-01 15:00",
+              onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                handleInputChange("start_at", event.target.value),
+            }}
           />
           <FormContainer
             label="업무 시간*"
             gridArea="work_time"
-            inputProps={{ placeholder: "3", unit: "시간" }}
+            inputProps={{
+              placeholder: "3",
+              unit: "시간",
+              onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                handleInputChange("work_time", event.target.value),
+            }}
           />
-          <FormContainer label="공고 설명" gridArea="description" />
+          <FormContainer
+            label="공고 설명"
+            gridArea="description"
+            inputProps={{
+              placeholder: "공고 상세",
+              onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                handleInputChange("description", event.target.value),
+            }}
+          />
         </Content>
         <Button
           text="등록하기"

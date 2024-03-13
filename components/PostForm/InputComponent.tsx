@@ -6,10 +6,11 @@ export default function InputComponent({
   gridArea,
   unit,
   type = "text",
+  onChange,
 }: InputComponentProps) {
   return (
     <div style={{ position: "relative", width: "100%", gridArea: gridArea }}>
-      <Input placeholder={placeholder} type={type} />
+      <Input placeholder={placeholder} type={type} onChange={onChange} />
       <span
         style={{
           position: "absolute",

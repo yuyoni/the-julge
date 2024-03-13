@@ -12,7 +12,7 @@ export default function FormContainer({
     <>
       <Label gridArea={gridArea}>{label}</Label>
       {gridArea === "description" ? (
-        <TextArea placeholder="공고 상세" gridArea={`${gridArea}_input`} />
+        <TextArea {...inputProps} gridArea={`${gridArea}_input`} />
       ) : (
         <InputComponent {...inputProps} gridArea={`${gridArea}_input`} />
       )}

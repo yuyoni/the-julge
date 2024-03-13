@@ -12,6 +12,7 @@ export interface FormContainerProps {
 export interface InputComponentProps {
   placeholder: string;
   gridArea: string;
+  onChange: () => void;
   unit?: string;
   type?: string;
 }
