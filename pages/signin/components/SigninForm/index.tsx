@@ -10,6 +10,7 @@ import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Input from "@/components/Input";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^.{8,}$/;
@@ -22,6 +23,7 @@ export default function SigninForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<SigninFormData>({ mode: "onChange" });
+  const router = useRouter();
 
   const { email: emailError, password: passwordError } = errors;
 
@@ -39,6 +41,7 @@ export default function SigninForm() {
       const { token, user } = data.item;
       const { href } = user;
       console.log(token, href);
+      router.push("/");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const { message } = error.response.data;
