@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { body2Regular } from "@/styles/fontsStyle";
 
 export default function Button({
   text,
@@ -56,6 +57,7 @@ const Container = styled.button<{
   align-items: center;
   border-radius: 6px;
   width: 100%;
+  ${body2Regular}
 
   ${({ $color }) => getColorStyles($color || "colored")}
 `;

@@ -94,8 +94,8 @@ export default function Filter({
 const Wrapper = styled.div`
   display: flex;
   position: absolute;
-  top: 100px;
-  right: 238px;
+  // 필터 위치에 따라 top, right 등 속성 조절 필요
+  z-index: 999;
 
   width: 390px;
   padding: 24px 20px;
