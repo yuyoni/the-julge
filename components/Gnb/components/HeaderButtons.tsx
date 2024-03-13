@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import UiButton from "./UiButton";
 import NotiButton from "./NotiButton";
+
 interface HeaderButtonsProps {
   userType?: "employee" | "employer" | "guest" | undefined;
   hasNotification: boolean;
@@ -12,20 +13,8 @@ export default function HeaderButtons({
   hasNotification,
   handleClickMovePage,
 }: HeaderButtonsProps) {
-  const HeaderButtons = styled.div`
-    grid-area: buttons;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-
-    @media only screen and (max-width: 768px) {
-      justify-content: flex-end;
-    }
-  `;
-
   return (
-    <HeaderButtons>
+    <Buttons>
       {userType === "guest" && (
         <>
           <UiButton
@@ -66,6 +55,18 @@ export default function HeaderButtons({
           <NotiButton activeStatus={hasNotification ? "active" : "inactive"} />
         </>
       )}
-    </HeaderButtons>
+    </Buttons>
   );
 }
+
+const Buttons = styled.div`
+  grid-area: buttons;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  @media only screen and (max-width: 768px) {
+    justify-content: flex-end;
+  }
+`;

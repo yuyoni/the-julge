@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import UiGnb from "./UiGnb";
+import UiGnb from "./components/UiGnb";
 interface GnbClientProps {
   userType?: "guest" | "employee" | "employer";
 }
