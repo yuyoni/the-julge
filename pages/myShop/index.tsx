@@ -4,15 +4,13 @@ import Footer from "./components/Footer";
 import styled from "@emotion/styled";
 export default function MyShop() {
   return (
-    <>
-      <Container>
-        <Header>
-          <Gnb userType="employer" />
-          <MyShopInfo />
-        </Header>
-        <Footer />
-      </Container>
-    </>
+    <Container>
+      <Header>
+        <Gnb userType="employer" />
+        <MyShopInfo />
+      </Header>
+      <Footer />
+    </Container>
   );
 }
 
