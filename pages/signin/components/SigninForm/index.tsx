@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { SigninFormData } from "../../types/types";
 import { validateSigninData } from "@/lib/utils/validateFormData";
+import { useRouter } from "next/router";
 import {
   INVALID_EMAIL,
   INVALID_PASSWORD,
@@ -10,7 +11,6 @@ import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Input from "@/components/Input";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^.{8,}$/;
@@ -28,9 +28,7 @@ export default function SigninForm() {
   const { email: emailError, password: passwordError } = errors;
 
   const onSubmit = async (formData: SigninFormData) => {
-    const { email, password } = formData;
-
-    const isValid = validateSigninData(email, password);
+    const isValid = validateSigninData(formData);
     if (!isValid) {
       alert(WRONG_INFORMATION);
       return;
