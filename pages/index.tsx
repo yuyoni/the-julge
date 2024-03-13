@@ -56,27 +56,59 @@ export default function Home() {
   return (
     <Wrapper>
       <Gnb userType={user} />
-      <button onClick={() => setUser("guest")}>로그인하지 않음</button>
-      <button onClick={() => setUser("employee")}>알바님</button>
-      <button onClick={() => setUser("employer")}>사장님</button>
-      <Button
-        text="상세 필터"
-        color="colored"
-        handleClick={handleToggleModal}
-      />
-      <Button
-        text="공고 등록하기"
-        color="colored"
-        handleClick={handleTogglePostForm}
-      />
-      <Filter
-        isModalVisible={isModalVisible}
-        handleModalClose={handleToggleModal}
-      />
-      <PostForm
-        isPostFormVisible={isPostFormVisible}
-        handlePostFormClose={handleTogglePostForm}
-      />
+
+      {/* 회원에 따른 nav바 확인을 위해 임시로 추가한 영역 */}
+      <div style={{ display: "flex", gap: "10px", width: "20%" }}>
+        <Button
+          text="비회원상태"
+          color="white"
+          handleClick={() => setUser("guest")}
+        />
+        <Button
+          text="알바님"
+          color="white"
+          handleClick={() => setUser("employee")}
+        />
+        <Button
+          text="사장님"
+          color="white"
+          handleClick={() => setUser("employer")}
+        />
+      </div>
+
+      {/* 상세 필터 모달 및 공고 등록 UI 확인을 위해 임시로 추가한 영역 */}
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          position: "relative",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <Button
+          text="상세 필터"
+          color="colored"
+          handleClick={handleToggleModal}
+          width={80}
+        />
+        <Button
+          text="공고 등록하기"
+          color="colored"
+          handleClick={handleTogglePostForm}
+          width={312}
+        />
+
+        <Filter
+          isModalVisible={isModalVisible}
+          handleModalClose={handleToggleModal}
+        />
+        <PostForm
+          isPostFormVisible={isPostFormVisible}
+          handlePostFormClose={handleTogglePostForm}
+        />
+      </div>
+
       <CustomPostList>
         <CustomPostListHeader>
           <h1>맞춤 공고</h1>
@@ -92,6 +124,7 @@ export default function Home() {
 }
 
 const Wrapper = styled.div`
+  // 임시로 추가
   position: relative;
   width: 100%;
   height: 100%;

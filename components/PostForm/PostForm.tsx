@@ -48,7 +48,7 @@ export default function PostForm({
 const Wrapper = styled.div`
   background: var(--The-julge-gray-05, #fafafa);
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   position: absolute;
   top: 0;

@@ -97,6 +97,9 @@ const Wrapper = styled.div`
   display: flex;
   position: absolute;
   // 필터 위치에 따라 top, right 등 속성 조절 필요
+  top: 100px;
+  right: 100px;
+
   z-index: 999;
 
   width: 390px;
