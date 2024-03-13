@@ -6,15 +6,19 @@ export default function Button({
   text,
   color = "colored",
   handleClick,
+  width,
 }: {
   text: string;
   handleClick?: () => void;
   color?: "colored" | "white" | "gray";
+  width?: number;
 }) {
   return (
-    <Container onClick={handleClick} $color={color}>
-      {text}
-    </Container>
+    <Wrapper $width={width}>
+      <Container onClick={handleClick} $color={color}>
+        {text}
+      </Container>
+    </Wrapper>
   );
 }
 
@@ -47,6 +51,10 @@ const getColorStyles = (color: string) => {
       `;
   }
 };
+
+const Wrapper = styled.div<{ $width?: number }>`
+  width: ${({ $width }) => ($width ? `${$width}px` : "100%")};
+`;
 
 const Container = styled.button<{
   $color?: "colored" | "white" | "gray";

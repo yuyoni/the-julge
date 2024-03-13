@@ -39,9 +39,7 @@ export default function PostForm({
           />
           <FormContainer label="공고 설명" gridArea="description" />
         </Content>
-        <ButtonWrapper>
-          <Button text="등록하기" color="colored" />
-        </ButtonWrapper>
+        <Button text="등록하기" color="colored" width={312} />
       </Wrapper>
     )
   );
@@ -82,8 +80,4 @@ const Content = styled.div`
   column-gap: 24px;
   grid-template-areas: "wage start_at work_time" "wage_input start_at_input work_time_input" "description description description" "description_input description_input description_input";
   ${body1Regular}
-`;
-
-const ButtonWrapper = styled.div`
-  width: 312px;
 `;
