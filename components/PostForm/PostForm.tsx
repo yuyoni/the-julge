@@ -1,6 +1,8 @@
+import { useToast } from "@/contexts/ToastContext";
 import closeIcon from "@/public/images/close_icon.svg";
 import { body1Regular, h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
+import { useRouter } from "next/navigation";
 import Button from "../Button/Button";
 import ImageButton from "../Button/ImageButton";
 import FormContainer from "./FormContainer";
@@ -10,6 +12,14 @@ export default function PostForm({
   isPostFormVisible,
   handlePostFormClose,
 }: PostFormProps) {
+  const router = useRouter();
+  const { showToast } = useToast();
+
+  const handleRegisterClick = () => {
+    router.push("/"); // 임시로 루트 페이지로 가도록 설정. 추후 공고 상세 페이지 생기면 공고상세 path로 이동해야함
+    showToast("등록되었습니다!");
+  };
+
   return (
     isPostFormVisible && (
       <Wrapper>
@@ -39,7 +49,12 @@ export default function PostForm({
           />
           <FormContainer label="공고 설명" gridArea="description" />
         </Content>
-        <Button text="등록하기" color="colored" width={312} />
+        <Button
+          text="등록하기"
+          color="colored"
+          width={312}
+          handleClick={handleRegisterClick}
+        />
       </Wrapper>
     )
   );
