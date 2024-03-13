@@ -4,7 +4,7 @@ import Gnb from "@/components/Gnb";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import responseData from "../components/Post/response_mockupdata.json";
-import { h2 } from "@/components/Post/styles/fontsStyle";
+import { h2 } from "@/styles/fontsStyle";
 import Post from "@/components/Post";
 
 const CustomPostList = styled.section`
