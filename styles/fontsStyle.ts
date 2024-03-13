@@ -54,6 +54,16 @@ export const h1 = css`
   letter-spacing: 0.56px;
 `;
 
+/* The julge/h1Regular */
+export const h1Regular = css`
+  font-family: "Spoqa Han Sans Neo";
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.56px;
+`;
+
 /* The julge/h2 */
 export const h2 = css`
   font-family: "Spoqa Han Sans Neo";

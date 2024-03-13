@@ -1,3 +1,4 @@
+import Gnb from "@/components/Gnb";
 import { globalStyles } from "@/styles/global";
 import { Global } from "@emotion/react";
 import type { AppProps } from "next/app";

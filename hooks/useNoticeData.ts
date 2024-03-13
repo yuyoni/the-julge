@@ -29,7 +29,7 @@ interface Link {
   };
 }
 
-interface NoticeData {
+export interface NoticeData {
   item: {
     id: string;
     hourlyPay: number;
