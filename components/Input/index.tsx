@@ -1,39 +1,37 @@
 import styled from "@emotion/styled";
-import { InputProps } from "./types/type";
+import { InputProps } from "./types/types";
 
 export default function Input({
   label,
   type = "text",
-  name,
   value,
-  onChange,
-  errorMessage,
+  error,
+  register,
 }: InputProps) {
-  const hasError: boolean = !!errorMessage;
+  const hasError: boolean = !!error;
 
   return (
     <InputWrapper>
       <StyledLabel>{label}</StyledLabel>
       <StyledInput
         type={type}
-        name={name}
         value={value}
-        onChange={onChange}
         placeholder="입력"
         hasError={hasError}
+        {...register}
       />
-      {errorMessage && <StyledWarning>{errorMessage}</StyledWarning>}
+      {error && <StyledWarning>{error.message}</StyledWarning>}
     </InputWrapper>
   );
 }
 
 const commonStyles = `
-color: var(--The-julge-black);
-font-family: Abel;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 26px;
+  color: var(--The-julge-black);
+  font-family: Abel;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
 `;
 
 const InputWrapper = styled.div`
@@ -44,7 +42,7 @@ const InputWrapper = styled.div`
   gap: 8px;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ hasError: boolean }>`
   ${commonStyles}
   display: flex;
   padding: 16px 20px;
@@ -53,8 +51,8 @@ const StyledInput = styled.input`
   align-self: stretch;
   border-radius: 6px;
   border: 1px solid
-    ${(props) =>
-      props.hasError ? "var(--The-julge-red)" : "var(--The-julge-gray-30)"};
+    ${({ hasError }) =>
+      hasError ? "var(--The-julge-red)" : "var(--The-julge-gray-30)"};
   background: var(--The-julge-white);
 
   ::placeholder {
