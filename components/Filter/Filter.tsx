@@ -73,18 +73,20 @@ export default function Filter({
           onChange={(e) => setHourlyPayValue(e.target.value)}
         />
         <ButtonContainer>
-          <ButtonWrapper $width={82}>
-            <Button text="초기화" handleClick={clearFilters} color="white" />
-          </ButtonWrapper>
-          <ButtonWrapper $width={260}>
-            <Button
-              text="적용하기"
-              handleClick={() => {
-                console.log("적용하기");
-              }}
-              color="colored"
-            />
-          </ButtonWrapper>
+          <Button
+            text="초기화"
+            handleClick={clearFilters}
+            color="white"
+            width={82}
+          />
+          <Button
+            text="적용하기"
+            handleClick={() => {
+              console.log("적용하기");
+            }}
+            color="colored"
+            width={260}
+          />
         </ButtonContainer>
       </Wrapper>
     )
@@ -94,8 +96,11 @@ export default function Filter({
 const Wrapper = styled.div`
   display: flex;
   position: absolute;
+  // 필터 위치에 따라 top, right 등 속성 조절 필요
   top: 100px;
-  right: 238px;
+  right: 100px;
+
+  z-index: 999;
 
   width: 390px;
   padding: 24px 20px;
@@ -147,8 +152,4 @@ const ButtonContainer = styled.div`
   width: 100%;
   gap: 8px;
   margin-top: 16px;
-`;
-
-const ButtonWrapper = styled.div<{ $width: number }>`
-  width: ${({ $width }) => `${$width}px`};
 `;

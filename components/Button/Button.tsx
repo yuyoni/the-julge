@@ -1,19 +1,24 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { body2Regular } from "@/styles/fontsStyle";
 
 export default function Button({
   text,
   color = "colored",
   handleClick,
+  width,
 }: {
   text: string;
   handleClick?: () => void;
   color?: "colored" | "white" | "gray";
+  width?: number;
 }) {
   return (
-    <Container onClick={handleClick} $color={color}>
-      {text}
-    </Container>
+    <Wrapper $width={width}>
+      <Container onClick={handleClick} $color={color}>
+        {text}
+      </Container>
+    </Wrapper>
   );
 }
 
@@ -47,6 +52,10 @@ const getColorStyles = (color: string) => {
   }
 };
 
+const Wrapper = styled.div<{ $width?: number }>`
+  width: ${({ $width }) => ($width ? `${$width}px` : "100%")};
+`;
+
 const Container = styled.button<{
   $color?: "colored" | "white" | "gray";
 }>`
@@ -56,6 +65,7 @@ const Container = styled.button<{
   align-items: center;
   border-radius: 6px;
   width: 100%;
+  ${body2Regular}
 
   ${({ $color }) => getColorStyles($color || "colored")}
 `;
