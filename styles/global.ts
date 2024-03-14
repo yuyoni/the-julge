@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { body2Regular } from "./fontsStyle";
 
 export const globalStyles = css`
   :root {
@@ -66,7 +67,6 @@ export const globalStyles = css`
 
   html,
   body {
-    font-size: 62.5%;
   }
 
   a {
