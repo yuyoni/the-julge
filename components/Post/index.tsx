@@ -3,7 +3,7 @@ import UiImage from "./components/UiImage";
 import UiPostContent from "./components/UiPostContent";
 
 export interface PostProps {
-  noticeId: string;
+  id: string;
   shopId: string;
   name: string;
   duration: string;
@@ -18,7 +18,7 @@ export interface PostProps {
 export default function Post({ item }: { item: PostProps }) {
   const {
     shopId,
-    noticeId,
+    id,
     imageUrl,
     name,
     duration,
@@ -30,7 +30,7 @@ export default function Post({ item }: { item: PostProps }) {
   } = item;
 
   return (
-    <CardLink href={`/detail/${shopId}/${noticeId}`}>
+    <CardLink href={`/shops/${shopId}/notices/${id}`}>
       <UiImage
         hourlyPay={hourlyPay}
         originalHourlyPay={originalHourlyPay}
