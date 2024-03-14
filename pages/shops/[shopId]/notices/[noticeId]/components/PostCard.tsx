@@ -1,24 +1,16 @@
 import { NoticeData } from "@/hooks/useNoticeData";
 import styled from "@emotion/styled";
-import PostDetail from "./PostDetail";
+import PostInformation from "./PostInformation";
 import Button from "@/components/Button/Button";
 
-export default function PostInfoCard({
-  noticeData,
-}: {
-  noticeData: NoticeData;
-}) {
+export default function PostCard({ noticeData }: { noticeData: NoticeData }) {
   return (
     <Wrapper>
       <ImageContainer>
-        <img
-          style={{ maxWidth: "100%", maxHeight: "100%" }}
-          src={noticeData.item.shop.item.imageUrl}
-          alt="shop_image"
-        />
+        <img src={noticeData.item.shop.item.imageUrl} alt="shop_image" />
       </ImageContainer>
       <Container>
-        <PostDetail noticeData={noticeData} />
+        <PostInformation noticeData={noticeData} />
         <Button text="공고 편집하기" color="white" />
       </Container>
     </Wrapper>
@@ -52,4 +44,9 @@ const ImageContainer = styled.div`
   max-height: 300px;
 
   border-radius: 20px;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
