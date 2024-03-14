@@ -1,6 +1,6 @@
 import Gnb from "@/components/Gnb";
 import MyShopInfo from "./components/MyShopInfo";
-import Footer from "./components/Footer";
+import Footer from "@/components/Footer";
 import styled from "@emotion/styled";
 export default function MyShop() {
   return (
