@@ -1,4 +1,3 @@
-import Gnb from "@/components/Gnb";
 import Post from "@/components/Post";
 import { h2 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
@@ -7,6 +6,7 @@ import responseData from "../components/Post/response_mockupdata.json";
 import Button from "@/components/Button/Button";
 import Filter from "@/components/Filter/Filter";
 import PostForm from "@/components/PostForm/PostForm";
+import Layout from "@/components/Layout";
 
 export const utilFormatDuration = (duration: string, workhour: number) => {
   const date = duration.slice(0, 10);
@@ -54,9 +54,7 @@ export default function Home() {
   };
 
   return (
-    <Wrapper>
-      <Gnb userType={user} />
-
+    <Layout>
       {/* 회원에 따른 nav바 확인을 위해 임시로 추가한 영역 */}
       <div style={{ display: "flex", gap: "10px", width: "20%" }}>
         <Button
@@ -119,16 +117,9 @@ export default function Home() {
           ))}
         </CustomPostContent>
       </CustomPostList>
-    </Wrapper>
+    </Layout>
   );
 }
-
-const Wrapper = styled.div`
-  // 임시로 추가
-  position: relative;
-  width: 100%;
-  height: 100%;
-`;
 
 const CustomPostList = styled.section`
   padding: 60px 0;
