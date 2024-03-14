@@ -1,4 +1,4 @@
-import axios from "axios";
+import fetchData from "@/lib/apis/fetchData";
 import { useQuery } from "react-query";
 
 interface Shop {
@@ -47,10 +47,7 @@ export interface NoticeData {
 }
 
 export function useNoticeData(shopId: string, noticeId: string) {
-  return useQuery<NoticeData>(["noticeData", shopId, noticeId], async () => {
-    const response = await axios.get(
-      `https://bootcamp-api.codeit.kr/api/3-3/the-julge/shops/${shopId}/notices/${noticeId}`,
-    );
-    return response.data;
-  });
+  return useQuery<NoticeData>(["noticeData", shopId, noticeId], () =>
+    fetchData(`shops/${shopId}/notices/${noticeId}`),
+  );
 }
