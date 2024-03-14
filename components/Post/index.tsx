@@ -53,4 +53,5 @@ const CardLink = styled.a`
   flex-direction: column;
   color: rgb(51, 51, 51);
   cursor: pointer;
+  border: 1px solid var(--The-julge-gray-20, #e5e4e7);
 `;
