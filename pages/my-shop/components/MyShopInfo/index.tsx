@@ -7,7 +7,7 @@ import Button from "@/components/Button/Button";
 export default function MyShopInfo() {
   const router = useRouter();
   const handleClick = () => {
-    router.push("/myShop/register");
+    router.push("/my-shop/register");
   };
 
   return (
