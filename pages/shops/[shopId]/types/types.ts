@@ -1,6 +1,6 @@
 export interface FormDataType {
-  wage: string;
-  start_at: string;
-  work_time: string;
+  hourlyPay: number;
+  startsAt: string;
+  workhour: number;
   description: string;
 }

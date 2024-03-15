@@ -27,32 +27,32 @@ export default function PostForm({ handleInputChange }: PostFormProps) {
       />
       <FormContainer
         label="시급*"
-        gridArea="wage"
+        gridArea="hourlyPay"
         inputProps={{
           placeholder: "15,000",
           unit: "원",
           onChange: (event: ChangeEvent<HTMLInputElement>) =>
-            handleInputChange("wage", event.target.value),
+            handleInputChange("hourlyPay", event.target.value),
         }}
       />
       <FormContainer
         label="시작 일시*"
-        gridArea="start_at"
+        gridArea="startsAt"
         inputProps={{
           type: "date",
           placeholder: "2023-07-01 15:00",
           onChange: (event: ChangeEvent<HTMLInputElement>) =>
-            handleInputChange("start_at", event.target.value),
+            handleInputChange("startsAt", event.target.value),
         }}
       />
       <FormContainer
         label="업무 시간*"
-        gridArea="work_time"
+        gridArea="workhour"
         inputProps={{
           placeholder: "3",
           unit: "시간",
           onChange: (event: ChangeEvent<HTMLInputElement>) =>
-            handleInputChange("work_time", event.target.value),
+            handleInputChange("workhour", event.target.value),
         }}
       />
       <FormContainer
@@ -74,7 +74,7 @@ const Wrapper = styled.div`
   width: 100%;
   row-gap: 20px;
   column-gap: 24px;
-  grid-template-areas: "wage start_at work_time" "wage_input start_at_input work_time_input" "description description description" "description_input description_input description_input";
+  grid-template-areas: "hourlyPay startsAt workhour" "hourlyPay_input startsAt_input workhour_input" "description description description" "description_input description_input description_input";
   ${body1Regular}
 `;
 
