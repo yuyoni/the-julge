@@ -29,7 +29,7 @@ export default function PostForm({ handleInputChange }: PostFormProps) {
         label="시급*"
         gridArea="hourlyPay"
         inputProps={{
-          placeholder: "15,000",
+          placeholder: "15000",
           unit: "원",
           onChange: (event: ChangeEvent<HTMLInputElement>) =>
             handleInputChange("hourlyPay", event.target.value),
@@ -39,7 +39,7 @@ export default function PostForm({ handleInputChange }: PostFormProps) {
         label="시작 일시*"
         gridArea="startsAt"
         inputProps={{
-          type: "date",
+          type: "datetime-local",
           placeholder: "2023-07-01 15:00",
           onChange: (event: ChangeEvent<HTMLInputElement>) =>
             handleInputChange("startsAt", event.target.value),

@@ -39,7 +39,7 @@ const Input = styled.input<{ type: string }>`
   background: var(--The-julge-white, #fff);
 
   ${({ type }) =>
-    type === "date" &&
+    type === "datetime-local" &&
     `
   &::-webkit-calendar-picker-indicator {
     cursor: pointer;
