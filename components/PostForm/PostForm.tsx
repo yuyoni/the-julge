@@ -1,14 +1,19 @@
 import { useToast } from "@/contexts/ToastContext";
+import tooltipIcon from "@/public/images/tooltip-icon.svg";
 import { body1Regular, h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import Button from "../Button/Button";
 import FormContainer from "./FormContainer";
+import Tooltip from "./Tooltip";
 
 export default function PostForm({}) {
   const router = useRouter();
   const { showToast } = useToast();
+
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [formData, setFormData] = useState({
     wage: "",
     start_at: "",
@@ -37,6 +42,16 @@ export default function PostForm({}) {
     <Wrapper>
       <Title>공고 등록</Title>
       <Content>
+        <TooltipIcon
+          src={tooltipIcon}
+          alt="tooltip_icon"
+          onMouseEnter={() => setIsTooltipVisible(true)}
+          onMouseLeave={() => setIsTooltipVisible(false)}
+        />
+        <Tooltip
+          visible={isTooltipVisible}
+          message="기존 시급과 같거나 상향된 금액을 입력하세요"
+        />
         <FormContainer
           label="시급*"
           gridArea="wage"
@@ -71,7 +86,7 @@ export default function PostForm({}) {
           label="공고 설명"
           gridArea="description"
           inputProps={{
-            placeholder: "공고 상세",
+            placeholder: "공고 내용",
             onChange: (event: ChangeEvent<HTMLInputElement>) =>
               handleInputChange("description", event.target.value),
           }}
@@ -102,10 +117,19 @@ const Title = styled.span`
 `;
 
 const Content = styled.div`
+  position: relative;
   display: grid;
   width: 100%;
   row-gap: 20px;
   column-gap: 24px;
   grid-template-areas: "wage start_at work_time" "wage_input start_at_input work_time_input" "description description description" "description_input description_input description_input";
   ${body1Regular}
+`;
+
+const TooltipIcon = styled(Image)`
+  position: absolute;
+  top: 3px;
+  left: 38px;
+  cursor: pointer;
+  z-index: 1;
 `;

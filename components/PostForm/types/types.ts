@@ -1,5 +1,6 @@
 export interface FormContainerProps {
   label: string;
+  tooltipMessage?: string;
   gridArea: string;
   inputProps?: any;
 }
