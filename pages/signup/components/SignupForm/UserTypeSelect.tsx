@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { UserType } from "../../types/types";
 import styled from "@emotion/styled";
 import TypeButton from "./TypeButton";
 
-export default function UserTypeSelect() {
-  const [checked, setChecked] = useState<boolean>(true);
+type UserTypeSelectProps = {
+  type: UserType;
+  setType: (type: UserType) => void;
+};
 
-  const handleClick = () => setChecked(!checked);
-
+export default function UserTypeSelect({ type, setType }: UserTypeSelectProps) {
   return (
     <Wrapper>
       회원 유형
       <ButtonContainer>
-        <TypeButton isChecked={checked} onClick={handleClick} text="알바님" />
-        <TypeButton isChecked={!checked} onClick={handleClick} text="사장님" />
+        <TypeButton
+          isChecked={type === UserType.PART_TIME}
+          onClick={() => setType(UserType.PART_TIME)}
+          text={UserType.PART_TIME}
+        />
+        <TypeButton
+          isChecked={type === UserType.OWNER}
+          onClick={() => setType(UserType.OWNER)}
+          text={UserType.OWNER}
+        />
       </ButtonContainer>
     </Wrapper>
   );
