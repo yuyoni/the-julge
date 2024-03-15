@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
 import { InputProps } from "./types/types";
+import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 export default function Input({
   label,
@@ -25,7 +26,7 @@ export default function Input({
   );
 }
 
-const commonStyles = `
+const commonStyles = css`
   color: var(--The-julge-black);
   font-family: Abel;
   font-size: 16px;

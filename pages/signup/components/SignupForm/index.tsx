@@ -1,49 +1,46 @@
 import { useForm } from "react-hook-form";
-import { SigninFormData } from "../../types/types";
-import { validateSigninData } from "@/lib/utils/validateFormData";
+import { SignupFormData } from "../../types/types";
+import { validateSignupData } from "@/lib/utils/validateFormData";
 import { useRouter } from "next/router";
-import {
-  INVALID_EMAIL,
-  INVALID_PASSWORD,
-  WRONG_INFORMATION,
-} from "@/lib/constants/errorMessage";
+import { INVALID_EMAIL, INVALID_PASSWORD } from "@/lib/constants/errorMessage";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Input from "@/components/Input";
 import axios from "axios";
+import UserTypeSelect from "../UserTypeSelect";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-const passwordRegex = /^.{8,}$/;
+const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
 
 const BASE_URL = "https://bootcamp-api.codeit.kr/api/3-3/the-julge";
 
-export default function SigninForm() {
+export default function SignupForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
-  } = useForm<SigninFormData>({ mode: "onChange" });
+  } = useForm<SignupFormData>({ mode: "onChange" });
   const router = useRouter();
 
-  const { email: emailError, password: passwordError } = errors;
+  const {
+    email: emailError,
+    password: passwordError,
+    passwordCheck: passwordCheckError,
+  } = errors;
 
-  const onSubmit = async (formData: SigninFormData) => {
-    const isValid = validateSigninData(formData);
-    if (!isValid) {
-      alert(WRONG_INFORMATION);
-      return;
-    }
-
+  const onSubmit = async (formData: SignupFormData) => {
     try {
-      const { data } = await axios.post(`${BASE_URL}/token`, formData);
-      const { token, user } = data.item;
-      const { href } = user;
-      console.log(token, href);
+      validateSignupData(formData);
+      const { data } = await axios.post(`${BASE_URL}/users`, formData);
+      console.log(data);
       router.push("/");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const { message } = error.response.data;
         alert(message);
+      } else if (error instanceof TypeError) {
+        alert(error.message);
       }
     }
   };
@@ -71,7 +68,19 @@ export default function SigninForm() {
           },
         })}
       />
-      <Button text="로그인 하기" />
+      <Input
+        label="비밀번호 확인"
+        error={passwordCheckError}
+        type="password"
+        register={register("passwordCheck", {
+          pattern: {
+            value: passwordRegex,
+            message: INVALID_PASSWORD,
+          },
+        })}
+      />
+      <UserTypeSelect />
+      <Button text="가입하기" />
     </Form>
   );
 }
@@ -82,13 +91,6 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 28px;
-
-  div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
 
   button {
     font-size: 16px;

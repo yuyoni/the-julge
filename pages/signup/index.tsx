@@ -1,19 +1,16 @@
 import Image from "next/image";
 import logo from "@/public/images/logo.svg";
 import styled from "@emotion/styled";
-import SigninForm from "./components/SigninForm";
-import ToSignup from "./components/ToSignup";
-import Link from "next/link";
+import SignupForm from "./components/SignupForm";
+import ToSignin from "./components/ToSignin";
 
-export default function Signin() {
+export default function Signup() {
   return (
     <CenteredContainer>
       <Wrapper>
-        <Link href="/">
-          <Image src={logo} alt="logo_button" width={248} height={45} />
-        </Link>
-        <SigninForm />
-        <ToSignup />
+        <Image src={logo} alt="logo_button" width={248} height={45} />
+        <SignupForm />
+        <ToSignin />
       </Wrapper>
     </CenteredContainer>
   );
