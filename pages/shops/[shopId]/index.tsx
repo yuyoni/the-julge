@@ -2,13 +2,17 @@ import Button from "@/components/Button/Button";
 import Layout from "@/components/Layout";
 import PostForm from "@/components/PostForm/index";
 import { useToast } from "@/contexts/ToastContext";
+import fetchData from "@/lib/apis/fetchData";
 import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { FormDataType, RequestData } from "./types/types";
+import convertToISODate from "./utils/formatDateString";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
+  const { shopId } = router.query;
   const { showToast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -26,7 +30,7 @@ export default function NoticeRegistrationPage() {
   };
 
   const validateFormData = () => {
-    const { hourlyPay, startsAt, workhour, description } = formData;
+    const { hourlyPay, startsAt, workhour } = formData;
     if (hourlyPay <= 0 || startsAt.trim() === "" || workhour <= 0) {
       showToast("모든 필드를 작성해주세요.");
       return false;
@@ -45,13 +49,19 @@ export default function NoticeRegistrationPage() {
   const handleFormSubmit = () => {
     if (!validateFormData()) return;
 
-    const { hourlyPay, startsAt, workhour, description } = formData;
+    const { hourlyPay, startsAt, description, workhour } = formData;
     const confirmed = window.confirm(
       `\n시급: ${hourlyPay}\n시작 일시: ${startsAt}\n업무 시간: ${workhour}\n공고 설명: ${description}\n\n등록하시겠습니까?`,
     );
 
     if (confirmed) {
-      router.push("/"); // 공고 등록 한 후 id를 이용해 shops/${shopId}/notices/${noticeId}로 이동해야함
+      const response = fetchData<FormDataType>(
+        `shops/${shopId}/notices`,
+        "POST",
+        convertToISODate(formData),
+      );
+      console.log(response);
+      // router.push("/"); // 공고 등록 한 후 response로 받은 공고 id를 이용해 shops/${shopId}/notices/${noticeId}로 이동해야함
       showToast("등록되었습니다!");
     }
   };

@@ -4,3 +4,9 @@ export interface FormDataType {
   workhour: number;
   description: string;
 }
+
+export interface RequestData<T> {
+  "Content-Type": string;
+  Authorization: string;
+  body: T;
+}
