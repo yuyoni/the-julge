@@ -1,8 +1,3 @@
-export interface PostFormProps {
-  isPostFormVisible: boolean;
-  handlePostFormClose: () => void;
-}
-
 export interface FormContainerProps {
   label: string;
   gridArea: string;
