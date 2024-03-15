@@ -1,7 +1,6 @@
 import { body2Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { Dispatch, SetStateAction } from "react";
-import { ITEMS_PER_PAGE, PAGE_GROUP_SIZE } from "../../constants/paginations";
 
 interface PaginationProp {
   count: number;
@@ -12,6 +11,10 @@ interface PaginationProp {
 interface PageButtonProps {
   isActive: boolean;
 }
+
+export const ITEMS_PER_PAGE = 6;
+export const PAGE_GROUP_SIZE = 7;
+export const TABLES_ITEMS_PER_PAGE = 6;
 
 export default function Pagination({
   count,
