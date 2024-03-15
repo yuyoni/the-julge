@@ -7,7 +7,7 @@ import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Input from "@/components/Input";
 import axios from "axios";
-import UserTypeSelect from "../UserTypeSelect";
+import UserTypeSelect from "./UserTypeSelect";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
@@ -32,7 +32,9 @@ export default function SignupForm() {
   const onSubmit = async (formData: SignupFormData) => {
     try {
       validateSignupData(formData);
-      const { data } = await axios.post(`${BASE_URL}/users`, formData);
+      const { email, password } = formData;
+      const request = { email, password };
+      const { data } = await axios.post(`${BASE_URL}/users`, request);
       console.log(data);
       router.push("/");
     } catch (error) {
