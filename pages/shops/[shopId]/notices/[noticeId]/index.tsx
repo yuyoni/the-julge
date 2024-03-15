@@ -7,6 +7,7 @@ import ApplicantList from "./components/ApplicantList";
 export default function PostDetailPage() {
   const { query } = useRouter();
   const { shopId, noticeId } = query;
+
   const {
     isLoading,
     error,
