@@ -2,22 +2,26 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
+interface ButtonProps {
+  text: string;
+  handleClick?: () => void;
+  color?: "colored" | "white" | "gray";
+  width?: number;
+  type?: "button" | "submit" | "reset";
+}
+
 export default function Button({
   text,
   color = "colored",
   handleClick,
   width,
-}: {
-  text: string;
-  handleClick?: () => void;
-  color?: "colored" | "white" | "gray";
-  width?: number;
-}) {
+  type = "button",
+}: ButtonProps) {
   return (
     <Wrapper $width={width}>
-      <Container onClick={handleClick} $color={color}>
+      <ButtonStyle onClick={handleClick} $color={color} type={type}>
         {text}
-      </Container>
+      </ButtonStyle>
     </Wrapper>
   );
 }
@@ -56,7 +60,7 @@ const Wrapper = styled.div<{ $width?: number }>`
   width: ${({ $width }) => ($width ? `${$width}px` : "100%")};
 `;
 
-const Container = styled.button<{
+const ButtonStyle = styled.button<{
   $color?: "colored" | "white" | "gray";
 }>`
   display: inline-flex;
