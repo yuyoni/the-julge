@@ -3,12 +3,15 @@ import logo from "@/public/images/logo.svg";
 import styled from "@emotion/styled";
 import SignupForm from "./components/SignupForm";
 import ToSignin from "./components/ToSignin";
+import Link from "next/link";
 
 export default function Signup() {
   return (
     <CenteredContainer>
       <Wrapper>
-        <Image src={logo} alt="logo_button" width={248} height={45} />
+        <Link href="/">
+          <Image src={logo} alt="logo_button" width={248} height={45} />
+        </Link>
         <SignupForm />
         <ToSignin />
       </Wrapper>
