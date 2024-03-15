@@ -15,12 +15,12 @@ export default function UserTypeSelect({ type, setType }: UserTypeSelectProps) {
         <TypeButton
           isChecked={type === UserType.PART_TIME}
           onClick={() => setType(UserType.PART_TIME)}
-          text={UserType.PART_TIME}
+          text="알바님"
         />
         <TypeButton
           isChecked={type === UserType.OWNER}
           onClick={() => setType(UserType.OWNER)}
-          text={UserType.OWNER}
+          text="사장님"
         />
       </ButtonContainer>
     </Wrapper>

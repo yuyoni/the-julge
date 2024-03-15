@@ -1,6 +1,6 @@
 export enum UserType {
-  PART_TIME = "알바님",
-  OWNER = "사장님",
+  PART_TIME = "employee",
+  OWNER = "employer",
 }
 
 export type SignupFormData = {
