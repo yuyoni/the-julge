@@ -14,6 +14,7 @@ import {
 export default function Filter({
   isModalVisible,
   handleModalClose,
+  onApplyFilter,
 }: FilterProps) {
   const [selectedLocations, setSelectedLocations] =
     useState<SelectedLocationList>([]);
@@ -34,6 +35,7 @@ export default function Filter({
     setSelectedLocations([]);
     setStartsAtValue("");
     setHourlyPayValue("");
+    onApplyFilter([], "", "");
   };
 
   return (
@@ -82,7 +84,7 @@ export default function Filter({
           <Button
             text="적용하기"
             handleClick={() => {
-              console.log("적용하기");
+              onApplyFilter(selectedLocations, startsAtValue, hourlyPayValue);
             }}
             color="colored"
             width={260}
@@ -96,10 +98,8 @@ export default function Filter({
 const Wrapper = styled.div`
   display: flex;
   position: absolute;
-  // 필터 위치에 따라 top, right 등 속성 조절 필요
-  top: 100px;
-  right: 100px;
-
+  top: 50px;
+  right: 0;
   z-index: 999;
 
   width: 390px;
