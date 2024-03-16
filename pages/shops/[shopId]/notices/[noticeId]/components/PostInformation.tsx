@@ -21,15 +21,15 @@ export default function PostInformation({
     const address = `${noticeData.item.shop.item.address1} ${noticeData.item.shop.item.address2}`;
     const hourlyPay = noticeData.item.hourlyPay;
     const originalHourlyPay = noticeData.item.shop.item.originalHourlyPay;
-    const wageIncreaseText = getWageIncreaseText(hourlyPay, originalHourlyPay);
+    const wageIncrease = getWageIncreaseText(hourlyPay, originalHourlyPay);
 
     return (
       <Wrapper>
         <Wage>시급</Wage>
         <WageContainer>
           <HourlyPay>{hourlyPay}원</HourlyPay>
-          {wageIncreaseText && (
-            <WageFlagStyle>{wageIncreaseText}</WageFlagStyle>
+          {wageIncrease && (
+            <WageFlagStyle>시급 {wageIncrease}% ▲</WageFlagStyle>
           )}
         </WageContainer>
         <Container>
