@@ -1,13 +1,17 @@
 import { h1Regular, h3 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import HistoryTable from "./HistoryTable";
+import { History } from "@/components/Table";
 
-export default function ApplyHistory() {
-  const history = true;
+type ApplyHistoryProps = {
+  histories: History[];
+};
+
+export default function ApplyHistory({ histories }: ApplyHistoryProps) {
   return (
     <Wrapper>
       <Title>신청 내역</Title>
-      <HistoryTable history={history} />
+      <HistoryTable histories={histories} />
     </Wrapper>
   );
 }
