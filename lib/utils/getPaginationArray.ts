@@ -21,7 +21,6 @@ export function getCurrentPageArray(
   );
   const hasPrev = currentPage > 1;
   const hasNext = currentPage < totalPage;
-  console.log(hasPrev, hasNext);
 
   return { currentPageArray, hasPrev, hasNext };
 }

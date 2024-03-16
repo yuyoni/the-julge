@@ -4,18 +4,18 @@ import ArrowButton from "./components/ArrowButton";
 import PageButton from "./components/PageButton";
 
 type PaginationProps = {
-  data: any;
+  count: number;
+  limit: number;
   currentPage: number;
   setPage: (page: number) => void;
 };
 
 export default function Pagination({
-  data,
+  count,
+  limit,
   currentPage,
   setPage,
 }: PaginationProps) {
-  console.log(currentPage);
-  const { count, limit } = data;
   const { currentPageArray, hasPrev, hasNext } = getCurrentPageArray(
     currentPage,
     count,
