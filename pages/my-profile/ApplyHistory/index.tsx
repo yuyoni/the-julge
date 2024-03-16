@@ -1,17 +1,23 @@
 import { h1Regular, h3 } from "@/styles/fontsStyle";
+import { History } from "@/components/Table";
 import styled from "@emotion/styled";
 import HistoryTable from "./HistoryTable";
-import { History } from "@/components/Table";
 
 type ApplyHistoryProps = {
-  histories: History[];
+  limit: number;
+  count: number;
+  items: History[];
 };
 
-export default function ApplyHistory({ histories }: ApplyHistoryProps) {
+export default function ApplyHistory({
+  limit,
+  count,
+  items,
+}: ApplyHistoryProps) {
   return (
     <Wrapper>
       <Title>신청 내역</Title>
-      <HistoryTable histories={histories} />
+      <HistoryTable limit={limit} count={count} histories={items} />
     </Wrapper>
   );
 }

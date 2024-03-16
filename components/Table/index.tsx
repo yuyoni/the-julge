@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import TableHeader from "./components/Header";
 import TableBody from "./components/TableBody";
+import Pagination from "../Pagination";
 
 export type History = {
   id: string;
@@ -11,10 +12,12 @@ export type History = {
 };
 
 type TableProps = {
+  limit: number;
+  count: number;
   histories: History[];
 };
 
-export default function Table({ histories }: TableProps) {
+export default function Table({ limit, count, histories }: TableProps) {
   return (
     <Wrapper>
       <TableContainer>
@@ -24,17 +27,23 @@ export default function Table({ histories }: TableProps) {
           return <TableBody key={id} {...tableData} />;
         })}
       </TableContainer>
-      <Pagination>페이지</Pagination>
+      <PaginationContainer>
+        <Pagination limit={limit} count={count} />
+      </PaginationContainer>
     </Wrapper>
   );
 }
-
-const Pagination = styled.div``;
 
 const TableContainer = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+`;
+
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 8px 12px;
 `;
 
 const Wrapper = styled.div`

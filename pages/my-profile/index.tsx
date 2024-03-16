@@ -28,11 +28,17 @@ export default function MyProfile() {
     },
   ];
 
+  const tempResponse = {
+    limit: 5,
+    count: tempHistories.length,
+    items: tempHistories,
+  };
+
   return (
     <Layout>
       <Profile />
       <Wrapper>
-        <ApplyHistory histories={tempHistories} />
+        <ApplyHistory {...tempResponse} />
       </Wrapper>
     </Layout>
   );
