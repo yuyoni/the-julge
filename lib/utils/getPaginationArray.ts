@@ -1,4 +1,4 @@
-const PAGE_ARRAY_LIMIT = 5;
+const PAGE_ARRAY_LIMIT = 7;
 
 type PaginationUtilProps = {
   currentPageArray: number[] | [];
@@ -11,7 +11,6 @@ export function getCurrentPageArray(
   count: number,
   limit: number,
 ): PaginationUtilProps {
-  currentPage = currentPage >= 1 ? currentPage : 1;
   const totalPage = calculateTotalPage(count, limit);
   const startIndex = getStratIndex(currentPage);
   const currentPageArray = getCurrentPageArrayLength(
