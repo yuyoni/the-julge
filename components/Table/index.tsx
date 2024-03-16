@@ -3,6 +3,7 @@ import TableHeader from "./components/Header";
 import TableBody from "./components/TableBody";
 
 export type History = {
+  id: string;
   name: string;
   date: string;
   hourlyPay: string;
@@ -18,9 +19,10 @@ export default function Table({ histories }: TableProps) {
     <Wrapper>
       <TableContainer>
         <TableHeader />
-        {histories.map((history) => (
-          <TableBody {...history} />
-        ))}
+        {histories.map((history) => {
+          const { id, ...tableData } = history;
+          return <TableBody key={id} {...tableData} />;
+        })}
       </TableContainer>
       <Pagination>페이지</Pagination>
     </Wrapper>

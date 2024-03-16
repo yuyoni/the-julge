@@ -3,7 +3,19 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { History } from "../..";
 
-export default function TableBody({ name, date, hourlyPay, status }: History) {
+type TableData = {
+  name: string;
+  date: string;
+  hourlyPay: string;
+  status: string;
+};
+
+export default function TableBody({
+  name,
+  date,
+  hourlyPay,
+  status,
+}: TableData) {
   return (
     <tbody>
       <TableRow>
