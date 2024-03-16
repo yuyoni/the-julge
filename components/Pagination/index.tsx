@@ -7,11 +7,13 @@ import PageButton from "./components/PageButton";
 type PaginationProps = {
   count: number;
   limit: number;
+  setPage?: () => void;
 };
 
-export default function Pagination({ count, limit }: PaginationProps) {
+export default function Pagination({ count, limit, setPage }: PaginationProps) {
   const router = useRouter();
   const { page } = router.query;
+  const basePath = router.pathname;
 
   const currentPage = Number(page) >= 1 ? Number(page) : 1;
   const { currentPageArray, hasPrev, hasNext } = getCurrentPageArray(
@@ -21,15 +23,15 @@ export default function Pagination({ count, limit }: PaginationProps) {
   );
 
   const handlePageClick = (page: number) => {
-    router.push(`/test?page=${page}`);
+    router.push(`${basePath}?page=${page}`);
   };
 
   const handlePrevClick = () => {
-    router.push(`/test?page=${currentPage - 1}`);
+    handlePageClick(currentPage - 1);
   };
 
   const handleNextClick = () => {
-    router.push(`/test?page=${currentPage + 1}`);
+    handlePageClick(currentPage + 1);
   };
 
   return (
@@ -46,7 +48,7 @@ export default function Pagination({ count, limit }: PaginationProps) {
               key={idx}
               pageIndex={idx}
               page={currentPage}
-              onClick={handlePageClick}
+              onClick={setPage || handlePageClick}
             />
           ))}
       </PageButtonContainer>
