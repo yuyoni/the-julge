@@ -18,12 +18,14 @@ const Title = styled.span`
 `;
 
 const Wrapper = styled.div`
+  max-width: 964px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   background-color: var(--The-julge-white);
   font-size: 16px;
-  padding: 60px 238px 120px;
+  padding: 60px 0;
 
   @media (max-width: 1023px) {
     padding: 60px 32px;

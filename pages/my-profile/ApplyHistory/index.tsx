@@ -21,13 +21,15 @@ const Title = styled.span`
 `;
 
 const Wrapper = styled.div`
+  max-width: 964px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 32px;
   background-color: var(--The-julge-gray-05);
   font-size: 16px;
-  padding: 60px 238px 120px;
+  padding: 60px 0 120px;
 
   @media (max-width: 1023px) {
     padding: 60px 32px 120px;
