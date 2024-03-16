@@ -1,4 +1,5 @@
 import { getCurrentPageArray } from "@/lib/utils/getPaginationArray";
+import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import ArrowButton from "./components/ArrowButton";
 import PageButton from "./components/PageButton";
@@ -6,32 +7,29 @@ import PageButton from "./components/PageButton";
 type PaginationProps = {
   count: number;
   limit: number;
-  currentPage: number;
-  setPage: (page: number) => void;
 };
 
-export default function Pagination({
-  count,
-  limit,
-  currentPage,
-  setPage,
-}: PaginationProps) {
+export default function Pagination({ count, limit }: PaginationProps) {
+  const router = useRouter();
+  const { page } = router.query;
+
+  const currentPage = Number(page) >= 1 ? Number(page) : 1;
   const { currentPageArray, hasPrev, hasNext } = getCurrentPageArray(
     currentPage,
     count,
     limit,
   );
 
-  const handlePageClick = (pageIndex: number) => {
-    setPage(pageIndex);
+  const handlePageClick = (page: number) => {
+    router.push(`/test?page=${page}`);
   };
 
   const handlePrevClick = () => {
-    setPage(currentPage - 1);
+    router.push(`/test?page=${currentPage - 1}`);
   };
 
   const handleNextClick = () => {
-    setPage(currentPage + 1);
+    router.push(`/test?page=${currentPage - 1}`);
   };
 
   return (
