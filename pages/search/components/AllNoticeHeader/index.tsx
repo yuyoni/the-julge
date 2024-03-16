@@ -1,9 +1,9 @@
+import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import Filter from "@/components/Filter/Filter";
-import HeaderButtons from "@/pages/home/components/HeaderButtons";
-import { h2 } from "@/styles/fontsStyle";
-import { ChangeEvent } from "react";
-import { SelectedLocationList } from "@/components/Filter/types/types";
+import HeaderButtons from "@/pages/search/components/HeaderButtons";
+import type { SelectedLocationList } from "@/components/Filter/types/types";
+import HeaderText from "../HeaderText";
 
 interface AllNoticeHeaderProps {
   handleSelectChange: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -16,6 +16,7 @@ interface AllNoticeHeaderProps {
     startsAt: string,
     hourlyPay: string,
   ) => void;
+  keyword?: string;
 }
 
 export default function AllNoticeHeader({
@@ -25,10 +26,11 @@ export default function AllNoticeHeader({
   isModalVisible,
   handleModalClose,
   onApplyFilter,
+  keyword,
 }: AllNoticeHeaderProps) {
   return (
     <Header>
-      <HeaderText>전체 공고</HeaderText>
+      <HeaderText keyword={keyword} />
       <HeaderButtons
         handleSelectChange={handleSelectChange}
         sortStr={sortStr}
@@ -63,9 +65,4 @@ const Header = styled.div`
       "header-text"
       "header-buttons";
   }
-`;
-
-const HeaderText = styled.span`
-  grid-area: header-text;
-  ${h2};
 `;

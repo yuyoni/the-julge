@@ -1,13 +1,14 @@
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
-import PostList from "../PostList.ts";
-import { useFilteredNoticesData } from "../../hooks/useUserQuery";
-import { SelectedLocationList } from "@/components/Filter/types/types.js";
-import { NoticesItem } from "@/types/PostType.js";
-import Pagination from "@/pages/home/components/Pagination";
-import AllNoticeHeader from "@/pages/home/components/AllNoticeHeader";
+import PostList from "@/pages/search/components/PostList";
+import { useFilteredNoticesData } from "@/hooks/useUserQuery";
+import Pagination from "@/components/Pagination";
+import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
-export default function AllNotice() {
+import type { SelectedLocationList } from "@/components/Filter/types/types.js";
+import type { NoticesItem } from "@/types/PostType.js";
+
+export default function AllNotice({ keyword }: { keyword: string }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [address, setAddress] = useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
@@ -52,6 +53,7 @@ export default function AllNotice() {
     startsAtValue,
     hourlyPayValue,
     address,
+    keyword,
   });
   const notices = noticesData?.items ?? [];
   const noticeArray = notices.map((notice: NoticesItem) => notice.item);
@@ -65,6 +67,7 @@ export default function AllNotice() {
         isModalVisible={isModalVisible}
         handleModalClose={handleToggleModal}
         onApplyFilter={handleApplyFilter}
+        keyword={keyword}
       />
 
       <PostContent>

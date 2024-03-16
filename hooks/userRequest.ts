@@ -52,6 +52,7 @@ export const getNotices = async ({
       query += `&address=${adr}`;
     });
   }
+
   if (keyword) {
     query += `&keyword=${keyword}`;
   }
@@ -64,8 +65,6 @@ export const getNotices = async ({
   if (sortStr) {
     query += `&sort=${sortStr}`;
   }
-
-  console.log(query);
 
   const { data } = await axios.get(`${URL}/notices?${query}`);
   return data;
