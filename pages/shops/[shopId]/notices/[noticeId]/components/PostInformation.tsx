@@ -28,7 +28,9 @@ export default function PostInformation({
         <Wage>시급</Wage>
         <WageContainer>
           <HourlyPay>{hourlyPay}원</HourlyPay>
-          <WageFlagStyle>{wageIncreaseText}</WageFlagStyle>
+          {wageIncreaseText && (
+            <WageFlagStyle>{wageIncreaseText}</WageFlagStyle>
+          )}
         </WageContainer>
         <Container>
           <Image src={clockIcon} alt="clock_icon" />

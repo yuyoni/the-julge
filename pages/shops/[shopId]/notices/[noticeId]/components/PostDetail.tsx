@@ -29,7 +29,6 @@ const Container = styled.div`
   justify-content: flex-start;
   padding: 60px 238px;
   gap: 24px;
-  background: var(--The-julge-gray-05, #fafafa);
 `;
 
 const ShopDetails = styled.div`

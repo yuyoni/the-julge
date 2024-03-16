@@ -1,10 +1,6 @@
-export interface PostFormProps {
-  isPostFormVisible: boolean;
-  handlePostFormClose: () => void;
-}
-
 export interface FormContainerProps {
   label: string;
+  tooltipMessage?: string;
   gridArea: string;
   inputProps?: any;
 }
