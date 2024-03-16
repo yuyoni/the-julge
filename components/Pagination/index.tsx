@@ -29,7 +29,7 @@ export default function Pagination({ count, limit }: PaginationProps) {
   };
 
   const handleNextClick = () => {
-    router.push(`/test?page=${currentPage - 1}`);
+    router.push(`/test?page=${currentPage + 1}`);
   };
 
   return (
