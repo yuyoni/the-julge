@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   gap: 8px;
 `;
 
-const LocationBadge = styled.button`
+const LocationBadge = styled.div`
   display: flex;
   height: 30px;
   padding: 6px 10px;

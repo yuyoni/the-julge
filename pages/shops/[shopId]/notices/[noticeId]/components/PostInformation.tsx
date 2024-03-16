@@ -1,6 +1,6 @@
 import getWageIncreaseText from "@/components/Post/utils/getWageIncreaseText";
 import { NoticeData } from "@/hooks/useNoticeData";
-import formatTimeRange from "@/lib/utils/formatTimeRange";
+import { formatTimeRange } from "@/lib/utils/formatTimeRange";
 import { body1Regular, body2Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Image from "next/image";
