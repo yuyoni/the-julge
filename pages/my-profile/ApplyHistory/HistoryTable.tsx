@@ -9,10 +9,30 @@ type HistoryTableProps = {
 };
 
 export default function HistoryTable({ history }: HistoryTableProps) {
+  const initData = [
+    {
+      name: "HS 과일주스1",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "승인 완료",
+    },
+    {
+      name: "HS 과일주스2",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "대기중",
+    },
+    {
+      name: "HS 과일주스3",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "거절",
+    },
+  ];
   return (
     <>
       {history ? (
-        <Table />
+        <Table histories={initData} />
       ) : (
         <Wrapper>
           <Description>아직 신청 내역이 없어요</Description>

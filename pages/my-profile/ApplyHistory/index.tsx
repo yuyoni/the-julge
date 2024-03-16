@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import HistoryTable from "./HistoryTable";
 
 export default function ApplyHistory() {
-  const history = false;
+  const history = true;
   return (
     <Wrapper>
       <Title>신청 내역</Title>
@@ -27,7 +27,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 32px;
-  background-color: var(--The-julge-gray-05);
   font-size: 16px;
   padding: 60px 0 120px;
 
