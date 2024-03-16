@@ -1,3 +1,4 @@
+import { body2Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 
 export default function TableHeader() {
@@ -16,6 +17,7 @@ export default function TableHeader() {
 const Cell = styled.th<{ width?: number }>`
   padding: 14px 12px;
   text-align: left;
+  ${body2Regular}
 `;
 
 const HeadRow = styled.tr`

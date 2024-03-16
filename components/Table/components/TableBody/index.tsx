@@ -1,4 +1,4 @@
-import { body2Regular } from "@/styles/fontsStyle";
+import { body1Regular, body2Regular } from "@/styles/fontsStyle";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { History } from "../..";
@@ -61,6 +61,7 @@ const Status = styled.div<{ status: string }>`
 
 const Cell = styled.td<{ width?: number }>`
   padding: 20px 12px;
+  ${body1Regular}
 `;
 
 const TableRow = styled.tr`
