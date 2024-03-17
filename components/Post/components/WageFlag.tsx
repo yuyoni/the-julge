@@ -38,7 +38,7 @@ const WageFlagStyle = styled.div<{ wageIncrease: number }>`
       return css`
         background: var(--The-julge-purple-40);
       `;
-    } else if (wageIncrease > 30) {
+    } else if (wageIncrease >= 30) {
       return css`
         background: var(--The-julge-purple-30);
       `;
