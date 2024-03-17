@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import TableHeader from "./components/Header";
-import OwnerTableRow from "./components/TableRow/OwnerTableRow";
-import PartTimerTableRow from "./components/TableRow/PartTimerTableRow";
 import Pagination from "../Pagination";
+import TableBody from "./components/TableBody";
 
 export type Data = {
   [key: string]: string;
@@ -34,21 +33,12 @@ export default function Table({
     <Wrapper>
       <TableContainer>
         <TableHeader headers={Headers[type]} />
-        <tbody>
-          {dataList.map((data) => {
-            const { id, ...tableData } = data;
-            return type === "employer" ? (
-              <OwnerTableRow
-                key={id}
-                {...(tableData as Data)}
-                handlePermitClick={handlePermitClick}
-                handleDenyClick={handleDenyClick}
-              />
-            ) : (
-              <PartTimerTableRow key={id} {...tableData} />
-            );
-          })}
-        </tbody>
+        <TableBody
+          type={type}
+          dataList={dataList}
+          handlePermitClick={handlePermitClick}
+          handleDenyClick={handleDenyClick}
+        />
       </TableContainer>
       <PaginationContainer>
         <Pagination limit={limit} count={count} />
