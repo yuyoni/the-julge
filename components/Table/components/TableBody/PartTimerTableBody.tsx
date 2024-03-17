@@ -48,6 +48,7 @@ const TableRow = styled.tr`
 `;
 
 const Cell = styled.td<{ width?: number }>`
+  background: var(--The-julge-gray-05);
   padding: 20px 12px;
   ${body1Regular}
 `;

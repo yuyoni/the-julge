@@ -4,6 +4,7 @@ import ApplyHistory, { ApplyHistoryProps } from "./ApplyHistory";
 import styled from "@emotion/styled";
 
 export default function MyProfile() {
+  // 7~ 96라인까지는 테이블 테스트용으로 임시로 만든 파일들입니다.
   const tempHistories = [
     {
       id: "1",
@@ -78,34 +79,6 @@ export default function MyProfile() {
       phoneNumber: "010-1234-5678",
       status: "거절",
     },
-    {
-      id: "4",
-      name: "HS 과일주스1",
-      description: "참일꾼",
-      phoneNumber: "010-1234-5678",
-      status: "승인 완료",
-    },
-    {
-      id: "5",
-      name: "HS 과일주스2",
-      description: "참일꾼",
-      phoneNumber: "010-1234-5678",
-      status: "대기중",
-    },
-    {
-      id: "6",
-      name: "HS 과일주스3",
-      description: "참일꾼",
-      phoneNumber: "010-1234-5678",
-      status: "거절",
-    },
-    {
-      id: "7",
-      name: "HS 과일주스3",
-      description: "참일꾼",
-      phoneNumber: "010-1234-5678",
-      status: "거절",
-    },
   ];
 
   const tempResponse: ApplyHistoryProps = {
@@ -126,7 +99,7 @@ export default function MyProfile() {
     <Layout>
       <Profile />
       <Wrapper>
-        <ApplyHistory {...tempResponse} />
+        <ApplyHistory {...tempResponseOwner} />
       </Wrapper>
     </Layout>
   );

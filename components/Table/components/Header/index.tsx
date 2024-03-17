@@ -20,10 +20,10 @@ export default function TableHeader({ headers }: HeaderProps) {
 const HeadRow = styled.tr`
   border-bottom: 1px solid var(--The-julge-gray-20);
   border-radius: 10px;
-  background-color: var(--The-julge-purple-10);
 `;
 
 const Cell = styled.th<{ width?: number }>`
+  background: var(--The-julge-purple-10);
   padding: 14px 12px;
   text-align: left;
   ${body2Regular}

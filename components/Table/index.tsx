@@ -53,17 +53,17 @@ const TableContainer = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
 
-  td:first-child,
-  th:first-child {
+  th:first-child,
+  td:first-child {
     width: 228px;
     position: sticky;
     left: 0;
     z-index: 1;
   }
 
-  td:last-child,
-  th:last-child {
-    width: auto;
+  th:last-child,
+  td:last-child {
+    width: 220px;
     position: sticky;
     right: 0;
     z-index: 1;
@@ -71,7 +71,8 @@ const TableContainer = styled.table`
 `;
 
 const PaginationContainer = styled.div`
-  position: static;
+  position: sticky;
+  left: 0;
   display: flex;
   justify-content: center;
   padding: 8px 12px;

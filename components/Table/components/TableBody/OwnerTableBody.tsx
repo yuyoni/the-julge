@@ -54,7 +54,11 @@ const TableRow = styled.tr`
   border-bottom: 1px solid var(--The-julge-gray-20);
 `;
 
-const Cell = styled.td<{ width?: number }>`
+const Cell = styled.td`
+  max-width: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background: var(--The-julge-gray-05);
   padding: 20px 12px;
   ${body1Regular}
 `;
