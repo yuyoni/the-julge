@@ -40,8 +40,12 @@ const Header = styled.div`
 
 const CustomPostContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, 294px);
   gap: 31px 18px;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, 250px);
+  }
 `;
