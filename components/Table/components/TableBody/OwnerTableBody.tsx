@@ -50,6 +50,15 @@ const getStatusStyle = (status: string) => {
   }
 };
 
+const TableRow = styled.tr`
+  border-bottom: 1px solid var(--The-julge-gray-20);
+`;
+
+const Cell = styled.td<{ width?: number }>`
+  padding: 20px 12px;
+  ${body1Regular}
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   gap: 12px;
@@ -66,14 +75,4 @@ const Status = styled.div<{ status: string }>`
   ${body2Regular}
 
   ${({ status }) => getStatusStyle(status)}
-`;
-
-const Cell = styled.td<{ width?: number }>`
-  padding: 20px 12px;
-  ${body1Regular}
-`;
-
-const TableRow = styled.tr`
-  width: 100%;
-  border-bottom: 1px solid var(--The-julge-gray-20);
 `;

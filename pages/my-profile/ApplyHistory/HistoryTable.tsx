@@ -5,12 +5,14 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 
 type HistoryTableProps = {
+  type: "employer" | "employee";
   limit: number;
   count: number;
   histories: Data[];
 };
 
 export default function HistoryTable({
+  type,
   limit,
   count,
   histories,
@@ -18,7 +20,7 @@ export default function HistoryTable({
   return (
     <>
       {histories.length > 0 ? (
-        <Table type="Owner" limit={limit} count={count} dataList={histories} />
+        <Table type={type} limit={limit} count={count} dataList={histories} />
       ) : (
         <Wrapper>
           <Description>아직 신청 내역이 없어요</Description>

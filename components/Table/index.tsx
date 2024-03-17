@@ -9,15 +9,15 @@ export type Data = {
 };
 
 type TableProps = {
-  type: "Owner" | "PartTimer";
+  type: "employer" | "employee";
   limit: number;
   count: number;
   dataList: Data[];
 };
 
 const Headers = {
-  Owner: ["신청자", "소개", "전화번호", "상태"],
-  PartTimer: ["가게", "일자", "시급", "상태"],
+  employer: ["신청자", "소개", "전화번호", "상태"],
+  employee: ["가게", "일자", "시급", "상태"],
 };
 
 export default function Table({ type, limit, count, dataList }: TableProps) {
@@ -25,7 +25,7 @@ export default function Table({ type, limit, count, dataList }: TableProps) {
     <Wrapper>
       <TableContainer>
         <TableHeader headers={Headers[type]} />
-        {type === "Owner"
+        {type === "employer"
           ? dataList.map((data) => {
               const { id, ...tableData } = data;
               return <OwnerTableBody key={id} {...tableData} />;
@@ -42,25 +42,37 @@ export default function Table({ type, limit, count, dataList }: TableProps) {
   );
 }
 
-const TableContainer = styled.table`
+const Wrapper = styled.div`
   overflow-x: auto;
+  border: 1px solid var(--The-julge-gray-20, #e5e4e7);
+  border-radius: 10px;
+`;
+
+const TableContainer = styled.table`
+  width: 964px;
   border-collapse: collapse;
   border-spacing: 0;
 
-  td,
-  th {
-    width: 200px;
+  td:first-child,
+  th:first-child {
+    width: 228px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+
+  td:last-child,
+  th:last-child {
+    width: auto;
+    position: sticky;
+    right: 0;
+    z-index: 1;
   }
 `;
 
 const PaginationContainer = styled.div`
+  position: static;
   display: flex;
   justify-content: center;
   padding: 8px 12px;
-`;
-
-const Wrapper = styled.div`
-  overflow: hidden;
-  border: 1px solid var(--The-julge-gray-20, #e5e4e7);
-  border-radius: 10px;
 `;

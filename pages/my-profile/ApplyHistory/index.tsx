@@ -3,13 +3,15 @@ import { Data } from "@/components/Table";
 import styled from "@emotion/styled";
 import HistoryTable from "./HistoryTable";
 
-type ApplyHistoryProps = {
+export type ApplyHistoryProps = {
+  type: "employer" | "employee";
   limit: number;
   count: number;
   items: Data[];
 };
 
 export default function ApplyHistory({
+  type,
   limit,
   count,
   items,
@@ -17,7 +19,7 @@ export default function ApplyHistory({
   return (
     <Wrapper>
       <Title>신청 내역</Title>
-      <HistoryTable limit={limit} count={count} histories={items} />
+      <HistoryTable type={type} limit={limit} count={count} histories={items} />
     </Wrapper>
   );
 }

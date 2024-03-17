@@ -43,13 +43,8 @@ const getStatusStyle = (status: string) => {
   }
 };
 
-const Status = styled.div<{ status: string }>`
-  width: fit-content;
-  border-radius: 20px;
-  padding: 6px 10px;
-  ${body2Regular}
-
-  ${({ status }) => getStatusStyle(status)}
+const TableRow = styled.tr`
+  border-bottom: 1px solid var(--The-julge-gray-20);
 `;
 
 const Cell = styled.td<{ width?: number }>`
@@ -57,7 +52,11 @@ const Cell = styled.td<{ width?: number }>`
   ${body1Regular}
 `;
 
-const TableRow = styled.tr`
-  width: 100%;
-  border-bottom: 1px solid var(--The-julge-gray-20);
+const Status = styled.div<{ status: string }>`
+  width: fit-content;
+  border-radius: 20px;
+  padding: 6px 10px;
+  ${body2Regular}
+
+  ${({ status }) => getStatusStyle(status)}
 `;
