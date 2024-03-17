@@ -3,23 +3,21 @@ import { css } from "@emotion/react";
 import { Data } from "../..";
 import styled from "@emotion/styled";
 
-export default function PartTimerTableBody({
+export default function PartTimerTableRow({
   name,
   date,
   hourlyPay,
   status,
 }: Data) {
   return (
-    <tbody>
-      <TableRow>
-        <Cell>{name}</Cell>
-        <Cell>{date}</Cell>
-        <Cell>{hourlyPay}</Cell>
-        <Cell>
-          <Status status={status}>{status}</Status>
-        </Cell>
-      </TableRow>
-    </tbody>
+    <TableRow>
+      <Cell>{name}</Cell>
+      <Cell>{date}</Cell>
+      <Cell>{hourlyPay}</Cell>
+      <Cell>
+        <Status status={status}>{status}</Status>
+      </Cell>
+    </TableRow>
   );
 }
 
@@ -47,7 +45,7 @@ const TableRow = styled.tr`
   border-bottom: 1px solid var(--The-julge-gray-20);
 `;
 
-const Cell = styled.td<{ width?: number }>`
+const Cell = styled.td`
   background: var(--The-julge-gray-05);
   padding: 20px 12px;
   ${body1Regular}

@@ -22,7 +22,7 @@ const HeadRow = styled.tr`
   border-radius: 10px;
 `;
 
-const Cell = styled.th<{ width?: number }>`
+const Cell = styled.th`
   background: var(--The-julge-purple-10);
   padding: 14px 12px;
   text-align: left;

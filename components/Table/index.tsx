@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import TableHeader from "./components/Header";
-import OwnerTableBody from "./components/TableBody/OwnerTableBody";
-import PartTimerTableBody from "./components/TableBody/PartTimerTableBody";
+import OwnerTableRow from "./components/TableRow/OwnerTableRow";
+import PartTimerTableRow from "./components/TableRow/PartTimerTableRow";
 import Pagination from "../Pagination";
 
 export type Data = {
@@ -13,6 +13,8 @@ type TableProps = {
   limit: number;
   count: number;
   dataList: Data[];
+  handlePermitClick?: () => void;
+  handleDenyClick?: () => void;
 };
 
 const Headers = {
@@ -20,20 +22,33 @@ const Headers = {
   employee: ["가게", "일자", "시급", "상태"],
 };
 
-export default function Table({ type, limit, count, dataList }: TableProps) {
+export default function Table({
+  type,
+  limit,
+  count,
+  dataList,
+  handlePermitClick,
+  handleDenyClick,
+}: TableProps) {
   return (
     <Wrapper>
       <TableContainer>
         <TableHeader headers={Headers[type]} />
-        {type === "employer"
-          ? dataList.map((data) => {
-              const { id, ...tableData } = data;
-              return <OwnerTableBody key={id} {...tableData} />;
-            })
-          : dataList.map((data) => {
-              const { id, ...tableData } = data;
-              return <PartTimerTableBody key={id} {...tableData} />;
-            })}
+        <tbody>
+          {dataList.map((data) => {
+            const { id, ...tableData } = data;
+            return type === "employer" ? (
+              <OwnerTableRow
+                key={id}
+                {...(tableData as Data)}
+                handlePermitClick={handlePermitClick}
+                handleDenyClick={handleDenyClick}
+              />
+            ) : (
+              <PartTimerTableRow key={id} {...tableData} />
+            );
+          })}
+        </tbody>
       </TableContainer>
       <PaginationContainer>
         <Pagination limit={limit} count={count} />
@@ -46,6 +61,10 @@ const Wrapper = styled.div`
   overflow-x: auto;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   border-radius: 10px;
+
+  ::-webkit-scrollbar {
+    display: none; /* 웹킷 브라우저의 스크롤바를 숨김 */
+  }
 `;
 
 const TableContainer = styled.table`
@@ -53,20 +72,28 @@ const TableContainer = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
 
-  th:first-child,
-  td:first-child {
+  th:first-of-type,
+  td:first-of-type {
     width: 228px;
     position: sticky;
     left: 0;
     z-index: 1;
   }
 
-  th:last-child,
-  td:last-child {
-    width: 220px;
+  th:last-of-type,
+  td:last-of-type {
+    width: auto;
     position: sticky;
     right: 0;
     z-index: 1;
+  }
+
+  td:nth-of-type(2) {
+    width: 300px;
+  }
+
+  td:nth-of-type(3) {
+    width: 200px;
   }
 `;
 
