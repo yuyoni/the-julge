@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
 import PostList from "@/pages/search/components/PostList";
 import { useFilteredNoticesData } from "@/hooks/useUserQuery";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/pages/search/components/Pagination";
 import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";

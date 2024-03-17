@@ -7,10 +7,6 @@ import {
 } from "./userRequest";
 import { SelectedLocationList } from "@/components/Filter/types/types";
 
-export const useUserData = (userId: string) => {
-  return useQuery("user", () => fetchUser(userId));
-};
-
 interface GetNoticesProp {
   limit: number;
   offset: number;
@@ -20,6 +16,10 @@ interface GetNoticesProp {
   hourlyPayValue: string;
   address: SelectedLocationList;
 }
+
+export const useUserData = (userId: string) => {
+  return useQuery("user", () => fetchUser(userId));
+};
 
 export const useNoticesData = (address: string) => {
   return useQuery(["notices", address], () => fetchNotices(address), {
