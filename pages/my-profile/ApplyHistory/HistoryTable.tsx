@@ -17,7 +17,7 @@ export default function HistoryTable({
 }: HistoryTableProps) {
   return (
     <>
-      {histories.length !== 0 ? (
+      {histories.length > 0 ? (
         <Table limit={limit} count={count} histories={histories} />
       ) : (
         <Wrapper>
