@@ -1,5 +1,5 @@
 import Button from "@/components/Button/Button";
-import Table, { History } from "@/components/Table";
+import Table, { Data } from "@/components/Table";
 import { body1Regular, body2Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import Link from "next/link";
 type HistoryTableProps = {
   limit: number;
   count: number;
-  histories: History[];
+  histories: Data[];
 };
 
 export default function HistoryTable({
@@ -18,7 +18,7 @@ export default function HistoryTable({
   return (
     <>
       {histories.length > 0 ? (
-        <Table limit={limit} count={count} histories={histories} />
+        <Table type="Owner" limit={limit} count={count} dataList={histories} />
       ) : (
         <Wrapper>
           <Description>아직 신청 내역이 없어요</Description>

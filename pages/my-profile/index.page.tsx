@@ -26,6 +26,34 @@ export default function MyProfile() {
       hourlyPay: "15,000원",
       status: "거절",
     },
+    {
+      id: "4",
+      name: "HS 과일주스1",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "승인 완료",
+    },
+    {
+      id: "5",
+      name: "HS 과일주스2",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "대기중",
+    },
+    {
+      id: "6",
+      name: "HS 과일주스3",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "거절",
+    },
+    {
+      id: "7",
+      name: "HS 과일주스3",
+      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
+      hourlyPay: "15,000원",
+      status: "거절",
+    },
   ];
 
   const tempResponse = {

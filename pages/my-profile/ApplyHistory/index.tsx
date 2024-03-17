@@ -1,12 +1,12 @@
 import { h1Regular, h3 } from "@/styles/fontsStyle";
-import { History } from "@/components/Table";
+import { Data } from "@/components/Table";
 import styled from "@emotion/styled";
 import HistoryTable from "./HistoryTable";
 
 type ApplyHistoryProps = {
   limit: number;
   count: number;
-  items: History[];
+  items: Data[];
 };
 
 export default function ApplyHistory({

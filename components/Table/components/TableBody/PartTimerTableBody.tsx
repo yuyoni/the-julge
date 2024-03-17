@@ -1,20 +1,14 @@
 import { body1Regular, body2Regular } from "@/styles/fontsStyle";
 import { css } from "@emotion/react";
+import { Data } from "../..";
 import styled from "@emotion/styled";
 
-type TableData = {
-  name: string;
-  date: string;
-  hourlyPay: string;
-  status: string;
-};
-
-export default function TableBody({
+export default function PartTimerTableBody({
   name,
   date,
   hourlyPay,
   status,
-}: TableData) {
+}: Data) {
   return (
     <tbody>
       <TableRow>

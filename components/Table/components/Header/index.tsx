@@ -1,14 +1,18 @@
 import { body2Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 
-export default function TableHeader() {
+type HeaderProps = {
+  headers: string[];
+};
+
+export default function TableHeader({ headers }: HeaderProps) {
+  console.log(headers);
   return (
     <thead>
       <HeadRow>
-        <Cell>가게</Cell>
-        <Cell>일자</Cell>
-        <Cell>시급</Cell>
-        <Cell>상태</Cell>
+        {headers.map((header) => (
+          <Cell>{header}</Cell>
+        ))}
       </HeadRow>
     </thead>
   );

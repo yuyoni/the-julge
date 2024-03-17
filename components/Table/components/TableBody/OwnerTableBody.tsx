@@ -1,28 +1,34 @@
 import { body1Regular, body2Regular } from "@/styles/fontsStyle";
 import { css } from "@emotion/react";
+import { Data } from "../..";
 import styled from "@emotion/styled";
+import Button from "@/components/Button/Button";
 
-type TableData = {
-  name: string;
-  date: string;
-  hourlyPay: string;
-  status: string;
-};
-
-export default function TableBody({
+export default function OwnerTableBody({
   name,
-  date,
-  hourlyPay,
+  description,
+  phoneNumber,
   status,
-}: TableData) {
+}: Data) {
   return (
     <tbody>
       <TableRow>
         <Cell>{name}</Cell>
-        <Cell>{date}</Cell>
-        <Cell>{hourlyPay}</Cell>
+        <Cell>{description}</Cell>
+        <Cell>{phoneNumber}</Cell>
         <Cell>
-          <Status status={status}>{status}</Status>
+          {status === "대기중" ? (
+            <ButtonContainer>
+              <ButtonWrapper>
+                <Button text="승인하기" color="white" />
+              </ButtonWrapper>
+              <ButtonWrapper>
+                <Button text="거절하기" color="white" />
+              </ButtonWrapper>
+            </ButtonContainer>
+          ) : (
+            <Status status={status}>{status}</Status>
+          )}
         </Cell>
       </TableRow>
     </tbody>
@@ -36,11 +42,6 @@ const getStatusStyle = (status: string) => {
         background: var(--The-julge-blue-10);
         color: var(--The-julge-blue-20);
       `;
-    case "대기중":
-      return css`
-        background: var(--The-julge-green-10);
-        color: var(--The-julge-green-20);
-      `;
     case "거절":
       return css`
         background: var(--The-julge-red);
@@ -48,6 +49,15 @@ const getStatusStyle = (status: string) => {
       `;
   }
 };
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 92px;
+`;
 
 const Status = styled.div<{ status: string }>`
   width: fit-content;

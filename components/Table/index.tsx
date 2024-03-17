@@ -1,31 +1,39 @@
 import styled from "@emotion/styled";
 import TableHeader from "./components/Header";
-import TableBody from "./components/TableBody";
+import OwnerTableBody from "./components/TableBody/OwnerTableBody";
+import PartTimerTableBody from "./components/TableBody/PartTimerTableBody";
 import Pagination from "../Pagination";
 
-export type History = {
-  id: string;
-  name: string;
-  date: string;
-  hourlyPay: string;
-  status: string;
+export type Data = {
+  [key: string]: string;
 };
 
 type TableProps = {
+  type: "Owner" | "PartTimer";
   limit: number;
   count: number;
-  histories: History[];
+  dataList: Data[];
 };
 
-export default function Table({ limit, count, histories }: TableProps) {
+const Headers = {
+  Owner: ["신청자", "소개", "전화번호", "상태"],
+  PartTimer: ["가게", "일자", "시급", "상태"],
+};
+
+export default function Table({ type, limit, count, dataList }: TableProps) {
   return (
     <Wrapper>
       <TableContainer>
-        <TableHeader />
-        {histories.map((history) => {
-          const { id, ...tableData } = history;
-          return <TableBody key={id} {...tableData} />;
-        })}
+        <TableHeader headers={Headers[type]} />
+        {type === "Owner"
+          ? dataList.map((data) => {
+              const { id, ...tableData } = data;
+              return <OwnerTableBody key={id} {...tableData} />;
+            })
+          : dataList.map((data) => {
+              const { id, ...tableData } = data;
+              return <PartTimerTableBody key={id} {...tableData} />;
+            })}
       </TableContainer>
       <PaginationContainer>
         <Pagination limit={limit} count={count} />
@@ -35,9 +43,14 @@ export default function Table({ limit, count, histories }: TableProps) {
 }
 
 const TableContainer = styled.table`
-  width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
   border-spacing: 0;
+
+  td,
+  th {
+    width: 200px;
+  }
 `;
 
 const PaginationContainer = styled.div`
