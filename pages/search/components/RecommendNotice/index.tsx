@@ -32,12 +32,16 @@ const Header = styled.div`
   margin-bottom: 30px;
   width: 100%;
   ${h2};
+
+  @media only screen and (max-width: 1028px) {
+    padding: 15px 10px;
+  }
 `;
 
 const CustomPostContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 294px);
+  grid-template-columns: repeat(auto-fill, 250px);
   gap: 31px 18px;
-  margin: 0 auto;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
 `;

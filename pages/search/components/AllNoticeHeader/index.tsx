@@ -54,7 +54,7 @@ const Header = styled.div`
   position: relative;
 
   @media only screen and (max-width: 1028px) {
-    padding: 15px 32px;
+    padding: 15px 10px;
   }
 
   @media only screen and (max-width: 768px) {

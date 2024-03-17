@@ -7,6 +7,7 @@ import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import type { NoticesItem } from "@/types/PostType.js";
+import { h3 } from "@/styles/fontsStyle";
 
 export default function AllNotice({ keyword }: { keyword: string }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -71,7 +72,11 @@ export default function AllNotice({ keyword }: { keyword: string }) {
       />
 
       <PostContent>
-        <PostList isRecommend={false} noticeArray={noticeArray} />
+        {noticeArray.length === 0 ? (
+          <NoPost>등록된 공고가 없습니다.</NoPost>
+        ) : (
+          <PostList isRecommend={false} noticeArray={noticeArray} />
+        )}
       </PostContent>
 
       <Pagination
@@ -84,6 +89,8 @@ export default function AllNotice({ keyword }: { keyword: string }) {
 }
 
 const AllNoticeList = styled.section`
+  display: flex;
+  flex-direction: column;
   padding: 30px 0;
   max-width: 968px;
   margin: 0 auto;
@@ -91,8 +98,15 @@ const AllNoticeList = styled.section`
 
 const PostContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 294px);
-  gap: 31px 41px;
-  margin: 0 auto;
-  max-width: 968px;
+  grid-template-columns: repeat(auto-fill, 250px);
+  gap: 31px 18px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NoPost = styled.div`
+  width: 100%;
+  color: var(--The-julge-black);
+  ${h3};
 `;
