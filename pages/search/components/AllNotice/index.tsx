@@ -2,20 +2,28 @@ import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
 import PostList from "@/pages/search/components/PostList";
 import { useFilteredNoticesData } from "@/hooks/useUserQuery";
-import Pagination from "@/pages/search/components/Pagination";
+import Pagination from "@/components/Pagination";
 import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import type { NoticesItem } from "@/types/PostType.js";
 import { h3 } from "@/styles/fontsStyle";
 
-export default function AllNotice({ keyword }: { keyword: string }) {
+interface AllNoticeProps {
+  keyword: string;
+  initialPage?: number;
+}
+
+export default function AllNotice({
+  keyword,
+  initialPage = 1,
+}: AllNoticeProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [address, setAddress] = useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
   const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
   const [sortStr, setSortStr] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(initialPage);
 
   const TABLES_ITEMS_PER_PAGE = 6;
   const limit = TABLES_ITEMS_PER_PAGE;
@@ -70,7 +78,6 @@ export default function AllNotice({ keyword }: { keyword: string }) {
         onApplyFilter={handleApplyFilter}
         keyword={keyword}
       />
-
       <PostContent>
         {noticeArray.length === 0 ? (
           <NoPost>등록된 공고가 없습니다.</NoPost>
@@ -78,12 +85,7 @@ export default function AllNotice({ keyword }: { keyword: string }) {
           <PostList isRecommend={false} noticeArray={noticeArray} />
         )}
       </PostContent>
-
-      <Pagination
-        count={noticesData?.count}
-        currentPage={page}
-        setCurrentPage={setPage}
-      />
+      <Pagination count={noticesData?.count} limit={limit} setPage={setPage} />
     </AllNoticeList>
   );
 }

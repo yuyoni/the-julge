@@ -3,14 +3,19 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import ArrowButton from "./components/ArrowButton";
 import PageButton from "./components/PageButton";
+import { Dispatch, SetStateAction } from "react";
 
 type PaginationProps = {
   count: number;
   limit: number;
-  setPage?: () => void;
+  setPage?: Dispatch<SetStateAction<number>>;
 };
 
-export default function Pagination({ count, limit, setPage }: PaginationProps) {
+export default function Pagination({
+  count = 1,
+  limit,
+  setPage,
+}: PaginationProps) {
   const router = useRouter();
   const { page } = router.query;
   const basePath = router.pathname;
@@ -48,7 +53,7 @@ export default function Pagination({ count, limit, setPage }: PaginationProps) {
               key={idx}
               pageIndex={idx}
               page={currentPage}
-              onClick={setPage || handlePageClick}
+              onClick={handlePageClick}
             />
           ))}
       </PageButtonContainer>
@@ -63,12 +68,15 @@ export default function Pagination({ count, limit, setPage }: PaginationProps) {
 
 const PageButtonContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 2px;
 `;
 
 const Wrapper = styled.div`
+  margin-top: 40px;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 20px;
 `;
