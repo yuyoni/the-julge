@@ -11,11 +11,7 @@ type PaginationProps = {
   setPage?: Dispatch<SetStateAction<number>>;
 };
 
-export default function Pagination({
-  count = 1,
-  limit,
-  setPage,
-}: PaginationProps) {
+export default function Pagination({ count, limit, setPage }: PaginationProps) {
   const router = useRouter();
   const { page } = router.query;
   const basePath = router.pathname;

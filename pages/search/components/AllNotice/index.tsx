@@ -55,7 +55,7 @@ export default function AllNotice({
    * hourlyPayValue: 시급
    * address: 주소 배열
    */
-  const { data: noticesData } = useFilteredNoticesData({
+  const { data: noticesData, isSuccess } = useFilteredNoticesData({
     limit,
     offset,
     sortStr,
@@ -67,6 +67,7 @@ export default function AllNotice({
   const notices = noticesData?.items ?? [];
   const noticeArray = notices.map((notice: NoticesItem) => notice.item);
 
+  console.log(isSuccess);
   return (
     <AllNoticeList>
       <AllNoticeHeader
@@ -78,14 +79,23 @@ export default function AllNotice({
         onApplyFilter={handleApplyFilter}
         keyword={keyword}
       />
-      <PostContent>
-        {noticeArray.length === 0 ? (
-          <NoPost>등록된 공고가 없습니다.</NoPost>
-        ) : (
-          <PostList isRecommend={false} noticeArray={noticeArray} />
-        )}
-      </PostContent>
-      <Pagination count={noticesData?.count} limit={limit} setPage={setPage} />
+
+      {isSuccess && (
+        <>
+          <PostContent>
+            {noticeArray.length === 0 ? (
+              <NoPost>등록된 공고가 없습니다.</NoPost>
+            ) : (
+              <PostList isRecommend={false} noticeArray={noticeArray} />
+            )}
+          </PostContent>
+          <Pagination
+            count={noticesData?.count}
+            limit={limit}
+            setPage={setPage}
+          />
+        </>
+      )}
     </AllNoticeList>
   );
 }
