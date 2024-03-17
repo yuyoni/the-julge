@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
-import { ModalInfo } from "../types/types";
+import type { ModalInfo } from "../types/types";
 import alertIcon from "@/public/images/alert-icon.svg";
 import checkIcon from "@/public/images/check-icon.svg";
 

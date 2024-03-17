@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Notification } from "./types/types";
+import type { Notification } from "./types/types";
 
 export default function Notification({
   name,
