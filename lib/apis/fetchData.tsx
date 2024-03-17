@@ -1,12 +1,8 @@
 import { HttpMethod } from "@/types/apiTypes";
 import axios from "axios";
 
-// 임시 토큰 - 사장님
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjMDNhNjUyYy1iMWM5LTRkYjctYWNhZS03OTczMjZmNGFkZmIiLCJpYXQiOjE3MTA0OTYzNDJ9.hd-yKlpEAVWEc4Q8izhz83_atZZ1YbritHJbPWpxSm8";
-
-// 임시로 0기 데이터로 설정
-const BASE_URL = "https://bootcamp-api.codeit.kr/api/0-1/the-julge/";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const TOKEN = process.env.NEXT_PUBLIC_TOKEN; // 임시로 고정값 사용. 추후 토큰값 저장되면 삭제 예정
 
 export default async function fetchData<T>(
   param: string,
