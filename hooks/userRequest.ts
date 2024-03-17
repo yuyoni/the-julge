@@ -1,9 +1,6 @@
 import { SelectedLocationList } from "@/components/Filter/types/types";
 import axios from "axios";
 
-//추후에 env 등으로 뺄 예쩡
-const URL = "https://bootcamp-api.codeit.kr/api/0-1/the-julge";
-
 interface GetNoticesProp {
   limit: number;
   offset: number;
@@ -13,6 +10,8 @@ interface GetNoticesProp {
   hourlyPayValue: string;
   address: SelectedLocationList;
 }
+
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchUser = async (userId: string) => {
   const { data } = await axios.get(`${URL}/users/${userId}`);
@@ -52,6 +51,7 @@ export const getNotices = async ({
       query += `&address=${adr}`;
     });
   }
+
   if (keyword) {
     query += `&keyword=${keyword}`;
   }
@@ -64,8 +64,6 @@ export const getNotices = async ({
   if (sortStr) {
     query += `&sort=${sortStr}`;
   }
-
-  console.log(query);
 
   const { data } = await axios.get(`${URL}/notices?${query}`);
   return data;

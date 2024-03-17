@@ -1,14 +1,15 @@
 import { h2 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Layout from "@/components/Layout";
-import RecommendNotice from "./home/components/RecommendNotice";
-import AllNotice from "./home/components/AllNotice";
+import RecommendNotice from "@/pages/search/components/RecommendNotice";
+import AllNotice from "@/pages/search/components/AllNotice";
 
 export default function Home() {
+  const keyword = "";
   return (
     <Layout>
       <RecommendNotice />
-      <AllNotice />
+      <AllNotice keyword={keyword} />
     </Layout>
   );
 }

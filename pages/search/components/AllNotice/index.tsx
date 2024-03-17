@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
-import PostList from "../PostList.ts";
-import { useFilteredNoticesData } from "../../hooks/useUserQuery";
-import { SelectedLocationList } from "@/components/Filter/types/types.js";
-import { NoticesItem } from "@/types/PostType.js";
-import Pagination from "@/pages/home/components/Pagination";
-import AllNoticeHeader from "@/pages/home/components/AllNoticeHeader";
+import PostList from "@/pages/search/components/PostList";
+import { useFilteredNoticesData } from "@/hooks/useUserQuery";
+import Pagination from "@/pages/search/components/Pagination";
+import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
-export default function AllNotice() {
+import type { SelectedLocationList } from "@/components/Filter/types/types.js";
+import type { NoticesItem } from "@/types/PostType.js";
+import { h3 } from "@/styles/fontsStyle";
+
+export default function AllNotice({ keyword }: { keyword: string }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [address, setAddress] = useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
@@ -52,6 +54,7 @@ export default function AllNotice() {
     startsAtValue,
     hourlyPayValue,
     address,
+    keyword,
   });
   const notices = noticesData?.items ?? [];
   const noticeArray = notices.map((notice: NoticesItem) => notice.item);
@@ -65,10 +68,15 @@ export default function AllNotice() {
         isModalVisible={isModalVisible}
         handleModalClose={handleToggleModal}
         onApplyFilter={handleApplyFilter}
+        keyword={keyword}
       />
 
       <PostContent>
-        <PostList isRecommend={false} noticeArray={noticeArray} />
+        {noticeArray.length === 0 ? (
+          <NoPost>등록된 공고가 없습니다.</NoPost>
+        ) : (
+          <PostList isRecommend={false} noticeArray={noticeArray} />
+        )}
       </PostContent>
 
       <Pagination
@@ -81,6 +89,8 @@ export default function AllNotice() {
 }
 
 const AllNoticeList = styled.section`
+  display: flex;
+  flex-direction: column;
   padding: 30px 0;
   max-width: 968px;
   margin: 0 auto;
@@ -89,7 +99,18 @@ const AllNoticeList = styled.section`
 const PostContent = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 294px);
-  gap: 31px 41px;
-  margin: 0 auto;
-  max-width: 968px;
+  gap: 31px 18px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, 250px);
+  }
+`;
+
+const NoPost = styled.div`
+  width: 100%;
+  color: var(--The-julge-black);
+  ${h3};
 `;

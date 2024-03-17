@@ -9,7 +9,7 @@ export interface HeaderButtonsProps {
 }
 export default function HeaderButtons({
   handleSelectChange,
-  sortStr,
+  sortStr = "time",
   handleToggleModal,
 }: HeaderButtonsProps) {
   return (
