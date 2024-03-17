@@ -57,7 +57,6 @@ const FooterWrapper = styled.footer`
   justify-content: center;
   width: 100%;
   height: 160px;
-  margin-top: 40px;
   background-color: var(--The-julge-gray-10);
   color: var(--The-julge-gray-50);
 

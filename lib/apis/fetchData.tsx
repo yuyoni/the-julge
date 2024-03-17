@@ -17,11 +17,11 @@ export default async function fetchData<T>(
   try {
     switch (method) {
       case "GET": {
-        const response = await axios.get(`${BASE_URL}${param}`, { headers });
+        const response = await axios.get(`${BASE_URL}/${param}`, { headers });
         return response.data;
       }
       case "POST": {
-        const response = await axios.post(`${BASE_URL}${param}`, requestData, {
+        const response = await axios.post(`${BASE_URL}/${param}`, requestData, {
           headers,
         });
         return response.data;

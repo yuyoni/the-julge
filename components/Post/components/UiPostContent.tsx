@@ -48,7 +48,7 @@ const PostContent = styled.div`
   flex-direction: column;
   gap: 4px;
   margin: 10px 0;
-  padding: 0 8px;
+  padding: 0 16px;
 `;
 
 const Time = styled.div`
@@ -58,6 +58,7 @@ const Time = styled.div`
   color: var(--The-julge-gray-50, #7d7986);
   ${body1Regular}
 `;
+
 const Location = styled.div`
   display: flex;
   gap: 10px;
@@ -68,8 +69,11 @@ const Location = styled.div`
 
 const PostName = styled.div`
   ${h2}
+  margin-bottom: 8px;
 `;
+
 const Wage = styled.div`
   ${h2}
-  text-align:right;
+  margin-top: 8px;
+  text-align: right;
 `;

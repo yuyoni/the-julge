@@ -18,7 +18,7 @@ export default function UiImage({
   return (
     <ImageContent>
       <ImageWrapper>
-        <PostImage src={imageUrl} />
+        <PostImage src={imageUrl} className="card-image" />
         <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
         {closed && <Overlay />}
       </ImageWrapper>
@@ -27,20 +27,21 @@ export default function UiImage({
 }
 
 const ImageContent = styled.div`
-  height: 294px;
   overflow: hidden;
-  border-radius: 4px;
   flex-shrink: 0;
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
-  width: 100%;
-  padding-bottom: 100%;
+  padding-bottom: 200px;
 `;
 
 const PostImage = styled.img`
   overflow: hidden;
-  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
