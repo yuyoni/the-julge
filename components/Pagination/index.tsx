@@ -3,15 +3,16 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import ArrowButton from "./components/ArrowButton";
 import PageButton from "./components/PageButton";
-import { Dispatch, SetStateAction } from "react";
+import objectToQueryString from "@/lib/utils/objectToQueryString";
 
 type PaginationProps = {
   count: number;
   limit: number;
-  setPage?: Dispatch<SetStateAction<number>>;
+
+  setPage?: (page: number) => void;
 };
 
-export default function Pagination({ count, limit, setPage }: PaginationProps) {
+export default function Pagination({ count, limit }: PaginationProps) {
   const router = useRouter();
   const { page } = router.query;
   const basePath = router.pathname;
@@ -24,7 +25,8 @@ export default function Pagination({ count, limit, setPage }: PaginationProps) {
   );
 
   const handlePageClick = (page: number) => {
-    router.push(`${basePath}?page=${page}`);
+    const query = objectToQueryString({ ...router.query, page });
+    router.push(`${basePath}?${query}`);
   };
 
   const handlePrevClick = () => {
@@ -43,11 +45,11 @@ export default function Pagination({ count, limit, setPage }: PaginationProps) {
         isDisabled={!hasPrev}
       />
       <PageButtonContainer>
-        {typeof currentPageArray &&
-          currentPageArray.map((idx: any) => (
+        {currentPageArray.length > 0 &&
+          currentPageArray.map((index: number) => (
             <PageButton
-              key={idx}
-              pageIndex={idx}
+              key={index}
+              pageIndex={index}
               page={currentPage}
               onClick={handlePageClick}
             />
