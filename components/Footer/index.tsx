@@ -68,23 +68,22 @@ const FooterWrapper = styled.footer`
 const Items = styled.div`
   display: grid;
   justify-content: space-between;
-  grid-template: 'copyright footer-links sns';
+  grid-template: "copyright footer-links sns";
   width: 100%;
   padding: 32px;
-  
+
   ${body1Regular}
 
   @media (max-width: 768px) {
     grid-template:
-      'footer-links sns'
-      '. .' 1fr
-      'copyright .';
+      "footer-links sns"
+      ". ." 1fr
+      "copyright .";
 
     height: 100px;
     max-width: 1920px;
     padding: 32px 104px 0;
   }
-}
 `;
 
 const Copyright = styled.span`

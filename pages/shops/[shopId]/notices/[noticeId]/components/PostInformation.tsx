@@ -29,7 +29,9 @@ export default function PostInformation({
         <WageContainer>
           <HourlyPay>{hourlyPay}원</HourlyPay>
           {wageIncrease && (
-            <WageFlagStyle>시급 {wageIncrease}% ▲</WageFlagStyle>
+            <WageFlagStyle>
+              <span>시급 {wageIncrease}% ▲</span>
+            </WageFlagStyle>
           )}
         </WageContainer>
         <Container>
@@ -66,15 +68,15 @@ const HourlyPay = styled.span`
 
 const WageFlagStyle = styled.div`
   display: flex;
-  height: 36px;
-  padding: 12px;
-  align-items: center;
-  gap: 6px;
-  width: 110px;
+  place-items: center;
+  padding: 2px 12px;
 
   color: var(--The-julge-gray-00, #ffffff);
   border-radius: 20px;
-  background: var(--The-julge-purple-40, #905cb9);
+  background: var(
+    --The-julge-purple-40,
+    #905cb9
+  ); // 값에 따라 색상 변경하도록 추가하기
   ${body2Regular}
 `;
 
