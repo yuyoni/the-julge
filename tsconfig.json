@@ -17,12 +17,5 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "pages/search/components/PostList",
-    "pages/search/components/PostList"
-  ],
   "exclude": ["node_modules"]
 }
