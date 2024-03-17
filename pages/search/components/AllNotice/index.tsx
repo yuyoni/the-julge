@@ -67,7 +67,6 @@ export default function AllNotice({
   const notices = noticesData?.items ?? [];
   const noticeArray = notices.map((notice: NoticesItem) => notice.item);
 
-  console.log(isSuccess);
   return (
     <AllNoticeList>
       <AllNoticeHeader
