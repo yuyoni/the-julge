@@ -1,6 +1,6 @@
 import Post from "@/components/Post";
 import { useNoticeData } from "@/hooks/useNoticeData";
-import { formatTimeRange } from "@/lib/utils/formatTimeRange";
+import formatTimeRange from "@/lib/utils/formatTimeRange";
 
 export default function RecentNotice({
   recentNoticeId,
@@ -35,6 +35,8 @@ export default function RecentNotice({
     closed: noticeData.item.closed,
     shopId: noticeData.item.shop.item.id,
   };
+
+  console.log(itemDatas.duration);
 
   return <Post item={itemDatas} />;
 }

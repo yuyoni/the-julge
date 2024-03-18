@@ -10,6 +10,7 @@ import updateRecentNotices from "./utils/updateRecentNotices";
 
 export default function PostDetailPage() {
   const userType = "employee"; // 임시로 추가
+
   const { query } = useRouter();
   const { shopId, noticeId } = query;
 

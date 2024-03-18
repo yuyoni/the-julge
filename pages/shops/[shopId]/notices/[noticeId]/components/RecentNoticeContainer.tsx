@@ -34,19 +34,30 @@ export default function RecentNoticeContainer() {
 
   return (
     <Wrapper>
-      {recentNoticeList.map((notice, index) => (
-        <RecentNotice recentNoticeId={notice} index={index} />
-      ))}
+      <Container>
+        {recentNoticeList.map((notice, index) => (
+          <RecentNotice
+            key={notice.noticeId}
+            recentNoticeId={notice}
+            index={index}
+          />
+        ))}
+      </Container>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: flex-start;
+  padding: 60px 238px;
+`;
+
+const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 60px 238px;
-  gap: 24px;
+  gap: 32px 14px;
 `;
