@@ -6,8 +6,8 @@ import Pagination from "@/pages/search/components/Pagination";
 import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
-import type { NoticesItem } from "@/lib/types/PostType.js";
 import { h3 } from "@/styles/fontsStyle";
+import { NoticeItem, NoticeList } from "@/lib/types/NoticeTypes";
 
 export default function AllNotice({ keyword }: { keyword: string }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -57,7 +57,7 @@ export default function AllNotice({ keyword }: { keyword: string }) {
     keyword,
   });
   const notices = noticesData?.items ?? [];
-  const noticeArray = notices.map((notice: NoticesItem) => notice.item);
+  const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return (
     <AllNoticeList>

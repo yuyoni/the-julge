@@ -1,5 +1,5 @@
 import Post, { PostProps } from "@/components/Post";
-import type { NoticeItem } from "@/lib/types/NoticeTypes";
+import { NoticeItem } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
 
 interface PostListProps {
