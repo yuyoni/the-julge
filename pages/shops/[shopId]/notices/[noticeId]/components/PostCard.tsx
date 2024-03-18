@@ -2,8 +2,14 @@ import Button from "@/components/Button/Button";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import PostInformation from "./PostInformation";
+import { UserType } from "@/lib/types/userType";
 
-export default function PostCard({ noticeData }: { noticeData: NoticeList }) {
+interface PostCardType {
+  userType: UserType;
+  noticeData: NoticeList;
+}
+
+export default function PostCard({ userType, noticeData }: PostCardType) {
   return (
     <Wrapper>
       <ImageContainer>
@@ -11,7 +17,11 @@ export default function PostCard({ noticeData }: { noticeData: NoticeList }) {
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
-        <Button text="공고 편집하기" color="white" />
+        {userType === "employee" ? (
+          <Button text="신청하기" />
+        ) : (
+          <Button text="공고 편집하기" color="white" />
+        )}
       </Container>
     </Wrapper>
   );

@@ -2,19 +2,23 @@ import { NoticeList } from "@/lib/types/NoticeTypes";
 import { body1Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import PostCard from "./PostCard";
+import { UserType } from "@/lib/types/userType";
 
 interface PostDetailProps {
+  userType: UserType;
   noticeData: NoticeList;
 }
 
-export default function PostDetail({ noticeData }: PostDetailProps) {
+export default function PostDetail({ userType, noticeData }: PostDetailProps) {
+  if (!noticeData) return <div>loading...</div>;
+
   return (
     <Container>
       <ShopDetails>
         <Category>{noticeData.item.shop.item.category}</Category>
         <Title>{noticeData.item.shop.item.name}</Title>
       </ShopDetails>
-      <PostCard noticeData={noticeData} />
+      <PostCard userType={userType} noticeData={noticeData} />
       <PostDescription>
         <DescriptionHeading>공고 설명</DescriptionHeading>
         <DescriptionText>{noticeData.item.description}</DescriptionText>

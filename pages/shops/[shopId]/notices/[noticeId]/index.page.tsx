@@ -2,15 +2,12 @@ import Layout from "@/components/Layout";
 import { useNoticeData } from "@/hooks/useNoticeData";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import ApplicantList from "./components/ApplicantList";
-import PostDetail from "./components/PostDetail";
-import RecentNoticeContainer from "./components/RecentNoticeContainer";
-import updateRecentNotices from "./utils/updateRecentNotices";
+import Employee from "./components/Employee";
+import Employer from "./components/Employer";
+import { UserType } from "@/lib/types/userType";
 
 export default function PostDetailPage() {
-  const userType = "employee"; // 임시로 추가
-
+  const userType: UserType = "employee"; // 임시로 추가
   const { query } = useRouter();
   const { shopId, noticeId } = query;
 
@@ -20,12 +17,6 @@ export default function PostDetailPage() {
     data: noticeData,
   } = useNoticeData(`${shopId}`, `${noticeId}`);
 
-  useEffect(() => {
-    if (userType === "employee" && shopId && noticeId) {
-      updateRecentNotices(shopId as string, noticeId as string);
-    }
-  }, [userType, shopId, noticeId]);
-
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>error</p>;
   if (!noticeData) return <p>data not found</p>;
@@ -33,11 +24,14 @@ export default function PostDetailPage() {
   return (
     <Layout>
       <Wrapper>
-        <PostDetail noticeData={noticeData} />
         {userType === "employee" ? (
-          <RecentNoticeContainer />
+          <Employee
+            noticeData={noticeData}
+            shopId={shopId as string}
+            noticeId={noticeId as string}
+          />
         ) : (
-          <ApplicantList />
+          <Employer noticeData={noticeData} />
         )}
       </Wrapper>
     </Layout>
