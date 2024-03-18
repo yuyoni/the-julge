@@ -1,10 +1,10 @@
-import { formatTimeRange } from "@/lib/utils/formatTimeRange";
 import getElapsedTime from "@/lib/utils/getElapsedTime";
 import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Notification from "./Notification";
 import { NotificationItem } from "./types/types";
+import formatTimeRange from "@/lib/utils/formatTimeRange";
 
 export default function NotificationModal({
   isModalVisible,

@@ -35,4 +35,5 @@ const StyledText = styled.span`
   font-style: normal;
   font-weight: var(--weight-regular);
   line-height: 26px;
+  white-space: pre-line;
 `;
