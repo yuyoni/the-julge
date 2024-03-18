@@ -2,7 +2,8 @@ import { HttpMethod } from "@/lib/types/apiTypes";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
+const TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzk4MjFiMi0wMWIyLTRjYzYtOGM1OC03OWY0ZTE2MDI5MjEiLCJpYXQiOjE3MTA2NTQ2OTV9.C2DdkQynvGKFhQA2k6xOsDwDVfuutsIS-TS5jJGayHM";
 axios.defaults.headers.common["Authorization"] = `Bearer ${TOKEN}`;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
