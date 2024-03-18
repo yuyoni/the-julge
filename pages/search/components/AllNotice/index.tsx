@@ -93,7 +93,10 @@ export default function AllNotice({
             <PostContent>
               <PostList isRecommend={false} noticeArray={noticeArray} />
             </PostContent>
-            <Pagination count={noticesData?.count} limit={limit} />
+
+            <PaginationWrapper>
+              <Pagination count={noticesData?.count} limit={limit} />
+            </PaginationWrapper>
           </>
         ))}
     </AllNoticeList>
@@ -125,4 +128,14 @@ const NoPost = styled.div`
   width: 100%;
   color: var(--The-julge-black);
   ${h3};
+`;
+
+const PaginationWrapper = styled.div`
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    margin-top: 0px;
+  }
 `;
