@@ -16,7 +16,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 60px 238px;
   gap: 32px;
-  background: var(--The-julge-gray-05, #fafafa);
 `;
 
 const Title = styled.span`

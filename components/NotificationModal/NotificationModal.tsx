@@ -1,4 +1,4 @@
-import formatTimeRange from "@/lib/utils/formatTimeRange";
+import { formatTimeRange } from "@/lib/utils/formatTimeRange";
 import getElapsedTime from "@/lib/utils/getElapsedTime";
 import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";

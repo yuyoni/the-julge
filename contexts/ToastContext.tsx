@@ -1,8 +1,9 @@
 import Toast from "@/components/Toast/Toast";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+export type ShowToastType = (message: string) => void;
 interface ToastContextType {
-  showToast: (message: string) => void;
+  showToast: ShowToastType;
 }
 interface ToastProviderProps {
   children: ReactNode;
