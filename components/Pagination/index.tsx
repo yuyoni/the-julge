@@ -70,9 +70,7 @@ const PageButtonContainer = styled.div`
 `;
 
 const Wrapper = styled.div`
-  margin-top: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 20px;
 `;
