@@ -79,22 +79,23 @@ export default function AllNotice({
         keyword={keyword}
       />
 
-      {isSuccess && (
-        <>
+      {isSuccess &&
+        (noticeArray.length === 0 ? (
           <PostContent>
-            {noticeArray.length === 0 ? (
-              <NoPost>등록된 공고가 없습니다.</NoPost>
-            ) : (
-              <PostList isRecommend={false} noticeArray={noticeArray} />
-            )}
+            <NoPost>등록된 공고가 없습니다.</NoPost>
           </PostContent>
-          <Pagination
-            count={noticesData?.count}
-            limit={limit}
-            setPage={setPage}
-          />
-        </>
-      )}
+        ) : (
+          <>
+            <PostContent>
+              <PostList isRecommend={false} noticeArray={noticeArray} />
+            </PostContent>
+            <Pagination
+              count={noticesData?.count}
+              limit={limit}
+              setPage={setPage}
+            />
+          </>
+        ))}
     </AllNoticeList>
   );
 }
