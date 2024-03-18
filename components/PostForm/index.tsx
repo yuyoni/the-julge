@@ -74,7 +74,11 @@ const Wrapper = styled.div`
   width: 100%;
   row-gap: 20px;
   column-gap: 24px;
-  grid-template-areas: "hourlyPay startsAt workhour" "hourlyPay_input startsAt_input workhour_input" "description description description" "description_input description_input description_input";
+  grid-template-areas:
+    "hourlyPay startsAt workhour"
+    "hourlyPay_input startsAt_input workhour_input"
+    "description description description"
+    "description_input description_input description_input";
   ${body1Regular}
 `;
 

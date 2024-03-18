@@ -6,8 +6,8 @@ import Pagination from "@/components/Pagination";
 import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
-import type { NoticesItem } from "@/types/PostType.js";
 import { h3 } from "@/styles/fontsStyle";
+import { NoticeItem, NoticeList } from "@/lib/types/NoticeTypes";
 
 interface AllNoticeProps {
   keyword: string;
@@ -69,7 +69,7 @@ export default function AllNotice({
     keyword,
   });
   const notices = noticesData?.items ?? [];
-  const noticeArray = notices.map((notice: NoticesItem) => notice.item);
+  const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return (
     <AllNoticeList>

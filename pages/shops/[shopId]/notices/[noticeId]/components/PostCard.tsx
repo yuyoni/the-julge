@@ -1,9 +1,9 @@
-import { NoticeData } from "@/hooks/useNoticeData";
+import Button from "@/components/Button/Button";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import PostInformation from "./PostInformation";
-import Button from "@/components/Button/Button";
 
-export default function PostCard({ noticeData }: { noticeData: NoticeData }) {
+export default function PostCard({ noticeData }: { noticeData: NoticeList }) {
   return (
     <Wrapper>
       <ImageContainer>

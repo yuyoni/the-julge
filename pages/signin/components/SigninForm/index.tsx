@@ -70,7 +70,7 @@ export default function SigninForm() {
           },
         })}
       />
-      <Button text="로그인 하기" />
+      <Button type="submit" text="로그인 하기" />
     </Form>
   );
 }

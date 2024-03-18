@@ -54,4 +54,11 @@ const CardLink = styled.a`
   color: rgb(51, 51, 51);
   cursor: pointer;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
+  background-color: var(--The-julge-gray-00);
+
+  &:hover {
+    .card-image {
+      opacity: 0.7;
+    }
+  }
 `;
