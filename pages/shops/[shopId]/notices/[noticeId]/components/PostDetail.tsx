@@ -1,10 +1,10 @@
+import { NoticeList } from "@/lib/types/NoticeTypes";
+import { body1Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import PostCard from "./PostCard";
-import { NoticeData } from "@/hooks/useNoticeData";
-import { body1Regular, h1Regular } from "@/styles/fontsStyle";
 
 interface PostDetailProps {
-  noticeData: NoticeData;
+  noticeData: NoticeList;
 }
 
 export default function PostDetail({ noticeData }: PostDetailProps) {

@@ -1,8 +1,7 @@
 import closeIcon from "@/public/images/purple_close_icon.svg";
 import styled from "@emotion/styled";
-import ImageButton from "../Button/ImageButton";
-import { LocationBadgeBoxProps } from "./types/types";
 import Image from "next/image";
+import { LocationBadgeBoxProps } from "./types/types";
 
 export default function LocationBadgeBox({
   selectedLocations,
@@ -36,6 +35,7 @@ const LocationBadge = styled.div`
   align-items: center;
   gap: 4px;
   font-size: 14px;
+  cursor: pointer;
 
   border-radius: 20px;
   background: var(--The-julge-purple-10, #e9dcf4);

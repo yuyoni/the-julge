@@ -1,6 +1,6 @@
 import { h2 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
-import type { NoticesItem } from "@/types/PostType";
+import type { NoticesItem } from "@/lib/types/PostType";
 import { useNoticesData, useUserData } from "@/hooks/useUserQuery";
 import PostList from "@/pages/search/components/PostList";
 

@@ -16,8 +16,13 @@ export default function Modal({
       <ModalInfo modalIcon={modalIcon} modalText={modalText} />
       {modalIcon === "check" ? (
         <StyledButtons>
-          <Button text="아니요" color="white" handleClick={handleNoClick} />
-          <Button text="예" handleClick={handleYesClick} />
+          <Button
+            text="아니요"
+            color="white"
+            handleClick={handleNoClick}
+            width={80}
+          />
+          <Button text="예" handleClick={handleYesClick} width={80} />
         </StyledButtons>
       ) : (
         <StyledButtons>
@@ -33,6 +38,7 @@ export default function Modal({
 }
 
 const Container = styled.div`
+  position: absolute;
   display: flex;
   padding: 24px;
   flex-direction: column;
@@ -40,7 +46,7 @@ const Container = styled.div`
   width: 298px;
   gap: 32px;
   border-radius: 12px;
-  background: var(--The-julge-white);
+  background: var(--The-julge-gray-00);
 `;
 
 const StyledButtons = styled.div`
@@ -48,5 +54,5 @@ const StyledButtons = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 8px;
-  width: 80px;
+  width: 100%;
 `;

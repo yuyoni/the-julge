@@ -6,7 +6,7 @@ import Pagination from "@/pages/search/components/Pagination";
 import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
-import type { NoticesItem } from "@/types/PostType.js";
+import type { NoticesItem } from "@/lib/types/PostType.js";
 import { h3 } from "@/styles/fontsStyle";
 
 export default function AllNotice({ keyword }: { keyword: string }) {

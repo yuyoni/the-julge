@@ -1,16 +1,16 @@
 import getWageIncreaseText from "@/components/Post/utils/getWageIncreaseText";
-import { NoticeData } from "@/hooks/useNoticeData";
 import { formatTimeRange } from "@/lib/utils/formatTimeRange";
 import { body1Regular, body2Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import clockIcon from "@/public/images/clock-icon 1.svg";
 import locationIcon from "@/public/images/location.svg";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 
 export default function PostInformation({
   noticeData,
 }: {
-  noticeData: NoticeData;
+  noticeData: NoticeList;
 }) {
   if (noticeData) {
     const duration = formatTimeRange(

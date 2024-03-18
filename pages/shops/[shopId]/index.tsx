@@ -1,20 +1,23 @@
 import Button from "@/components/Button/Button";
 import Layout from "@/components/Layout";
+import Modal from "@/components/Modal";
 import PostForm from "@/components/PostForm/index";
 import { useToast } from "@/contexts/ToastContext";
 import fetchData from "@/lib/apis/fetchData";
+import TOAST_MESSAGES from "@/lib/constants/toastMessage";
+import convertToISODate from "@/lib/utils/formatDateString";
 import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FormDataType, RequestData } from "./types/types";
-import convertToISODate from "./utils/formatDateString";
+import validateFormData from "./utils/validateFormData";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
   const { shopId } = router.query;
   const { showToast } = useToast();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     hourlyPay: 0,
     startsAt: "",
@@ -29,41 +32,25 @@ export default function NoticeRegistrationPage() {
     }));
   };
 
-  const validateFormData = () => {
-    const { hourlyPay, startsAt, workhour } = formData;
-    if (hourlyPay <= 0 || startsAt.trim() === "" || workhour <= 0) {
-      showToast("모든 필드를 작성해주세요.");
-      return false;
-    }
-    if (isNaN(hourlyPay) || isNaN(workhour)) {
-      showToast("시급과 업무 시간은 숫자로 입력해주세요.");
-      return false;
-    }
-    if (hourlyPay < 9860) {
-      showToast("시급은 최저시급 이상 입력해주세요");
-      return false;
-    }
-    return true;
+  const handleFormSubmit = () => {
+    if (!validateFormData(formData, showToast)) return;
+    setIsModalOpen(true);
   };
 
-  const handleFormSubmit = () => {
-    if (!validateFormData()) return;
-
-    const { hourlyPay, startsAt, description, workhour } = formData;
-    const confirmed = window.confirm(
-      `\n시급: ${hourlyPay}\n시작 일시: ${startsAt}\n업무 시간: ${workhour}\n공고 설명: ${description}\n\n등록하시겠습니까?`,
+  const handleYesClick = () => {
+    const response = fetchData(
+      `shops/${shopId}/notices`,
+      "POST",
+      convertToISODate(formData),
     );
+    console.log(response);
+    // router.push("/"); // 공고 등록 한 후 response로 받은 공고 id를 이용해 shops/${shopId}/notices/${noticeId}로 이동해야함
+    showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
+    setIsModalOpen(false);
+  };
 
-    if (confirmed) {
-      const response = fetchData<FormDataType>(
-        `shops/${shopId}/notices`,
-        "POST",
-        convertToISODate(formData),
-      );
-      console.log(response);
-      // router.push("/"); // 공고 등록 한 후 response로 받은 공고 id를 이용해 shops/${shopId}/notices/${noticeId}로 이동해야함
-      showToast("등록되었습니다!");
-    }
+  const handleNoClick = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -77,6 +64,22 @@ export default function NoticeRegistrationPage() {
           width={312}
           handleClick={handleFormSubmit}
         />
+        {isModalOpen && (
+          <Dimmed>
+            <Modal
+              modalIcon="check"
+              modalText={`시급: ${formData.hourlyPay}원
+              시작 일시: ${formData.startsAt}
+              업무 시간: ${formData.workhour}
+              공고 설명: ${formData.description}
+              
+              등록하시겠습니까?
+            `}
+              handleYesClick={handleYesClick}
+              handleNoClick={handleNoClick}
+            />
+          </Dimmed>
+        )}
       </Wrapper>
     </Layout>
   );
@@ -94,4 +97,15 @@ const Wrapper = styled.div`
 
 const Title = styled.span`
   ${h1}
+`;
+
+const Dimmed = styled.div`
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
 `;

@@ -1,6 +1,6 @@
 import Post, { PostProps } from "@/components/Post";
 import { utilFormatDuration } from "@/lib/utils/formatTimeRange";
-import type { NoticeItem } from "@/types/PostType";
+import type { NoticeItem } from "@/lib/types/PostType";
 
 interface PostListProps {
   isRecommend: boolean;
