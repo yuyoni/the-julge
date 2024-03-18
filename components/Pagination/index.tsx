@@ -8,10 +8,9 @@ import objectToQueryString from "@/lib/utils/objectToQueryString";
 type PaginationProps = {
   count: number;
   limit: number;
-  setPage: (page: number) => void;
 };
 
-export default function Pagination({ count, limit, setPage }: PaginationProps) {
+export default function Pagination({ count, limit }: PaginationProps) {
   const router = useRouter();
   const { page } = router.query;
   const basePath = router.pathname;
@@ -25,7 +24,6 @@ export default function Pagination({ count, limit, setPage }: PaginationProps) {
 
   const handlePageClick = (page: number) => {
     const query = objectToQueryString({ ...router.query, page });
-    setPage(page);
     router.push(`${basePath}?${query}`);
   };
 

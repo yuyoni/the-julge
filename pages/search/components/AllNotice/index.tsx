@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import PostList from "@/pages/search/components/PostList";
 import { useFilteredNoticesData } from "@/hooks/useUserQuery";
 import Pagination from "@/components/Pagination";
@@ -28,6 +28,10 @@ export default function AllNotice({
   const TABLES_ITEMS_PER_PAGE = 6;
   const limit = TABLES_ITEMS_PER_PAGE;
   const offset = (page - 1) * TABLES_ITEMS_PER_PAGE;
+
+  useEffect(() => {
+    setPage(initialPage);
+  }, [initialPage]);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortStr(event.target.value);
@@ -89,11 +93,7 @@ export default function AllNotice({
             <PostContent>
               <PostList isRecommend={false} noticeArray={noticeArray} />
             </PostContent>
-            <Pagination
-              count={noticesData?.count}
-              limit={limit}
-              setPage={setPage}
-            />
+            <Pagination count={noticesData?.count} limit={limit} />
           </>
         ))}
     </AllNoticeList>
