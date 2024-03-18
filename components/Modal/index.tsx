@@ -10,19 +10,27 @@ export default function Modal({
   handleYesClick,
   handleConfirmClick,
   buttonColor = "white",
-}: ModalProps & { buttonColor?: "colored" | "white" | "gray" }) {
+  yesButtonText = "확인",
+}: ModalProps & {
+  buttonColor?: "colored" | "white" | "gray";
+  yesButtonText?: string;
+}) {
   return (
     <Container>
       <ModalInfo modalIcon={modalIcon} modalText={modalText} />
       {modalIcon === "check" ? (
         <StyledButtons>
           <Button
-            text="아니요"
+            text="아니오"
             color="white"
             handleClick={handleNoClick}
             width={80}
           />
-          <Button text="예" handleClick={handleYesClick} width={80} />
+          <Button
+            text={yesButtonText}
+            handleClick={handleYesClick}
+            width={80}
+          />
         </StyledButtons>
       ) : (
         <StyledButtons>
