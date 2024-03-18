@@ -17,7 +17,7 @@ export const PAGE_GROUP_SIZE = 7;
 export const TABLES_ITEMS_PER_PAGE = 6;
 
 export default function Pagination({
-  count,
+  count = 6,
   currentPage,
   setCurrentPage,
 }: PaginationProp) {
