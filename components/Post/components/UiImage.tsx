@@ -38,7 +38,8 @@ const ImageWrapper = styled.div`
 
 const PostImage = styled.img`
   overflow: hidden;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   position: absolute;
   top: 50%;

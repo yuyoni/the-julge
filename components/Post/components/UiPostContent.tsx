@@ -47,8 +47,7 @@ const PostContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin: 10px 0;
-  padding: 0 16px;
+  padding: 16px 20px;
 `;
 
 const Time = styled.div`
