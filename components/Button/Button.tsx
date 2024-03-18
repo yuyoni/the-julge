@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   handleClick?: () => void;
   color?: "colored" | "white" | "gray";
