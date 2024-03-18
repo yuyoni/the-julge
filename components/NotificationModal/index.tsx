@@ -1,11 +1,9 @@
-import { utilFormatDuration } from "@/lib/utils/formatTimeRange";
-import getElapsedTime from "@/lib/utils/getElapsedTime";
 import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Notification from "./components/Notification";
-import { NotificationItem } from "./types/types";
 import { h4 } from "@/styles/fontsStyle";
+import extractNotificationInfo from "./utils/extractNotificationInfo";
 
 export default function NotificationModal({
   handleClickNoti,
@@ -29,21 +27,6 @@ export default function NotificationModal({
       ))}
     </Wrapper>
   );
-}
-
-function extractNotificationInfo(notificationList: NotificationItem[]) {
-  const notifications = notificationList.map(({ item }) => {
-    const { createdAt, result, shop, notice } = item;
-    const { name } = shop.item;
-    const { startsAt, workhour } = notice.item;
-
-    const elapsedTime = getElapsedTime(createdAt);
-    const formattedTime = utilFormatDuration(startsAt, workhour);
-
-    return { name, result, elapsedTime, formattedTime };
-  });
-
-  return notifications;
 }
 
 const Title = styled.span`
