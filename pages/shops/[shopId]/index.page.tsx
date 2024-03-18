@@ -43,7 +43,7 @@ export default function NoticeRegistrationPage() {
       "POST",
       convertToISODate(formData),
     );
-    console.log(response);
+
     // router.push("/"); // 공고 등록 한 후 response로 받은 공고 id를 이용해 shops/${shopId}/notices/${noticeId}로 이동해야함
     showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
     setIsModalOpen(false);

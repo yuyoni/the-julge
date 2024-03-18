@@ -36,7 +36,5 @@ export default function RecentNotice({
     shopId: noticeData.item.shop.item.id,
   };
 
-  console.log(itemDatas.duration);
-
   return <Post item={itemDatas} />;
 }
