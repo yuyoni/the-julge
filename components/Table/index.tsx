@@ -49,7 +49,7 @@ export default function Table({
 
 const Wrapper = styled.div`
   overflow-x: auto;
-  border: 1px solid var(--The-julge-gray-20, #e5e4e7);
+  border: 1px solid var(--The-julge-gray-20);
   border-radius: 10px;
 
   ::-webkit-scrollbar {
