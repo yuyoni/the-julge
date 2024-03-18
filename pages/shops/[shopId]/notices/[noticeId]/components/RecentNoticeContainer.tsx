@@ -1,3 +1,4 @@
+import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import RecentNotice from "./RecentNotice";
@@ -34,6 +35,7 @@ export default function RecentNoticeContainer() {
 
   return (
     <Wrapper>
+      <Title>최근에 본 공고</Title>
       <Container>
         {recentNoticeList.map((notice, index) => (
           <RecentNotice
@@ -47,6 +49,9 @@ export default function RecentNoticeContainer() {
   );
 }
 
+const Title = styled.span`
+  ${h1Regular}
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
