@@ -8,7 +8,6 @@ import objectToQueryString from "@/lib/utils/objectToQueryString";
 type PaginationProps = {
   count: number;
   limit: number;
-  setPage?: (page: number) => void;
 };
 
 export default function Pagination({ count, limit }: PaginationProps) {
