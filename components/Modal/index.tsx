@@ -10,7 +10,7 @@ export default function Modal({
   handleYesClick,
   handleConfirmClick,
   buttonColor = "white",
-  yesButtonText = "확인",
+  yesButtonText = "예",
 }: ModalProps & {
   buttonColor?: "colored" | "white" | "gray";
   yesButtonText?: string;
