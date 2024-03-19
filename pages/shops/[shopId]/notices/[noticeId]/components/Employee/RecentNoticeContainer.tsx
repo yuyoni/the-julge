@@ -3,33 +3,19 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import RecentNotice from "./RecentNotice";
 
-interface RecentNotice {
-  shopId: string;
-  noticeId: string;
-}
-
-type RecentNoticeList = RecentNotice[];
+export type NoticeHref = string;
+type RecentNoticeHrefList = NoticeHref[];
 
 export default function RecentNoticeContainer() {
-  const [recentNoticeList, setRecentNoticeList] = useState<RecentNoticeList>(
-    [],
-  );
+  const [recentNoticeList, setRecentNoticeList] =
+    useState<RecentNoticeHrefList>([]);
 
   useEffect(() => {
-    const shopIdListString = localStorage.getItem("shopIdList");
-    const noticeIdListString = localStorage.getItem("noticeIdList");
+    const noticeHrefListString = localStorage.getItem("noticeHrefList");
 
-    if (noticeIdListString && shopIdListString) {
-      const shopIdList = JSON.parse(shopIdListString);
-      const noticeIdList = JSON.parse(noticeIdListString);
-
-      const newRecentNoticeList = noticeIdList.map(
-        (noticeId: string, index: number) => {
-          return { shopId: shopIdList[index], noticeId: noticeId };
-        },
-      );
-
-      setRecentNoticeList(newRecentNoticeList);
+    if (noticeHrefListString) {
+      const noticeHrefList = JSON.parse(noticeHrefListString);
+      setRecentNoticeList(noticeHrefList);
     }
   }, []);
 
@@ -37,13 +23,13 @@ export default function RecentNoticeContainer() {
     <Wrapper>
       <Title>최근에 본 공고</Title>
       <Container>
-        {recentNoticeList.map((notice, index) => (
-          <RecentNotice
-            key={notice.noticeId}
-            recentNoticeId={notice}
-            index={index}
-          />
-        ))}
+        {recentNoticeList.length ? (
+          recentNoticeList.map((notice, index) => (
+            <RecentNotice key={notice} noticeHref={notice} index={index} />
+          ))
+        ) : (
+          <NoRecentNotice>최근에 본 공고가 없습니다.</NoRecentNotice>
+        )}
       </Container>
     </Wrapper>
   );
@@ -65,4 +51,13 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 32px 14px;
+`;
+
+const NoRecentNotice = styled.div`
+  display: flex;
+  width: 964px;
+  padding: 60px 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

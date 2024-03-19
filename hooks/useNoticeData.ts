@@ -1,11 +1,12 @@
 import fetchData from "@/lib/apis/fetchData";
 import { NoticeList } from "@/lib/types/NoticeTypes";
+import { NoticeHref } from "@/pages/shops/[shopId]/notices/[noticeId]/components/Employee/RecentNoticeContainer";
 import { useQuery } from "react-query";
 
-export function useNoticeData(shopId: string, noticeId: string) {
+export function useNoticeData(noticeHref: NoticeHref) {
   return useQuery<NoticeList>(
-    ["noticeData", shopId, noticeId],
-    () => fetchData(`shops/${shopId}/notices/${noticeId}`),
-    { enabled: !!shopId && !!noticeId },
+    ["noticeData", noticeHref],
+    () => fetchData(noticeHref),
+    { enabled: !!noticeHref },
   );
 }

@@ -1,25 +1,27 @@
 import Layout from "@/components/Layout";
 import { useNoticeData } from "@/hooks/useNoticeData";
+
+import useCookie from "@/hooks/useCookies";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
-import { UserType } from "@/lib/types/userType";
 
 export default function PostDetailPage() {
-  const userType: UserType = "employee"; // 임시로 추가
-  const { query } = useRouter();
-  const { shopId, noticeId } = query;
+  const { id, userType } = useCookie();
+  const {
+    query: { shopId, noticeId },
+  } = useRouter();
 
   const {
     isLoading,
     error,
     data: noticeData,
-  } = useNoticeData(`${shopId}`, `${noticeId}`);
+  } = useNoticeData(`shops/${shopId}/notices/${noticeId}`);
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>error</p>;
-  if (!noticeData) return <p>data not found</p>;
+  if (error) return <p>Notice Detail fetching error</p>;
+  if (!noticeData) return <p>Noticedata not found</p>;
 
   return (
     <Layout>

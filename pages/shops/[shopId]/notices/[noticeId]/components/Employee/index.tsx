@@ -10,15 +10,11 @@ interface EmployeeProps {
 }
 
 export default function Employee({ noticeData }: EmployeeProps) {
-  const { query } = useRouter();
-  const shopId = query.shopId as string;
-  const noticeId = query.noticeId as string;
+  const noticeHref = noticeData.links[0].href.slice(19);
 
   useEffect(() => {
-    if (shopId && noticeId) {
-      updateRecentNotices(shopId, noticeId);
-    }
-  }, [shopId, noticeId]);
+    updateRecentNotices(noticeHref);
+  }, [noticeHref]);
 
   return (
     <>
