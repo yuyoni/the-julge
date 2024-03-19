@@ -28,7 +28,7 @@ export default function SigninForm() {
 
   const { email: emailError, password: passwordError } = errors;
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: SigninFormData) => {
     const isValid = validateSigninData(formData);
     if (!isValid) {
       alert(WRONG_INFORMATION);
