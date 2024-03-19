@@ -40,9 +40,9 @@ export default function SigninForm() {
       const { token, user } = data.item;
       const { id, type } = user.item;
 
-      document.cookie = `Authorization=Bearer ${token}; path=/`;
-      document.cookie = `Id=${id}; path=/`;
-      document.cookie = `UserType=${type}; path=/`;
+      document.cookie = `jwt=Bearer ${token}; path=/`;
+      document.cookie = `id=${id}; path=/`;
+      document.cookie = `userType=${type}; path=/`;
 
       router.push("/");
     } catch (error) {
