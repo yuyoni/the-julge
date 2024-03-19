@@ -20,3 +20,16 @@ function formatDate(date: Date, isStartTime: boolean): string {
     ? `${year}-${month}-${day} ${hours}:${minutes}`
     : `${hours}:${minutes}`;
 }
+
+export const utilFormatDuration = (duration: string, workhour: number) => {
+  const date = duration.slice(0, 10).replace(/-/g, ".");
+  const hours = parseInt(duration.slice(11, 13));
+  const minutes = duration.slice(14, 16);
+
+  let endHours = hours + workhour;
+
+  const startTime = `${hours.toString().padStart(2, "0")}:${minutes}`;
+  const endTime = `${endHours}:${minutes}`;
+
+  return `${date} ${startTime}~${endTime}`;
+};
