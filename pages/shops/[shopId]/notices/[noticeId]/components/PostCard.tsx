@@ -1,12 +1,11 @@
 import { NoticeList } from "@/lib/types/NoticeTypes";
-import { UserType } from "@/lib/types/userType";
 import styled from "@emotion/styled";
 import EmployeeButton from "./Employee/EmployeeButton";
 import EmployerButton from "./Employer/EmployerButton";
 import PostInformation from "./PostInformation";
 
 interface PostCardType {
-  userType: UserType;
+  userType: string;
   noticeData: NoticeList;
 }
 

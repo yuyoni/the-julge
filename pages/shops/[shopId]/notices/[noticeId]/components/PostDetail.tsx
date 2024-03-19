@@ -2,10 +2,9 @@ import { NoticeList } from "@/lib/types/NoticeTypes";
 import { body1Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import PostCard from "./PostCard";
-import { UserType } from "@/lib/types/userType";
 
 interface PostDetailProps {
-  userType: UserType;
+  userType: string;
   noticeData: NoticeList;
 }
 

@@ -1,14 +1,15 @@
 import Layout from "@/components/Layout";
-import { useNoticeData } from "@/hooks/useNoticeData";
-
-import useCookie from "@/hooks/useCookies";
+import useFetchData from "@/hooks/useFetchData";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
+import { useUser } from "@/contexts/UserContext";
 
-export default function PostDetailPage() {
-  const { id, userType } = useCookie();
+export default function NoticeDetailPage() {
+  const { userInfo } = useUser();
+
   const {
     query: { shopId, noticeId },
   } = useRouter();
@@ -17,16 +18,19 @@ export default function PostDetailPage() {
     isLoading,
     error,
     data: noticeData,
-  } = useNoticeData(`shops/${shopId}/notices/${noticeId}`);
+  } = useFetchData<NoticeList>(
+    `shops/${shopId}/notices/${noticeId}`,
+    "NoticeInfo",
+  );
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading || !userInfo) return <p>Loading...</p>;
   if (error) return <p>Notice Detail fetching error</p>;
   if (!noticeData) return <p>Noticedata not found</p>;
 
   return (
     <Layout>
       <Wrapper>
-        {userType === "employee" ? (
+        {userInfo.item.type === "employee" ? (
           <Employee noticeData={noticeData} />
         ) : (
           <Employer noticeData={noticeData} />

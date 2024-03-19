@@ -1,5 +1,6 @@
 import Button, { ButtonProps } from "@/components/Button/Button";
 import Modal from "@/components/Modal";
+import { useUser } from "@/contexts/UserContext";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -9,11 +10,10 @@ interface EmployeeButtonProps {
 }
 
 export default function EmployeeButton({ isClosed }: EmployeeButtonProps) {
+  const { userInfo } = useUser();
   const router = useRouter();
-  const shopId = router.query.shopId as string;
-  const noticeId = router.query.noticeId as string;
 
-  const isProfileExist = true; // 추후 유저 정보 받으면 프로필 있는지 검사하는 코드로 수정
+  const isProfileExist = userInfo?.item.name;
 
   const [isApplied, setIsApplied] = useState(false);
   const [showApplyModal, setShowApplyModal] = useState(false);

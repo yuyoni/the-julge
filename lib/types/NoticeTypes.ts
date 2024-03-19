@@ -1,6 +1,13 @@
+import { FormDataType } from "./FormDataType";
+
 export interface NoticeList {
   item: NoticeItem;
-  links: Link[];
+  links: Link<FormDataType>[];
+}
+
+export interface ShopList {
+  item: ShopItem;
+  href: string;
 }
 
 export interface NoticeItem {
@@ -10,7 +17,7 @@ export interface NoticeItem {
   workhour: number;
   description: string;
   closed: boolean;
-  shop: { item: ShopItem };
+  shop: ShopList;
   currentUserApplication: any;
 }
 
@@ -25,17 +32,12 @@ export interface ShopItem {
   originalHourlyPay: number;
 }
 
-export interface Link {
+export interface Link<T> {
   rel: string;
   description: string;
   method: string;
   href: string;
-  body?: {
-    hourlyPay: string;
-    startsAt: string;
-    workhour: string;
-    description: string;
-  };
+  body?: T;
   query?: {
     offset: string | undefined | number;
     limit: string | undefined | number;
