@@ -15,7 +15,7 @@ import axios from "axios";
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^.{8,}$/;
 
-const BASE_URL = "https://bootcamp-api.codeit.kr/api/3-3/the-julge";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function SigninForm() {
   const {
@@ -27,7 +27,7 @@ export default function SigninForm() {
 
   const { email: emailError, password: passwordError } = errors;
 
-  const onSubmit = async (formData: SigninFormData) => {
+  const onSubmit = async (formData: any) => {
     const isValid = validateSigninData(formData);
     if (!isValid) {
       alert(WRONG_INFORMATION);
@@ -37,7 +37,7 @@ export default function SigninForm() {
     try {
       const { data } = await axios.post(`${BASE_URL}/token`, formData);
       const { token } = data.item;
-      localStorage.setItem("accessToken", token);
+      document.cookie = `Authorization=Bearer ${token}; path=/`;
       router.push("/");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
