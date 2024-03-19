@@ -2,8 +2,10 @@ import { HttpMethod } from "@/lib/types/apiTypes";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+// TOKEN은 추후 수정
 const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzk4MjFiMi0wMWIyLTRjYzYtOGM1OC03OWY0ZTE2MDI5MjEiLCJpYXQiOjE3MTA2NTQ2OTV9.C2DdkQynvGKFhQA2k6xOsDwDVfuutsIS-TS5jJGayHM";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NTczZDM3Zi03M2I1LTQ3NTItYTJkNy1hN2Q5MmVjYzI2OTIiLCJpYXQiOjE3MTA3NzY2NDd9.eFSiPjd6iYC-6q4t6bZAu0fw3Ux2SELMG-0xcRGqIV0";
 axios.defaults.headers.common["Authorization"] = `Bearer ${TOKEN}`;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 

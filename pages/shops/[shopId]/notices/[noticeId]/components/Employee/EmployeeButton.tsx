@@ -10,6 +10,8 @@ interface EmployeeButtonProps {
 
 export default function EmployeeButton({ isClosed }: EmployeeButtonProps) {
   const router = useRouter();
+  const shopId = router.query.shopId as string;
+  const noticeId = router.query.noticeId as string;
 
   const isProfileExist = true; // 추후 유저 정보 받으면 프로필 있는지 검사하는 코드로 수정
 
@@ -117,4 +119,5 @@ const Dimmed = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
 `;

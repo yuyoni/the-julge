@@ -25,11 +25,7 @@ export default function PostDetailPage() {
     <Layout>
       <Wrapper>
         {userType === "employee" ? (
-          <Employee
-            noticeData={noticeData}
-            shopId={shopId as string}
-            noticeId={noticeId as string}
-          />
+          <Employee noticeData={noticeData} />
         ) : (
           <Employer noticeData={noticeData} />
         )}
