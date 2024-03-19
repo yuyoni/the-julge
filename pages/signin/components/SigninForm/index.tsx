@@ -11,7 +11,6 @@ import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Input from "@/components/Input";
 import axios from "axios";
-import fetchData from "@/lib/apis/fetchData";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^.{8,}$/;
@@ -40,9 +39,9 @@ export default function SigninForm() {
       const { token, user } = data.item;
       const { id, type } = user.item;
 
-      document.cookie = `Authorization=Bearer ${token}; path=/`;
-      document.cookie = `Id=${id}; path=/`;
-      document.cookie = `UserType=${type}; path=/`;
+      document.cookie = `jwt=Bearer ${token}; path=/`;
+      document.cookie = `id=${id}; path=/`;
+      document.cookie = `userType=${type}; path=/`;
 
       router.push("/");
     } catch (error) {

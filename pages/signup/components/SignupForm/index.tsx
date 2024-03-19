@@ -13,7 +13,7 @@ import UserTypeSelect from "./UserTypeSelect";
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
 
-const BASE_URL = "https://bootcamp-api.codeit.kr/api/3-3/the-julge";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function SignupForm() {
   const [type, setType] = useState<UserType>(UserType.PART_TIME);
@@ -86,7 +86,7 @@ export default function SignupForm() {
         })}
       />
       <UserTypeSelect type={type} setType={setType} />
-      <Button text="가입하기" />
+      <Button type="submit" text="가입하기" />
     </Form>
   );
 }
