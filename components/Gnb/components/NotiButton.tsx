@@ -1,3 +1,4 @@
+import NotificationModal from "@/components/NotificationModal";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { useState } from "react";
@@ -15,30 +16,19 @@ export default function NotiButton({ activeStatus }: { activeStatus: string }) {
 
   return (
     <>
-      <button type="button" onClick={handleClickNoti}>
+      <Button type="button" onClick={handleClickNoti}>
         <Image
           src={`/images/notification-${activeStatus}.svg`}
           alt="notification"
           width={20}
           height={20}
         />
-      </button>
-      <div>{isModalOpen && <ModalContainer></ModalContainer>}</div>
+        {isModalOpen && <NotificationModal handleClickNoti={handleClickNoti} />}
+      </Button>
     </>
   );
 }
 
-const ModalContainer = styled.div`
-  position: absolute;
-  z-index: 1000;
-  top: +50px;
-  right: 350px;
-  height: 200px;
-  width: 368px;
-  padding: 0 20px 24px;
-  overflow-y: auto;
-  border: 1px solid var(--The-julge-gray-30);
-  border-radius: 10px;
-  background-color: var(--The-julge-purple-10);
-  box-shadow: 0 2px 8px 0 rgb(120 116 134 / 25%);
+const Button = styled.button`
+  position: relative;
 `;
