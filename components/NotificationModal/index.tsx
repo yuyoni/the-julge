@@ -7,25 +7,29 @@ import extractNotificationInfo from "./utils/extractNotificationInfo";
 
 export default function NotificationModal({
   handleClickNoti,
+  isModalOpen,
 }: {
   handleClickNoti: () => void;
+  isModalOpen: boolean;
 }) {
   const notifications = extractNotificationInfo(notificationList);
 
   return (
-    <Wrapper>
-      <Container>
-        <Title>{`알림 ${notificationList.length}개`}</Title>
-        <StyledCloseIcon
-          src={closeIcon}
-          alt="close_icon"
-          onClick={handleClickNoti}
-        />
-      </Container>
-      {notifications.map((notification, index) => (
-        <Notification key={index} {...notification} />
-      ))}
-    </Wrapper>
+    isModalOpen && (
+      <Wrapper>
+        <Container>
+          <Title>{`알림 ${notificationList.length}개`}</Title>
+          <StyledCloseIcon
+            src={closeIcon}
+            alt="close_icon"
+            onClick={handleClickNoti}
+          />
+        </Container>
+        {notifications.map((notification, index) => (
+          <Notification key={index} {...notification} />
+        ))}
+      </Wrapper>
+    )
   );
 }
 
