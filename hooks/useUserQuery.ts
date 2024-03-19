@@ -18,12 +18,12 @@ interface GetNoticesProp {
 }
 
 export const useUserData = (userId: string) => {
-  return useQuery("user", () => fetchUser(userId));
+  return useQuery("user", () => fetchUser(userId), { enabled: !!userId });
 };
 
 export const useNoticesData = (address: string) => {
   return useQuery(["notices", address], () => fetchNotices(address), {
-    enabled: !!address, // address가 truthy 값일 때만 쿼리 실행
+    enabled: !!address,
     onSuccess: (data) => {
       if (data?.items?.length === 0) {
         fetchAllNotices();
