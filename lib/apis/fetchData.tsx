@@ -1,49 +1,50 @@
-import { HttpMethod } from "@/types/apiTypes";
-import axios from "axios";
+import { HttpMethod } from "@/lib/types/apiTypes";
+import axios, { AxiosResponse, AxiosError } from "axios";
 
-// 임시 토큰 - 사장님
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjMDNhNjUyYy1iMWM5LTRkYjctYWNhZS03OTczMjZmNGFkZmIiLCJpYXQiOjE3MTA0OTYzNDJ9.hd-yKlpEAVWEc4Q8izhz83_atZZ1YbritHJbPWpxSm8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzk4MjFiMi0wMWIyLTRjYzYtOGM1OC03OWY0ZTE2MDI5MjEiLCJpYXQiOjE3MTA2NTQ2OTV9.C2DdkQynvGKFhQA2k6xOsDwDVfuutsIS-TS5jJGayHM";
+axios.defaults.headers.common["Authorization"] = `Bearer ${TOKEN}`;
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
-// 임시로 0기 데이터로 설정
-const BASE_URL = "https://bootcamp-api.codeit.kr/api/0-1/the-julge/";
-
-export default async function fetchData<T>(
+export default async function fetchData(
   param: string,
   method: HttpMethod = "GET",
-  requestData?: T,
+  requestData?: any,
 ) {
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${TOKEN}`,
-  };
+  const url = `${BASE_URL}/${param}`;
 
   try {
+    let response: AxiosResponse;
+
     switch (method) {
-      case "GET": {
-        const response = await axios.get(`${BASE_URL}${param}`, { headers });
-        return response.data;
-      }
-      case "POST": {
-        const response = await axios.post(`${BASE_URL}${param}`, requestData, {
-          headers,
-        });
-        return response.data;
-      }
-      case "PUT": {
-        if (!requestData) {
-          throw new Error("PUT request requires data.");
-        }
-        const response = await axios.put(`${BASE_URL}${param}`, requestData, {
-          headers,
-        });
-        return response.data;
-      }
-      default: {
-        throw new Error(`Invalid HTTP method: ${method}`);
-      }
+      case "GET":
+        response = await axios.get(url);
+        break;
+      case "POST":
+        response = await axios.post(url, requestData);
+        break;
+      case "PUT":
+        response = await axios.put(url, requestData);
+        break;
+      default:
+        throw new Error("Invalid HTTP method");
     }
+    return response.data;
   } catch (error) {
-    throw new Error(`Request failed: ${error}`);
+    handleAxiosError(error);
+  }
+}
+
+function handleAxiosError(error: any): never {
+  const axiosError = error as AxiosError;
+  if (axiosError.response) {
+    throw new Error(
+      `Request failed with status code ${axiosError.response.status}`,
+    );
+  } else if (axiosError.request) {
+    throw new Error("No response received from server");
+  } else {
+    throw new Error(`Request failed with message: ${axiosError.message}`);
   }
 }

@@ -1,6 +1,6 @@
 import Post, { PostProps } from "@/components/Post";
-import { utilFormatDuration } from "@/lib/utils/formatTimeRange";
-import type { NoticeItem } from "@/types/PostType";
+import { NoticeItem } from "@/lib/types/NoticeTypes";
+import formatTimeRange from "@/lib/utils/formatTimeRange";
 
 interface PostListProps {
   isRecommend: boolean;
@@ -14,7 +14,7 @@ export default function PostList({
   const itemDatas = noticeArray.map((notice: NoticeItem) => ({
     name: notice.shop.item.name,
     id: notice.id,
-    duration: utilFormatDuration(notice.startsAt, notice.workhour),
+    duration: formatTimeRange(notice.startsAt, notice.workhour),
     workhour: notice.workhour,
     address: notice.shop.item.address1,
     hourlyPay: notice.hourlyPay,
