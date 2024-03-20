@@ -14,7 +14,6 @@ export default function Input({
   includeImage,
   handleClick,
   error,
-  readonly,
 }: InputProps) {
   return (
     <InputContainer>
