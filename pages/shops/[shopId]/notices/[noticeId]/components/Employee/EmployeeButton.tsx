@@ -2,12 +2,7 @@ import Button, { ButtonProps } from "@/components/Button/Button";
 import { useUser } from "@/contexts/UserContext";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
-import {
-  ApplicationsResponse,
-  AppliedNotice,
-  ApplyResponse,
-} from "@/lib/types/Application";
-import axios from "axios";
+import { ApplicationsResponse, ApplyResponse } from "@/lib/types/Application";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ModalContent from "../ModalContent";
@@ -56,7 +51,6 @@ export default function EmployeeButton({
         setIsApplied(true);
         setApplicationId(userApply[0].item.id);
       }
-      console.log(applicationId);
     }
   };
 
@@ -112,14 +106,12 @@ export default function EmployeeButton({
 
   const handleCancel = async () => {
     // 취소 요청 보내고 성공하면 아래 로직실행
-    console.log(applicationId);
     const response = await fetchData<ApplyResponse>({
       param: `/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
       method: "put",
       requestData: { status: "canceled" },
       token: token,
     });
-    console.log(response);
     setShowCancelModal(false);
     setIsApplied(false);
   };

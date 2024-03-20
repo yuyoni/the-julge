@@ -6,7 +6,6 @@ export default function EmployerButton() {
 
   const handleEditButtonClick = () => {
     // 공고 편집 버튼 클릭 시 실행되는 기능 구현
-    console.log("Edit button clicked");
     // 필요한 로직 구현
   };
 

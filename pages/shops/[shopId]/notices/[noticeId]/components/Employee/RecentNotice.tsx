@@ -10,7 +10,6 @@ export default function RecentNotice({
   noticeHref: string;
   index: number;
 }) {
-  console.log(noticeHref);
   const {
     isLoading,
     error,
