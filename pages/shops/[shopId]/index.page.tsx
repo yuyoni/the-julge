@@ -12,11 +12,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContent from "./components/ModalContents";
 import validateFormData from "./utils/validateFormData";
+import useCookie from "@/hooks/useCookies";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
   const { shopId } = router.query;
   const { showToast } = useToast();
+  const { jwt: token } = useCookie();
 
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -49,13 +51,14 @@ export default function NoticeRegistrationPage() {
         param: `/shops/${shopId}/notices`,
         method: "post",
         requestData: convertToISODate(modalState.formData),
+        token: token,
       });
 
       const { id: noticeId } = response.item;
       router.push(`/shops/${shopId}/notices/${noticeId}`);
       showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
     } catch (error) {
-      console.error("Error :", error);
+      console.error(error);
     } finally {
       setModalState((prevState) => ({ ...prevState, isOpen: false }));
     }

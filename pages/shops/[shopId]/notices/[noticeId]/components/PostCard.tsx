@@ -1,8 +1,10 @@
+import useCookie from "@/hooks/useCookies";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import EmployeeButton from "./Employee/EmployeeButton";
 import EmployerButton from "./Employer/EmployerButton";
 import PostInformation from "./PostInformation";
+import { useUser } from "@/contexts/UserContext";
 
 interface PostCardType {
   userType: string;
@@ -11,6 +13,8 @@ interface PostCardType {
 
 export default function PostCard({ userType, noticeData }: PostCardType) {
   const applyHref = noticeData.links[3].href.slice(18);
+  const { jwt: token } = useCookie();
+  const { userInfo } = useUser();
 
   return (
     <Wrapper>
@@ -19,13 +23,15 @@ export default function PostCard({ userType, noticeData }: PostCardType) {
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
-        {userType !== "employee" ? (
+        {userType === "employee" ? (
           <EmployeeButton
             applyHref={applyHref}
             isClosed={noticeData.item.closed}
+            token={token}
+            userInfo={userInfo}
           />
         ) : (
-          <EmployerButton />
+          <EmployerButton token={token} userInfo={userInfo} />
         )}
       </Container>
     </Wrapper>

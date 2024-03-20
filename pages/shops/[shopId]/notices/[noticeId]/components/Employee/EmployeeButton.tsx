@@ -1,8 +1,7 @@
 import Button, { ButtonProps } from "@/components/Button/Button";
-import { useUser } from "@/contexts/UserContext";
-import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import { ApplicationsResponse, ApplyResponse } from "@/lib/types/Application";
+import { UserData } from "@/lib/types/userType";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ModalContent from "../ModalContent";
@@ -10,14 +9,16 @@ import ModalContent from "../ModalContent";
 interface EmployeeButtonProps {
   applyHref: string;
   isClosed: boolean;
+  token: string;
+  userInfo: UserData | null;
 }
 
 export default function EmployeeButton({
   applyHref,
   isClosed,
+  token,
+  userInfo,
 }: EmployeeButtonProps) {
-  const { userInfo } = useUser();
-  const { jwt: token } = useCookie();
   const router = useRouter();
   const { shopId, noticeId } = router.query;
 
