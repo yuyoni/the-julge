@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
-import Input from "../Input";
-import DropDownList from "../DropDown/components/DropDownList";
+import Input from "../../pages/my-shop/components/Input";
+import DropDownList from "./components/DropDownList";
 import styled from "@emotion/styled";
 import { body1Regular } from "@/styles/fontsStyle";
 
