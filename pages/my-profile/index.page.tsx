@@ -1,71 +1,94 @@
+import { useEffect, useState } from "react";
+import ApplyHistory, { ApplyHistoryProps } from "./ApplyHistory";
 import Layout from "@/components/Layout";
 import Profile from "./Profile";
-import ApplyHistory, { ApplyHistoryProps } from "./ApplyHistory";
 import styled from "@emotion/styled";
+import axios from "axios";
+import useCookie from "@/hooks/useCookies";
+
+type UserProfile = {
+  name: string;
+  phone: string;
+  address: string;
+  bio: string;
+};
+
+type Application = {
+  id: string;
+  name: string;
+  date: string;
+  hourlyPay: string;
+  status: string;
+};
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function MyProfile() {
-  // 7~ 62라인까지는 테이블 테스트용으로 임시로 만든 파일들입니다.
-  const tempHistories = [
-    {
-      id: "1",
-      name: "HS 과일주스1",
-      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
-      hourlyPay: "15,000원",
-      status: "승인 완료",
-    },
-    {
-      id: "2",
-      name: "HS 과일주스2",
-      date: "2023-01-12 10:00 ~ 12:00 (2시간)",
-      hourlyPay: "15,000원",
-      status: "대기중",
-    },
-  ];
+  const { jwt, userType, id } = useCookie();
+  const [profile, setProfile] = useState<UserProfile>({
+    name: "",
+    phone: "",
+    address: "",
+    bio: "",
+  });
+  const [applicationHistory, setApplicationHistory] = useState<Application[]>(
+    [],
+  );
 
-  const tempApplication = [
-    {
-      id: "1",
-      name: "HS 과일주스1",
-      description: "참일꾼",
-      phoneNumber: "010-1234-5678",
-      status: "승인 완료",
-    },
-    {
-      id: "2",
-      name: "HS 과일주스2",
-      description: "참일꾼",
-      phoneNumber: "010-1234-5678",
-      status: "대기중",
-    },
-    {
-      id: "3",
-      name: "HS 과일주스3",
-      description:
-        "나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱나는짱",
-      phoneNumber: "010-1234-5678",
-      status: "거절",
-    },
-  ];
+  useEffect(() => {
+    console.log("useEffect");
+    const fetchData = async () => {
+      try {
+        const [{ data: userInfo }, { data: applicationHistory }] =
+          await Promise.all([
+            axios.get(`${BASE_URL}/users/${id}`),
+            axios.get(`${BASE_URL}/users/${id}/applications`, {
+              headers: {
+                Authorization: jwt,
+              },
+            }),
+          ]);
+        const { name, phone, address, bio } = userInfo.item;
+        setProfile((prev) => ({ ...prev, name, phone, address, bio }));
+
+        const { count, limit, items } = applicationHistory;
+        const history: Application[] = items.map(({ item }: any) => {
+          const { id, notice, shop, status } = item;
+          const { name } = shop.item;
+          const { hourlyPay, startsAt, workhour } = notice.item;
+          const date = `2023-01-12 10:00 ~ 12:00 (${workhour}시간)`;
+          return {
+            id,
+            name,
+            date,
+            hourlyPay,
+            status,
+          };
+        });
+        setApplicationHistory(history);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          const { message } = error.response.data;
+          alert(message);
+        }
+      }
+    };
+    fetchData();
+  }, [id]);
+  console.log(profile);
 
   const tempResponse: ApplyHistoryProps = {
     type: "employee",
     limit: 5,
-    count: tempHistories.length,
-    items: tempHistories,
-  };
-
-  const tempResponseOwner: ApplyHistoryProps = {
-    type: "employer",
-    limit: 5,
-    count: 0,
-    items: [],
+    count: applicationHistory.length,
+    items: applicationHistory,
   };
 
   return (
     <Layout>
       <Profile />
       <Wrapper>
-        <ApplyHistory {...tempResponseOwner} />
+        <ApplyHistory {...tempResponse} />
       </Wrapper>
     </Layout>
   );
