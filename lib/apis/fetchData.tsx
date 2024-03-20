@@ -24,12 +24,21 @@ export default async function fetchData<T>({
     let response: AxiosResponse<T>;
 
     if (token) {
-      response = await axios[method](url, requestData, {
-        headers: {
-          Authorization: `${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      if (method === "get") {
+        response = await axios[method](url, {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        response = await axios[method](url, requestData, {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+      }
     } else {
       response = await axios[method](url, requestData);
     }

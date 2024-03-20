@@ -27,3 +27,37 @@ export interface ApplyResponse {
     method: string;
   }[];
 }
+
+export interface ApplicationsResponse {
+  count: number;
+  hasNext: boolean;
+  items: ApplyResponse[];
+  shop: Shop;
+  status: string;
+  links: Link[];
+}
+
+export interface AppliedNotice {
+  createdAt: string;
+  id: string;
+  notice: {
+    href: string;
+  };
+  closed: boolean;
+  description: string;
+  hourlyPay: string;
+  startsAt: string;
+  workhour: string;
+}
+
+interface Shop {
+  href: string;
+  item: ShopItem;
+}
+
+interface Link {
+  description: string;
+  href: string;
+  method: string;
+  rel: string;
+}
