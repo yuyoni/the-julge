@@ -34,7 +34,7 @@ export interface ApplicationsResponse {
   items: ApplyResponse[];
   shop: Shop;
   status: string;
-  links: Link[];
+  links: ApplicantLink[];
 }
 
 export interface AppliedNotice {
@@ -55,7 +55,7 @@ interface Shop {
   item: ShopItem;
 }
 
-interface Link {
+export interface ApplicantLink {
   description: string;
   href: string;
   method: string;
