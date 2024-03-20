@@ -1,15 +1,15 @@
+import Button from "@/components/Button/Button";
+import fetchData from "@/lib/apis/fetchData";
+import ModalContent from "@/pages/shops/[shopId]/notices/[noticeId]/components/ModalContent";
 import { body1Regular, body2Regular } from "@/styles/fontsStyle";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Button from "@/components/Button/Button";
-import { useEffect, useState } from "react";
-import fetchData from "@/lib/apis/fetchData";
-import useCookie from "@/hooks/useCookies";
 import { useRouter } from "next/router";
-import ModalContent from "@/pages/shops/[shopId]/notices/[noticeId]/components/ModalContent";
+import { useState } from "react";
 
 type OwnerTableBodyProps = {
   key?: string;
+  token?: string;
   applicationId?: string;
   name?: string;
   bio?: string;
@@ -20,13 +20,13 @@ type OwnerTableBodyProps = {
 };
 
 export default function OwnerTableRow({
+  token,
   applicationId,
   name,
   bio,
   phone,
   status,
 }: OwnerTableBodyProps) {
-  const { jwt: token } = useCookie();
   const router = useRouter();
   const { shopId, noticeId } = router.query;
   const [isShowAcceptModal, setIsShowAcceptModal] = useState(false);
@@ -59,7 +59,7 @@ export default function OwnerTableRow({
       requestData: {
         status: "rejected",
       },
-      token: token,
+      token: token!,
     });
     setIsShowRejectModal(false);
     router.reload();

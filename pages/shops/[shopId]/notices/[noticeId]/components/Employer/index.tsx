@@ -7,7 +7,13 @@ import { useRouter } from "next/router";
 import RecentNoticeContainer from "../Employee/RecentNoticeContainer";
 import updateRecentNotices from "../../utils/updateRecentNotices";
 
-export default function Employer({ noticeData }: { noticeData: NoticeList }) {
+export default function Employer({
+  noticeData,
+  token,
+}: {
+  noticeData: NoticeList;
+  token: string;
+}) {
   const { userInfo } = useUser();
   const { query } = useRouter();
   const { shopId } = query;
@@ -25,11 +31,12 @@ export default function Employer({ noticeData }: { noticeData: NoticeList }) {
   return (
     <>
       <PostDetail
+        token={token}
         isMyNotice={isMyNotice}
         userType="employer"
         noticeData={noticeData}
       />
-      {isMyNotice ? <ApplicantList /> : <RecentNoticeContainer />}
+      {isMyNotice ? <ApplicantList token={token} /> : <RecentNoticeContainer />}
     </>
   );
 }

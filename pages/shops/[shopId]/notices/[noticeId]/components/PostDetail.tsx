@@ -4,12 +4,14 @@ import styled from "@emotion/styled";
 import PostCard from "./PostCard";
 
 interface PostDetailProps {
+  token: string;
   userType: string;
   noticeData: NoticeList;
   isMyNotice?: boolean;
 }
 
 export default function PostDetail({
+  token,
   userType,
   noticeData,
   isMyNotice,
@@ -23,6 +25,7 @@ export default function PostDetail({
         <Title>{noticeData.item.shop.item.name}</Title>
       </ShopDetails>
       <PostCard
+        token={token}
         isMyNotice={isMyNotice}
         userType={userType}
         noticeData={noticeData}

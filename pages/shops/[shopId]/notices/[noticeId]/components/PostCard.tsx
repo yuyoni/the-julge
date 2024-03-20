@@ -7,18 +7,19 @@ import PostInformation from "./PostInformation";
 import { useUser } from "@/contexts/UserContext";
 
 interface PostCardType {
+  token: string;
   userType: string;
   noticeData: NoticeList;
   isMyNotice?: boolean;
 }
 
 export default function PostCard({
+  token,
   userType,
   noticeData,
   isMyNotice,
 }: PostCardType) {
   const applyHref = noticeData.links[3].href.slice(18);
-  const { jwt: token } = useCookie();
   const { userInfo } = useUser();
 
   return (
