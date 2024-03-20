@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import LOCATIONS from "./constants/constants";
-import { LocationOptionProps } from "./types/types";
+import { LocationOptionProps, LocationString } from "./types/types";
 
 export default function LocationOption({
   selectedLocations,
@@ -8,7 +8,7 @@ export default function LocationOption({
 }: LocationOptionProps) {
   return (
     <Wrapper>
-      {LOCATIONS.map((location) => (
+      {LOCATIONS.map((location: LocationString) => (
         <Container
           key={location}
           onClick={() => toggleLocation(location)}

@@ -1,4 +1,6 @@
-const LOCATIONS = [
+import { LocationString } from "../types/types";
+
+const LOCATIONS: LocationString[] = [
   "서울시 종로구",
   "서울시 중구",
   "서울시 용산구",

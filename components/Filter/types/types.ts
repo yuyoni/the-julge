@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export type LocationString =
   | "서울시 종로구"
   | "서울시 중구"
