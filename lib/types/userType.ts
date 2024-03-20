@@ -1,10 +1,13 @@
 import { LocationString } from "@/components/Filter/types/types";
 import { Link, ShopList } from "./NoticeTypes";
 
-export interface UserInfo {
+export interface UserItem {
   id: string;
   email: string;
   type: string;
+}
+
+export interface UserInfo extends UserItem {
   shop: null | ShopList;
   name?: string;
   phone?: string;

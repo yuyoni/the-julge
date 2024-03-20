@@ -5,28 +5,33 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
-export default async function fetchData<T>(
-  param: string,
-  method: HttpMethod = "GET",
-  requestData?: any,
-) {
+interface FetchDataOptions {
+  param: string;
+  method?: "get" | "post" | "put";
+  requestData?: any;
+  token?: string;
+}
+
+export default async function fetchData<T>({
+  param,
+  method = "get",
+  requestData = {},
+  token,
+}: FetchDataOptions): Promise<T> {
   const url = `${BASE_URL}/${param}`;
 
   try {
     let response: AxiosResponse<T>;
 
-    switch (method) {
-      case "GET":
-        response = await axios.get(url);
-        break;
-      case "POST":
-        response = await axios.post(url, requestData);
-        break;
-      case "PUT":
-        response = await axios.put(url, requestData);
-        break;
-      default:
-        throw new Error("Invalid HTTP method");
+    if (token) {
+      response = await axios[method](url, requestData, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+    } else {
+      response = await axios[method](url, requestData);
     }
     return response.data;
   } catch (error) {

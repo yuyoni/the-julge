@@ -45,11 +45,11 @@ export default function NoticeRegistrationPage() {
 
   const handleYesClick = async () => {
     try {
-      const response = await fetchData<NoticeList>(
-        `shops/${shopId}/notices`,
-        "POST",
-        convertToISODate(modalState.formData),
-      );
+      const response = await fetchData<NoticeList>({
+        param: `shops/${shopId}/notices`,
+        method: "post",
+        requestData: convertToISODate(modalState.formData),
+      });
 
       const { id: noticeId } = response.item;
       router.push(`/shops/${shopId}/notices/${noticeId}`);
@@ -77,7 +77,7 @@ export default function NoticeRegistrationPage() {
           handleClick={handleFormSubmit}
         />
         {modalState.isOpen && (
-          <Dimmed>
+          <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
             <ModalContent
               formData={modalState.formData}
               handleYesClick={handleYesClick}

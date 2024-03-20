@@ -10,13 +10,15 @@ export interface ShopList {
   href: string;
 }
 
-export interface NoticeItem {
+export interface NoticeBase {
   id: string;
   hourlyPay: number;
   startsAt: string;
   workhour: number;
   description: string;
   closed: boolean;
+}
+export interface NoticeItem extends NoticeBase {
   shop: ShopList;
   currentUserApplication: any;
 }
