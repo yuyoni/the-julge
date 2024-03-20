@@ -9,11 +9,8 @@ import { useUser } from "@/contexts/UserContext";
 
 export default function NoticeDetailPage() {
   const { userInfo } = useUser();
-
-  const {
-    query: { shopId, noticeId },
-  } = useRouter();
-
+  const { query } = useRouter();
+  const { shopId, noticeId } = query;
   const {
     isLoading,
     error,

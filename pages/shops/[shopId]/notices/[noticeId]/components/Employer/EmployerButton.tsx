@@ -4,25 +4,17 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 interface EmployerButtonProps {
+  isMyNotice: boolean;
   token: string;
   userInfo: UserData | null;
 }
 
 export default function EmployerButton({
+  isMyNotice,
   token,
   userInfo,
 }: EmployerButtonProps) {
-  const [isMyNotice, setIsMyNotice] = useState(false);
   const router = useRouter();
-  const { shopId } = router.query;
-  console.log(userInfo);
-
-  useEffect(() => {
-    console.log(userInfo?.item.shop?.item.id === shopId);
-    if (userInfo?.item.shop?.item.id === shopId) {
-      setIsMyNotice(true);
-    }
-  }, []);
 
   const handleEditButtonClick = () => {
     // 공고 편집 버튼 클릭 시 실행되는 기능 구현

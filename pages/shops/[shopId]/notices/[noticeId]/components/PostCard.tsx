@@ -9,9 +9,14 @@ import { useUser } from "@/contexts/UserContext";
 interface PostCardType {
   userType: string;
   noticeData: NoticeList;
+  isMyNotice?: boolean;
 }
 
-export default function PostCard({ userType, noticeData }: PostCardType) {
+export default function PostCard({
+  userType,
+  noticeData,
+  isMyNotice,
+}: PostCardType) {
   const applyHref = noticeData.links[3].href.slice(18);
   const { jwt: token } = useCookie();
   const { userInfo } = useUser();
@@ -31,7 +36,11 @@ export default function PostCard({ userType, noticeData }: PostCardType) {
             userInfo={userInfo}
           />
         ) : (
-          <EmployerButton token={token} userInfo={userInfo} />
+          <EmployerButton
+            isMyNotice={isMyNotice!}
+            token={token}
+            userInfo={userInfo}
+          />
         )}
       </Container>
     </Wrapper>

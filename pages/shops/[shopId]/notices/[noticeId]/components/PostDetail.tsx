@@ -6,9 +6,14 @@ import PostCard from "./PostCard";
 interface PostDetailProps {
   userType: string;
   noticeData: NoticeList;
+  isMyNotice?: boolean;
 }
 
-export default function PostDetail({ userType, noticeData }: PostDetailProps) {
+export default function PostDetail({
+  userType,
+  noticeData,
+  isMyNotice,
+}: PostDetailProps) {
   if (!noticeData) return <div>loading...</div>;
 
   return (
@@ -17,7 +22,11 @@ export default function PostDetail({ userType, noticeData }: PostDetailProps) {
         <Category>{noticeData.item.shop.item.category}</Category>
         <Title>{noticeData.item.shop.item.name}</Title>
       </ShopDetails>
-      <PostCard userType={userType} noticeData={noticeData} />
+      <PostCard
+        isMyNotice={isMyNotice}
+        userType={userType}
+        noticeData={noticeData}
+      />
       <PostDescription>
         <DescriptionHeading>공고 설명</DescriptionHeading>
         <DescriptionText>{noticeData.item.description}</DescriptionText>

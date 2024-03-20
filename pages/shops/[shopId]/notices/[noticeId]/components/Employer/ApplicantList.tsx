@@ -1,3 +1,4 @@
+import Table from "@/components/Table";
 import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 
@@ -5,6 +6,7 @@ export default function ApplicantList() {
   return (
     <Wrapper>
       <Title>신청자 목록</Title>
+      {/* <Table type="employer" limit={5} count={4} dataList={} handlePermitClick={} handleDenyClick={}/> */}
     </Wrapper>
   );
 }
