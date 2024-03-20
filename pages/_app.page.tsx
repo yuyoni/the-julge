@@ -1,4 +1,5 @@
 import { ToastProvider } from "@/contexts/ToastContext";
+import { UserProvider } from "@/contexts/UserContext";
 import { globalStyles } from "@/styles/global";
 import { Global } from "@emotion/react";
 import type { AppProps } from "next/app";
@@ -21,7 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <ToastProvider>
         <QueryClientProvider client={queryClient}>
           <Global styles={globalStyles} />
-          <Component {...pageProps} />
+          <UserProvider>
+            <Component {...pageProps} />
+          </UserProvider>
         </QueryClientProvider>
       </ToastProvider>
     </>

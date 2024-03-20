@@ -1,43 +1,39 @@
 import Layout from "@/components/Layout";
-import { useNoticeData } from "@/hooks/useNoticeData";
+import useFetchData from "@/hooks/useFetchData";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import ApplicantList from "./components/ApplicantList";
-import PostDetail from "./components/PostDetail";
-import RecentNoticeContainer from "./components/RecentNoticeContainer";
-import updateRecentNotices from "./utils/updateRecentNotices";
+import Employee from "./components/Employee";
+import Employer from "./components/Employer";
+import { useUser } from "@/contexts/UserContext";
 
-export default function PostDetailPage() {
-  const userType = "employee"; // 임시로 추가
+export default function NoticeDetailPage() {
+  const { userInfo } = useUser();
 
-  const { query } = useRouter();
-  const { shopId, noticeId } = query;
+  const {
+    query: { shopId, noticeId },
+  } = useRouter();
 
   const {
     isLoading,
     error,
     data: noticeData,
-  } = useNoticeData(`${shopId}`, `${noticeId}`);
+  } = useFetchData<NoticeList>(
+    `/shops/${shopId}/notices/${noticeId}`,
+    "NoticeInfo",
+  );
 
-  useEffect(() => {
-    if (userType === "employee" && shopId && noticeId) {
-      updateRecentNotices(shopId as string, noticeId as string);
-    }
-  }, [userType, shopId, noticeId]);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>error</p>;
-  if (!noticeData) return <p>data not found</p>;
+  if (isLoading || !userInfo) return <p>Loading...</p>;
+  if (error) return <p>Notice Detail fetching error</p>;
+  if (!noticeData) return <p>Noticedata not found</p>;
 
   return (
     <Layout>
       <Wrapper>
-        <PostDetail noticeData={noticeData} />
-        {userType === "employee" ? (
-          <RecentNoticeContainer />
+        {userInfo.item.type === "employee" ? (
+          <Employee noticeData={noticeData} />
         ) : (
-          <ApplicantList />
+          <Employer noticeData={noticeData} />
         )}
       </Wrapper>
     </Layout>

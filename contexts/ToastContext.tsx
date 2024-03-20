@@ -5,6 +5,7 @@ export type ShowToastType = (message: string) => void;
 interface ToastContextType {
   showToast: ShowToastType;
 }
+
 interface ToastProviderProps {
   children: ReactNode;
 }
