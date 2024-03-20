@@ -4,19 +4,19 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 
-export type ApplyHistoryProps = {
+export type ApplicationHistoryProps = {
   type: "employer" | "employee";
   limit: number;
   count: number;
   items: Data[];
 };
 
-export default function ApplyHistory({
+export default function ApplicationHistory({
   type,
   limit,
   count,
   items,
-}: ApplyHistoryProps) {
+}: ApplicationHistoryProps) {
   return (
     <Wrapper>
       <Title>신청 내역</Title>

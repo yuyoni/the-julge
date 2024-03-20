@@ -3,7 +3,19 @@ import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-export default function Profile() {
+type UserProfileProps = {
+  name: string;
+  phone: string;
+  address: string;
+  bio: string;
+};
+
+export default function UserProfile({
+  name,
+  phone,
+  address,
+  bio,
+}: UserProfileProps) {
   return (
     <Wrapper>
       <Title>내 프로필</Title>

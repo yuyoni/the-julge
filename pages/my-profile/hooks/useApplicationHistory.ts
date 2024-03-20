@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { ApplyHistoryProps } from "../components/ApplyHistory";
+import { ApplicationHistoryProps } from "../components/ApplyHistory";
 import useCookie from "@/hooks/useCookies";
 import axios from "axios";
 
@@ -22,7 +22,7 @@ export default function useApplicationHistory() {
   const offset = 5 * (currentPage - 1);
 
   const { jwt, userType, id } = useCookie();
-  const [history, setHistory] = useState<ApplyHistoryProps>({
+  const [history, setHistory] = useState<ApplicationHistoryProps>({
     type: "employee",
     limit: LIMIT,
     count: 0,

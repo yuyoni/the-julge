@@ -1,6 +1,6 @@
-import ApplyHistory from "./components/ApplyHistory";
+import ApplicationHistory from "./components/ApplyHistory";
 import Layout from "@/components/Layout";
-import Profile from "./components/Profile";
+import UserProfile from "./components/Profile";
 import styled from "@emotion/styled";
 import useProfileData from "./hooks/useProfileData";
 import useApplicationHistory from "./hooks/useApplicationHistory";
@@ -11,9 +11,9 @@ export default function MyProfile() {
 
   return (
     <Layout>
-      <Profile />
+      <UserProfile {...profileData} />
       <Wrapper>
-        <ApplyHistory {...applicationHistory} />
+        <ApplicationHistory {...applicationHistory} />
       </Wrapper>
     </Layout>
   );

@@ -12,7 +12,7 @@ type UserProfile = {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function useProfileData() {
-  const { jwt, userType, id } = useCookie();
+  const { id } = useCookie();
   const [profile, setProfile] = useState<UserProfile>({
     name: "",
     phone: "",
