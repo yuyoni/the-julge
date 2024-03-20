@@ -1,13 +1,16 @@
 import { useState, ChangeEvent } from "react";
 import Input from "../Input";
 import DropDownList from "../DropDown/components/DropDownList";
+import styled from "@emotion/styled";
+import { body1Regular } from "@/styles/fontsStyle";
 
-interface DropdownProps {
-  label: string;
+interface DropDownProps {
+  label?: string;
   categories: string[];
+  width?: number;
 }
 
-export default function Dropdown({ label, categories }: DropdownProps) {
+export default function DropDown({ label, categories, width }: DropDownProps) {
   const [selectOption, setSelectOption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,18 +28,36 @@ export default function Dropdown({ label, categories }: DropdownProps) {
   };
 
   return (
-    <>
+    <DropDownContainer $width={width}>
+      {!selectOption && <StyledSpan labelExists={!!label}>선택</StyledSpan>}
       <Input
         label={label}
-        placeholder="선택"
+        type="button"
         value={selectOption}
         includeImage
         handleClick={handleClick}
         onChange={handleInput}
       />
+
       {isOpen && (
         <DropDownList categories={categories} handleSelect={handleSelect} />
       )}
-    </>
+    </DropDownContainer>
   );
 }
+
+const DropDownContainer = styled.div<{ $width?: number }>`
+  width: ${({ $width }) => ($width ? `${$width}px` : "100%")};
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const StyledSpan = styled.span<{ labelExists: boolean }>`
+  position: absolute;
+  top: ${({ labelExists }) => (labelExists ? "52px" : "25px")};
+  left: 20px;
+  color: var(--The-julge-gray-40);
+  ${body1Regular};
+`;

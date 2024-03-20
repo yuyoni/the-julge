@@ -12,13 +12,14 @@ export default function Input({
   onChange,
   includeText,
   includeImage,
-  inputSize,
   handleClick,
+  error,
+  readonly,
 }: InputProps) {
   return (
     <InputContainer>
       <StyledLabel>{label}</StyledLabel>
-      <InputWrapper inputSize={inputSize}>
+      <InputWrapper>
         <StyledInput
           type={type}
           placeholder={placeholder}
@@ -42,6 +43,7 @@ const customBody1Regular = css`
 
 const InputContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -68,7 +70,7 @@ const StyledLabel = styled.label`
   ${customBody1Regular}
 `;
 
-const InputWrapper = styled.div<{ inputSize?: number }>`
+const InputWrapper = styled.div`
   position: relative;
-  width: ${(props) => (props.inputSize ? `${props.inputSize}px` : "400px")};
+  width: 100%;
 `;

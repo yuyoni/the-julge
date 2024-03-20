@@ -1,10 +1,10 @@
 export interface InputProps extends InputContentProps {
-  label: string;
+  label?: string;
   type?: string;
   placeholder?: string;
   value?: string;
-  inputSize?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 export interface InputContentProps {
