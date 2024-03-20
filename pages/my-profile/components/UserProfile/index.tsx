@@ -2,6 +2,7 @@ import { body1Regular, body2Regular, h1Regular, h3 } from "@/styles/fontsStyle";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import ProfileCard from "../ProfileCard.tsx";
 
 type UserProfileProps = {
   name: string;
@@ -10,30 +11,32 @@ type UserProfileProps = {
   bio: string;
 };
 
-export default function UserProfile({
-  name,
-  phone,
-  address,
-  bio,
-}: UserProfileProps) {
+export default function UserProfile(props: UserProfileProps) {
+  const { name, phone, address, bio } = props;
+  const hasProfile = !!(name || phone || address || bio);
   return (
-    <Wrapper>
+    <Wrapper hasProfile={hasProfile}>
       <Title>내 프로필</Title>
-      <NoApplication>
-        <Description>
-          내 프로필을 등록하고 원하는 가게에 지원해 보세요.
-        </Description>
-        <ButtonContainer>
-          <Link href="/">
-            <Button text="내 프로필 등록하기" />
-          </Link>
-        </ButtonContainer>
-      </NoApplication>
+
+      {hasProfile ? (
+        <ProfileCard {...props} />
+      ) : (
+        <NoApplication>
+          <Description>
+            내 프로필을 등록하고 원하는 가게에 지원해 보세요.
+          </Description>
+          <ButtonContainer>
+            <Link href="/">
+              <Button text="내 프로필 등록하기" />
+            </Link>
+          </ButtonContainer>
+        </NoApplication>
+      )}
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ hasProfile: boolean }>`
   max-width: 964px;
   margin: 0 auto;
   display: flex;
