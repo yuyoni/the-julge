@@ -1,6 +1,6 @@
 import ApplicationHistory from "./components/ApplyHistory";
 import Layout from "@/components/Layout";
-import UserProfile from "./components/Profile";
+import UserProfile from "./components/UserProfile";
 import styled from "@emotion/styled";
 import useProfileData from "./hooks/useProfileData";
 import useApplicationHistory from "./hooks/useApplicationHistory";

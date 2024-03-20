@@ -24,8 +24,7 @@ export default function useProfileData() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${BASE_URL}/users/${id}`);
-
-        const { name, phone, address, bio } = data.item;
+        const { name = "", phone = "", address = "", bio = "" } = data.item;
         setProfile((prev) => ({ ...prev, name, phone, address, bio }));
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
