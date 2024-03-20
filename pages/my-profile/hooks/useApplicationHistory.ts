@@ -19,7 +19,7 @@ export default function useApplicationHistory() {
   const router = useRouter();
   const { page } = router.query;
   const currentPage = Number(page) >= 1 ? Number(page) : 1;
-  const offset = 5 * (currentPage - 1);
+  const offset = LIMIT * (currentPage - 1);
 
   const { jwt, userType, id } = useCookie();
   const [history, setHistory] = useState<ApplicationHistoryProps>({
