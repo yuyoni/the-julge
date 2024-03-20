@@ -44,7 +44,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 32px;
-  font-size: 16px;
   padding: 60px 0 120px;
 
   @media (max-width: 1023px) {
@@ -53,6 +52,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 767px) {
     padding: 40px 12px 80px;
+    gap: 15px;
   }
 `;
 
@@ -69,6 +69,8 @@ const NoApplication = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--The-julge-gray-20);
   padding: 60px 24px;
   gap: 24px;
 
@@ -88,4 +90,9 @@ const Description = styled.span`
 const ButtonContainer = styled.div`
   width: 346px;
   height: 47px;
+
+  @media (max-width: 767px) {
+    width: 150px;
+    height: 37px;
+  }
 `;
