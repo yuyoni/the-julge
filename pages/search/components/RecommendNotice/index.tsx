@@ -3,19 +3,25 @@ import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import PostList from "../PostList";
 import { h2 } from "@/styles/fontsStyle";
+import useCookie from "@/hooks/useCookies";
+import { BASE_ADDRESS } from "./constants/constants";
 
 export default function RecommendNotice() {
-  // 추후에 로그인을 통해 가져올 데이터(쿠키나 다른 저장소나 상태관리 등)
-  const userId = "0dcb5feb-fe19-4b3d-b318-3a449b023461";
-  const { data: userData } = useUserData(userId);
-  const { data: noticesData } = useNoticesData(userData?.item?.address);
-  const notices = noticesData?.items ?? [];
+  const { id } = useCookie();
+  const { data: userData } = useUserData(id);
 
+  const address = userData?.item?.address
+    ? userData?.item?.address
+    : BASE_ADDRESS;
+
+  const { data: noticesData } = useNoticesData(address);
+
+  const notices = noticesData?.items ?? [];
   const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return (
     <RecommendList>
-      <Header>맞춤 공고</Header>
+      <Header>추천 공고</Header>
       <CustomPostContent>
         <PostList isRecommend={true} noticeArray={noticeArray} />
       </CustomPostContent>
