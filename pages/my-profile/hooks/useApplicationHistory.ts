@@ -32,6 +32,7 @@ export default function useApplicationHistory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!id) return;
         const { data } = await axios.get(
           `${BASE_URL}/users/${id}/applications?limit=${LIMIT}&offset=${offset}`,
           {

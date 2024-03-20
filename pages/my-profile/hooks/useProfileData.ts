@@ -23,6 +23,7 @@ export default function useProfileData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!id) return;
         const { data } = await axios.get(`${BASE_URL}/users/${id}`);
         const { name = "", phone = "", address = "", bio = "" } = data.item;
         setProfile((prev) => ({ ...prev, name, phone, address, bio }));
