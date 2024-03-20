@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { ApplyHistoryProps } from "../ApplyHistory";
+import { ApplyHistoryProps } from "../components/ApplyHistory";
 import useCookie from "@/hooks/useCookies";
 import axios from "axios";
 
