@@ -6,8 +6,8 @@ import Button from "@/components/Button/Button";
 type OwnerTableBodyProps = {
   key?: string;
   name?: string;
-  description?: string;
-  phoneNumber?: string;
+  bio?: string;
+  phone?: string;
   status?: string;
   handlePermitClick?: () => void;
   handleDenyClick?: () => void;
@@ -15,8 +15,8 @@ type OwnerTableBodyProps = {
 
 export default function OwnerTableRow({
   name,
-  description,
-  phoneNumber,
+  bio,
+  phone,
   status,
   handlePermitClick,
   handleDenyClick,
@@ -25,24 +25,24 @@ export default function OwnerTableRow({
     <TableRow>
       <Cell>{name}</Cell>
       <Cell>
-        <Wrapper>{description}</Wrapper>
+        <Wrapper>{bio}</Wrapper>
       </Cell>
-      <Cell>{phoneNumber}</Cell>
+      <Cell>{phone?.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")}</Cell>
       <Cell>
-        {status === "대기중" ? (
+        {status === "pending" ? (
           <ButtonContainer>
             <ButtonWrapper>
               <Button
                 handleClick={handlePermitClick}
                 text="승인하기"
-                color="white"
+                color="accept"
               />
             </ButtonWrapper>
             <ButtonWrapper>
               <Button
                 handleClick={handleDenyClick}
                 text="거절하기"
-                color="white"
+                color="reject"
               />
             </ButtonWrapper>
           </ButtonContainer>
@@ -56,15 +56,15 @@ export default function OwnerTableRow({
 
 const getStatusStyle = (status: string) => {
   switch (status) {
-    case "승인 완료":
+    case "accepted":
       return css`
         background: var(--The-julge-blue-10);
         color: var(--The-julge-blue-20);
       `;
-    case "거절":
+    case "rejected":
       return css`
         background: var(--The-julge-red);
-        color: var(--The-julge-white, #fff);
+        color: var(--The-julge-gray-00);
       `;
   }
 };

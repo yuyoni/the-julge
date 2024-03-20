@@ -5,10 +5,25 @@ import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 
+interface ApplicantItem {
+  item: {
+    user: {
+      href: string;
+      item: {
+        id: string;
+        name: string;
+        bio: string;
+        phone: string;
+      };
+    };
+    status: string;
+  };
+}
+
 interface ApplicantList {
   count: number;
   hasNext: boolean;
-  items: Data[];
+  items: ApplicantItem[];
   limit: number;
   links: ApplicantLink[];
   offset: number;
@@ -21,7 +36,17 @@ export default function ApplicantList() {
     `/shops/${shopId}/notices/${noticeId}/applications`,
     "applicant",
   );
-  console.log(data);
+
+  const transformItems = (items: ApplicantItem[]): Data[] => {
+    const newItems = items.map((element) => ({
+      id: element.item.user.item.id,
+      name: element.item.user.item.name,
+      bio: element.item.user.item.bio,
+      phone: element.item.user.item.phone,
+      status: element.item.status,
+    }));
+    return newItems;
+  };
 
   return (
     data && (
@@ -31,7 +56,7 @@ export default function ApplicantList() {
           type="employer"
           limit={5}
           count={data.count}
-          dataList={data.items}
+          dataList={transformItems(data.items)}
         />
       </Wrapper>
     )
