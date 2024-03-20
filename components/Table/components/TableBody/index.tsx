@@ -18,10 +18,11 @@ export default function TableBody({
   return (
     <tbody>
       {dataList.map((data) => {
-        const { id, ...tableData } = data;
+        const { id, applicationId, ...tableData } = data;
         return type === "employer" ? (
           <OwnerTableRow
             key={id}
+            applicationId={applicationId}
             {...(tableData as Data)}
             handlePermitClick={handlePermitClick}
             handleDenyClick={handleDenyClick}

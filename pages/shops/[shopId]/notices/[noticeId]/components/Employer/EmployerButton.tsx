@@ -23,21 +23,14 @@ export default function EmployerButton({
 
   return (
     <>
-      {/** 내 공고인 경우 */}
-      {isMyNotice && (
+      {isMyNotice ? (
         <Button
           text="공고 편집하기"
           color="white"
           handleClick={handleEditButtonClick}
         />
-      )}
-      {/** 내 공고가 아닌 경우 */}
-      {!isMyNotice && (
-        <Button
-          text="공고 편집하기"
-          color="gray"
-          handleClick={handleEditButtonClick}
-        />
+      ) : (
+        <Button text="공고 편집하기" color="gray" />
       )}
     </>
   );

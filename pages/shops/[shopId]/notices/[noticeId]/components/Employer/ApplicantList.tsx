@@ -1,33 +1,10 @@
-import Table, { Data } from "@/components/Table";
+import Table from "@/components/Table";
 import useFetchData from "@/hooks/useFetchData";
-import { ApplicantLink } from "@/lib/types/Application";
+import { ApplicantList } from "@/lib/types/Application";
 import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-
-interface ApplicantItem {
-  item: {
-    user: {
-      href: string;
-      item: {
-        id: string;
-        name: string;
-        bio: string;
-        phone: string;
-      };
-    };
-    status: string;
-  };
-}
-
-interface ApplicantList {
-  count: number;
-  hasNext: boolean;
-  items: ApplicantItem[];
-  limit: number;
-  links: ApplicantLink[];
-  offset: number;
-}
+import transformItems from "../../utils/transformItems";
 
 export default function ApplicantList() {
   const { query } = useRouter();
@@ -37,28 +14,19 @@ export default function ApplicantList() {
     "applicant",
   );
 
-  const transformItems = (items: ApplicantItem[]): Data[] => {
-    const newItems = items.map((element) => ({
-      id: element.item.user.item.id,
-      name: element.item.user.item.name,
-      bio: element.item.user.item.bio,
-      phone: element.item.user.item.phone,
-      status: element.item.status,
-    }));
-    return newItems;
-  };
-
   return (
     data && (
-      <Wrapper>
-        <Title>신청자 목록</Title>
-        <Table
-          type="employer"
-          limit={5}
-          count={data.count}
-          dataList={transformItems(data.items)}
-        />
-      </Wrapper>
+      <>
+        <Wrapper>
+          <Title>신청자 목록</Title>
+          <Table
+            type="employer"
+            limit={5}
+            count={data.count}
+            dataList={transformItems(data.items)}
+          />
+        </Wrapper>
+      </>
     )
   );
 }
