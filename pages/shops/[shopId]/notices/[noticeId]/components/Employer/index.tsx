@@ -14,11 +14,7 @@ export default function Employer({ noticeData }: { noticeData: NoticeList }) {
   const [isMyNotice, setIsMyNotice] = useState(false);
   const noticeHref = noticeData.links[0].href.slice(18);
 
-  console.log(userInfo);
-  console.log(isMyNotice);
-
   useEffect(() => {
-    console.log(userInfo?.item.shop?.item.id === shopId);
     if (userInfo?.item.shop?.item.id === shopId) {
       setIsMyNotice(true);
     } else {

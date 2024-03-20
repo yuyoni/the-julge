@@ -1,6 +1,6 @@
 import Table from "@/components/Table";
 import useFetchData from "@/hooks/useFetchData";
-import { ApplicantList } from "@/lib/types/Application";
+import type { ApplicantList } from "@/lib/types/Application";
 import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";

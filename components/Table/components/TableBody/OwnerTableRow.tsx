@@ -40,7 +40,6 @@ export default function OwnerTableRow({
   };
 
   const sendAcceptRequest = async () => {
-    console.log(applicationId);
     const response = await fetchData({
       param: `/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
       method: "put",
@@ -54,7 +53,6 @@ export default function OwnerTableRow({
   };
 
   const sendRejectRequest = async () => {
-    console.log(applicationId);
     const response = await fetchData({
       param: `/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
       method: "put",
