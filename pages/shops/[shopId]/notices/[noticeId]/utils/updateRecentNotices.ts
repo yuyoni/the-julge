@@ -1,28 +1,19 @@
-export default function updateRecentNotices(
-  newShopId: string,
-  newNoticeId: string,
-) {
-  const shopIdList = localStorage.getItem("shopIdList");
-  const noticeIdList = localStorage.getItem("noticeIdList");
+export default function updateRecentNotices(noticeHref: string) {
+  const noticeHrefList = localStorage.getItem("noticeHrefList");
+  const newNoticeHrefList = noticeHrefList ? JSON.parse(noticeHrefList) : [];
 
-  const newShopIdList = shopIdList ? JSON.parse(shopIdList) : [];
-  const newNoticeIdList = noticeIdList ? JSON.parse(noticeIdList) : [];
-
-  const isDuplicate = newNoticeIdList.some(
-    (existingNoticeId: string) => existingNoticeId === newNoticeId,
+  const isDuplicate = newNoticeHrefList.some(
+    (existingNoticeHref: string) => existingNoticeHref === noticeHref,
   );
 
   // 중복된 공지가 없는 경우에만 저장
   if (!isDuplicate) {
-    newShopIdList.unshift(newShopId);
-    newNoticeIdList.unshift(newNoticeId);
+    newNoticeHrefList.unshift(noticeHref);
 
-    if (newShopIdList.length > 6 && newNoticeIdList.length > 6) {
-      newShopIdList.pop();
-      newNoticeIdList.pop();
+    if (newNoticeHrefList.length > 6) {
+      newNoticeHrefList.pop();
     }
   }
 
-  localStorage.setItem("shopIdList", JSON.stringify(newShopIdList));
-  localStorage.setItem("noticeIdList", JSON.stringify(newNoticeIdList));
+  localStorage.setItem("noticeHrefList", JSON.stringify(newNoticeHrefList));
 }

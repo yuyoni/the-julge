@@ -2,33 +2,45 @@ import { HttpMethod } from "@/lib/types/apiTypes";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzk4MjFiMi0wMWIyLTRjYzYtOGM1OC03OWY0ZTE2MDI5MjEiLCJpYXQiOjE3MTA2NTQ2OTV9.C2DdkQynvGKFhQA2k6xOsDwDVfuutsIS-TS5jJGayHM";
-axios.defaults.headers.common["Authorization"] = `Bearer ${TOKEN}`;
+
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
-export default async function fetchData(
-  param: string,
-  method: HttpMethod = "GET",
-  requestData?: any,
-) {
-  const url = `${BASE_URL}/${param}`;
+interface FetchDataOptions {
+  param: string;
+  method?: "get" | "post" | "put";
+  requestData?: any;
+  token?: string;
+}
+
+export default async function fetchData<T>({
+  param,
+  method = "get",
+  requestData = {},
+  token,
+}: FetchDataOptions): Promise<T> {
+  const url = `${BASE_URL}${param}`;
 
   try {
-    let response: AxiosResponse;
+    let response: AxiosResponse<T>;
 
-    switch (method) {
-      case "GET":
-        response = await axios.get(url);
-        break;
-      case "POST":
-        response = await axios.post(url, requestData);
-        break;
-      case "PUT":
-        response = await axios.put(url, requestData);
-        break;
-      default:
-        throw new Error("Invalid HTTP method");
+    if (token) {
+      if (method === "get") {
+        response = await axios[method](url, {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        response = await axios[method](url, requestData, {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+      }
+    } else {
+      response = await axios[method](url, requestData);
     }
     return response.data;
   } catch (error) {

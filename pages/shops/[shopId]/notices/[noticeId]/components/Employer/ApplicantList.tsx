@@ -1,12 +1,10 @@
 import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
-import EmployeeTable from "./EmployeeTable";
 
 export default function ApplicantList() {
   return (
     <Wrapper>
       <Title>신청자 목록</Title>
-      <EmployeeTable />
     </Wrapper>
   );
 }

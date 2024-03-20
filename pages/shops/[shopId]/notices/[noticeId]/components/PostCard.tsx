@@ -1,9 +1,17 @@
-import Button from "@/components/Button/Button";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
+import EmployeeButton from "./Employee/EmployeeButton";
+import EmployerButton from "./Employer/EmployerButton";
 import PostInformation from "./PostInformation";
 
-export default function PostCard({ noticeData }: { noticeData: NoticeList }) {
+interface PostCardType {
+  userType: string;
+  noticeData: NoticeList;
+}
+
+export default function PostCard({ userType, noticeData }: PostCardType) {
+  const applyHref = noticeData.links[3].href.slice(18);
+
   return (
     <Wrapper>
       <ImageContainer>
@@ -11,7 +19,14 @@ export default function PostCard({ noticeData }: { noticeData: NoticeList }) {
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
-        <Button text="공고 편집하기" color="white" />
+        {userType !== "employee" ? (
+          <EmployeeButton
+            applyHref={applyHref}
+            isClosed={noticeData.item.closed}
+          />
+        ) : (
+          <EmployerButton />
+        )}
       </Container>
     </Wrapper>
   );
@@ -23,7 +38,6 @@ const Wrapper = styled.div`
   gap: 30px;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-
   border-radius: 12px;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   background: var(--The-julge-white, #fff);
@@ -42,7 +56,6 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   max-height: 300px;
-
   border-radius: 20px;
 
   img {

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   handleClick?: () => void;
   color?: "colored" | "white" | "gray";
@@ -30,24 +30,26 @@ const getColorStyles = (color: string) => {
   switch (color) {
     case "white":
       return css`
-        background: var(--The-julge-gray-00, #fff);
-        color: var(--The-julge-purple-40, #905cb9);
-        border: 1px solid var(--The-julge-purple-40, #905cb9);
+        background: var(--The-julge-gray-00);
+        color: var(--The-julge-purple-40);
+        border: 1px solid var(--The-julge-purple-40);
 
         :active {
-          background: var(--The-julge-purple-10, #f2f2f3);
+          background: var(--The-julge-purple-10);
         }
       `;
     case "gray":
       return css`
-        background: var(--The-julge-gray-40, #a4a1aa);
-        color: var(--The-julge-gray-00, #fff);
+        background: var(--The-julge-gray-40);
+        color: var(--The-julge-gray-00);
+        border: 1px solid var(--The-julge-gray-40);
         cursor: not-allowed;
       `;
     default:
       return css`
-        background: var(--The-julge-purple-40, #905cb9);
-        color: var(--The-julge-gray-00, #fff);
+        background: var(--The-julge-purple-40);
+        color: var(--The-julge-gray-00);
+        border: 1px solid var(--The-julge-purple-40);
 
         :active {
           background: #6a4487;
