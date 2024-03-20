@@ -10,7 +10,9 @@ interface EmployeeProps {
 }
 
 export default function Employee({ noticeData }: EmployeeProps) {
-  const noticeHref = noticeData.links[0].href.slice(19);
+  const noticeHref = noticeData.links[0].href.slice(18);
+  console.log(noticeHref);
+  console.log(noticeHref);
 
   useEffect(() => {
     updateRecentNotices(noticeHref);

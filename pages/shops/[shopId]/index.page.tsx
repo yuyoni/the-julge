@@ -46,7 +46,7 @@ export default function NoticeRegistrationPage() {
   const handleYesClick = async () => {
     try {
       const response = await fetchData<NoticeList>({
-        param: `shops/${shopId}/notices`,
+        param: `/shops/${shopId}/notices`,
         method: "post",
         requestData: convertToISODate(modalState.formData),
       });

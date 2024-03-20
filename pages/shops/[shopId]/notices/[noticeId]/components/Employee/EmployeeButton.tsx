@@ -43,7 +43,7 @@ export default function EmployeeButton({
 
   const getUserApplications = async () => {
     const applicationData = await fetchData<ApplicationsResponse>({
-      param: `shops/${shopId}/notices/${noticeId}/applications?limit=100`,
+      param: `/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
       method: "get",
     });
 
@@ -114,7 +114,7 @@ export default function EmployeeButton({
     // 취소 요청 보내고 성공하면 아래 로직실행
     console.log(applicationId);
     const response = await fetchData<ApplyResponse>({
-      param: `shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      param: `/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
       method: "put",
       requestData: { status: "canceled" },
       token: token,

@@ -10,7 +10,7 @@ interface PostCardType {
 }
 
 export default function PostCard({ userType, noticeData }: PostCardType) {
-  const applyHref = noticeData.links[3].href.slice(19);
+  const applyHref = noticeData.links[3].href.slice(18);
 
   return (
     <Wrapper>
@@ -19,7 +19,7 @@ export default function PostCard({ userType, noticeData }: PostCardType) {
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
-        {userType === "employee" ? (
+        {userType !== "employee" ? (
           <EmployeeButton
             applyHref={applyHref}
             isClosed={noticeData.item.closed}

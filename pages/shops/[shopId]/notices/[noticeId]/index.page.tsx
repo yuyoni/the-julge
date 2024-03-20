@@ -19,7 +19,7 @@ export default function NoticeDetailPage() {
     error,
     data: noticeData,
   } = useFetchData<NoticeList>(
-    `shops/${shopId}/notices/${noticeId}`,
+    `/shops/${shopId}/notices/${noticeId}`,
     "NoticeInfo",
   );
 

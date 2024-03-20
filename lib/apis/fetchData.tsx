@@ -18,7 +18,7 @@ export default async function fetchData<T>({
   requestData = {},
   token,
 }: FetchDataOptions): Promise<T> {
-  const url = `${BASE_URL}/${param}`;
+  const url = `${BASE_URL}${param}`;
 
   try {
     let response: AxiosResponse<T>;
