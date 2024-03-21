@@ -1,7 +1,7 @@
+import DropDown from "@/components/DropDown";
 import Gnb from "@/components/Gnb";
-import Input from "../components/Input";
-import DropDown from "../components/DropDown";
 import { addressArray } from "@/lib/constants/options";
+import Input from "../components/Input";
 
 export default function Register() {
   return (
