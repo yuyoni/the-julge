@@ -2,6 +2,7 @@ import { body1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import ProfileContent from "./ProfileContent";
 import Button from "@/components/Button/Button";
+import Link from "next/link";
 
 type ProfileCardProps = {
   bio: string;
@@ -19,7 +20,9 @@ export default function ProfileCard(props: ProfileCardProps) {
         <Biograph>{bio}</Biograph>
       </ContentContainer>
       <ButtonContainer>
-        <Button text="편집하기" color="white" />
+        <Link href="/my-profile/edit">
+          <Button text="편집하기" color="white" />
+        </Link>
       </ButtonContainer>
     </Wrapper>
   );
