@@ -1,8 +1,8 @@
-import { useNoticesData, useUserData } from "@/hooks/useUserQuery";
+import { useNoticesData, useUserData } from "@/pages/search/hooks/useUserQuery";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import PostList from "../PostList";
-import { h2 } from "@/styles/fontsStyle";
+import { h1, h3 } from "@/styles/fontsStyle";
 import useCookie from "@/hooks/useCookies";
 import { BASE_ADDRESS } from "./constants/constants";
 
@@ -22,6 +22,7 @@ export default function RecommendNotice() {
   return (
     <RecommendList>
       <Header>추천 공고</Header>
+
       <CustomPostContent>
         <PostList isRecommend={true} noticeArray={noticeArray} />
       </CustomPostContent>
@@ -37,7 +38,7 @@ const RecommendList = styled.section`
 const Header = styled.div`
   margin-bottom: 30px;
   width: 100%;
-  ${h2};
+  ${h1};
 
   @media only screen and (max-width: 1028px) {
     padding: 15px 10px;
