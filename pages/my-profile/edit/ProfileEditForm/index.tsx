@@ -40,7 +40,7 @@ export default function ProfileEditForm() {
           <EditFormInput label="address" register={register} />
         </InputContainer>
         <TextAreaContainier>
-          <EditFormInput label="bio" {...register} register={register} />
+          <EditFormInput label="bio" register={register} />
         </TextAreaContainier>
       </FormContent>
       <ButtonContainer>
