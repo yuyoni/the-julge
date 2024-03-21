@@ -74,12 +74,13 @@ export default function NoticeRegistrationPage() {
       <Wrapper>
         <Title>공고 등록</Title>
         <PostForm handleInputChange={handleInputChange} />
-        <Button
-          text="등록하기"
-          color="colored"
-          width={312}
-          handleClick={handleFormSubmit}
-        />
+        <ButtonContainer>
+          <Button
+            text="등록하기"
+            color="colored"
+            handleClick={handleFormSubmit}
+          />
+        </ButtonContainer>
         {modalState.isOpen && (
           <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
             <ModalContent
@@ -102,10 +103,26 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 60px;
   gap: 32px;
+
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    padding: 60px 32px;
+  }
+  @media only screen and (min-width: 375px) and (max-width: 767px) {
+    padding: 40px 12px 80px;
+    gap: 24px;
+  }
 `;
 
 const Title = styled.span`
   ${h1}
+`;
+
+const ButtonContainer = styled.div`
+  width: 312px;
+
+  @media only screen and (min-width: 375px) and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 const Dimmed = styled.div`
