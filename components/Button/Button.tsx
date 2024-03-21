@@ -2,10 +2,11 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
-export interface ButtonProps {
+//TODO handleClick 확인 필요! ()에서 (e:any)로 변경해도 되는지?
+interface ButtonProps {
   text: string;
-  handleClick?: () => void;
-  color?: "colored" | "white" | "gray";
+  handleClick?: (e: any) => void;
+  color?: "colored" | "white" | "gray" | "reject" | "accept";
   width?: number;
   type?: "button" | "submit" | "reset";
 }
@@ -28,6 +29,26 @@ export default function Button({
 
 const getColorStyles = (color: string) => {
   switch (color) {
+    case "reject":
+      return css`
+        background: var(--The-julge-gray-00);
+        color: var(--The-julge-red);
+        border: 1px solid var(--The-julge-red);
+
+        :active {
+          background: #fbb7af;
+        }
+      `;
+    case "accept":
+      return css`
+        background: var(--The-julge-gray-00);
+        color: var(--The-julge-blue-20);
+        border: 1px solid var(--The-julge-blue-20);
+
+        :active {
+          background: var(--The-julge-blue-10);
+        }
+      `;
     case "white":
       return css`
         background: var(--The-julge-gray-00);
@@ -63,7 +84,7 @@ const Wrapper = styled.div<{ $width?: number }>`
 `;
 
 const ButtonStyle = styled.button<{
-  $color?: "colored" | "white" | "gray";
+  $color?: "colored" | "white" | "gray" | "reject" | "accept";
 }>`
   display: inline-flex;
   padding: 12px 12px;
