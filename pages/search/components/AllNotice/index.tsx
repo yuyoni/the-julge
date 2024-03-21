@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { h3 } from "@/styles/fontsStyle";
 import Pagination from "@/components/Pagination";
@@ -108,6 +108,13 @@ const AllNoticeList = styled.section`
   padding: 30px 0;
   max-width: 968px;
   margin: 0 auto;
+
+  @media only screen and (max-width: 1028px) {
+    padding: 15px 32px;
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 15px 20px;
+  }
 `;
 
 const PostContent = styled.div`
@@ -118,8 +125,12 @@ const PostContent = styled.div`
   justify-content: center;
   align-items: center;
 
+  @media only screen and (max-width: 1028px) {
+    grid-template-columns: repeat(auto-fill, 214px);
+  }
+
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, 250px);
+    grid-template-columns: repeat(auto-fill, 294px);
   }
 `;
 
@@ -137,6 +148,6 @@ const PaginationWrapper = styled.div`
   justify-content: center;
 
   @media (max-width: 768px) {
-    margin-top: 0px;
+    margin-top: 20px;
   }
 `;

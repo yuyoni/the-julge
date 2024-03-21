@@ -34,14 +34,22 @@ const RecommendList = styled.section`
   padding: 30px 0;
   max-width: 968px;
   margin: 0 auto;
+
+  @media only screen and (max-width: 1028px) {
+    padding: 15px 32px;
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 15px 20px;
+    ${h3}
+  }
 `;
 const Header = styled.div`
   margin-bottom: 30px;
   width: 100%;
   ${h1};
 
-  @media only screen and (max-width: 1028px) {
-    padding: 15px 10px;
+  @media only screen and (max-width: 768px) {
+    ${h3}
   }
 `;
 

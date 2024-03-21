@@ -53,10 +53,6 @@ const Header = styled.div`
   width: 100%;
   position: relative;
 
-  @media only screen and (max-width: 1028px) {
-    padding: 15px 32px;
-  }
-
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 1fr;
