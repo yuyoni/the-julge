@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
 import { useUser } from "@/contexts/UserContext";
+import useCookie from "@/hooks/useCookies";
 
 export default function NoticeDetailPage() {
   const { userInfo } = useUser();
-
-  const {
-    query: { shopId, noticeId },
-  } = useRouter();
+  const { query } = useRouter();
+  const { shopId, noticeId } = query;
+  const { jwt: token } = useCookie();
 
   const {
     isLoading,
@@ -31,9 +31,9 @@ export default function NoticeDetailPage() {
     <Layout>
       <Wrapper>
         {userInfo.item.type === "employee" ? (
-          <Employee noticeData={noticeData} />
+          <Employee noticeData={noticeData} token={token} />
         ) : (
-          <Employer noticeData={noticeData} />
+          <Employer noticeData={noticeData} token={token} />
         )}
       </Wrapper>
     </Layout>

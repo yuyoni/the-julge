@@ -1,8 +1,20 @@
 import Button from "@/components/Button/Button";
-import { useState } from "react";
+import { UserData } from "@/lib/types/userType";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-export default function EmployerButton() {
-  const [isMyNotice, setIsMyNotice] = useState(false);
+interface EmployerButtonProps {
+  isMyNotice: boolean;
+  token: string;
+  userInfo: UserData | null;
+}
+
+export default function EmployerButton({
+  isMyNotice,
+  token,
+  userInfo,
+}: EmployerButtonProps) {
+  const router = useRouter();
 
   const handleEditButtonClick = () => {
     // 공고 편집 버튼 클릭 시 실행되는 기능 구현
@@ -11,21 +23,14 @@ export default function EmployerButton() {
 
   return (
     <>
-      {/** 내 공고인 경우 */}
-      {isMyNotice && (
+      {isMyNotice ? (
         <Button
           text="공고 편집하기"
           color="white"
           handleClick={handleEditButtonClick}
         />
-      )}
-      {/** 내 공고가 아닌 경우 */}
-      {!isMyNotice && (
-        <Button
-          text="공고 편집하기"
-          color="gray"
-          handleClick={handleEditButtonClick}
-        />
+      ) : (
+        <Button text="공고 편집하기" color="gray" />
       )}
     </>
   );
