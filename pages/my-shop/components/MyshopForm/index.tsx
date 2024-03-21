@@ -1,25 +1,20 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { ChangeEvent } from "react";
 import DropDown from "../../../../components/DropDown";
 import Input from "../Input";
 import { addressArray, categoriesArray } from "@/lib/constants/options";
 import Button from "@/components/Button/Button";
 import ImageInput from "../ImageInput";
 import Modal from "@/components/Modal";
-import { ShopInfo } from "./shop-type";
-import { useUser } from "@/contexts/UserContext";
+import { ShopData } from "./shop-type";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
-import { registerShop } from "../../register/util/shopRequest";
-import { sendRegisterShopRequest } from "../../register/util/sendRegisterShopRequest";
+import { AxiosError } from "axios";
 
 export default function MyShopForm() {
   const router = useRouter();
-  const { userInfo } = useUser();
   const { jwt: token } = useCookie();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -44,25 +39,33 @@ export default function MyShopForm() {
         originalHourlyPay,
       } = formData;
 
-      const response = await sendRegisterShopRequest(
-        name,
-        category,
-        address1,
-        address2,
-        originalHourlyPay,
-        imageUrl,
-        description,
-        token,
-      );
-      // registerShop 함수 호출
-      console.log("Shop registered successfully:", response);
-      // 성공적으로 등록된 경우의 로직
-    } catch (error) {
-      console.error("Error registering shop:", error);
-      console.log("token:", token);
-      console.log("user", userInfo);
-      console.log(formData);
-      // 등록 중 오류가 발생한 경우의 로직
+      if (
+        name === "" ||
+        category === "" ||
+        address1 === "" ||
+        address2 === "" ||
+        imageUrl === "" ||
+        description === "" ||
+        originalHourlyPay === 0
+      ) {
+        alert("모든 값을 채워주세요"); //TODO 모달로 바꾸기
+        return;
+      }
+
+      const response = await fetchData<ShopData>({
+        param: "/shops",
+        method: "post",
+        requestData: formData,
+        token: token,
+      });
+
+      if (response) router.push("/my-shop");
+
+      throw new Error();
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      }
     }
   };
 
@@ -79,6 +82,14 @@ export default function MyShopForm() {
     console.log("클릭");
     router.push("/my-shop");
   };
+  const handleCategory = (category: string) => {
+    if (categoriesArray.some((e) => e === category)) {
+      handleInputChange("category", category);
+      return;
+    }
+    handleInputChange("address1", category);
+  };
+
   return (
     <FormContainer>
       <FormWrapper>
@@ -86,10 +97,18 @@ export default function MyShopForm() {
           onChange={(event) => handleInputChange("name", event.target.value)}
           label="가게 이름*"
         />
-        <DropDown label="분류*" categories={categoriesArray} />
+        <DropDown
+          label="분류*"
+          categories={categoriesArray}
+          onCategoryChange={handleCategory}
+        />
       </FormWrapper>
       <FormWrapper>
-        <DropDown label="주소*" categories={addressArray} />
+        <DropDown
+          label="주소*"
+          categories={addressArray}
+          onCategoryChange={handleCategory}
+        />
         <Input
           onChange={(event) =>
             handleInputChange("address2", event.target.value)
@@ -107,7 +126,7 @@ export default function MyShopForm() {
         />
       </FormWrapper>
       <FormWrapper>
-        <ImageInput />
+        <ImageInput handleImg={handleInputChange} />
       </FormWrapper>
       <Input
         type="textarea"

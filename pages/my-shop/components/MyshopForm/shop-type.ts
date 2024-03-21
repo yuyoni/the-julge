@@ -72,6 +72,9 @@ interface ShopData {
         phone?: string; // optional
         address?: string; // optional
         bio?: string; // optional
+        shop: {
+          id?: string;
+        };
       };
       href: string;
     };
