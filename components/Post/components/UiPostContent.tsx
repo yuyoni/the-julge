@@ -38,7 +38,7 @@ export default function UiPostContent({
         />
         {address}
       </Location>
-      <Wage>{hourlyPay.toLocaleString("ko-KR")}원</Wage>
+      <Wage>{Number(hourlyPay).toLocaleString("ko-KR")}원</Wage>
     </PostContent>
   );
 }
