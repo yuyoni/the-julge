@@ -1,56 +1,72 @@
 import Button from "@/components/Button/Button";
 import Layout from "@/components/Layout";
-import Modal from "@/components/Modal";
 import PostForm from "@/components/PostForm/index";
 import { useToast } from "@/contexts/ToastContext";
 import fetchData from "@/lib/apis/fetchData";
 import TOAST_MESSAGES from "@/lib/constants/toastMessage";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 import convertToISODate from "@/lib/utils/formatDateString";
 import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import ModalContent from "./components/ModalContents";
 import validateFormData from "./utils/validateFormData";
+import useCookie from "@/hooks/useCookies";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
   const { shopId } = router.query;
   const { showToast } = useToast();
+  const { jwt: token } = useCookie();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    hourlyPay: 0,
-    startsAt: "",
-    workhour: 0,
-    description: "",
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    formData: {
+      hourlyPay: 0,
+      startsAt: "",
+      workhour: 0,
+      description: "",
+    },
   });
 
   const handleInputChange = (key: string, value: string | number) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [key]: value,
+    setModalState((prevState) => ({
+      ...prevState,
+      formData: {
+        ...prevState.formData,
+        [key]: value,
+      },
     }));
   };
 
-  const handleFormSubmit = () => {
-    if (!validateFormData(formData, showToast)) return;
-    setIsModalOpen(true);
+  const handleFormSubmit = async () => {
+    if (!validateFormData(modalState.formData, showToast)) return;
+    setModalState((prevState) => ({ ...prevState, isOpen: true }));
   };
 
-  const handleYesClick = () => {
-    const response = fetchData(
-      `shops/${shopId}/notices`,
-      "POST",
-      convertToISODate(formData),
-    );
+  const handleYesClick = async () => {
+    try {
+      const response = await fetchData<NoticeList>({
+        param: `/shops/${shopId}/notices`,
+        method: "post",
+        requestData: convertToISODate(modalState.formData),
+        token: token,
+      });
 
-    // router.push("/"); // 공고 등록 한 후 response로 받은 공고 id를 이용해 shops/${shopId}/notices/${noticeId}로 이동해야함
-    showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
-    setIsModalOpen(false);
+      const { id: noticeId } = response.item;
+      router.push(`/shops/${shopId}/notices/${noticeId}`);
+      showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
+    } finally {
+      setModalState((prevState) => ({ ...prevState, isOpen: false }));
+    }
   };
 
   const handleNoClick = () => {
-    setIsModalOpen(false);
+    setModalState((prevState) => ({ ...prevState, isOpen: false }));
   };
 
   return (
@@ -64,17 +80,10 @@ export default function NoticeRegistrationPage() {
           width={312}
           handleClick={handleFormSubmit}
         />
-        {isModalOpen && (
-          <Dimmed>
-            <Modal
-              modalIcon="check"
-              modalText={`시급: ${formData.hourlyPay}원
-              시작 일시: ${formData.startsAt}
-              업무 시간: ${formData.workhour}
-              공고 설명: ${formData.description}
-              
-              등록하시겠습니까?
-            `}
+        {modalState.isOpen && (
+          <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
+            <ModalContent
+              formData={modalState.formData}
               handleYesClick={handleYesClick}
               handleNoClick={handleNoClick}
             />
@@ -102,10 +111,12 @@ const Title = styled.span`
 const Dimmed = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
 `;

@@ -6,12 +6,19 @@ export default function validateFormData(
   formData: FormDataType,
   showToast: ShowToastType,
 ) {
-  const { hourlyPay, startsAt, workhour } = formData;
-  if (hourlyPay <= 0 || startsAt.trim() === "" || workhour <= 0) {
-    showToast(TOAST_MESSAGES.ALL_FIELDS_REQUIRED);
+  const { hourlyPay, startsAt, workhour, description } = formData;
+  const currentDateTime = new Date();
+
+  if (new Date(startsAt) < currentDateTime) {
+    showToast(TOAST_MESSAGES.OUTDATED);
     return false;
   }
-  if (isNaN(hourlyPay) || isNaN(workhour)) {
+  if (
+    Number.isInteger(hourlyPay) ||
+    Number.isInteger(workhour) ||
+    isNaN(hourlyPay) ||
+    isNaN(workhour)
+  ) {
     showToast(TOAST_MESSAGES.HOURLY_WAGE_AND_WORKING_HOURS_NUMBER);
     return false;
   }
@@ -19,5 +26,14 @@ export default function validateFormData(
     showToast(TOAST_MESSAGES.MINIMUM_WAGE);
     return false;
   }
+  if (workhour <= 0) {
+    showToast(TOAST_MESSAGES.INVALID_WORKHOUR);
+    return false;
+  }
+  if (hourlyPay <= 0 || startsAt.trim() === "" || description.trim() === "") {
+    showToast(TOAST_MESSAGES.ALL_FIELDS_REQUIRED);
+    return false;
+  }
+
   return true;
 }

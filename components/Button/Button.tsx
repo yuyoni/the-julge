@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   handleClick?: () => void;
-  color?: "colored" | "white" | "gray";
+  color?: "colored" | "white" | "gray" | "reject" | "accept";
   width?: number;
   type?: "button" | "submit" | "reset";
 }
@@ -28,26 +28,48 @@ export default function Button({
 
 const getColorStyles = (color: string) => {
   switch (color) {
-    case "white":
+    case "reject":
       return css`
-        background: var(--The-julge-gray-00, #fff);
-        color: var(--The-julge-purple-40, #905cb9);
-        border: 1px solid var(--The-julge-purple-40, #905cb9);
+        background: var(--The-julge-gray-00);
+        color: var(--The-julge-red);
+        border: 1px solid var(--The-julge-red);
 
         :active {
-          background: var(--The-julge-purple-10, #f2f2f3);
+          background: #fbb7af;
+        }
+      `;
+    case "accept":
+      return css`
+        background: var(--The-julge-gray-00);
+        color: var(--The-julge-blue-20);
+        border: 1px solid var(--The-julge-blue-20);
+
+        :active {
+          background: var(--The-julge-blue-10);
+        }
+      `;
+    case "white":
+      return css`
+        background: var(--The-julge-gray-00);
+        color: var(--The-julge-purple-40);
+        border: 1px solid var(--The-julge-purple-40);
+
+        :active {
+          background: var(--The-julge-purple-10);
         }
       `;
     case "gray":
       return css`
-        background: var(--The-julge-gray-40, #a4a1aa);
-        color: var(--The-julge-gray-00, #fff);
+        background: var(--The-julge-gray-40);
+        color: var(--The-julge-gray-00);
+        border: 1px solid var(--The-julge-gray-40);
         cursor: not-allowed;
       `;
     default:
       return css`
-        background: var(--The-julge-purple-40, #905cb9);
-        color: var(--The-julge-gray-00, #fff);
+        background: var(--The-julge-purple-40);
+        color: var(--The-julge-gray-00);
+        border: 1px solid var(--The-julge-purple-40);
 
         :active {
           background: #6a4487;
@@ -61,7 +83,7 @@ const Wrapper = styled.div<{ $width?: number }>`
 `;
 
 const ButtonStyle = styled.button<{
-  $color?: "colored" | "white" | "gray";
+  $color?: "colored" | "white" | "gray" | "reject" | "accept";
 }>`
   display: inline-flex;
   padding: 12px 12px;

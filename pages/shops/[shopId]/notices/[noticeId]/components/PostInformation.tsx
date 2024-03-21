@@ -49,12 +49,12 @@ export default function PostInformation({
 }
 
 const Wrapper = styled.div`
-  margin-top: 16px;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  margin-bottom: 12px;
 `;
 
 const Wage = styled.span`

@@ -1,23 +1,23 @@
 import Post from "@/components/Post";
-import { useNoticeData } from "@/hooks/useNoticeData";
+import useFetchData from "@/hooks/useFetchData";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
 
 export default function RecentNotice({
-  recentNoticeId,
+  noticeHref,
   index,
 }: {
-  recentNoticeId: { shopId: string; noticeId: string };
+  noticeHref: string;
   index: number;
 }) {
-  const { shopId, noticeId } = recentNoticeId;
   const {
     isLoading,
     error,
     data: noticeData,
-  } = useNoticeData(shopId, noticeId);
+  } = useFetchData<NoticeList>(noticeHref, "NoticeInfo");
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>recentNotice Data fetching error</p>;
   if (!noticeData) return <p>Data not found</p>;
 
   const itemDatas = {

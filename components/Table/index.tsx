@@ -8,6 +8,7 @@ export type Data = {
 };
 
 type TableProps = {
+  token?: string;
   type: "employer" | "employee";
   limit: number;
   count: number;
@@ -22,6 +23,7 @@ const Headers = {
 };
 
 export default function Table({
+  token,
   type,
   limit,
   count,
@@ -35,6 +37,7 @@ export default function Table({
         <TableHeader headers={Headers[type]} />
         <TableBody
           type={type}
+          token={token}
           dataList={dataList}
           handlePermitClick={handlePermitClick}
           handleDenyClick={handleDenyClick}
