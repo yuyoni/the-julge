@@ -34,6 +34,7 @@ export default function RecentNotice({
     imageUrl: noticeData.item.shop.item.imageUrl,
     closed: noticeData.item.closed,
     shopId: noticeData.item.shop.item.id,
+    startsAt: noticeData.item.startsAt,
   };
 
   return <Post item={itemDatas} />;

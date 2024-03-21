@@ -1,5 +1,7 @@
 import { SelectedLocationList } from "@/components/Filter/types/types";
+import convertDateNow from "../utils/convertDate";
 import axios from "axios";
+import { categoryMap } from "../constants/category";
 
 interface GetNoticesProp {
   limit: number;
@@ -56,13 +58,13 @@ export const getNotices = async ({
     query += `&keyword=${keyword}`;
   }
   if (startsAtValue) {
-    query += `&startsAtGte=${startsAtValue}`;
+    query += `&startsAtGte=${convertDateNow(startsAtValue)}`;
   }
   if (hourlyPayValue) {
     query += `&hourlyPayGte=${hourlyPayValue}`;
   }
   if (sortStr) {
-    query += `&sort=${sortStr}`;
+    query += `&sort=${categoryMap.get(sortStr)}`;
   }
 
   const { data } = await axios.get(`${URL}/notices?${query}`);

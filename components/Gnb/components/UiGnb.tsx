@@ -39,8 +39,9 @@ const GnbWrapper = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
+    padding: 15px 20px;
     width: 100%;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1.2fr;
     grid-row-gap: 16px;
     grid-template-areas:
       "logo buttons"

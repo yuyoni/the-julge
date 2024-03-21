@@ -59,10 +59,6 @@ const FooterWrapper = styled.footer`
   height: 160px;
   background-color: var(--The-julge-gray-10);
   color: var(--The-julge-gray-50);
-
-  @media (max-width: 768px) {
-    margin-top: 60px;
-  }
 `;
 
 const Items = styled.div`
