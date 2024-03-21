@@ -16,7 +16,7 @@ export default function ProfileCard(props: ProfileCardProps) {
     <Wrapper>
       <ContentContainer>
         <ProfileContent {...rest} />
-        <Biograph>{bio ?? "열심히 일하겠습니다."}</Biograph>
+        <Biograph>{bio}</Biograph>
       </ContentContainer>
       <ButtonContainer>
         <Button text="편집하기" color="white" />

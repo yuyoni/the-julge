@@ -17,12 +17,12 @@ export default function ProfileContent({
     <Wrapper>
       <NameContainer>
         이름
-        <Name>{name ?? "나는짱"}</Name>
+        <Name>{name}</Name>
       </NameContainer>
       <PhoneContainer>
         <Image src="/images/phone.svg" alt="전화번호" width={20} height={20} />
 
-        {phone ?? "010-1234-5678"}
+        {phone}
       </PhoneContainer>
       <AddressContainer>
         <Image
@@ -32,7 +32,7 @@ export default function ProfileContent({
           height={20}
         />
         <div>선호지역:</div>
-        {address ?? "서울시 도봉구"}
+        {address}
       </AddressContainer>
     </Wrapper>
   );
