@@ -1,73 +1,41 @@
-import { useRouter } from "next/router";
-import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import { h1, body1Regular } from "@/styles/fontsStyle";
-import Button from "@/components/Button/Button";
+import { useEffect, useState } from "react";
+import { ShopData } from "../MyshopForm/shop-type";
+import CommonFrame from "./Common";
+import ShopCard from "./ShopCard";
+import fetchData from "@/lib/apis/fetchData";
 
-export default function MyShopInfo() {
-  const router = useRouter();
-  const handleClick = () => {
-    router.push("/my-shop/register");
-  };
-
-  return (
-    <Container>
-      <Wrapper>
-        <StyledH1>내 가게</StyledH1>
-        <Content>
-          <h3>내 가게를 소개하고 공고도 등록해 보세요.</h3>
-          <ButtonWrapper>
-            <Button text="가게 등록하기" handleClick={handleClick} />
-          </ButtonWrapper>
-        </Content>
-      </Wrapper>
-    </Container>
-  );
-}
-
-// 만들어주신 h1에서 font-weight만 바꾸고 싶어서 커스텀 했습니다!
-const customH1 = css`
-  ${h1};
-  font-weight: 400;
-`;
-
-const Container = styled.div`
-  display: flex;
-  padding: 60px 237px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-`;
-
-const Wrapper = styled.div`
-  width: 965px;
-  height: 276px;
-  color: var(--The-julge-black);
-`;
-
-const StyledH1 = styled.h1`
-  margin-bottom: 23px;
-  ${customH1};
-`;
-
-const Content = styled.div`
-  display: flex;
-  width: 964px;
-  padding: 60px 24px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  border-radius: 12px;
-  border: 1px solid var(--The-julge-gray-20);
-
-  h3 {
-    align-self: stretch;
-    text-align: center;
-    ${body1Regular};
+const getShopInfo = async (shopId: string) => {
+  try {
+    const response = await fetchData<ShopData>({
+      param: `/shops/${shopId}`,
+      method: "get",
+    });
+    console.log("Response:", response);
+    return response; // 변경된 부분: response.data를 반환
+  } catch (error) {
+    throw error; // 오류를 던지도록 수정
   }
-`;
+};
 
-const ButtonWrapper = styled.div`
-  width: 346px;
-`;
+export default function MyShopInfo({ shopId }: { shopId: string }) {
+  const [myShopData, setMyShopData] = useState<ShopData | null>(null);
+
+  useEffect(() => {
+    if (shopId) {
+      getShopInfo(shopId)
+        .then((data) => {
+          setMyShopData(data);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch shop info:", error);
+          // 오류 처리를 할 수 있습니다.
+        });
+    }
+  }, [shopId]);
+
+  if (myShopData === null) {
+    return <CommonFrame frameType="MY_SHOP" />;
+  } else {
+    return <ShopCard shop={myShopData.item} />;
+  }
+}
