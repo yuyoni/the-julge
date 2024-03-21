@@ -54,7 +54,7 @@ export default function NoticeEditPage() {
         token: token,
       });
       router.push(`/shops/${shopId}/notices/${noticeId}`);
-      showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
+      showToast(TOAST_MESSAGES.EDIT_SUCCESSFUL);
     } catch (error) {
       console.error(error);
     } finally {
