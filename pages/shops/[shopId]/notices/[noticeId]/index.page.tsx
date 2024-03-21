@@ -41,10 +41,22 @@ export default function NoticeDetailPage() {
 }
 
 const Wrapper = styled.div`
+  max-width: 964px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  padding: 60px 0;
+  gap: 41px;
   background: var(--The-julge-gray-05, #fafafa);
-  padding-bottom: 40px;
+
+  @media (max-width: 1023px) {
+    padding: 60px 32px;
+    gap: 23px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 40px 12px;
+    gap: 15px;
+  }
 `;
