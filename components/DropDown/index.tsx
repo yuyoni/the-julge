@@ -8,9 +8,15 @@ interface DropDownProps {
   label?: string;
   categories: string[];
   width?: number;
+  onCategoryChange?: (category: string) => void;
 }
 
-export default function DropDown({ label, categories, width }: DropDownProps) {
+export default function DropDown({
+  label,
+  categories,
+  width,
+  onCategoryChange,
+}: DropDownProps) {
   const [selectOption, setSelectOption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,6 +27,7 @@ export default function DropDown({ label, categories, width }: DropDownProps) {
   const handleSelect = (category: string) => {
     setSelectOption(category);
     setIsOpen(!isOpen);
+    if (onCategoryChange) onCategoryChange(category);
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
