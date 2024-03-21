@@ -3,6 +3,8 @@ import { body1Regular, h1Regular, h3 } from "@/styles/fontsStyle";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import EditFormInput from "./EditFormInput";
+import Image from "next/image";
+import Link from "next/link";
 
 type EditForm = {
   name: string;
@@ -20,7 +22,17 @@ export default function ProfileEditForm() {
   } = useForm<EditForm>({ mode: "onChange" });
   return (
     <Form>
-      <Title>내 프로필</Title>
+      <Title>
+        내 프로필
+        <Link href="/my-profile">
+          <Image
+            src="/images/close_icon.svg"
+            alt="닫기 버튼"
+            width={32}
+            height={32}
+          />
+        </Link>
+      </Title>
       <FormContent>
         <InputContainer>
           <EditFormInput label="name" register={register} />
@@ -60,6 +72,9 @@ const Form = styled.form`
 `;
 
 const Title = styled.span`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   ${h1Regular}
 
   @media (max-width: 767px) {
