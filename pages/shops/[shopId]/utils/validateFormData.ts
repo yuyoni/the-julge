@@ -14,8 +14,8 @@ export default function validateFormData(
     return false;
   }
   if (
-    Number.isInteger(hourlyPay) ||
-    Number.isInteger(workhour) ||
+    !Number.isInteger(hourlyPay) ||
+    !Number.isInteger(workhour) ||
     isNaN(hourlyPay) ||
     isNaN(workhour)
   ) {

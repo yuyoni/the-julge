@@ -24,8 +24,6 @@ export default function PostCard({
   const { closed: isClosed } = noticeData.item;
   const { startsAt } = noticeData.item;
   const isOutdated = new Date(startsAt) < new Date();
-  console.log(isClosed);
-  console.log(isOutdated);
 
   const showImageOnText = (isClosed: boolean, isOutdated: boolean) => {
     if (isClosed) return <DimmedText>마감 완료</DimmedText>;

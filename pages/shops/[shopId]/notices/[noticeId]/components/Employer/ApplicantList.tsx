@@ -25,7 +25,6 @@ export default function ApplicantList({ token }: { token: string }) {
           `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications?offset=${offset}&limit=${LIMIT}`,
           { headers: { Authorization: token } },
         );
-        console.log(data);
         setData(data);
       } catch (error: any) {
         const { message } = error.response.data;
