@@ -7,6 +7,7 @@ interface UiImageProps {
   hourlyPay: number;
   originalHourlyPay: number;
   closed: boolean;
+  startAt: string;
 }
 
 export default function UiImage({
@@ -14,13 +15,18 @@ export default function UiImage({
   hourlyPay,
   originalHourlyPay,
   closed,
+  startAt,
 }: UiImageProps) {
+  const isOutdated = new Date(startAt) < new Date();
+
   return (
     <ImageContent>
       <ImageWrapper>
         <PostImage src={imageUrl} className="card-image" />
         <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
-        {closed && <Overlay />}
+        {(closed || isOutdated) && (
+          <Overlay closed={closed} isOutdated={isOutdated} />
+        )}
       </ImageWrapper>
     </ImageContent>
   );

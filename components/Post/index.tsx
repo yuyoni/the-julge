@@ -13,6 +13,7 @@ export interface PostProps {
   originalHourlyPay: number;
   imageUrl: string;
   closed: boolean;
+  startAt: string;
 }
 
 export default function Post({ item }: { item: PostProps }) {
@@ -27,6 +28,7 @@ export default function Post({ item }: { item: PostProps }) {
     hourlyPay,
     originalHourlyPay,
     closed,
+    startAt,
   } = item;
 
   return (
@@ -36,6 +38,7 @@ export default function Post({ item }: { item: PostProps }) {
         originalHourlyPay={originalHourlyPay}
         closed={closed}
         imageUrl={imageUrl}
+        startAt={startAt}
       />
       <UiPostContent
         name={name}

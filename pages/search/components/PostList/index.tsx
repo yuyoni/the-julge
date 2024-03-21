@@ -22,6 +22,7 @@ export default function PostList({
     imageUrl: notice.shop.item.imageUrl,
     closed: notice.closed,
     shopId: notice.shop.item.id,
+    startAt: notice.startsAt,
   }));
 
   return renderPosts(itemDatas, isRecommend);
