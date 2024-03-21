@@ -26,7 +26,7 @@ export default function UserProfile(props: UserProfileProps) {
             내 프로필을 등록하고 원하는 가게에 지원해 보세요.
           </Description>
           <ButtonContainer>
-            <Link href="/">
+            <Link href="/my-profile/edit">
               <Button text="내 프로필 등록하기" />
             </Link>
           </ButtonContainer>
