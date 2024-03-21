@@ -41,4 +41,5 @@ const FilterButton = styled.div`
   color: var(--The-julge-white, #fff);
   ${body2Bold}
   background: var(--The-julge-purple-30);
+  cursor: pointer;
 `;
