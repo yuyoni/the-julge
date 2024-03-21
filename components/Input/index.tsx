@@ -55,7 +55,7 @@ const StyledInput = styled.input<{ hasError: boolean }>`
   border: 1px solid
     ${({ hasError }) =>
       hasError ? "var(--The-julge-red)" : "var(--The-julge-gray-30)"};
-  background: var(--The-julge-white);
+  background: var(--The-julge-gray-00);
 
   ::placeholder {
     color: var(--The-julge-gray-40);
