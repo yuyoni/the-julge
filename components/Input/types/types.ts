@@ -6,4 +6,5 @@ export type InputProps = {
   value?: string | number;
   error?: FieldError;
   register: UseFormRegisterReturn;
+  isStatic?: boolean;
 };

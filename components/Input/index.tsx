@@ -8,11 +8,12 @@ export default function Input({
   value,
   error,
   register,
+  isStatic = true,
 }: InputProps) {
   const hasError: boolean = !!error;
 
   return (
-    <InputWrapper>
+    <InputWrapper isStatic={isStatic}>
       <StyledLabel>{label}</StyledLabel>
       <StyledInput
         type={type}
@@ -35,9 +36,9 @@ const commonStyles = css`
   line-height: 26px;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ isStatic: boolean }>`
   display: flex;
-  width: 350px;
+  width: ${({ isStatic }) => (isStatic ? "350px" : "100%")};
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
