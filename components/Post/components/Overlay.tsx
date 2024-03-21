@@ -2,19 +2,14 @@ import styled from "@emotion/styled";
 import { h1 } from "@/styles/fontsStyle";
 
 interface OverlayProps {
-  closed: boolean;
-  isOutdated: boolean;
+  overlayText: string;
 }
 
-export default function Overlay({ closed, isOutdated }: OverlayProps) {
+export default function Overlay({ overlayText }: OverlayProps) {
   return (
     <OverlayWrapper>
       <OverlayDiv>
-        {isOutdated ? (
-          <OverlayText>지난 공고</OverlayText>
-        ) : closed ? (
-          <OverlayText>마감 완료</OverlayText>
-        ) : null}
+        <OverlayText>{overlayText}</OverlayText>
       </OverlayDiv>
     </OverlayWrapper>
   );

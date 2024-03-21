@@ -19,14 +19,14 @@ export default function UiImage({
 }: UiImageProps) {
   const isOutdated = new Date(startsAt) < new Date();
 
+  const overlayText = isOutdated ? "지난 공고" : closed ? "마감 완료" : "";
+
   return (
     <ImageContent>
       <ImageWrapper>
         <PostImage src={imageUrl} className="card-image" />
         <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
-        {(closed || isOutdated) && (
-          <Overlay closed={closed} isOutdated={isOutdated} />
-        )}
+        {overlayText && <Overlay overlayText={overlayText} />}
       </ImageWrapper>
     </ImageContent>
   );
