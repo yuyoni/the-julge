@@ -30,17 +30,23 @@ export default function NoticeDetailPage() {
   return (
     <Layout>
       <Wrapper>
-        {userInfo.item.type === "employee" ? (
-          <Employee noticeData={noticeData} token={token} />
-        ) : (
-          <Employer noticeData={noticeData} token={token} />
-        )}
+        <Container>
+          {userInfo.item.type === "employee" ? (
+            <Employee noticeData={noticeData} token={token} />
+          ) : (
+            <Employer noticeData={noticeData} token={token} />
+          )}
+        </Container>
       </Wrapper>
     </Layout>
   );
 }
 
 const Wrapper = styled.div`
+  background: var(--The-julge-gray-05, #fafafa);
+`;
+
+const Container = styled.div`
   max-width: 964px;
   margin: 0 auto;
   display: flex;
@@ -48,7 +54,6 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   padding: 60px 0;
   gap: 41px;
-  background: var(--The-julge-gray-05, #fafafa);
 
   @media (max-width: 1023px) {
     padding: 60px 32px;
