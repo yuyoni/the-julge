@@ -8,10 +8,15 @@ import { useNoticesData } from "../hook/useUserQuery";
 export default function NotiButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { jwt, id } = useCookie();
-  const result = useNoticesData(id, jwt);
-  const activeStatus = result?.data?.count ? "active" : "inactive";
+  const response = useNoticesData(id, jwt);
 
-  const notificationList = result?.data?.items ?? [];
+  const responseList = response?.data?.items ?? [];
+
+  const notificationList = responseList.filter(
+    (item: { item: { read: boolean } }) => item.item.read === false,
+  );
+
+  const activeStatus = notificationList.length > 0 ? "active" : "inactive";
 
   const handleClickNoti = () => {
     if (isModalOpen) {
