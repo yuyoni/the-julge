@@ -5,6 +5,7 @@ import { UserData } from "@/lib/types/userType";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ModalContent from "../ModalContent";
+import { useToast } from "@/contexts/ToastContext";
 
 interface EmployeeButtonProps {
   applyHref: string;
@@ -21,6 +22,7 @@ export default function EmployeeButton({
   token,
   userInfo,
 }: EmployeeButtonProps) {
+  const { showToast } = useToast();
   const router = useRouter();
   const { shopId, noticeId } = router.query;
 
@@ -110,6 +112,7 @@ export default function EmployeeButton({
       setShowApplyModal(false);
       setIsApplied(true);
       getUserApplications();
+      showToast("신청완료!");
     } catch (error: any) {
       const { message } = error.response.data;
       alert(message);
@@ -126,6 +129,7 @@ export default function EmployeeButton({
       });
       setShowCancelModal(false);
       setIsApplied(false);
+      showToast("취소했어요");
     } catch (error: any) {
       const { message } = error.response.data;
       alert(message);
