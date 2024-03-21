@@ -40,20 +40,25 @@ export default function EmployeeButton({
   }, [userInfo, token]);
 
   const getUserApplications = async () => {
-    const applicationData = await fetchData<ApplicationsResponse>({
-      param: `/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
-      method: "get",
-    });
-
-    if (userInfo) {
-      const userApply = applicationData.items.filter((apply) => {
-        return userInfo.item.id === apply.item.user.item.id;
+    try {
+      const applicationData = await fetchData<ApplicationsResponse>({
+        param: `/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
+        method: "get",
       });
 
-      if (userApply.length !== 0 && userApply[0].item.status === "pending") {
-        setIsApplied(true);
-        setApplicationId(userApply[0].item.id);
+      if (userInfo) {
+        const userApply = applicationData.items.filter((apply) => {
+          return userInfo.item.id === apply.item.user.item.id;
+        });
+
+        if (userApply.length !== 0 && userApply[0].item.status === "pending") {
+          setIsApplied(true);
+          setApplicationId(userApply[0].item.id);
+        }
       }
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
     }
   };
 
@@ -96,27 +101,35 @@ export default function EmployeeButton({
   }
 
   const handleApply = async () => {
-    // 신청 요청 보내고 성공하면 아래 로직 실행
-    const response = await fetchData<ApplyResponse>({
-      param: applyHref,
-      method: "post",
-      token: token,
-    });
-    setShowApplyModal(false);
-    setIsApplied(true);
-    getUserApplications(); // 새로운 applicationId 가져오기
+    try {
+      const response = await fetchData<ApplyResponse>({
+        param: applyHref,
+        method: "post",
+        token: token,
+      });
+      setShowApplyModal(false);
+      setIsApplied(true);
+      getUserApplications();
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
+    }
   };
 
   const handleCancel = async () => {
-    // 취소 요청 보내고 성공하면 아래 로직실행
-    const response = await fetchData<ApplyResponse>({
-      param: `/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
-      method: "put",
-      requestData: { status: "canceled" },
-      token: token,
-    });
-    setShowCancelModal(false);
-    setIsApplied(false);
+    try {
+      const response = await fetchData<ApplyResponse>({
+        param: `/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+        method: "put",
+        requestData: { status: "canceled" },
+        token: token,
+      });
+      setShowCancelModal(false);
+      setIsApplied(false);
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
+    }
   };
 
   return (

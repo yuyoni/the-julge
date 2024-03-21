@@ -27,8 +27,9 @@ export default function ApplicantList({ token }: { token: string }) {
         );
         console.log(data);
         setData(data);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        const { message } = error.response.data;
+        alert(message);
       }
     };
     fetchData();

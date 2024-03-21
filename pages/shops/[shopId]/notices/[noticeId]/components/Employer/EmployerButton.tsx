@@ -1,6 +1,4 @@
 import Button from "@/components/Button/Button";
-import useFetchData from "@/hooks/useFetchData";
-import { NoticeList } from "@/lib/types/NoticeTypes";
 import { UserData } from "@/lib/types/userType";
 import { useRouter } from "next/router";
 
@@ -16,8 +14,6 @@ export default function EmployerButton({
   isMyNotice,
   isClosed,
   isOutdated,
-  token,
-  userInfo,
 }: EmployerButtonProps) {
   const router = useRouter();
   const { shopId, noticeId } = router.query;

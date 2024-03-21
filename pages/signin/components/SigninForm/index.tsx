@@ -1,17 +1,16 @@
-import { useForm } from "react-hook-form";
-import { SigninFormData } from "../../types/types";
-import { validateSigninData } from "@/lib/utils/validateFormData";
-import { useRouter } from "next/router";
+import Button from "@/components/Button/Button";
+import Input from "@/components/Input";
 import {
   INVALID_EMAIL,
   INVALID_PASSWORD,
   WRONG_INFORMATION,
 } from "@/lib/constants/errorMessage";
-import Button from "@/components/Button/Button";
+import { validateSigninData } from "@/lib/utils/validateFormData";
 import styled from "@emotion/styled";
-import Input from "@/components/Input";
 import axios from "axios";
-import fetchData from "@/lib/apis/fetchData";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { SigninFormData } from "../../types/types";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^.{8,}$/;
@@ -45,11 +44,9 @@ export default function SigninForm() {
       document.cookie = `userType=${type}; path=/`;
 
       router.push("/");
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        const { message } = error.response.data;
-        alert(message);
-      }
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
     }
   };
 

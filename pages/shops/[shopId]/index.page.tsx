@@ -57,8 +57,9 @@ export default function NoticeRegistrationPage() {
       const { id: noticeId } = response.item;
       router.push(`/shops/${shopId}/notices/${noticeId}`);
       showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
     } finally {
       setModalState((prevState) => ({ ...prevState, isOpen: false }));
     }

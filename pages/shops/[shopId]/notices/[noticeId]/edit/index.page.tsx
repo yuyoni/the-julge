@@ -55,8 +55,9 @@ export default function NoticeEditPage() {
       });
       router.push(`/shops/${shopId}/notices/${noticeId}`);
       showToast(TOAST_MESSAGES.EDIT_SUCCESSFUL);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
     } finally {
       setModalState((prevState) => ({ ...prevState, isOpen: false }));
     }
