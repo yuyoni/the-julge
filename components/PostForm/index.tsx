@@ -80,6 +80,28 @@ const Wrapper = styled.div`
     "description description description"
     "description_input description_input description_input";
   ${body1Regular}
+
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    grid-template-areas:
+      "hourlyPay startsAt"
+      "hourlyPay_input startsAt_input"
+      "workhour ."
+      "workhour_input ."
+      "description description"
+      "description_input description_input";
+  }
+
+  @media only screen and (min-width: 375px) and (max-width: 767px) {
+    grid-template-areas:
+      "hourlyPay"
+      "hourlyPay_input"
+      "startsAt"
+      "startsAt_input"
+      "workhour"
+      "workhour_input"
+      "description"
+      "description_input";
+  }
 `;
 
 const TooltipIcon = styled(Image)`

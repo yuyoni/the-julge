@@ -24,8 +24,6 @@ export default function PostCard({
   const { closed: isClosed } = noticeData.item;
   const { startsAt } = noticeData.item;
   const isOutdated = new Date(startsAt) < new Date();
-  console.log(isClosed);
-  console.log(isOutdated);
 
   const showImageOnText = (isClosed: boolean, isOutdated: boolean) => {
     if (isClosed) return <DimmedText>마감 완료</DimmedText>;
@@ -74,6 +72,10 @@ const Wrapper = styled.div`
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   background: var(--The-julge-white, #fff);
   gap: 30px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Container = styled.div`

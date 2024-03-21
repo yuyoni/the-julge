@@ -42,8 +42,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 60px 238px;
+  padding: 60px 32px;
   gap: 24px;
+  max-width: 964px;
+  width: 100%;
 `;
 
 const ShopDetails = styled.div`

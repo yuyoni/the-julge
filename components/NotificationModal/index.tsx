@@ -70,11 +70,13 @@ const Wrapper = styled.div`
   box-shadow: 0px 2px 8px 0px rgba(60, 59, 62, 0.26);
 
   z-index: 10;
+
   @media only screen and (max-width: 768px) {
     top: 0px;
     position: fixed;
     box-shadow: none;
     width: 100%;
+    height: 100vh;
     border: none;
     border-radius: 0;
   }

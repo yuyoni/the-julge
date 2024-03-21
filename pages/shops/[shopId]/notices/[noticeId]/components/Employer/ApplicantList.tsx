@@ -2,11 +2,10 @@ import Table from "@/components/Table";
 import type { ApplicantList } from "@/lib/types/Application";
 import { h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import transformItems from "../../utils/transformItems";
-import handleAxiosError from "@/lib/apis/handleAxiosError";
 
 const LIMIT = 5;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -25,7 +24,6 @@ export default function ApplicantList({ token }: { token: string }) {
           `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications?offset=${offset}&limit=${LIMIT}`,
           { headers: { Authorization: token } },
         );
-        console.log(data);
         setData(data);
       } catch (error: any) {
         const { message } = error.response.data;
@@ -60,6 +58,7 @@ const NoApplicant = styled.div`
   justify-content: center;
   align-items: center;
   padding: 60px 24px;
+  width: 100%;
   border-radius: 12px;
   border: 1px solid var(--The-julge-gray-20);
 `;
@@ -67,7 +66,9 @@ const NoApplicant = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 60px 238px;
+  padding: 60px 32px;
+  max-width: 964px;
+  width: 100%;
   gap: 32px;
 `;
 

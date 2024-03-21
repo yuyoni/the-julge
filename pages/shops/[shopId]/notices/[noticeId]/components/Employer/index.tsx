@@ -1,11 +1,12 @@
+import { useUser } from "@/contexts/UserContext";
 import { NoticeList } from "@/lib/types/NoticeTypes";
+import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import updateRecentNotices from "../../utils/updateRecentNotices";
+import RecentNoticeContainer from "../Employee/RecentNoticeContainer";
 import PostDetail from "../PostDetail";
 import ApplicantList from "./ApplicantList";
-import { useUser } from "@/contexts/UserContext";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import RecentNoticeContainer from "../Employee/RecentNoticeContainer";
-import updateRecentNotices from "../../utils/updateRecentNotices";
 
 export default function Employer({
   noticeData,
@@ -29,7 +30,7 @@ export default function Employer({
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <PostDetail
         token={token}
         isMyNotice={isMyNotice}
@@ -37,6 +38,13 @@ export default function Employer({
         noticeData={noticeData}
       />
       {isMyNotice ? <ApplicantList token={token} /> : <RecentNoticeContainer />}
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
