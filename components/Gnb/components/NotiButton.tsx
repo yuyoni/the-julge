@@ -11,6 +11,8 @@ export default function NotiButton() {
   const result = useNoticesData(id, jwt);
   const activeStatus = result?.data?.count ? "active" : "inactive";
 
+  const notificationList = result?.data?.items ?? [];
+
   const handleClickNoti = () => {
     if (isModalOpen) {
       setIsModalOpen(false);
@@ -32,6 +34,7 @@ export default function NotiButton() {
         <NotificationModal
           handleClickNoti={handleClickNoti}
           isModalOpen={isModalOpen}
+          notificationList={notificationList}
         />
       </Button>
     </>

@@ -1,15 +1,23 @@
 import styled from "@emotion/styled";
 import type { Notification } from "../types/types";
 import { body2Regular } from "@/styles/fontsStyle";
+import useCookie from "@/hooks/useCookies";
+import { useClearNoitification } from "../hooks/useUserQuery";
 
 export default function Notification({
+  alertId,
   name,
   result,
   elapsedTime,
   formattedTime,
 }: Notification) {
+  const { id, jwt } = useCookie();
+
+  const handleclick = (alertId: string) => {
+    const response = useClearNoitification(id, alertId, jwt);
+  };
   return (
-    <Wrapper>
+    <Wrapper onClick={() => handleclick(alertId)}>
       <Container>
         <Circle result={result}></Circle>
         <NotifiText>

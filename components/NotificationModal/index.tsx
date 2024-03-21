@@ -4,14 +4,19 @@ import Image from "next/image";
 import Notification from "./components/Notification";
 import { h4 } from "@/styles/fontsStyle";
 import extractNotificationInfo from "./utils/extractNotificationInfo";
+import { NotificationItem } from "./types/types";
+
+interface NotificationModalProps {
+  handleClickNoti: () => void;
+  isModalOpen: boolean;
+  notificationList: NotificationItem[];
+}
 
 export default function NotificationModal({
   handleClickNoti,
   isModalOpen,
-}: {
-  handleClickNoti: () => void;
-  isModalOpen: boolean;
-}) {
+  notificationList,
+}: NotificationModalProps) {
   const notifications = extractNotificationInfo(notificationList);
 
   return (
@@ -34,8 +39,8 @@ export default function NotificationModal({
 }
 
 const Title = styled.span`
-  ${h4}
   color: var(--The-julge-black, #111322);
+  ${h4}
 `;
 
 const StyledCloseIcon = styled(Image)`
@@ -82,101 +87,101 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const notificationList = [
-  {
-    item: {
-      id: "1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
-      createdAt: "2024-03-18T09:32:47.392Z",
-      result: "accepted",
-      read: false,
-      application: {
-        item: {
-          id: "f9585caf-f240-4bf7-8e07-2d11f64254a1",
-          status: "accepted",
-        },
-        href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/applications/f9585caf-f240-4bf7-8e07-2d11f64254a1",
-      },
-      shop: {
-        item: {
-          id: "04b0a194-ad51-4606-a597-3a1ff2fd1272",
-          name: "성수동부대찌개",
-          category: "한식",
-          address1: "서울시 성동구",
-          address2: "상원 12길 5",
-          description: "테스트",
-          imageUrl:
-            "https://bootcamp-project-api.s3.ap-northeast-2.amazonaws.com/0-1/the-julge/5238e2af-7533-4f36-9d86-b14186061ba2-card-default.png",
-          originalHourlyPay: 11000,
-        },
-        href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272",
-      },
-      notice: {
-        item: {
-          id: "863dd9b4-0797-4632-895e-7dbfac1e67f9",
-          hourlyPay: 15000,
-          description: "많은 지원 부탁드려요",
-          startsAt: "2024-03-18T15:00:00.000Z",
-          workhour: 3,
-          closed: true,
-        },
-        href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272/notices/863dd9b4-0797-4632-895e-7dbfac1e67f9",
-      },
-    },
-    links: [
-      {
-        rel: "read",
-        description: "읽음 처리",
-        method: "PUT",
-        href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/alerts/1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
-      },
-    ],
-  },
-  {
-    item: {
-      id: "1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
-      createdAt: "2024-03-18T09:32:47.392Z",
-      result: "거절",
-      read: false,
-      application: {
-        item: {
-          id: "f9585caf-f240-4bf7-8e07-2d11f64254a1",
-          status: "accepted",
-        },
-        href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/applications/f9585caf-f240-4bf7-8e07-2d11f64254a1",
-      },
-      shop: {
-        item: {
-          id: "04b0a194-ad51-4606-a597-3a1ff2fd1272",
-          name: "성수동부대찌개",
-          category: "한식",
-          address1: "서울시 성동구",
-          address2: "상원 12길 5",
-          description: "테스트",
-          imageUrl:
-            "https://bootcamp-project-api.s3.ap-northeast-2.amazonaws.com/0-1/the-julge/5238e2af-7533-4f36-9d86-b14186061ba2-card-default.png",
-          originalHourlyPay: 11000,
-        },
-        href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272",
-      },
-      notice: {
-        item: {
-          id: "863dd9b4-0797-4632-895e-7dbfac1e67f9",
-          hourlyPay: 15000,
-          description: "많은 지원 부탁드려요",
-          startsAt: "2024-03-18T15:00:00.000Z",
-          workhour: 3,
-          closed: true,
-        },
-        href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272/notices/863dd9b4-0797-4632-895e-7dbfac1e67f9",
-      },
-    },
-    links: [
-      {
-        rel: "read",
-        description: "읽음 처리",
-        method: "PUT",
-        href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/alerts/1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
-      },
-    ],
-  },
-];
+// const notificationList = [
+//   {
+//     item: {
+//       id: "1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
+//       createdAt: "2024-03-18T09:32:47.392Z",
+//       result: "accepted",
+//       read: false,
+//       application: {
+//         item: {
+//           id: "f9585caf-f240-4bf7-8e07-2d11f64254a1",
+//           status: "accepted",
+//         },
+//         href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/applications/f9585caf-f240-4bf7-8e07-2d11f64254a1",
+//       },
+//       shop: {
+//         item: {
+//           id: "04b0a194-ad51-4606-a597-3a1ff2fd1272",
+//           name: "성수동부대찌개",
+//           category: "한식",
+//           address1: "서울시 성동구",
+//           address2: "상원 12길 5",
+//           description: "테스트",
+//           imageUrl:
+//             "https://bootcamp-project-api.s3.ap-northeast-2.amazonaws.com/0-1/the-julge/5238e2af-7533-4f36-9d86-b14186061ba2-card-default.png",
+//           originalHourlyPay: 11000,
+//         },
+//         href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272",
+//       },
+//       notice: {
+//         item: {
+//           id: "863dd9b4-0797-4632-895e-7dbfac1e67f9",
+//           hourlyPay: 15000,
+//           description: "많은 지원 부탁드려요",
+//           startsAt: "2024-03-18T15:00:00.000Z",
+//           workhour: 3,
+//           closed: true,
+//         },
+//         href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272/notices/863dd9b4-0797-4632-895e-7dbfac1e67f9",
+//       },
+//     },
+//     links: [
+//       {
+//         rel: "read",
+//         description: "읽음 처리",
+//         method: "PUT",
+//         href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/alerts/1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
+//       },
+//     ],
+//   },
+//   {
+//     item: {
+//       id: "1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
+//       createdAt: "2024-03-18T09:32:47.392Z",
+//       result: "거절",
+//       read: false,
+//       application: {
+//         item: {
+//           id: "f9585caf-f240-4bf7-8e07-2d11f64254a1",
+//           status: "accepted",
+//         },
+//         href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/applications/f9585caf-f240-4bf7-8e07-2d11f64254a1",
+//       },
+//       shop: {
+//         item: {
+//           id: "04b0a194-ad51-4606-a597-3a1ff2fd1272",
+//           name: "성수동부대찌개",
+//           category: "한식",
+//           address1: "서울시 성동구",
+//           address2: "상원 12길 5",
+//           description: "테스트",
+//           imageUrl:
+//             "https://bootcamp-project-api.s3.ap-northeast-2.amazonaws.com/0-1/the-julge/5238e2af-7533-4f36-9d86-b14186061ba2-card-default.png",
+//           originalHourlyPay: 11000,
+//         },
+//         href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272",
+//       },
+//       notice: {
+//         item: {
+//           id: "863dd9b4-0797-4632-895e-7dbfac1e67f9",
+//           hourlyPay: 15000,
+//           description: "많은 지원 부탁드려요",
+//           startsAt: "2024-03-18T15:00:00.000Z",
+//           workhour: 3,
+//           closed: true,
+//         },
+//         href: "/api/0-1/the-julge/shops/04b0a194-ad51-4606-a597-3a1ff2fd1272/notices/863dd9b4-0797-4632-895e-7dbfac1e67f9",
+//       },
+//     },
+//     links: [
+//       {
+//         rel: "read",
+//         description: "읽음 처리",
+//         method: "PUT",
+//         href: "/api/0-1/the-julge/users/52d15203-7313-444e-86ce-881159b851fb/alerts/1c73a86f-eb80-46ed-b0a7-c5b82e06af9e",
+//       },
+//     ],
+//   },
+// ];
