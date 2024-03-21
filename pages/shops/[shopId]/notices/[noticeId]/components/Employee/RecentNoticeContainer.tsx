@@ -38,19 +38,23 @@ export default function RecentNoticeContainer() {
 const Title = styled.span`
   ${h1Regular}
 `;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
   justify-content: flex-start;
-  padding: 60px 238px;
+  padding: 60px 32px;
 `;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template: repeat(2, 1fr) / repeat(3, 1fr);
   gap: 32px 14px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+  }
 `;
 
 const NoRecentNotice = styled.div`

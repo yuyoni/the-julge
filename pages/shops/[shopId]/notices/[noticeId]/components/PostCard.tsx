@@ -72,6 +72,10 @@ const Wrapper = styled.div`
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   background: var(--The-julge-white, #fff);
   gap: 30px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Container = styled.div`

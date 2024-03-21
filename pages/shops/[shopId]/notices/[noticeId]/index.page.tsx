@@ -43,6 +43,8 @@ export default function NoticeDetailPage() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: var(--The-julge-gray-05, #fafafa);
   padding-bottom: 40px;
 `;

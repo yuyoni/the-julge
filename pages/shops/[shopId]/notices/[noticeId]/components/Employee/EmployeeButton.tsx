@@ -87,6 +87,12 @@ export default function EmployeeButton({
         color: "gray",
       };
       break;
+    case isOutdated:
+      buttonProps = {
+        text: "기간 종료",
+        color: "gray",
+      };
+      break;
     case isApplied:
       buttonProps = {
         text: "취소하기",
