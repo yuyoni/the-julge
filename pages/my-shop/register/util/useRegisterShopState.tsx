@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { ShopInfo, ShopData } from "../../components/MyshopForm/shop-type";
+import { ShopInfo, ShopData } from "../../type/shop-type";
 
 export default function useRegisterShopState({
   variant = "default",

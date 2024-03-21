@@ -1,6 +1,6 @@
 import fetchData from "@/lib/apis/fetchData";
 import useCookie from "@/hooks/useCookies";
-import { ShopData, ShopInfo } from "../../components/MyshopForm/shop-type";
+import { ShopData, ShopInfo } from "../../type/shop-type";
 import { useUser } from "@/contexts/UserContext";
 
 const registerShop = async (shopInfo: ShopInfo) => {

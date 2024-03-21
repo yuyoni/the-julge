@@ -7,7 +7,7 @@ import { addressArray, categoriesArray } from "@/lib/constants/options";
 import Button from "@/components/Button/Button";
 import ImageInput from "../ImageInput";
 import Modal from "@/components/Modal";
-import { ShopData } from "./shop-type";
+import { ShopData } from "../../type/shop-type";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import { AxiosError } from "axios";
@@ -50,6 +50,8 @@ export default function MyShopForm() {
       ) {
         alert("모든 값을 채워주세요"); //TODO 모달로 바꾸기
         return;
+      } else {
+        alert("가게 등록@");
       }
 
       const response = await fetchData<ShopData>({
