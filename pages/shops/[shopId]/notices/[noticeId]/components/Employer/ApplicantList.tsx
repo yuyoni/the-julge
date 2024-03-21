@@ -27,30 +27,42 @@ export default function ApplicantList({ token }: { token: string }) {
         );
         console.log(data);
         setData(data);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        const { message } = error.response.data;
+        alert(message);
       }
     };
     fetchData();
   }, [page]);
 
+  if (!data) return <div>Loading...</div>;
+
   return (
-    data && (
-      <>
-        <Wrapper>
-          <Title>신청자 목록</Title>
-          <Table
-            token={token}
-            type="employer"
-            limit={5}
-            count={data.count}
-            dataList={transformItems(data.items)}
-          />
-        </Wrapper>
-      </>
-    )
+    <Wrapper>
+      <Title>신청자 목록</Title>
+      {data.count ? (
+        <Table
+          token={token}
+          type="employer"
+          limit={5}
+          count={data.count}
+          dataList={transformItems(data.items)}
+        />
+      ) : (
+        <NoApplicant>아직 신청 내역이 없어요</NoApplicant>
+      )}
+    </Wrapper>
   );
 }
+
+const NoApplicant = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--The-julge-gray-20);
+`;
 
 const Wrapper = styled.div`
   display: flex;

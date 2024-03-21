@@ -19,11 +19,11 @@ export default function TableBody({
 }: TableBodyProps) {
   return (
     <tbody>
-      {dataList.map((data) => {
+      {dataList.map((data, index) => {
         const { id, applicationId, ...tableData } = data;
         return type === "employer" ? (
           <OwnerTableRow
-            key={id}
+            key={id + index}
             token={token}
             applicationId={applicationId}
             {...(tableData as Data)}

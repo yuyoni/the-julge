@@ -1,7 +1,8 @@
 import Button from "@/components/Button/Button";
 import Layout from "@/components/Layout";
-import PostForm from "@/components/PostForm/index";
+import PostForm from "@/components/PostForm";
 import { useToast } from "@/contexts/ToastContext";
+import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import TOAST_MESSAGES from "@/lib/constants/toastMessage";
 import { NoticeList } from "@/lib/types/NoticeTypes";
@@ -10,13 +11,12 @@ import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ModalContent from "./components/ModalContents";
-import validateFormData from "./utils/validateFormData";
-import useCookie from "@/hooks/useCookies";
+import ModalContent from "../../../components/ModalContents";
+import validateFormData from "../../../utils/validateFormData";
 
-export default function NoticeRegistrationPage() {
+export default function NoticeEditPage() {
   const router = useRouter();
-  const { shopId } = router.query;
+  const { shopId, noticeId } = router.query;
   const { showToast } = useToast();
   const { jwt: token } = useCookie();
 
@@ -48,15 +48,13 @@ export default function NoticeRegistrationPage() {
   const handleYesClick = async () => {
     try {
       const response = await fetchData<NoticeList>({
-        param: `/shops/${shopId}/notices`,
-        method: "post",
+        param: `/shops/${shopId}/notices/${noticeId}`,
+        method: "put",
         requestData: convertToISODate(modalState.formData),
         token: token,
       });
-
-      const { id: noticeId } = response.item;
       router.push(`/shops/${shopId}/notices/${noticeId}`);
-      showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
+      showToast(TOAST_MESSAGES.EDIT_SUCCESSFUL);
     } catch (error: any) {
       const { message } = error.response.data;
       alert(message);
@@ -72,10 +70,10 @@ export default function NoticeRegistrationPage() {
   return (
     <Layout>
       <Wrapper>
-        <Title>공고 등록</Title>
+        <Title>공고 편집</Title>
         <PostForm handleInputChange={handleInputChange} />
         <Button
-          text="등록하기"
+          text="편집하기"
           color="colored"
           width={312}
           handleClick={handleFormSubmit}

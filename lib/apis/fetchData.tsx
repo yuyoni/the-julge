@@ -44,6 +44,6 @@ export default async function fetchData<T>({
     }
     return response.data;
   } catch (error) {
-    handleAxiosError(error);
+    throw new Error(handleAxiosError(error));
   }
 }

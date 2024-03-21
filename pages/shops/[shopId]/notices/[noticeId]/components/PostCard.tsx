@@ -5,6 +5,7 @@ import EmployeeButton from "./Employee/EmployeeButton";
 import EmployerButton from "./Employer/EmployerButton";
 import PostInformation from "./PostInformation";
 import { useUser } from "@/contexts/UserContext";
+import { h2 } from "@/styles/fontsStyle";
 
 interface PostCardType {
   token: string;
@@ -20,11 +21,23 @@ export default function PostCard({
   isMyNotice,
 }: PostCardType) {
   const applyHref = noticeData.links[3].href.slice(18);
+  const { closed: isClosed } = noticeData.item;
+  const { startsAt } = noticeData.item;
+  const isOutdated = new Date(startsAt) < new Date();
+  console.log(isClosed);
+  console.log(isOutdated);
+
+  const showImageOnText = (isClosed: boolean, isOutdated: boolean) => {
+    if (isClosed) return <DimmedText>마감 완료</DimmedText>;
+    if (isOutdated) return <DimmedText>지난 공고</DimmedText>;
+  };
+
   const { userInfo } = useUser();
 
   return (
     <Wrapper>
       <ImageContainer>
+        {showImageOnText(isClosed, isOutdated)}
         <img src={noticeData.item.shop.item.imageUrl} alt="shop_image" />
       </ImageContainer>
       <Container>
@@ -32,13 +45,16 @@ export default function PostCard({
         {userType === "employee" ? (
           <EmployeeButton
             applyHref={applyHref}
-            isClosed={noticeData.item.closed}
+            isClosed={isClosed}
+            isOutdated={isOutdated}
             token={token}
             userInfo={userInfo}
           />
         ) : (
           <EmployerButton
             isMyNotice={isMyNotice!}
+            isClosed={isClosed}
+            isOutdated={isOutdated}
             token={token}
             userInfo={userInfo}
           />
@@ -68,6 +84,7 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
   overflow: hidden;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,4 +95,16 @@ const ImageContainer = styled.div`
     max-width: 100%;
     max-height: 100%;
   }
+`;
+
+const DimmedText = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--The-julge-gray-00);
+  ${h2}
 `;
