@@ -7,7 +7,7 @@ interface UiImageProps {
   hourlyPay: number;
   originalHourlyPay: number;
   closed: boolean;
-  startAt: string;
+  startsAt: string;
 }
 
 export default function UiImage({
@@ -15,9 +15,9 @@ export default function UiImage({
   hourlyPay,
   originalHourlyPay,
   closed,
-  startAt,
+  startsAt,
 }: UiImageProps) {
-  const isOutdated = new Date(startAt) < new Date();
+  const isOutdated = new Date(startsAt) < new Date();
 
   return (
     <ImageContent>
