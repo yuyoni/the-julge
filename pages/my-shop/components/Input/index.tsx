@@ -8,16 +8,28 @@ export default function Input({
   label,
   type = "text",
   placeholder = "입력",
+  value,
+  onChange,
   includeText,
   includeImage,
-  inputSize,
+  handleClick,
+  error,
 }: InputProps) {
   return (
     <InputContainer>
       <StyledLabel>{label}</StyledLabel>
-      <InputWrapper inputSize={inputSize}>
-        <StyledInput type={type} placeholder={placeholder} />
-        <InputContent includeText={includeText} includeImage={includeImage} />
+      <InputWrapper>
+        <StyledInput
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+        <InputContent
+          includeText={includeText}
+          includeImage={includeImage}
+          handleClick={handleClick}
+        />
       </InputWrapper>
     </InputContainer>
   );
@@ -30,6 +42,7 @@ const customBody1Regular = css`
 
 const InputContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -56,7 +69,7 @@ const StyledLabel = styled.label`
   ${customBody1Regular}
 `;
 
-const InputWrapper = styled.div<{ inputSize?: number }>`
+const InputWrapper = styled.div`
   position: relative;
-  width: ${(props) => (props.inputSize ? `${props.inputSize}px` : "400px")};
+  width: 100%;
 `;

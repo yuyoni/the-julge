@@ -9,22 +9,20 @@ import arrowUp from "@/public/images/arrow-up.svg";
 export default function InputContent({
   includeText,
   includeImage,
+  handleClick,
 }: InputContentProps) {
   const [currentImage, setCurrentImage] = useState(arrowDown);
 
-  const handleImageClick = () => {
-    if (currentImage === arrowDown) {
-      setCurrentImage(arrowUp);
-    } else {
-      setCurrentImage(arrowDown);
-    }
+  const toggleImage = () => {
+    setCurrentImage(currentImage === arrowDown ? arrowUp : arrowDown);
+    handleClick?.();
   };
 
   if (includeText) {
     return <StyledSpan>{includeText}</StyledSpan>;
   } else if (includeImage) {
     return (
-      <StyledImageWrapper onClick={handleImageClick}>
+      <StyledImageWrapper onClick={toggleImage}>
         <StyledImage
           width={16}
           height={16}
@@ -49,7 +47,6 @@ const StyledImageWrapper = styled.div`
 
 const StyledImage = styled(Image)`
   ${commonStyles};
-  pointer: cursor;
 `;
 
 const StyledSpan = styled.span`
