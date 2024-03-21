@@ -6,7 +6,7 @@ export default function MyShop() {
   return (
     <Container>
       <Header>
-        <Gnb userType="employer" />
+        <Gnb />
         <MyShopInfo />
       </Header>
       <Footer />

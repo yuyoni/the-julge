@@ -4,16 +4,11 @@ import HeaderButtons from "./HeaderButtons";
 import SearchBar from "./SearchBar";
 
 interface GnbProps {
-  userType?: "employee" | "employer" | "guest" | undefined;
-  hasNotification: boolean;
+  userType: string;
   handleClickMovePage: (pathname?: string) => void;
 }
 
-export default function UiGnb({
-  userType,
-  hasNotification,
-  handleClickMovePage,
-}: GnbProps) {
+export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
   return (
     <GnbWrapper>
       <Logo href="/">
@@ -23,7 +18,6 @@ export default function UiGnb({
       <HeaderButtons
         userType={userType}
         handleClickMovePage={handleClickMovePage}
-        hasNotification={hasNotification}
       />
     </GnbWrapper>
   );
