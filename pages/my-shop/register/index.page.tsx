@@ -1,6 +1,6 @@
 import Gnb from "@/components/Gnb";
 import Input from "../components/Input";
-import Dropdown from "../components/DropDown";
+import DropDown from "../components/DropDown";
 import { addressArray } from "@/lib/constants/options";
 
 export default function Register() {
@@ -14,7 +14,7 @@ export default function Register() {
       <Input label="기본 시급*" includeText="원" />
       <Input label="상세 주소*" />
       <Input label="가게 설명" />
-      <Dropdown label="주소" categories={addressArray} />
+      <DropDown label="주소" categories={addressArray} />
     </>
   );
 }
