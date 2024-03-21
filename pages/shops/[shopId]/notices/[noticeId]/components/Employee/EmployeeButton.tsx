@@ -9,6 +9,7 @@ import ModalContent from "../ModalContent";
 interface EmployeeButtonProps {
   applyHref: string;
   isClosed: boolean;
+  isOutdated: boolean;
   token: string;
   userInfo: UserData | null;
 }
@@ -16,6 +17,7 @@ interface EmployeeButtonProps {
 export default function EmployeeButton({
   applyHref,
   isClosed,
+  isOutdated,
   token,
   userInfo,
 }: EmployeeButtonProps) {
