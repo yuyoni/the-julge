@@ -1,13 +1,12 @@
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { ChangeEvent, useEffect, useState } from "react";
-import PostList from "@/pages/search/components/PostList";
-import { useFilteredNoticesData } from "@/hooks/useUserQuery";
-import Pagination from "@/components/Pagination";
-import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
-
-import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import { h3 } from "@/styles/fontsStyle";
-import { NoticeItem, NoticeList } from "@/lib/types/NoticeTypes";
+import Pagination from "@/components/Pagination";
+import PostList from "@/pages/search/components/PostList";
+import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
+import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
+import type { SelectedLocationList } from "@/components/Filter/types/types.js";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 
 interface AllNoticeProps {
   keyword: string;
@@ -22,7 +21,7 @@ export default function AllNotice({
   const [address, setAddress] = useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
   const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
-  const [sortStr, setSortStr] = useState("");
+  const [sortStr, setSortStr] = useState("시급많은순");
   const [page, setPage] = useState(initialPage);
 
   const TABLES_ITEMS_PER_PAGE = 6;
@@ -33,8 +32,8 @@ export default function AllNotice({
     setPage(initialPage);
   }, [initialPage]);
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSortStr(event.target.value);
+  const handleCategoryChange = (category: string) => {
+    setSortStr(category);
   };
 
   const handleToggleModal = () => {
@@ -74,7 +73,7 @@ export default function AllNotice({
   return (
     <AllNoticeList>
       <AllNoticeHeader
-        handleSelectChange={handleSelectChange}
+        handleCategoryChange={handleCategoryChange}
         sortStr={sortStr}
         handleToggleModal={handleToggleModal}
         isModalVisible={isModalVisible}
@@ -109,6 +108,13 @@ const AllNoticeList = styled.section`
   padding: 30px 0;
   max-width: 968px;
   margin: 0 auto;
+
+  @media only screen and (max-width: 1028px) {
+    padding: 15px 32px;
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 15px 20px;
+  }
 `;
 
 const PostContent = styled.div`
@@ -119,12 +125,14 @@ const PostContent = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, 250px);
+  @media only screen and (max-width: 1028px) {
+    grid-template-columns: repeat(auto-fill, 348px);
   }
 `;
 
 const NoPost = styled.div`
+  grid-column: 1 / 4;
+  text-align: center;
   width: 100%;
   color: var(--The-julge-black);
   ${h3};
@@ -136,6 +144,6 @@ const PaginationWrapper = styled.div`
   justify-content: center;
 
   @media (max-width: 768px) {
-    margin-top: 0px;
+    margin-top: 20px;
   }
 `;

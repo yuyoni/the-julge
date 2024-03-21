@@ -6,7 +6,7 @@ import type { SelectedLocationList } from "@/components/Filter/types/types";
 import HeaderText from "../HeaderText";
 
 interface AllNoticeHeaderProps {
-  handleSelectChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  handleCategoryChange: (category: string) => void;
   sortStr: string;
   handleToggleModal: () => void;
   isModalVisible: boolean;
@@ -20,7 +20,7 @@ interface AllNoticeHeaderProps {
 }
 
 export default function AllNoticeHeader({
-  handleSelectChange,
+  handleCategoryChange,
   sortStr,
   handleToggleModal,
   isModalVisible,
@@ -32,7 +32,7 @@ export default function AllNoticeHeader({
     <Header>
       <HeaderText keyword={keyword} />
       <HeaderButtons
-        handleSelectChange={handleSelectChange}
+        handleCategoryChange={handleCategoryChange}
         sortStr={sortStr}
         handleToggleModal={handleToggleModal}
       />
@@ -52,10 +52,6 @@ const Header = styled.div`
   margin-bottom: 30px;
   width: 100%;
   position: relative;
-
-  @media only screen and (max-width: 1028px) {
-    padding: 15px 32px;
-  }
 
   @media only screen and (max-width: 768px) {
     display: grid;

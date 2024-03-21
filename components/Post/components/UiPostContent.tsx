@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import { body1Regular, h2 } from "@/styles/fontsStyle";
+import {
+  body1Bold,
+  body1Regular,
+  body2Regular,
+  caption,
+  h2,
+  h3,
+  h4,
+} from "@/styles/fontsStyle";
 
 export interface PostUiPostContentProps {
   name: string;
@@ -38,7 +46,7 @@ export default function UiPostContent({
         />
         {address}
       </Location>
-      <Wage>{hourlyPay.toLocaleString("ko-KR")}원</Wage>
+      <Wage>{Number(hourlyPay).toLocaleString("ko-KR")}원</Wage>
     </PostContent>
   );
 }
@@ -55,7 +63,11 @@ const Time = styled.div`
   gap: 10px;
   align-items: center;
   color: var(--The-julge-gray-50, #7d7986);
-  ${body1Regular}
+  ${body2Regular}
+
+  @media only screen and (max-width: 768px) {
+    ${caption}
+  }
 `;
 
 const Location = styled.div`
@@ -63,16 +75,26 @@ const Location = styled.div`
   gap: 10px;
   align-items: center;
   color: var(--The-julge-gray-50, #7d7986);
-  ${body1Regular}
+  ${body2Regular}
+
+  @media only screen and (max-width: 768px) {
+    ${caption}
+  }
 `;
 
 const PostName = styled.div`
-  ${h2}
   margin-bottom: 8px;
+  ${h3}
+  @media only screen and (max-width: 768px) {
+    ${body1Bold}
+  }
 `;
 
 const Wage = styled.div`
-  ${h2}
   margin-top: 8px;
   text-align: right;
+  ${h2}
+  @media only screen and (max-width: 768px) {
+    ${h4}
+  }
 `;

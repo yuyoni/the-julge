@@ -1,32 +1,39 @@
 import Button from "@/components/Button/Button";
-import { useState } from "react";
+import { UserData } from "@/lib/types/userType";
+import { useRouter } from "next/router";
 
-export default function EmployerButton() {
-  const [isMyNotice, setIsMyNotice] = useState(false);
+interface EmployerButtonProps {
+  isMyNotice: boolean;
+  isClosed: boolean;
+  isOutdated: boolean;
+  token: string;
+  userInfo: UserData | null;
+}
+
+export default function EmployerButton({
+  isMyNotice,
+  isClosed,
+  isOutdated,
+}: EmployerButtonProps) {
+  const router = useRouter();
+  const { shopId, noticeId } = router.query;
 
   const handleEditButtonClick = () => {
-    // 공고 편집 버튼 클릭 시 실행되는 기능 구현
-    // 필요한 로직 구현
+    router.push(`/shops/${shopId}/notices/${noticeId}/edit`);
   };
 
-  return (
-    <>
-      {/** 내 공고인 경우 */}
-      {isMyNotice && (
-        <Button
-          text="공고 편집하기"
-          color="white"
-          handleClick={handleEditButtonClick}
-        />
-      )}
-      {/** 내 공고가 아닌 경우 */}
-      {!isMyNotice && (
-        <Button
-          text="공고 편집하기"
-          color="gray"
-          handleClick={handleEditButtonClick}
-        />
-      )}
-    </>
-  );
+  if (isMyNotice) {
+    if (isClosed || isOutdated) {
+      return <Button text="공고 마감 및 만료" color="gray" />;
+    }
+    return (
+      <Button
+        text="공고 편집하기"
+        color="white"
+        handleClick={handleEditButtonClick}
+      />
+    );
+  } else {
+    return <Button text="공고 편집하기" color="gray" />;
+  }
 }

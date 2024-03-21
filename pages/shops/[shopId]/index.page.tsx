@@ -12,11 +12,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ModalContent from "./components/ModalContents";
 import validateFormData from "./utils/validateFormData";
+import useCookie from "@/hooks/useCookies";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
   const { shopId } = router.query;
   const { showToast } = useToast();
+  const { jwt: token } = useCookie();
 
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -49,13 +51,15 @@ export default function NoticeRegistrationPage() {
         param: `/shops/${shopId}/notices`,
         method: "post",
         requestData: convertToISODate(modalState.formData),
+        token: token,
       });
 
       const { id: noticeId } = response.item;
       router.push(`/shops/${shopId}/notices/${noticeId}`);
       showToast(TOAST_MESSAGES.REGISTRATION_SUCCESSFUL);
-    } catch (error) {
-      console.error("Error :", error);
+    } catch (error: any) {
+      const { message } = error.response.data;
+      alert(message);
     } finally {
       setModalState((prevState) => ({ ...prevState, isOpen: false }));
     }
@@ -70,12 +74,13 @@ export default function NoticeRegistrationPage() {
       <Wrapper>
         <Title>공고 등록</Title>
         <PostForm handleInputChange={handleInputChange} />
-        <Button
-          text="등록하기"
-          color="colored"
-          width={312}
-          handleClick={handleFormSubmit}
-        />
+        <ButtonContainer>
+          <Button
+            text="등록하기"
+            color="colored"
+            handleClick={handleFormSubmit}
+          />
+        </ButtonContainer>
         {modalState.isOpen && (
           <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
             <ModalContent
@@ -98,10 +103,26 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 60px;
   gap: 32px;
+
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    padding: 60px 32px;
+  }
+  @media only screen and (min-width: 375px) and (max-width: 767px) {
+    padding: 40px 12px 80px;
+    gap: 24px;
+  }
 `;
 
 const Title = styled.span`
   ${h1}
+`;
+
+const ButtonContainer = styled.div`
+  width: 312px;
+
+  @media only screen and (min-width: 375px) and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 const Dimmed = styled.div`

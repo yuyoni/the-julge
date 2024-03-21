@@ -91,3 +91,12 @@ export const h4 = css`
   font-weight: 700;
   line-height: normal;
 `;
+
+/* The julge/caption */
+export const caption = css`
+  font-family: "Spoqa Han Sans Neo";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+`;

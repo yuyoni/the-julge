@@ -4,16 +4,11 @@ import HeaderButtons from "./HeaderButtons";
 import SearchBar from "./SearchBar";
 
 interface GnbProps {
-  userType?: "employee" | "employer" | "guest" | undefined;
-  hasNotification: boolean;
+  userType: string;
   handleClickMovePage: (pathname?: string) => void;
 }
 
-export default function UiGnb({
-  userType,
-  hasNotification,
-  handleClickMovePage,
-}: GnbProps) {
+export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
   return (
     <GnbWrapper>
       <Logo href="/">
@@ -23,7 +18,6 @@ export default function UiGnb({
       <HeaderButtons
         userType={userType}
         handleClickMovePage={handleClickMovePage}
-        hasNotification={hasNotification}
       />
     </GnbWrapper>
   );
@@ -45,8 +39,9 @@ const GnbWrapper = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
+    padding: 15px 20px;
     width: 100%;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1.2fr;
     grid-row-gap: 16px;
     grid-template-areas:
       "logo buttons"

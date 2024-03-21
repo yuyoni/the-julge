@@ -8,7 +8,7 @@ interface DropDownProps {
   label?: string;
   categories: string[];
   width?: number;
-  onCategoryChange?: (category: string) => void;
+  onCategoryChange?: (category: string) => void | undefined;
 }
 
 export default function DropDown({

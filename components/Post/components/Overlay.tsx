@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
 import { h1 } from "@/styles/fontsStyle";
 
-export default function Overlay() {
+interface OverlayProps {
+  overlayText: string;
+}
+
+export default function Overlay({ overlayText }: OverlayProps) {
   return (
     <OverlayWrapper>
       <OverlayDiv>
-        <OverlayText>마감 완료</OverlayText>
+        <OverlayText>{overlayText}</OverlayText>
       </OverlayDiv>
     </OverlayWrapper>
   );

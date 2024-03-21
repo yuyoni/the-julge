@@ -1,6 +1,6 @@
-import Post, { PostProps } from "@/components/Post";
 import { NoticeItem } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
+import { renderPosts } from "./util/renderPosts";
 
 interface PostListProps {
   isRecommend: boolean;
@@ -22,17 +22,8 @@ export default function PostList({
     imageUrl: notice.shop.item.imageUrl,
     closed: notice.closed,
     shopId: notice.shop.item.id,
+    startsAt: notice.startsAt,
   }));
 
-  if (isRecommend) {
-    const filteredItemDatas = itemDatas
-      .filter((item) => !item.closed)
-      .slice(0, 3);
-
-    return filteredItemDatas.map((item: PostProps) => (
-      <Post key={item.id} item={item} />
-    ));
-  }
-
-  return itemDatas.map((item: PostProps) => <Post key={item.id} item={item} />);
+  return renderPosts(itemDatas, isRecommend);
 }

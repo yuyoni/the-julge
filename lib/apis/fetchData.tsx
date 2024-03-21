@@ -1,5 +1,5 @@
-import { HttpMethod } from "@/lib/types/apiTypes";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
+import handleAxiosError from "./handleAxiosError";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -44,19 +44,6 @@ export default async function fetchData<T>({
     }
     return response.data;
   } catch (error) {
-    handleAxiosError(error);
-  }
-}
-
-function handleAxiosError(error: any): never {
-  const axiosError = error as AxiosError;
-  if (axiosError.response) {
-    throw new Error(
-      `Request failed with status code ${axiosError.response.status}`,
-    );
-  } else if (axiosError.request) {
-    throw new Error("No response received from server");
-  } else {
-    throw new Error(`Request failed with message: ${axiosError.message}`);
+    throw new Error(handleAxiosError(error));
   }
 }

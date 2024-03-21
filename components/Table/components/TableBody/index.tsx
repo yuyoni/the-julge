@@ -4,6 +4,7 @@ import PartTimerTableRow from "./PartTimerTableRow";
 
 type TableBodyProps = {
   type: "employer" | "employee";
+  token?: string;
   dataList: Data[];
   handlePermitClick?: () => void;
   handleDenyClick?: () => void;
@@ -11,17 +12,20 @@ type TableBodyProps = {
 
 export default function TableBody({
   type,
+  token,
   dataList,
   handlePermitClick,
   handleDenyClick,
 }: TableBodyProps) {
   return (
     <tbody>
-      {dataList.map((data) => {
-        const { id, ...tableData } = data;
+      {dataList.map((data, index) => {
+        const { id, applicationId, ...tableData } = data;
         return type === "employer" ? (
           <OwnerTableRow
-            key={id}
+            key={id + index}
+            token={token}
+            applicationId={applicationId}
             {...(tableData as Data)}
             handlePermitClick={handlePermitClick}
             handleDenyClick={handleDenyClick}

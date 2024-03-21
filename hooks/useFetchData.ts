@@ -6,17 +6,25 @@ export default function useFetchData<T>(
   queryKey: string,
   token?: string,
 ) {
-  if (token) {
-    return useQuery<T>(
-      [queryKey, href],
-      () => fetchData<T>({ param: href, token: token }),
-      {
-        enabled: !!href,
-      },
-    );
-  } else {
-    return useQuery<T>([queryKey, href], () => fetchData<T>({ param: href }), {
-      enabled: !!href,
-    });
+  try {
+    if (token) {
+      return useQuery<T>(
+        [queryKey, href],
+        () => fetchData<T>({ param: href, token: token }),
+        {
+          enabled: !!href,
+        },
+      );
+    } else {
+      return useQuery<T>(
+        [queryKey, href],
+        () => fetchData<T>({ param: href }),
+        {
+          enabled: !!href,
+        },
+      );
+    }
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

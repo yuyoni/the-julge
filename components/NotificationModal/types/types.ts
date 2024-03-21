@@ -1,4 +1,5 @@
 export interface Notification {
+  alertId: string;
   name: string;
   result: string;
   elapsedTime: string;

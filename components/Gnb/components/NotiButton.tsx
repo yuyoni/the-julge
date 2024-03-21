@@ -1,10 +1,17 @@
 import NotificationModal from "@/components/NotificationModal";
+import useCookie from "@/hooks/useCookies";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { useState } from "react";
+import { useNoticesData } from "../hook/useUserQuery";
 
-export default function NotiButton({ activeStatus }: { activeStatus: string }) {
+export default function NotiButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { jwt, id } = useCookie();
+  const result = useNoticesData(id, jwt);
+  const activeStatus = result?.data?.count ? "active" : "inactive";
+
+  const notificationList = result?.data?.items ?? [];
 
   const handleClickNoti = () => {
     if (isModalOpen) {
@@ -23,7 +30,12 @@ export default function NotiButton({ activeStatus }: { activeStatus: string }) {
           width={20}
           height={20}
         />
-        {isModalOpen && <NotificationModal handleClickNoti={handleClickNoti} />}
+
+        <NotificationModal
+          handleClickNoti={handleClickNoti}
+          isModalOpen={isModalOpen}
+          notificationList={notificationList}
+        />
       </Button>
     </>
   );
