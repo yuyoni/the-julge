@@ -65,6 +65,36 @@ export default function OwnerTableRow({
     router.reload();
   };
 
+  const getStatusBadge = (status: string | undefined) => {
+    switch (status) {
+      case "accepted":
+        return <Status status={status}>승인 완료</Status>;
+      case "rejected":
+        return <Status status={status}>거절</Status>;
+      case "canceled":
+        return <Status status={status}>신청 취소</Status>;
+      default:
+        return (
+          <ButtonContainer>
+            <ButtonWrapper>
+              <Button
+                handleClick={handleClickAccept}
+                text="승인하기"
+                color="accept"
+              />
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <Button
+                handleClick={handleClickReject}
+                text="거절하기"
+                color="reject"
+              />
+            </ButtonWrapper>
+          </ButtonContainer>
+        );
+    }
+  };
+
   return (
     <>
       <TableRow>
@@ -73,30 +103,7 @@ export default function OwnerTableRow({
           <Wrapper>{bio}</Wrapper>
         </Cell>
         <Cell>{phone?.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")}</Cell>
-        <Cell>
-          {status === "pending" ? (
-            <ButtonContainer>
-              <ButtonWrapper>
-                <Button
-                  handleClick={handleClickAccept}
-                  text="승인하기"
-                  color="accept"
-                />
-              </ButtonWrapper>
-              <ButtonWrapper>
-                <Button
-                  handleClick={handleClickReject}
-                  text="거절하기"
-                  color="reject"
-                />
-              </ButtonWrapper>
-            </ButtonContainer>
-          ) : (
-            <Status status={status}>
-              {status === "accepted" ? "승인 완료" : "거절"}
-            </Status>
-          )}
-        </Cell>
+        <Cell>{getStatusBadge(status)}</Cell>
       </TableRow>
       {isShowAcceptModal && (
         <ModalContent
@@ -134,7 +141,7 @@ const getStatusStyle = (status: string) => {
       `;
     case "canceled":
       return css`
-        background: var(--The-julge-gray-20);
+        background: var(--The-julge-gray-40);
         color: var(--The-julge-gray-00);
       `;
   }
