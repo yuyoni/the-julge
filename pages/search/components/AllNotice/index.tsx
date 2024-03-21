@@ -21,7 +21,7 @@ export default function AllNotice({
   const [address, setAddress] = useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
   const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
-  const [sortStr, setSortStr] = useState("pay");
+  const [sortStr, setSortStr] = useState("시급많은순");
   const [page, setPage] = useState(initialPage);
 
   const TABLES_ITEMS_PER_PAGE = 6;
