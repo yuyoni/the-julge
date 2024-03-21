@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { ChangeEvent, useEffect, useState } from "react";
 import PostList from "@/pages/search/components/PostList";
-import { useFilteredNoticesData } from "@/hooks/useUserQuery";
+import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
 import Pagination from "@/components/Pagination";
 import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
 
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import { h3 } from "@/styles/fontsStyle";
-import { NoticeItem, NoticeList } from "@/lib/types/NoticeTypes";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 
 interface AllNoticeProps {
   keyword: string;
@@ -125,6 +125,8 @@ const PostContent = styled.div`
 `;
 
 const NoPost = styled.div`
+  grid-column: 1 / 4;
+  text-align: center;
   width: 100%;
   color: var(--The-julge-black);
   ${h3};
