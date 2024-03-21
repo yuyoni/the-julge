@@ -8,10 +8,7 @@ interface GnbProps {
   handleClickMovePage: (pathname?: string) => void;
 }
 
-export default function UiGnb({
-  userType = "guest",
-  handleClickMovePage,
-}: GnbProps) {
+export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
   return (
     <GnbWrapper>
       <Logo href="/">
