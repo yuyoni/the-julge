@@ -26,8 +26,7 @@ export default function EmployeeButton({
   const router = useRouter();
   const { shopId, noticeId } = router.query;
 
-  // const isProfileExist = userInfo?.item.name;
-  const isProfileExist = true; // 임시로 true로 고정
+  const isProfileExist = userInfo?.item.name;
 
   const [applicationId, setApplicationId] = useState<string>("");
   const [isApplied, setIsApplied] = useState(false);
@@ -67,7 +66,6 @@ export default function EmployeeButton({
   const handleApplyButtonClick = () => {
     if (isProfileExist) {
       setShowApplyModal(true);
-      // 마운트될 때와 버튼 클릭시에 applicationId 갱신
       getUserApplications();
     } else {
       setShowProfileCheckModal(true);
@@ -176,7 +174,7 @@ export default function EmployeeButton({
           modalText="내 프로필을 먼저 등록해주세요"
           handleYesClick={() => {
             setShowProfileCheckModal(false);
-            router.push("/myprofile");
+            router.push("/my-profile");
           }}
         />
       )}
