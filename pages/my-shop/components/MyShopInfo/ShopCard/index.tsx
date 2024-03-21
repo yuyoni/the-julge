@@ -4,14 +4,29 @@ import Link from "next/link";
 import locationIcon from "@/public/images/location.svg";
 import Button from "@/components/Button/Button";
 import { body1Regular, h1Regular } from "@/styles/fontsStyle";
-import { Shop } from "@/pages/my-shop/type/my-shop-type";
 
-export default function ShopCard({ shop }: { shop: Shop }) {
+interface ShopCardProps {
+  id: string;
+  name: string;
+  address1: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
+export default function ShopCard({
+  id,
+  name,
+  address1,
+  imageUrl,
+  description,
+  category,
+}: ShopCardProps) {
   return (
     <Section>
       <ShopImageWrapper>
         <ShopImage
-          src={shop.imageUrl}
+          src={imageUrl}
           alt="My shop information Card"
           width={539}
           height={320}
@@ -21,8 +36,8 @@ export default function ShopCard({ shop }: { shop: Shop }) {
       <ShopInfoWrapper>
         <DescriptionDiv>
           <MyShopDiv>
-            <h3>{shop.category}</h3>
-            <h2>{shop.name}</h2>
+            <h3>{category}</h3>
+            <h2>{name}</h2>
           </MyShopDiv>
           <LocationDiv>
             <Image
@@ -31,15 +46,15 @@ export default function ShopCard({ shop }: { shop: Shop }) {
               width={20}
               height={20}
             />
-            <span>{shop.address1}</span>
+            <span>{address1}</span>
           </LocationDiv>
-          <p>{shop.description}</p>
+          <p>{description}</p>
         </DescriptionDiv>
         <ButtonsWrapper>
           <Link href="/my-shop/register">
             <Button text="편집하기" type="submit" color="white" width={170} />
           </Link>
-          <Link href={`/shops/${shop.id}/notices`}>
+          <Link href={`/shops/${id}/notices`}>
             <Button text="공고 등록하기" type="submit" width={170} />
           </Link>
         </ButtonsWrapper>
