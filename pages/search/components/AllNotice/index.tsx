@@ -1,12 +1,11 @@
-import styled from "@emotion/styled";
 import { ChangeEvent, useEffect, useState } from "react";
-import PostList from "@/pages/search/components/PostList";
-import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
-import Pagination from "@/components/Pagination";
-import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
-
-import type { SelectedLocationList } from "@/components/Filter/types/types.js";
+import styled from "@emotion/styled";
 import { h3 } from "@/styles/fontsStyle";
+import Pagination from "@/components/Pagination";
+import PostList from "@/pages/search/components/PostList";
+import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
+import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
+import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 
 interface AllNoticeProps {
@@ -22,7 +21,7 @@ export default function AllNotice({
   const [address, setAddress] = useState<SelectedLocationList>([]);
   const [startsAtValue, setStartsAtValue] = useState<string>("");
   const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
-  const [sortStr, setSortStr] = useState("");
+  const [sortStr, setSortStr] = useState("pay");
   const [page, setPage] = useState(initialPage);
 
   const TABLES_ITEMS_PER_PAGE = 6;
@@ -33,8 +32,8 @@ export default function AllNotice({
     setPage(initialPage);
   }, [initialPage]);
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSortStr(event.target.value);
+  const handleCategoryChange = (category: string) => {
+    setSortStr(category);
   };
 
   const handleToggleModal = () => {
@@ -74,7 +73,7 @@ export default function AllNotice({
   return (
     <AllNoticeList>
       <AllNoticeHeader
-        handleSelectChange={handleSelectChange}
+        handleCategoryChange={handleCategoryChange}
         sortStr={sortStr}
         handleToggleModal={handleToggleModal}
         isModalVisible={isModalVisible}

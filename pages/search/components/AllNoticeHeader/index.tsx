@@ -6,7 +6,7 @@ import type { SelectedLocationList } from "@/components/Filter/types/types";
 import HeaderText from "../HeaderText";
 
 interface AllNoticeHeaderProps {
-  handleSelectChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  handleCategoryChange: (category: string) => void;
   sortStr: string;
   handleToggleModal: () => void;
   isModalVisible: boolean;
@@ -20,7 +20,7 @@ interface AllNoticeHeaderProps {
 }
 
 export default function AllNoticeHeader({
-  handleSelectChange,
+  handleCategoryChange,
   sortStr,
   handleToggleModal,
   isModalVisible,
@@ -32,7 +32,7 @@ export default function AllNoticeHeader({
     <Header>
       <HeaderText keyword={keyword} />
       <HeaderButtons
-        handleSelectChange={handleSelectChange}
+        handleCategoryChange={handleCategoryChange}
         sortStr={sortStr}
         handleToggleModal={handleToggleModal}
       />

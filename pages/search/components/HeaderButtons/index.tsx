@@ -1,25 +1,24 @@
 import styled from "@emotion/styled";
 import { body2Bold } from "@/styles/fontsStyle";
 import { ChangeEvent } from "react";
+import DropDown from "@/components/DropDown";
 
 export interface HeaderButtonsProps {
-  handleSelectChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  handleCategoryChange: (category: string) => void;
   sortStr: string;
   handleToggleModal: () => void;
 }
 export default function HeaderButtons({
-  handleSelectChange,
-  sortStr = "time",
+  handleCategoryChange,
   handleToggleModal,
 }: HeaderButtonsProps) {
   return (
     <Buttons>
-      <select onChange={handleSelectChange} value={sortStr}>
-        <option value="time">마감임박순</option>
-        <option value="pay">시급많은순</option>
-        <option value="hour">시간적은순</option>
-        <option value="shop">가나다순</option>
-      </select>
+      <DropDown
+        categories={["마감임박순", "시급많은순", "시간적은순", "가나다순"]}
+        width={120}
+        onCategoryChange={handleCategoryChange}
+      />
       <FilterButton onClick={handleToggleModal}>상세 필터</FilterButton>
     </Buttons>
   );
