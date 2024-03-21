@@ -124,14 +124,6 @@ const PostContent = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 1028px) {
-    grid-template-columns: repeat(auto-fill, 214px);
-  }
-
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, 294px);
-  }
 `;
 
 const NoPost = styled.div`
