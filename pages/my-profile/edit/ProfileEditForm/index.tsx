@@ -44,7 +44,7 @@ export default function ProfileEditForm() {
         </TextAreaContainier>
       </FormContent>
       <ButtonContainer>
-        <Button text="등록하기" width={312} />
+        <Button text="등록하기" />
       </ButtonContainer>
     </Form>
   );
@@ -91,7 +91,12 @@ const FormContent = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+
+  @media (max-width: 1023px) {
+    justify-content: space-between;
+  }
 `;
 
 const TextAreaContainier = styled.div`
@@ -101,6 +106,11 @@ const TextAreaContainier = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  width: 312px;
   margin: 0 auto;
+  width: 312px;
+
+  @media (max-width: 375px) {
+    margin: 0 0;
+    width: 100%;
+  }
 `;

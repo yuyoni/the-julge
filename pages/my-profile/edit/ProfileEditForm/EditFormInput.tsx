@@ -31,23 +31,31 @@ export default function EditFormInput({ label, register }: EditFormInput) {
           <TextArea placeholder="입력" {...register("name")} />
         </>
       ) : (
-        <InputContainer>
+        <Wrapper>
           <Input
             label={labelType[label]}
             isStatic={false}
             register={register("name")}
           />
-        </InputContainer>
+        </Wrapper>
       )}
     </>
   );
 }
 
-const InputContainer = styled.div`
+const Wrapper = styled.div`
   width: 308px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 1023px) {
+    width: calc(50% - 20px);
+  }
+
+  @media (max-width: 375px) {
+    width: 100%;
+  }
 `;
 
 const TextArea = styled.textarea`
