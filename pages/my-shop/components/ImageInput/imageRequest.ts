@@ -1,28 +1,40 @@
+import fetchData from "@/lib/apis/fetchData";
 import axios from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+//const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function createPresinedURL(file: File) {
-  axios
-    .post(`${BASE_URL}/images`, {
-      filename: file.name,
-    })
-    .then((response) => {
-      const presignedUrl = response.data;
-      console.log(presignedUrl);
-      const url = new URL(presignedUrl);
-      const urlWithoutQueryParams = url.origin + url.pathname;
-      uploadImageToS3(urlWithoutQueryParams, file);
-      console.log(urlWithoutQueryParams);
-    })
-    .catch((error) => console.error(error));
+export default async function createPresinedURL(file: File, token: any) {
+  console.log(token); //TODO 콘솔
+  try {
+    const response: {
+      item: {
+        url: string;
+      };
+    } = await fetchData({
+      param: "/images",
+      method: "post",
+      requestData: { name: file.name },
+      token: token, //TODO 토큰값 임의로 안 넣어도 동작하는지
+    });
+    if (response?.item.url) {
+      const s3Res = await uploadImageToS3(response.item.url, file);
+      if (s3Res) return response.item.url;
+      throw new Error();
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function uploadImageToS3(url: string, file: File) {
-  axios
-    .put(url, file)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => console.error(error));
+async function uploadImageToS3(url: string, file: File) {
+  try {
+    const response = await axios.put(url, file);
+    if (response.status === 200) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }

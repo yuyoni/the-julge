@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import createPresinedURL from "./imageRequest";
 import Image from "next/image";
 import cameraIcon from "@/public/images/camera-icon.svg";
+import useCookie from "@/hooks/useCookies";
+import { useMutation } from "react-query";
 
 const Container = styled.div`
   display: flex;
@@ -65,17 +67,29 @@ const Container = styled.div`
   }
 `;
 
-type Props = {};
+type ImgProps = { handleImg: (key: string, value: string | number) => void };
 
-export default function ImageInput({}: Props) {
+export default function ImageInput({ handleImg }: ImgProps) {
   const [fileInfo, setFileInfo] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const { jwt: token } = useCookie();
 
   const fileCheck = useCallback((type: string) => {
     const filetype = type.split("/")[1];
     const extArr = ["jpg", "jpeg", "png", "tif", "tiff"];
     return extArr.includes(filetype);
   }, []);
+
+  const mutation = useMutation({
+    mutationFn: (selectedFile: File) => createPresinedURL(selectedFile, token),
+    onSuccess: (data) => {
+      console.log(data);
+      if (data) handleImg("imageUrl", data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const onSelectFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -85,21 +99,11 @@ export default function ImageInput({}: Props) {
       setPreviewUrl(url);
       console.log(selectedFile);
       setFileInfo(selectedFile);
+      mutation.mutate(selectedFile);
     } else {
       alert("jpeg, png, tiff 파일만 업로드 가능합니다.");
     }
   }, []);
-  const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (fileInfo) {
-        createPresinedURL(fileInfo);
-        setFileInfo(null);
-        setPreviewUrl(null);
-      }
-    },
-    [fileInfo],
-  );
 
   return (
     <Container>
