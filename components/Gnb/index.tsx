@@ -1,5 +1,4 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import UiGnb from "./components/UiGnb";
 import useCookie from "@/hooks/useCookies";
 
