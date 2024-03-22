@@ -51,7 +51,7 @@ export default function ShopCard({
           <p>{description}</p>
         </DescriptionDiv>
         <ButtonsWrapper>
-          <Link href="/my-shop/register">
+          <Link href="/my-shop/edit">
             <Button text="편집하기" type="submit" color="white" width={170} />
           </Link>
           <Link href={`/shops/${id}`}>

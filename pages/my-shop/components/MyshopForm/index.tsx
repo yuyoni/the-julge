@@ -7,14 +7,25 @@ import { addressArray, categoriesArray } from "@/lib/constants/options";
 import Button from "@/components/Button/Button";
 import ImageInput from "../ImageInput";
 import Modal from "@/components/Modal";
-import { ShopData } from "../../type/shop-type";
+import { ShopInfo } from "../../type/shop-type";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import { AxiosError } from "axios";
 
-export default function MyShopForm() {
+interface MyShopFormProps {
+  param: string;
+  method: "post" | "put";
+  initialData?: ShopInfo | null;
+}
+
+export default function MyShopForm({
+  param,
+  method,
+  initialData,
+}: MyShopFormProps) {
   const router = useRouter();
   const { jwt: token } = useCookie();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -50,13 +61,16 @@ export default function MyShopForm() {
       ) {
         alert("모든 값을 채워주세요"); //TODO 모달로 바꾸기
         return;
+      }
+      if (method === "post") {
+        alert("가게 등록@");
       } else {
-        alert("가게 등록@"); //TODO 이미 가게 등록돼도 뜸 수정
+        alert("편집이 완료됐습니당나귀");
       }
 
-      const response = await fetchData<ShopData>({
-        param: "/shops",
-        method: "post",
+      const response = await fetchData({
+        param: param,
+        method: method,
         requestData: formData,
         token: token,
       });
@@ -91,6 +105,8 @@ export default function MyShopForm() {
     }
     handleInputChange("address1", category);
   };
+
+  const buttonText = method === "put" ? "편집하기" : "등록하기";
 
   return (
     <FormContainer>
@@ -140,7 +156,7 @@ export default function MyShopForm() {
 
       <Button
         handleClick={handleSubmit}
-        text="등록하기"
+        text={buttonText}
         width={312}
         type="button"
       />
