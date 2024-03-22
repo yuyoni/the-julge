@@ -40,7 +40,7 @@ export default function MyShop() {
 
     fetchShopData();
   }, [userInfo, token]);
-  //TODO 공고 있을 때 ShopCard 밑에 컴포넌트로 빼기
+
   return (
     <>
       <Gnb />
@@ -61,8 +61,8 @@ export default function MyShop() {
                       category={shopData.item.category}
                     />
                   </StyledDiv>
-                  <CommonFrame frameType="NOTICE" shopId={shopData.item.id} />
-                  <MyNotices />
+
+                  <MyNotices shopImg={shopData.item.imageUrl} />
                 </>
               ) : (
                 <CommonFrame frameType="MY_SHOP" />

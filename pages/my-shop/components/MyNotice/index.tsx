@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useRouter } from "next/router";
+import styled from "@emotion/styled";
 import { useUser } from "@/contexts/UserContext";
 import useCookie from "@/hooks/useCookies";
 import useIntersectionObserver from "./useIntersectionObserver";
-import Post from "@/components/Post";
+import CommonFrame from "../MyShopInfo/Common";
 import NoticeCard from "../MyShopInfo/NoticeCard";
+import { h1Regular } from "@/styles/fontsStyle";
+
 interface Notice {
   item: {
     id: string;
@@ -18,10 +21,13 @@ interface Notice {
     closed: boolean;
   };
 }
+interface MyNoticesProps {
+  shopImg: string;
+}
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function MyNotices() {
+export default function MyNotices({ shopImg }: MyNoticesProps) {
   const [isLast, setIsLast] = useState<boolean>(false);
   const router = useRouter();
   const { userInfo } = useUser();
@@ -83,19 +89,38 @@ export default function MyNotices() {
 
   return (
     <>
-      {noticesData.map((notice) => (
-        <div
-          key={notice.item.id}
-          onClick={() =>
-            router.push(`/shops/${shopId}/notices/${notice.item.id}`)
-          }
-        >
-          <NoticeCard token={notice.item.id} noticeData={notice} isMyNotice />
-          <div>{notice.item.description}</div>
-        </div>
-      ))}
+      {noticesData.length > 0 ? (
+        <NoticeContainer>
+          <StyledH2>내가 등록한 공고</StyledH2>
+          {noticesData.map((notice) => (
+            <div
+              key={notice.item.id}
+              onClick={() =>
+                router.push(`/shops/${shopId}/notices/${notice.item.id}`)
+              }
+            >
+              <NoticeCard
+                hourly={notice.item.hourlyPay}
+                startsAt={notice.item.startsAt}
+                workhour={notice.item.workhour}
+                description={notice.item.description}
+                closed={notice.item.closed}
+                shopImg={shopImg}
+              />
+            </div>
+          ))}
+        </NoticeContainer>
+      ) : (
+        <CommonFrame frameType="NOTICE" shopId={shopId} />
+      )}
 
       <div ref={targetRef} />
     </>
   );
 }
+
+const NoticeContainer = styled.div``;
+
+const StyledH2 = styled.h2`
+  ${h1Regular};
+`;
