@@ -23,7 +23,10 @@ export default function ImageInput({ handleImg }: ImgProps) {
     mutationFn: (selectedFile: File) => createPresinedURL(selectedFile, token),
     onSuccess: (data) => {
       console.log(data);
-      if (data) handleImg("imageUrl", data);
+      if (data) {
+        const urlWithoutQueryParams = data.split("?")[0];
+        handleImg("imageUrl", urlWithoutQueryParams);
+      }
     },
     onError: (error) => {
       console.log(error);

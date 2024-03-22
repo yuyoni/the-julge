@@ -1,10 +1,7 @@
 import fetchData from "@/lib/apis/fetchData";
 import axios from "axios";
 
-//const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
 export default async function createPresinedURL(file: File, token: any) {
-  console.log(token); //TODO 콘솔
   try {
     const response: {
       item: {
@@ -14,7 +11,7 @@ export default async function createPresinedURL(file: File, token: any) {
       param: "/images",
       method: "post",
       requestData: { name: file.name },
-      token: token, //TODO 토큰값 임의로 안 넣어도 동작하는지
+      token: token,
     });
     if (response?.item.url) {
       const s3Res = await uploadImageToS3(response.item.url, file);
