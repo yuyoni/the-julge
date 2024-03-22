@@ -50,16 +50,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 60px 0;
+  padding-bottom: 40px;
   gap: 41px;
 
   @media (max-width: 1023px) {
-    padding: 60px 32px;
+    padding: 0px 32px;
     gap: 23px;
   }
 
   @media (max-width: 767px) {
-    padding: 40px 12px;
+    padding: 12px;
     gap: 15px;
   }
 `;
