@@ -11,13 +11,16 @@ import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ModalContent from "../../../components/ModalContents";
 import validateFormData from "../../../utils/validateFormData";
+import { useUser } from "@/contexts/UserContext";
+import FormModalContent from "../../../components/FormModalContent";
+import ModalContent from "../components/ModalContent";
 
 export default function NoticeEditPage() {
   const router = useRouter();
   const { shopId, noticeId } = router.query;
   const { showToast } = useToast();
+  const { userInfo } = useUser();
   const { jwt: token } = useCookie();
 
   const [modalState, setModalState] = useState({
@@ -67,6 +70,24 @@ export default function NoticeEditPage() {
     setModalState((prevState) => ({ ...prevState, isOpen: false }));
   };
 
+  if (!userInfo) {
+    return (
+      <ModalContent
+        modalIcon="alert"
+        modalText="로그인이 필요합니다"
+        handleYesClick={() => router.push("/signin")}
+      />
+    );
+  } else if (!userInfo.item.shop || userInfo.item.shop.item.id !== shopId) {
+    return (
+      <ModalContent
+        modalIcon="alert"
+        modalText="공고 편집 권한이 없습니다"
+        handleYesClick={() => router.push("/")}
+      />
+    );
+  }
+
   return (
     <Layout>
       <Wrapper>
@@ -81,7 +102,7 @@ export default function NoticeEditPage() {
         </ButtonContainer>
         {modalState.isOpen && (
           <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
-            <ModalContent
+            <FormModalContent
               formData={modalState.formData}
               handleYesClick={handleYesClick}
               handleNoClick={handleNoClick}
