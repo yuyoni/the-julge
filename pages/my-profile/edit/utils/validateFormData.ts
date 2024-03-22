@@ -7,10 +7,9 @@ type EditFormData = {
   bio: string;
 };
 
-export function validateEditFormData(formData: EditFormData) {
+export function validateProfileData(formData: EditFormData) {
   const { name, phone } = formData;
   if (name.length == 0 || phone.length == 0) {
     throw new TypeError(EMPTY_INPUT);
   }
-  return true;
 }

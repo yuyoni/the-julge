@@ -1,8 +1,12 @@
+import { validateProfileData } from "../../utils/validateFormData";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Title from "./Title";
 import FormContent from "./FormContent";
+import axios from "axios";
+import useCookie from "@/hooks/useCookies";
 
 type EditFormData = {
   name: string;
@@ -11,7 +15,11 @@ type EditFormData = {
   bio: string;
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function ProfileEditForm() {
+  const { id, jwt } = useCookie();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,8 +27,29 @@ export default function ProfileEditForm() {
     formState: { errors },
   } = useForm<EditFormData>({ mode: "onChange" });
 
-  const onSubmit = (formData: EditFormData) => {
-    console.log(formData);
+  const onSubmit = async (formData: EditFormData) => {
+    try {
+      validateProfileData(formData);
+      await axios.put(
+        `${BASE_URL}/users/${id}`,
+        { ...formData, address: "서울시 종로구" },
+        {
+          headers: {
+            Authorization: jwt,
+          },
+        },
+      );
+
+      alert("등록이 완료 되었습니다.");
+      router.push("/my-profile");
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const { message } = error.response.data;
+        alert(message);
+      } else if (error instanceof TypeError) {
+        alert(error.message);
+      }
+    }
   };
 
   return (
