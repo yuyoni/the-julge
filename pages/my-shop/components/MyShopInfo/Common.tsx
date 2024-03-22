@@ -39,7 +39,7 @@ export default function CommonFrame({
       description: "공고를 등록해 보세요",
       buttonText: "공고 등록하기",
       onClick: () => {
-        return router.push(`/shops/${shopId}/notices`);
+        return router.push(`/shops/${shopId}`);
       },
     },
   };
