@@ -6,9 +6,13 @@ import useCookie from "@/hooks/useCookies";
 
 interface NoPostProps {
   isRecommend: boolean;
+  hasItemDatasItems?: boolean;
 }
 
-export default function NoPost({ isRecommend }: NoPostProps) {
+export default function NoPost({
+  hasItemDatasItems,
+  isRecommend,
+}: NoPostProps) {
   const router = useRouter();
   const moveProfile = () => {
     router.push("/my-profile");
@@ -21,13 +25,17 @@ export default function NoPost({ isRecommend }: NoPostProps) {
           <Title>🙈 현재 준비된 맞춤공고가 없어요. 🙈</Title>
           <SubTitle>🎉맞춤 공고란? </SubTitle>
           설정된 선호 지역 기반 추천하는 공고입니다. <br />
-          프로필 페이지에서 선호지역을 설정하고 가까운 가게의 공고를 추천받아
-          보세요!
-          <Button
-            color="colored"
-            text="프로필로 이동"
-            handleClick={moveProfile}
-          />
+          {hasItemDatasItems || (
+            <>
+              프로필 페이지에서 선호지역을 설정하고 가까운 가게의 공고를
+              추천받아 보세요!
+              <Button
+                color="colored"
+                text="프로필로 이동"
+                handleClick={moveProfile}
+              />
+            </>
+          )}
         </Container>
       </Wrapper>
     );

@@ -10,12 +10,6 @@ export default function RecommendNotice() {
   const { id, userType } = useCookie();
   const { data: userData } = useUserData(id);
 
-  /**
-   * addres 설정
-   * 비 로그인시 : 전체지역
-   * 로그인하였을때 설정된 address 로 세팅
-   *
-   */
   let address = "";
   if (userType === "") {
     address = "";
