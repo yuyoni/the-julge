@@ -1,5 +1,6 @@
-import Image from "next/image";
 import styled from "@emotion/styled";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import HeaderButtons from "./HeaderButtons";
 import SearchBar from "./SearchBar";
 
@@ -9,8 +10,26 @@ interface GnbProps {
 }
 
 export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper scrolled={scrolled}>
       <GnbContainer>
         <Logo href="/">
           <Image src="/images/logo.svg" alt="더줄게" width={112} height={40} />
@@ -25,11 +44,13 @@ export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ scrolled: boolean }>`
   position: sticky;
   top: 0;
   background: var(--The-julge-gray-00);
-  box-shadow: 0px 2px 8px 0px rgba(60, 59, 62, 0.26);
+  box-shadow: ${({ scrolled }) =>
+    scrolled ? "0px 2px 8px 0px rgba(60, 59, 62, 0.26)" : "none"};
+  transition: box-shadow 0.3s ease;
   z-index: 999;
 `;
 
