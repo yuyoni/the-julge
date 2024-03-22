@@ -14,7 +14,11 @@ export default function RecentNotice({
     isLoading,
     error,
     data: noticeData,
-  } = useFetchData<NoticeList>(noticeHref, "NoticeInfo");
+  } = useFetchData<NoticeList>({
+    href: noticeHref,
+    queryKey: "NoticeInfo",
+    conditionValue: !!noticeHref,
+  });
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>recentNotice Data fetching error</p>;

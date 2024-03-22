@@ -16,10 +16,11 @@ export default function NoticeDetailPage() {
     isLoading,
     error,
     data: noticeData,
-  } = useFetchData<NoticeList>(
-    `/shops/${shopId}/notices/${noticeId}`,
-    "NoticeInfo",
-  );
+  } = useFetchData<NoticeList>({
+    href: `/shops/${shopId}/notices/${noticeId}`,
+    queryKey: "NoticeInfo",
+    conditionValue: !!noticeId,
+  });
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Notice Detail fetching error</p>;
