@@ -51,7 +51,7 @@ export default function MyShopForm() {
         alert("모든 값을 채워주세요"); //TODO 모달로 바꾸기
         return;
       } else {
-        alert("가게 등록@");
+        alert("가게 등록@"); //TODO 이미 가게 등록돼도 뜸 수정
       }
 
       const response = await fetchData<ShopData>({

@@ -1,47 +1,94 @@
-import fetchData from "@/lib/apis/fetchData";
-import { useCallback } from "react";
-import { useInfiniteQuery } from "react-query";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import useIntersectionObserver from "./useIntersectionObserver";
+import useCookie from "@/hooks/useCookies";
+import { useUser } from "@/contexts/UserContext";
+import Post from "@/components/Post";
+interface Notice {
+  id: string;
+  name: string;
+  hourlyPay: number;
+  startsAt: string;
+  workhour: number;
+  description: string;
+  closed: boolean;
+}
 
-const getMyNoticeData = (shopId: string, query: string) => {
-  fetchData(`shops/${shopId}/notices/${query}`);
+interface Props {
+  isLastItem: boolean;
+  onFetchMoreNotices: () => void;
+  children?: any;
+}
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+const Item: React.FC<Props> = ({
+  children,
+  isLastItem,
+  onFetchMoreNotices,
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null); // 감시할 엘리먼트
+  const entry = useIntersectionObserver(ref, {});
+  const isIntersecting = !!entry?.isIntersecting; // 겹치는 영역이 존재하는 지 여부
+
+  useEffect(() => {
+    isLastItem && isIntersecting && onFetchMoreNotices(); // 목록의 마지막에 도달했을 때, 리스트를 더 불러오도록 요청한다.
+  }, [isLastItem, isIntersecting]);
+
+  return (
+    <div ref={ref}>
+      <div>{children}</div>
+    </div>
+  );
 };
 
-export default function MyNotice({ myShopId }: { myShopId: string }) {
-  const {
-    isLoading,
-    error,
-    hasNextPage,
-    fetchNextPage,
-    data: myNoticeData,
-  } = useInfiniteQuery(
-    ["get-notices"],
-    ({ pageParam = 1 }) => getMyNoticeData(pageParam),
-    {
-      getNextPageParam: (_lastPage, pages) => {
-        if (pages.length < 3) {
-          return pages.length + 1;
-        } else return undefined;
-      },
-    },
-  );
+export default function MyNotices() {
+  const [notices, setNotices] = useState<Array<Notice>>([]);
+  const [count, setCount] = useState<number>(0);
+  const [isLast, setIsLast] = useState<boolean>(false);
+  const { userInfo } = useUser();
+  const { jwt: token } = useCookie();
 
-  const handleObserver = useCallback(
-    (entries) => {
-      const [target] = entries;
-      if (target.isIntersecting && hasNextPage) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage, hasNextPage],
-  );
+  const getnotices = async () => {
+    const shopId = userInfo?.item.shop?.item.id;
+    const params = { count: 5, offset: 2, limit: 2, sort: "time" }; //offset, limit, count, hasNext
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-  if (!myNoticeData) return <p>Data not found</p>;
+    try {
+      const response = await axios.get(`${BASE_URL}/shops/${shopId}/notices`, {
+        params,
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const data = response.data;
+      const notices = response.data.items;
+      const isLast = !data.hasNext;
+
+      setNotices((prev) => [...prev, ...notices]);
+      setIsLast(isLast);
+
+      console.log(response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    !isLast && getnotices();
+  }, [count]);
 
   return (
     <>
-      <h2>내가 등록한 공고</h2>
+      {notices.map((notice) => (
+        <Item
+          key={notice.id} //TODO 왜 오류가 나지 왜왜 왜냐고 말해봐 왜야?
+          isLastItem={false}
+          onFetchMoreNotices={() => setCount((prev) => prev + 1)}
+        >
+          {notice.name}
+        </Item>
+      ))}
     </>
   );
 }
