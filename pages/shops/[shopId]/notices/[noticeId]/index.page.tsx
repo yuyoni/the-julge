@@ -1,18 +1,16 @@
 import Layout from "@/components/Layout";
+import useCookie from "@/hooks/useCookies";
 import useFetchData from "@/hooks/useFetchData";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
-import { useUser } from "@/contexts/UserContext";
-import useCookie from "@/hooks/useCookies";
 
 export default function NoticeDetailPage() {
-  const { userInfo } = useUser();
   const { query } = useRouter();
   const { shopId, noticeId } = query;
-  const { jwt: token } = useCookie();
+  const { jwt: token, userType } = useCookie();
 
   const {
     isLoading,
@@ -23,7 +21,7 @@ export default function NoticeDetailPage() {
     "NoticeInfo",
   );
 
-  if (isLoading || !userInfo) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Notice Detail fetching error</p>;
   if (!noticeData) return <p>Noticedata not found</p>;
 
@@ -31,7 +29,7 @@ export default function NoticeDetailPage() {
     <Layout>
       <Wrapper>
         <Container>
-          {userInfo.item.type === "employee" ? (
+          {userType === "employee" ? (
             <Employee noticeData={noticeData} token={token} />
           ) : (
             <Employer noticeData={noticeData} token={token} />

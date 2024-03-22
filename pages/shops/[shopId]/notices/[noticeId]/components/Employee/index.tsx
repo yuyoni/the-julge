@@ -18,7 +18,7 @@ export default function Employee({ noticeData, token }: EmployeeProps) {
 
   return (
     <>
-      <PostDetail token={token} userType="employee" noticeData={noticeData} />
+      <PostDetail token={token} noticeData={noticeData} />
       <RecentNoticeContainer />
     </>
   );

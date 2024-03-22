@@ -6,31 +6,78 @@ import EmployerButton from "./Employer/EmployerButton";
 import PostInformation from "./PostInformation";
 import { useUser } from "@/contexts/UserContext";
 import { h2 } from "@/styles/fontsStyle";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import ModalContent from "./ModalContent";
+import Button from "@/components/Button/Button";
 
 interface PostCardType {
   token: string;
-  userType: string;
   noticeData: NoticeList;
   isMyNotice?: boolean;
 }
 
 export default function PostCard({
   token,
-  userType,
   noticeData,
   isMyNotice,
 }: PostCardType) {
+  const { userInfo } = useUser();
   const applyHref = noticeData.links[3].href.slice(18);
   const { closed: isClosed } = noticeData.item;
   const { startsAt } = noticeData.item;
   const isOutdated = new Date(startsAt) < new Date();
+  const router = useRouter();
+  const [showSigninModal, setShowSigninModal] = useState(false);
 
   const showImageOnText = (isClosed: boolean, isOutdated: boolean) => {
     if (isClosed) return <DimmedText>마감 완료</DimmedText>;
     if (isOutdated) return <DimmedText>지난 공고</DimmedText>;
   };
 
-  const { userInfo } = useUser();
+  const getComponentBasedOnUser = () => {
+    if (!userInfo) {
+      return (
+        <>
+          <Button
+            color="colored"
+            text="신청하기"
+            handleClick={() => {
+              setShowSigninModal(true);
+            }}
+          />
+          {showSigninModal && (
+            <ModalContent
+              modalIcon="alert"
+              modalText="로그인이 필요합니다"
+              handleYesClick={() => router.push("/signin")}
+              setModalState={setShowSigninModal}
+            />
+          )}
+        </>
+      );
+    } else if (userInfo.item.type === "employee") {
+      return (
+        <EmployeeButton
+          applyHref={applyHref}
+          isClosed={isClosed}
+          isOutdated={isOutdated}
+          token={token}
+          userInfo={userInfo}
+        />
+      );
+    } else {
+      return (
+        <EmployerButton
+          isMyNotice={isMyNotice!}
+          isClosed={isClosed}
+          isOutdated={isOutdated}
+          token={token}
+          userInfo={userInfo}
+        />
+      );
+    }
+  };
 
   return (
     <Wrapper>
@@ -40,23 +87,7 @@ export default function PostCard({
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
-        {userType === "employee" ? (
-          <EmployeeButton
-            applyHref={applyHref}
-            isClosed={isClosed}
-            isOutdated={isOutdated}
-            token={token}
-            userInfo={userInfo}
-          />
-        ) : (
-          <EmployerButton
-            isMyNotice={isMyNotice!}
-            isClosed={isClosed}
-            isOutdated={isOutdated}
-            token={token}
-            userInfo={userInfo}
-          />
-        )}
+        {getComponentBasedOnUser()}
       </Container>
     </Wrapper>
   );
