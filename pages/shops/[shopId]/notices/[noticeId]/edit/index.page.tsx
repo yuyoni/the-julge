@@ -15,6 +15,7 @@ import validateFormData from "../../../utils/validateFormData";
 import { useUser } from "@/contexts/UserContext";
 import FormModalContent from "../../../components/FormModalContent";
 import ModalContent from "../components/ModalContent";
+import ImageButton from "@/components/Button/ImageButton";
 
 export default function NoticeEditPage() {
   const router = useRouter();
@@ -91,7 +92,17 @@ export default function NoticeEditPage() {
   return (
     <Layout>
       <Wrapper>
-        <Title>공고 편집</Title>
+        <Header>
+          <Title>공고 편집</Title>
+          <ImageButton
+            src="/images/close_icon.svg"
+            alt="close"
+            width={32}
+            handleClick={() => {
+              router.back();
+            }}
+          />
+        </Header>
         <PostForm handleInputChange={handleInputChange} />
         <ButtonContainer>
           <Button
@@ -126,10 +137,16 @@ const Wrapper = styled.div`
   @media only screen and (min-width: 768px) and (max-width: 1023px) {
     padding: 60px 32px;
   }
-  @media only screen and (min-width: 375px) and (max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     padding: 40px 12px 80px;
     gap: 24px;
   }
+`;
+
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 `;
 
 const Title = styled.span`
@@ -139,7 +156,7 @@ const Title = styled.span`
 const ButtonContainer = styled.div`
   width: 312px;
 
-  @media only screen and (min-width: 375px) and (max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     width: 100%;
   }
 `;

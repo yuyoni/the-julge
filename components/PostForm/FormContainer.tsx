@@ -35,8 +35,8 @@ const TextArea = styled.textarea<{ gridArea: string }>`
   resize: none;
 
   border-radius: 6px;
-  border: 1px solid var(--The-julge-gray-30, #cbc9cf);
-  background: var(--The-julge-white, #fff);
+  border: 1px solid var(--The-julge-gray-30);
+  background: var(--The-julge-gray-00);
 
   grid-area: ${({ gridArea }) => gridArea};
 

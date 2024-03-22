@@ -44,10 +44,6 @@ const SearchInput = styled.input`
     color: var(--The-julge-gray-40);
   }
 
-  &:focus {
-    outline: 1px solid var(--The-julge-purple-30);
-  }
-
   &:hover {
     background-color: var(--The-julge-gray-10);
   }

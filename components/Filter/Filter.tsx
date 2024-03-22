@@ -1,4 +1,3 @@
-import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Button from "../Button/Button";
@@ -44,7 +43,7 @@ export default function Filter({
         <Header>
           <Title>상세 필터</Title>
           <ImageButton
-            src={closeIcon}
+            src="/images/close_icon.svg"
             alt="close_icon"
             handleClick={handleModalClose}
           />
