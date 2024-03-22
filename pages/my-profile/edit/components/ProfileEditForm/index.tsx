@@ -1,6 +1,7 @@
 import { validateProfileData } from "../../utils/validateFormData";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Title from "./Title";
@@ -18,8 +19,9 @@ type EditFormData = {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function ProfileEditForm() {
-  const { id, jwt } = useCookie();
   const router = useRouter();
+  const { id, jwt } = useCookie();
+  const [address, setAddress] = useState<string>("서울시 종로구");
   const {
     register,
     handleSubmit,
@@ -32,7 +34,7 @@ export default function ProfileEditForm() {
       validateProfileData(formData);
       await axios.put(
         `${BASE_URL}/users/${id}`,
-        { ...formData, address: "서울시 종로구" },
+        { ...formData, address },
         {
           headers: {
             Authorization: jwt,
@@ -55,7 +57,11 @@ export default function ProfileEditForm() {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Title>내 프로필</Title>
-      <FormContent register={register} errors={errors} />
+      <FormContent
+        register={register}
+        errors={errors}
+        selectAddress={(address: string) => setAddress(address)}
+      />
       <ButtonContainer>
         <Button text="등록하기" type="submit" />
       </ButtonContainer>
