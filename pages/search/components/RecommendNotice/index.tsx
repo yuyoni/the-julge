@@ -7,12 +7,21 @@ import useCookie from "@/hooks/useCookies";
 import { BASE_ADDRESS } from "./constants/constants";
 
 export default function RecommendNotice() {
-  const { id } = useCookie();
+  const { id, userType } = useCookie();
   const { data: userData } = useUserData(id);
 
-  const address = userData?.item?.address
-    ? userData?.item?.address
-    : BASE_ADDRESS;
+  /**
+   * addres 설정
+   * 비 로그인시 : 전체지역
+   * 로그인하였을때 설정된 address 로 세팅
+   *
+   */
+  let address = "";
+  if (userType === "") {
+    address = "";
+  } else {
+    address = userData?.item?.address;
+  }
 
   const { data: noticesData } = useNoticesData(address);
 
@@ -22,7 +31,6 @@ export default function RecommendNotice() {
   return (
     <RecommendList>
       <Header>추천 공고</Header>
-
       <CustomPostContent>
         <PostList isRecommend={true} noticeArray={noticeArray} />
       </CustomPostContent>
