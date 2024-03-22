@@ -91,7 +91,7 @@ const Wrapper = styled.div`
       "description_input description_input";
   }
 
-  @media only screen and (min-width: 375px) and (max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     grid-template-areas:
       "hourlyPay"
       "hourlyPay_input"

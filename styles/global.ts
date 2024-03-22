@@ -16,6 +16,7 @@ export const globalStyles = css`
     --The-julge-black: #111322;
 
     /* purple */
+    --The-julge-purple-05: #f6effc;
     --The-julge-purple-10: #e9dcf4;
     --The-julge-purple-20: #d0aeeb;
     --The-julge-purple-30: #b182d5;
@@ -75,12 +76,19 @@ export const globalStyles = css`
     cursor: pointer;
   }
 
-  input {
+  input,
+  textarea {
     border: none;
+    transition:
+      background-color 0.1s ease,
+      border 0.1s ease;
   }
 
-  input:focus {
+  input:focus,
+  textarea:focus {
     outline: none;
+    border: 1px solid var(--The-julge-purple-30);
+    background-color: var(--The-julge-purple-05);
   }
 
   input[type="search"]::-webkit-search-decoration,

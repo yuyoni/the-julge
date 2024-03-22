@@ -9,15 +9,19 @@ import convertToISODate from "@/lib/utils/formatDateString";
 import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import ModalContent from "./components/ModalContents";
+import { useEffect, useState } from "react";
 import validateFormData from "./utils/validateFormData";
 import useCookie from "@/hooks/useCookies";
+import FormModalContent from "./components/FormModalContent";
+import ModalContent from "./notices/[noticeId]/components/ModalContent";
+import { useUser } from "@/contexts/UserContext";
+import ImageButton from "@/components/Button/ImageButton";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
   const { shopId } = router.query;
   const { showToast } = useToast();
+  const { userInfo } = useUser();
   const { jwt: token } = useCookie();
 
   const [modalState, setModalState] = useState({
@@ -69,10 +73,38 @@ export default function NoticeRegistrationPage() {
     setModalState((prevState) => ({ ...prevState, isOpen: false }));
   };
 
+  if (!userInfo) {
+    return (
+      <ModalContent
+        modalIcon="alert"
+        modalText="로그인이 필요합니다"
+        handleYesClick={() => router.push("/signin")}
+      />
+    );
+  } else if (!userInfo.item.shop || userInfo.item.shop.item.id !== shopId) {
+    return (
+      <ModalContent
+        modalIcon="alert"
+        modalText="공고 등록권한이 없습니다"
+        handleYesClick={() => router.push("/")}
+      />
+    );
+  }
+
   return (
     <Layout>
       <Wrapper>
-        <Title>공고 등록</Title>
+        <Header>
+          <Title>공고 등록</Title>
+          <ImageButton
+            src="/images/close_icon.svg"
+            alt="close"
+            width={32}
+            handleClick={() => {
+              router.back();
+            }}
+          />
+        </Header>
         <PostForm handleInputChange={handleInputChange} />
         <ButtonContainer>
           <Button
@@ -83,7 +115,7 @@ export default function NoticeRegistrationPage() {
         </ButtonContainer>
         {modalState.isOpen && (
           <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
-            <ModalContent
+            <FormModalContent
               formData={modalState.formData}
               handleYesClick={handleYesClick}
               handleNoClick={handleNoClick}
@@ -107,7 +139,7 @@ const Wrapper = styled.div`
   @media only screen and (min-width: 768px) and (max-width: 1023px) {
     padding: 60px 32px;
   }
-  @media only screen and (min-width: 375px) and (max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     padding: 40px 12px 80px;
     gap: 24px;
   }
@@ -117,10 +149,16 @@ const Title = styled.span`
   ${h1}
 `;
 
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 const ButtonContainer = styled.div`
   width: 312px;
 
-  @media only screen and (min-width: 375px) and (max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     width: 100%;
   }
 `;

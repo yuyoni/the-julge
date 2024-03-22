@@ -34,7 +34,6 @@ export default function Employer({
       <PostDetail
         token={token}
         isMyNotice={isMyNotice}
-        userType="employer"
         noticeData={noticeData}
       />
       {isMyNotice ? <ApplicantList token={token} /> : <RecentNoticeContainer />}

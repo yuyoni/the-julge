@@ -54,6 +54,9 @@ const getColorStyles = (color: string) => {
         color: var(--The-julge-purple-40);
         border: 1px solid var(--The-julge-purple-40);
 
+        :hover {
+          background: var(--The-julge-purple-05);
+        }
         :active {
           background: var(--The-julge-purple-10);
         }
@@ -71,6 +74,9 @@ const getColorStyles = (color: string) => {
         color: var(--The-julge-gray-00);
         border: 1px solid var(--The-julge-purple-40);
 
+        :hover {
+          background: #8355a6;
+        }
         :active {
           background: #6a4487;
         }

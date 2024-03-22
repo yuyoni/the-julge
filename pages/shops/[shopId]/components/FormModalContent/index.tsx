@@ -1,17 +1,17 @@
 import Modal from "@/components/Modal";
 import { FormDataType } from "@/lib/types/FormDataType";
 
-interface ModalContentProps {
+interface FormModalContentProps {
   formData: FormDataType;
   handleYesClick: () => void;
   handleNoClick: () => void;
 }
 
-export default function ModalContent({
+export default function FormModalContent({
   formData,
   handleYesClick,
   handleNoClick,
-}: ModalContentProps) {
+}: FormModalContentProps) {
   const { hourlyPay, startsAt, workhour, description } = formData;
   return (
     <Modal
