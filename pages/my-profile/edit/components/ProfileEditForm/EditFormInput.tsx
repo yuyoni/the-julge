@@ -1,4 +1,5 @@
 import { FieldError, UseFormRegister } from "react-hook-form";
+import { EMPTY_INPUT } from "@/lib/constants/errorMessage";
 import Input from "@/components/Input";
 import styled from "@emotion/styled";
 import TextArea from "./TextArea";
@@ -23,10 +24,7 @@ const labelType = {
   bio: "소개",
 };
 
-const errorMessage = {
-  default: "필수입니다.",
-  name: "이름을 넣어주세요.",
-};
+const essentialInput = ["name", "phone"];
 
 export default function EditFormInput({
   label,
@@ -36,20 +34,17 @@ export default function EditFormInput({
   return (
     <>
       {label === "bio" ? (
-        <TextArea
-          label="bio"
-          error={error}
-          register={register(label, {
-            required: { value: true, message: errorMessage.default },
-          })}
-        />
+        <TextArea label="bio" error={error} register={register(label)} />
       ) : (
         <InputContainer>
           <Input
             label={labelType[label]}
             isStatic={false}
             register={register(label, {
-              required: { value: true, message: errorMessage.default },
+              required: {
+                value: essentialInput.includes(label),
+                message: EMPTY_INPUT,
+              },
             })}
             error={error}
           />
