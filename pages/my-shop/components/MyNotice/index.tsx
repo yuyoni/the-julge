@@ -1,57 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import useIntersectionObserver from "./useIntersectionObserver";
-import useCookie from "@/hooks/useCookies";
+import { useInfiniteQuery } from "react-query";
+import { useRouter } from "next/router";
 import { useUser } from "@/contexts/UserContext";
+import useCookie from "@/hooks/useCookies";
+import useIntersectionObserver from "./useIntersectionObserver";
 import Post from "@/components/Post";
+import NoticeCard from "../MyShopInfo/NoticeCard";
 interface Notice {
-  id: string;
-  name: string;
-  hourlyPay: number;
-  startsAt: string;
-  workhour: number;
-  description: string;
-  closed: boolean;
-}
-
-interface Props {
-  isLastItem: boolean;
-  onFetchMoreNotices: () => void;
-  children?: any;
+  item: {
+    id: string;
+    name: string;
+    hourlyPay: number;
+    startsAt: string;
+    workhour: number;
+    description: string;
+    closed: boolean;
+  };
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const Item: React.FC<Props> = ({
-  children,
-  isLastItem,
-  onFetchMoreNotices,
-}) => {
-  const ref = useRef<HTMLDivElement | null>(null); // 감시할 엘리먼트
-  const entry = useIntersectionObserver(ref, {});
-  const isIntersecting = !!entry?.isIntersecting; // 겹치는 영역이 존재하는 지 여부
-
-  useEffect(() => {
-    isLastItem && isIntersecting && onFetchMoreNotices(); // 목록의 마지막에 도달했을 때, 리스트를 더 불러오도록 요청한다.
-  }, [isLastItem, isIntersecting]);
-
-  return (
-    <div ref={ref}>
-      <div>{children}</div>
-    </div>
-  );
-};
-
 export default function MyNotices() {
-  const [notices, setNotices] = useState<Array<Notice>>([]);
-  const [count, setCount] = useState<number>(0);
   const [isLast, setIsLast] = useState<boolean>(false);
+  const router = useRouter();
   const { userInfo } = useUser();
   const { jwt: token } = useCookie();
+  const shopId = userInfo?.item.shop?.item.id;
 
-  const getnotices = async () => {
+  const getnotices = async ({ cursorId = 0 }: { cursorId: number }) => {
     const shopId = userInfo?.item.shop?.item.id;
-    const params = { count: 5, offset: 2, limit: 2, sort: "time" }; //offset, limit, count, hasNext
+    const params = { offset: cursorId, limit: 2 };
 
     try {
       const response = await axios.get(`${BASE_URL}/shops/${shopId}/notices`, {
@@ -61,34 +40,62 @@ export default function MyNotices() {
           "Content-Type": "application/json",
         },
       });
-      const data = response.data;
-      const notices = response.data.items;
-      const isLast = !data.hasNext;
-
-      setNotices((prev) => [...prev, ...notices]);
-      setIsLast(isLast);
-
-      console.log(response.data);
-    } catch (e) {
-      console.error(e);
+      setIsLast(response.data.hasNext);
+      return response.data;
+    } catch (error) {
+      console.error(error);
     }
   };
 
+  const QUERY_KEYS = {
+    notice: "notice",
+  } as const;
+
+  const { data, fetchNextPage, isError, isFetching } = useInfiniteQuery({
+    queryKey: [QUERY_KEYS.notice],
+    queryFn: ({ pageParam }) => getnotices({ cursorId: pageParam }),
+    getNextPageParam: (lastPage) => {
+      return lastPage.offset + 2;
+    },
+  });
+
+  const noticesData: Notice[] = data?.pages.flatMap((page) => page.items) || [];
+
+  const [isVisible, setIsVisible] = useState(false);
+  const targetRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    !isLast && getnotices();
-  }, [count]);
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      setIsVisible(entry.isIntersecting);
+    });
+    if (targetRef.current) {
+      observer.observe(targetRef.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (isVisible && isLast) fetchNextPage();
+  }, [isVisible]);
 
   return (
     <>
-      {notices.map((notice) => (
-        <Item
-          key={notice.id} //TODO 왜 오류가 나지 왜왜 왜냐고 말해봐 왜야?
-          isLastItem={false}
-          onFetchMoreNotices={() => setCount((prev) => prev + 1)}
+      {noticesData.map((notice) => (
+        <div
+          key={notice.item.id}
+          onClick={() =>
+            router.push(`/shops/${shopId}/notices/${notice.item.id}`)
+          }
         >
-          {notice.name}
-        </Item>
+          <NoticeCard token={notice.item.id} noticeData={notice} isMyNotice />
+          <div>{notice.item.description}</div>
+        </div>
       ))}
+
+      <div ref={targetRef} />
     </>
   );
 }
