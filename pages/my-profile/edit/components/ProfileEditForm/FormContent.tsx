@@ -16,7 +16,6 @@ type FormContentProps = {
 };
 
 export default function FormContent({ register, errors }: FormContentProps) {
-  console.log(errors);
   const {
     name: nameError,
     phone: phoneError,

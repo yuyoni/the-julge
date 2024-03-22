@@ -23,7 +23,7 @@ const labelType = {
   bio: "소개",
 };
 
-const errorMessageType = {
+const errorMessage = {
   default: "필수입니다.",
   name: "이름을 넣어주세요.",
 };
@@ -36,13 +36,21 @@ export default function EditFormInput({
   return (
     <>
       {label === "bio" ? (
-        <TextArea label="bio" error={error} register={register(label)} />
+        <TextArea
+          label="bio"
+          error={error}
+          register={register(label, {
+            required: { value: true, message: errorMessage.default },
+          })}
+        />
       ) : (
         <InputContainer>
           <Input
             label={labelType[label]}
             isStatic={false}
-            register={register(label)}
+            register={register(label, {
+              required: { value: true, message: errorMessage.default },
+            })}
             error={error}
           />
         </InputContainer>
