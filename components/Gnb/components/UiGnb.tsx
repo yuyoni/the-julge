@@ -10,20 +10,30 @@ interface GnbProps {
 
 export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
   return (
-    <GnbWrapper>
-      <Logo href="/">
-        <Image src="/images/logo.svg" alt="더줄게" width={112} height={40} />
-      </Logo>
-      <SearchBar />
-      <HeaderButtons
-        userType={userType}
-        handleClickMovePage={handleClickMovePage}
-      />
-    </GnbWrapper>
+    <Wrapper>
+      <GnbContainer>
+        <Logo href="/">
+          <Image src="/images/logo.svg" alt="더줄게" width={112} height={40} />
+        </Logo>
+        <SearchBar />
+        <HeaderButtons
+          userType={userType}
+          handleClickMovePage={handleClickMovePage}
+        />
+      </GnbContainer>
+    </Wrapper>
   );
 }
 
-const GnbWrapper = styled.div`
+const Wrapper = styled.div`
+  position: sticky;
+  top: 0;
+  background: var(--The-julge-gray-00);
+  box-shadow: 0px 2px 8px 0px rgba(60, 59, 62, 0.26);
+  z-index: 999;
+`;
+
+const GnbContainer = styled.div`
   max-width: 968px;
   margin: 0 auto;
   padding: 15px 0;

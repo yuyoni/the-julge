@@ -24,7 +24,7 @@ const Text = styled.div`
 const Keyword = styled.span`
   grid-area: header-text;
   color: var(--The-julge-purple-40, #905cb9);
-  ${h3};
+  ${h1};
   @media only screen and (max-width: 768px) {
     ${h3}
   }
