@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Button from "../Button/Button";
+import CloseButton from "../Button/CloseButton";
 import LocationBadgeBox from "./LocationBadgeBox";
 import LocationOption from "./LocationOption";
 import {
@@ -41,7 +42,7 @@ export default function Filter({
       <Wrapper>
         <Header>
           <Title>상세 필터</Title>
-          <svg></svg>
+          <CloseButton handleClick={handleModalClose} />
         </Header>
         <Subtitle>위치</Subtitle>
         <LocationOption

@@ -1,8 +1,9 @@
 name: git push into another repo to deploy to vercel
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+    types: [closed]
+    branches: -develop
 
 jobs:
   build:
@@ -15,16 +16,17 @@ jobs:
       - name: creates output
         run: sh ./build.sh
       - name: Pushes to another repository
+        if: github.event.pull_request.merged == true
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.AUTO_DEPLOY_TOKEN }}
         with:
-          source-directory: 'output'
+          source-directory: "output"
           destination-github-username: yuyoni
           destination-repository-name: the-julge
           user-email: ${{ secrets.DEPLOY_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
-          target-branch: main
+          target-branch: develop
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY

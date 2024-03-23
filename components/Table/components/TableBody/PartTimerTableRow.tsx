@@ -15,28 +15,46 @@ export default function PartTimerTableRow({
       <Cell>{date}</Cell>
       <Cell>{hourlyPay}</Cell>
       <Cell>
-        <Status status={status}>{status}</Status>
+        <Status status={status}>{getStatusText(status)}</Status>
       </Cell>
     </TableRow>
   );
 }
 
+const getStatusText = (status: string) => {
+  switch (status) {
+    case "accepted":
+      return "승인 완료";
+    case "pending":
+      return "대기중";
+    case "rejected":
+      return "거절";
+    case "canceled":
+      return "신청 취소";
+  }
+};
+
 const getStatusStyle = (status: string) => {
   switch (status) {
-    case "승인 완료":
+    case "accepted":
       return css`
         background: var(--The-julge-blue-10);
         color: var(--The-julge-blue-20);
       `;
-    case "대기중":
+    case "pending":
       return css`
         background: var(--The-julge-green-10);
         color: var(--The-julge-green-20);
       `;
-    case "거절":
+    case "rejected":
       return css`
         background: var(--The-julge-red);
-        color: var(--The-julge-white, #fff);
+        color: var(--The-julge-gray--00);
+      `;
+    case "canceled":
+      return css`
+        background: var(--The-julge-gray-40);
+        color: var(--The-julge-gray-00);
       `;
   }
 };
