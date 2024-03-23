@@ -16,8 +16,6 @@ export default function ArrowButton({
   onClick,
   isDisabled,
 }: ArrowButtonProps) {
-  console.log(type, isDisabled);
-
   return (
     <NextButton disabled={isDisabled} onClick={onClick}>
       <Image
