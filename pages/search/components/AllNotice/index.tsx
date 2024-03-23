@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { h3 } from "@/styles/fontsStyle";
 import Pagination from "@/components/Pagination";
 import PostList from "@/pages/search/components/PostList";
-import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
+import AllNoticeHeader from "@/pages/search/components/AllNotice/components/AllNoticeHeader";
 import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import { NoticeList } from "@/lib/types/NoticeTypes";

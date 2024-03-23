@@ -1,6 +1,6 @@
 import { NoticeItem } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
-import { renderPosts } from "./util/renderPosts";
+import { renderPosts } from "../../utils/renderPosts";
 
 interface PostListProps {
   isRecommend: boolean;

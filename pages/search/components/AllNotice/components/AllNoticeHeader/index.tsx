@@ -1,7 +1,6 @@
-import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import Filter from "@/components/Filter/Filter";
-import HeaderButtons from "@/pages/search/components/HeaderButtons";
+import HeaderButtons from "@/pages/search/components/AllNotice/components/HeaderButtons";
 import type { SelectedLocationList } from "@/components/Filter/types/types";
 import HeaderText from "../HeaderText";
 
