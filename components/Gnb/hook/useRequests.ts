@@ -3,7 +3,7 @@ import axios from "axios";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getUserNotiList = async (userId: string, accessToken: string) => {
-  const { data } = await axios.get(`${URL}/users/${userId}/alerts`, {
+  const { data } = await axios.get(`${URL}/users/${userId}/alerts?limit=100`, {
     headers: {
       Authorization: `${accessToken}`,
     },
