@@ -26,7 +26,11 @@ export default function RecommendNotice() {
       <RecommendList>
         <Header>추천 공고</Header>
         <CustomPostContent>
-          <PostList isRecommend={true} noticeArray={noticeArray} />
+          <PostList
+            isRecommend={true}
+            noticeArray={noticeArray}
+            address={address}
+          />
         </CustomPostContent>
       </RecommendList>
     </Wrapper>

@@ -2,24 +2,28 @@ import React from "react";
 import NoPost from "@/components/NoPost";
 import Post, { PostProps } from "@/components/Post";
 
-export const renderPosts = (itemDatas: PostProps[], isRecommend: boolean) => {
+export const renderPosts = (
+  itemDatas: PostProps[],
+  isRecommend: boolean,
+  address: string,
+) => {
   return isRecommend
-    ? renderRecommendedPosts(itemDatas, isRecommend)
+    ? renderRecommendedPosts(itemDatas, isRecommend, address)
     : renderRegularPosts(itemDatas, isRecommend);
 };
 
 const renderRecommendedPosts = (
   itemDatas: PostProps[],
   isRecommend: boolean,
+  address: string,
 ) => {
   const filteredItemDatas = itemDatas
     .filter((item) => !item.closed)
     .filter((item) => new Date(item.startsAt) > new Date())
     .slice(0, 3);
 
-  const hasItemDatasItems = Boolean(itemDatas.length > 0);
   return filteredItemDatas.length === 0 ? (
-    <NoPost isRecommend={isRecommend} hasItemDatasItems={hasItemDatasItems} />
+    <NoPost isRecommend={isRecommend} address={address} />
   ) : (
     renderPostList(filteredItemDatas)
   );
