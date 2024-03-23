@@ -1,9 +1,8 @@
 name: git push into another repo to deploy to vercel
 
 on:
-  pull_request:
-    branches:
-      - develop
+  push:
+    branches: [develop]
 
 jobs:
   build:
@@ -16,7 +15,6 @@ jobs:
       - name: creates output
         run: sh ./build.sh
       - name: Pushes to another repository
-        if: github.event.pull_request.merged == true
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
