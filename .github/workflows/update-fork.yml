@@ -2,8 +2,6 @@ name: git push into another repo to deploy to vercel
 
 on:
   pull_request:
-    branches: 
-      - develop
     types: [closed]
 
 jobs:
