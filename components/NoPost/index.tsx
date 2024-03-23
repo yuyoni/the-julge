@@ -2,17 +2,13 @@ import { body1Regular, h2, h3, h4 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Button from "../Button/Button";
 import { useRouter } from "next/router";
-import useCookie from "@/hooks/useCookies";
 
 interface NoPostProps {
   isRecommend: boolean;
-  hasItemDatasItems?: boolean;
+  address?: string;
 }
 
-export default function NoPost({
-  hasItemDatasItems,
-  isRecommend,
-}: NoPostProps) {
+export default function NoPost({ isRecommend, address }: NoPostProps) {
   const router = useRouter();
   const moveProfile = () => {
     router.push("/my-profile");
@@ -25,7 +21,12 @@ export default function NoPost({
           <Title>🙈 현재 준비된 맞춤공고가 없어요. 🙈</Title>
           <SubTitle>🎉맞춤 공고란? </SubTitle>
           설정된 선호 지역 기반 추천하는 공고입니다. <br />
-          {hasItemDatasItems || (
+          {address ? (
+            <>
+              아직 등록된 공고가 없어요. 🙈 <br />
+              공고가 등록되는대로 빠르게 안내드리도록 하겠습니다.
+            </>
+          ) : (
             <>
               프로필 페이지에서 선호지역을 설정하고 가까운 가게의 공고를
               추천받아 보세요!

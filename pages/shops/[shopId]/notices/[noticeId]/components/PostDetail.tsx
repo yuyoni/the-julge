@@ -2,19 +2,23 @@ import { NoticeList } from "@/lib/types/NoticeTypes";
 import { body1Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import PostCard from "./PostCard";
+import NoticeDetailSkeleton from "./Employer/NoticeDetailSkeleton";
 
 interface PostDetailProps {
   token: string;
-  noticeData: NoticeList;
+  noticeData: NoticeList | undefined;
   isMyNotice?: boolean;
+  isLoading: boolean;
+  error: boolean;
 }
 
 export default function PostDetail({
   token,
   noticeData,
   isMyNotice,
+  isLoading,
 }: PostDetailProps) {
-  if (!noticeData) return <div>loading...</div>;
+  if (isLoading || !noticeData) return <NoticeDetailSkeleton />;
 
   return (
     <Container>

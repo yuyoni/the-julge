@@ -66,8 +66,6 @@ npm run start
 <br>
 <img width="1128" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/050e39b3-6221-4abf-81c3-9db856c938bd">
 
-
-
 <br/><br/>
 
 ## 🔨 사용 기술 및 도구
@@ -78,16 +76,16 @@ npm run start
 
 ### 개발
 
-![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Typescript](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Emotion](https://img.shields.io/badge/emotion-DB7093?style=for-the-badge&logo=emotions&logoColor=white) 
+![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Typescript](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Emotion](https://img.shields.io/badge/emotion-DB7093?style=for-the-badge&logo=emotions&logoColor=white)
+
 ### 협업
 
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jirasoftware&logoColor=white) 
+![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jirasoftware&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=eslint&logoColor=white)
-![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white) 
+![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
 ![Notion](https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white)
-
 
 <br/>
 
@@ -128,6 +126,8 @@ root
 
 ### 📄 사장님 - 공고 등록 페이지
 
+- 내 가게에 대한 공고를 등록하고 등록 완료 시 해당 공고의 상세 페이지로 이동
+
 ### 📄 사장님 - 공고 상세 페이지
 
 ### 📄 사장님 - 내 가게 등록, 수정 페이지
@@ -137,6 +137,5 @@ root
 ### 📄 일반회원 - 내 프로필 등록, 수정 페이지
 
 ### 📄 로그인 및 회원가입 페이지
-
 
 <br/><br/>

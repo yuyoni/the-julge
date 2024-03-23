@@ -8,11 +8,14 @@ export default function Home() {
   const router = useRouter();
   const keyword = router.query.keyword as string;
   const page = parseInt(router.query.page as string, 10);
-  const { userType } = useCookie();
+  const { userType, isSuccess } = useCookie();
+
   return (
-    <Layout>
-      {userType !== "employer" && <RecommendNotice />}
-      <AllNotice keyword={keyword} initialPage={page} />
-    </Layout>
+    isSuccess && (
+      <Layout>
+        {userType !== "employer" && <RecommendNotice />}
+        <AllNotice keyword={keyword} initialPage={page} />
+      </Layout>
+    )
   );
 }

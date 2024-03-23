@@ -10,13 +10,7 @@ type TableBodyProps = {
   handleDenyClick?: () => void;
 };
 
-export default function TableBody({
-  type,
-  token,
-  dataList,
-  handlePermitClick,
-  handleDenyClick,
-}: TableBodyProps) {
+export default function TableBody({ type, token, dataList }: TableBodyProps) {
   return (
     <tbody>
       {dataList.map((data, index) => {
@@ -27,8 +21,6 @@ export default function TableBody({
             token={token}
             applicationId={applicationId}
             {...(tableData as Data)}
-            handlePermitClick={handlePermitClick}
-            handleDenyClick={handleDenyClick}
           />
         ) : (
           <PartTimerTableRow key={id} {...tableData} />
