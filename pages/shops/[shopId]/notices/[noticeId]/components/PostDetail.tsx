@@ -72,6 +72,16 @@ const PostDescription = styled.div`
   ${body1Regular}
 `;
 
-const DescriptionHeading = styled.span``;
+const DescriptionHeading = styled.span`
+  ${h1Regular}
+  font-size: 20px;
+`;
 
-const DescriptionText = styled.p``;
+const DescriptionText = styled.p`
+  max-height: 148px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
