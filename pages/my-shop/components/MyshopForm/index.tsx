@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import DropDown from "../../../../components/DropDown";
 import Input from "../Input";
@@ -13,19 +13,20 @@ import fetchData from "@/lib/apis/fetchData";
 import { AxiosError } from "axios";
 
 interface MyShopFormProps {
+  value?: string | undefined;
   param: string;
   method: "post" | "put";
   initialData?: ShopInfo | null;
 }
 
 export default function MyShopForm({
+  value,
   param,
   method,
   initialData,
 }: MyShopFormProps) {
   const router = useRouter();
   const { jwt: token } = useCookie();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -36,6 +37,13 @@ export default function MyShopForm({
     description: "",
     originalHourlyPay: 0,
   });
+  //TODO 편집페이지 기존값 유지하고 싶음 ㅡ_ㅡ
+  useEffect(() => {
+    console.log("initialData", initialData);
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();

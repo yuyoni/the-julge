@@ -90,26 +90,28 @@ export default function MyNotices({ shopImg }: MyNoticesProps) {
   return (
     <>
       {noticesData.length > 0 ? (
-        <NoticeContainer>
+        <>
           <StyledH2>내가 등록한 공고</StyledH2>
-          {noticesData.map((notice) => (
-            <div
-              key={notice.item.id}
-              onClick={() =>
-                router.push(`/shops/${shopId}/notices/${notice.item.id}`)
-              }
-            >
-              <NoticeCard
-                hourly={notice.item.hourlyPay}
-                startsAt={notice.item.startsAt}
-                workhour={notice.item.workhour}
-                description={notice.item.description}
-                closed={notice.item.closed}
-                shopImg={shopImg}
-              />
-            </div>
-          ))}
-        </NoticeContainer>
+          <NoticeContainer>
+            {noticesData.map((notice) => (
+              <div
+                key={notice.item.id}
+                onClick={() =>
+                  router.push(`/shops/${shopId}/notices/${notice.item.id}`)
+                }
+              >
+                <NoticeCard
+                  hourly={notice.item.hourlyPay}
+                  startsAt={notice.item.startsAt}
+                  workhour={notice.item.workhour}
+                  description={notice.item.description}
+                  closed={notice.item.closed}
+                  shopImg={shopImg}
+                />
+              </div>
+            ))}
+          </NoticeContainer>
+        </>
       ) : (
         <CommonFrame frameType="NOTICE" shopId={shopId} />
       )}
@@ -119,7 +121,12 @@ export default function MyNotices({ shopImg }: MyNoticesProps) {
   );
 }
 
-const NoticeContainer = styled.div``;
+const NoticeContainer = styled.div`
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 3rem 1.5rem;
+`;
 
 const StyledH2 = styled.h2`
   ${h1Regular};
