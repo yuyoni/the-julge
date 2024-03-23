@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
+import { useFilteredNoticesData } from "@/pages/search/hooks/useQuery";
 import type { SelectedLocationList } from "@/components/Filter/types/types.js";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 

@@ -4,7 +4,7 @@ import {
   fetchNotices,
   fetchAllNotices,
   getNotices,
-} from "./userRequest";
+} from "./useRequestApi";
 import { SelectedLocationList } from "@/components/Filter/types/types";
 
 interface GetNoticesProp {

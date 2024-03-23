@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNoticesData, useUserData } from "./useUserQuery";
+import { useNoticesData, useUserData } from "./useQuery";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 
 const useUserAndNoticesData = (id: string) => {
