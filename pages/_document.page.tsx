@@ -10,7 +10,6 @@ export default function Document() {
           rel="stylesheet"
           type="text/css"
         />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:type" content="website" />
       </Head>
       <body>

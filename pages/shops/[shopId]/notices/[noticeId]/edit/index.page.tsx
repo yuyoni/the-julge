@@ -16,6 +16,7 @@ import { useState } from "react";
 import FormModalContent from "../../../components/FormModalContent";
 import validateFormData from "../../../utils/validateFormData";
 import ModalContent from "../components/ModalContent";
+import MetaHead from "@/components/MetaHead";
 
 export default function NoticeEditPage() {
   const router = useRouter();
@@ -90,36 +91,39 @@ export default function NoticeEditPage() {
   }
 
   return (
-    <Layout>
-      <Wrapper>
-        <Header>
-          <Title>공고 편집</Title>
-          <CloseButton
-            size={32}
-            handleClick={() => {
-              router.back();
-            }}
-          />
-        </Header>
-        <PostForm handleInputChange={handleInputChange} />
-        <ButtonContainer>
-          <Button
-            text="편집하기"
-            color="colored"
-            handleClick={handleFormSubmit}
-          />
-        </ButtonContainer>
-        {modalState.isOpen && (
-          <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
-            <FormModalContent
-              formData={modalState.formData}
-              handleYesClick={handleYesClick}
-              handleNoClick={handleNoClick}
+    <>
+      <MetaHead title="+HE JULGE | 공고 편집하기" />
+      <Layout>
+        <Wrapper>
+          <Header>
+            <Title>공고 편집</Title>
+            <CloseButton
+              size={32}
+              handleClick={() => {
+                router.back();
+              }}
             />
-          </Dimmed>
-        )}
-      </Wrapper>
-    </Layout>
+          </Header>
+          <PostForm handleInputChange={handleInputChange} />
+          <ButtonContainer>
+            <Button
+              text="편집하기"
+              color="colored"
+              handleClick={handleFormSubmit}
+            />
+          </ButtonContainer>
+          {modalState.isOpen && (
+            <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
+              <FormModalContent
+                formData={modalState.formData}
+                handleYesClick={handleYesClick}
+                handleNoClick={handleNoClick}
+              />
+            </Dimmed>
+          )}
+        </Wrapper>
+      </Layout>
+    </>
   );
 }
 

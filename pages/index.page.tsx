@@ -3,6 +3,7 @@ import RecommendNotice from "@/pages/search/components/RecommendNotice";
 import AllNotice from "@/pages/search/components/AllNotice";
 import { useRouter } from "next/router";
 import useCookie from "@/hooks/useCookies";
+import MetaHead from "@/components/MetaHead";
 
 export default function Home() {
   const router = useRouter();
@@ -12,10 +13,13 @@ export default function Home() {
 
   return (
     isSuccess && (
-      <Layout>
-        {userType !== "employer" && <RecommendNotice />}
-        <AllNotice keyword={keyword} initialPage={page} />
-      </Layout>
+      <>
+        <MetaHead />
+        <Layout>
+          {userType !== "employer" && <RecommendNotice />}
+          <AllNotice keyword={keyword} initialPage={page} />
+        </Layout>
+      </>
     )
   );
 }

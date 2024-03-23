@@ -16,6 +16,7 @@ import { useState } from "react";
 import FormModalContent from "./components/FormModalContent";
 import ModalContent from "./notices/[noticeId]/components/ModalContent";
 import validateFormData from "./utils/validateFormData";
+import MetaHead from "@/components/MetaHead";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
@@ -92,36 +93,41 @@ export default function NoticeRegistrationPage() {
   }
 
   return (
-    <Layout>
-      <Wrapper>
-        <Header>
-          <Title>공고 등록</Title>
-          <CloseButton
-            size={32}
-            handleClick={() => {
-              router.back();
-            }}
-          />
-        </Header>
-        <PostForm handleInputChange={handleInputChange} />
-        <ButtonContainer>
-          <Button
-            text="등록하기"
-            color="colored"
-            handleClick={handleFormSubmit}
-          />
-        </ButtonContainer>
-        {modalState.isOpen && (
-          <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
-            <FormModalContent
-              formData={modalState.formData}
-              handleYesClick={handleYesClick}
-              handleNoClick={handleNoClick}
+    <>
+      <MetaHead
+        title={`+HE JULGE | ${userInfo.item.shop.item.name} 새 공고 등록`}
+      />
+      <Layout>
+        <Wrapper>
+          <Header>
+            <Title>공고 등록</Title>
+            <CloseButton
+              size={32}
+              handleClick={() => {
+                router.back();
+              }}
             />
-          </Dimmed>
-        )}
-      </Wrapper>
-    </Layout>
+          </Header>
+          <PostForm handleInputChange={handleInputChange} />
+          <ButtonContainer>
+            <Button
+              text="등록하기"
+              color="colored"
+              handleClick={handleFormSubmit}
+            />
+          </ButtonContainer>
+          {modalState.isOpen && (
+            <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
+              <FormModalContent
+                formData={modalState.formData}
+                handleYesClick={handleYesClick}
+                handleNoClick={handleNoClick}
+              />
+            </Dimmed>
+          )}
+        </Wrapper>
+      </Layout>
+    </>
   );
 }
 

@@ -35,7 +35,11 @@ export default function Employer({
         updateRecentNotices(noticeHref);
       }
     }
-  }, [noticeHref]);
+  }, [shopId, userInfo, noticeHref]);
+
+  console.log(isMyNotice);
+  console.log(userInfo?.item.shop?.item.id);
+  console.log(`shopId: ${shopId}`);
 
   return (
     <Wrapper>
