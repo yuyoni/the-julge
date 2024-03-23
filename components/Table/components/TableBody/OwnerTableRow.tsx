@@ -15,8 +15,6 @@ type OwnerTableBodyProps = {
   bio?: string;
   phone?: string;
   status?: string;
-  handlePermitClick?: () => void;
-  handleDenyClick?: () => void;
 };
 
 export default function OwnerTableRow({
@@ -59,7 +57,7 @@ export default function OwnerTableRow({
       requestData: {
         status: "rejected",
       },
-      token: token!,
+      token: token,
     });
     setIsShowRejectModal(false);
     router.reload();

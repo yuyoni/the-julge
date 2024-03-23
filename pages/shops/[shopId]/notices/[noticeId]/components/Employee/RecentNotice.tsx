@@ -1,4 +1,5 @@
 import Post from "@/components/Post";
+import SkeletonUI from "@/components/Skeleton";
 import useFetchData from "@/hooks/useFetchData";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
@@ -20,7 +21,7 @@ export default function RecentNotice({
     conditionValue: !!noticeHref,
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <SkeletonUI height={328} />;
   if (error) return <p>recentNotice Data fetching error</p>;
   if (!noticeData) return <p>Data not found</p>;
 

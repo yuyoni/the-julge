@@ -22,18 +22,24 @@ export default function NoticeDetailPage() {
     conditionValue: !!noticeId,
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Notice Detail fetching error</p>;
-  if (!noticeData) return <p>Noticedata not found</p>;
-
   return (
     <Layout>
       <Wrapper>
         <Container>
           {userType === "employee" ? (
-            <Employee noticeData={noticeData} token={token} />
+            <Employee
+              isLoading={isLoading}
+              error={error as boolean} // 수정해야함
+              noticeData={noticeData}
+              token={token}
+            />
           ) : (
-            <Employer noticeData={noticeData} token={token} />
+            <Employer
+              isLoading={isLoading}
+              error={error as boolean} // 수정해야함
+              noticeData={noticeData}
+              token={token}
+            />
           )}
         </Container>
       </Wrapper>
