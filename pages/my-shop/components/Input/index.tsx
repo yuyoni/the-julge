@@ -15,11 +15,13 @@ export default function Input({
   handleClick,
   error,
 }: InputProps) {
+  const Input = type === "textarea" ? StyledTextarea : StyledInput;
+
   return (
     <InputContainer>
       <StyledLabel>{label}</StyledLabel>
       <InputWrapper>
-        <StyledInput
+        <Input
           type={type}
           placeholder={placeholder}
           value={value}
@@ -59,6 +61,25 @@ const StyledInput = styled.input`
   border-radius: 6px;
   border: 1px solid var(--The-julge-gray-30);
   background: var(--The-julge-white);
+
+  ::placeholder {
+    color: var(--The-julge-gray-40);
+  }
+`;
+
+const StyledTextarea = styled.textarea`
+  ${customBody1Regular}
+  display: flex;
+  padding: 16px 20px;
+  align-items: flex-start;
+  width: 100%;
+  height: 158px;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 6px;
+  border: 1px solid var(--The-julge-gray-30);
+  background: var(--The-julge-white);
+  resize: none;
 
   ::placeholder {
     color: var(--The-julge-gray-40);

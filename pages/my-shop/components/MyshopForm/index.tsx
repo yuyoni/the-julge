@@ -117,57 +117,74 @@ export default function MyShopForm({
   const buttonText = method === "put" ? "편집하기" : "등록하기";
 
   return (
-    <FormContainer>
-      <FormWrapper>
-        <Input
-          onChange={(event) => handleInputChange("name", event.target.value)}
-          label="가게 이름*"
-        />
-        <DropDown
-          label="분류*"
-          categories={categoriesArray}
-          onCategoryChange={handleCategory}
-        />
-      </FormWrapper>
-      <FormWrapper>
-        <DropDown
-          label="주소*"
-          categories={addressArray}
-          onCategoryChange={handleCategory}
-        />
-        <Input
-          onChange={(event) =>
-            handleInputChange("address2", event.target.value)
-          }
-          label="상세 주소*"
-        />
-      </FormWrapper>
-      <FormWrapper>
-        <Input
-          onChange={(event) =>
-            handleInputChange("originalHourlyPay", event.target.value)
-          }
-          label="기본 시급*"
-          includeText="원"
-        />
-      </FormWrapper>
-      <FormWrapper>
-        <ImageInput handleImg={handleInputChange} />
-      </FormWrapper>
-      <Input
-        type="textarea"
-        onChange={(event) =>
-          handleInputChange("description", event.target.value)
-        }
-        label="가게 설명"
-      />
+    <Container>
+      <h1>가게 정보</h1>
+      <FormContainer>
+        <FormWrapper>
+          <Selection>
+            <Input
+              onChange={(event) =>
+                handleInputChange("name", event.target.value)
+              }
+              label="가게 이름*"
+            />
+          </Selection>
+          <Selection>
+            <DropDown
+              label="분류*"
+              categories={categoriesArray}
+              onCategoryChange={handleCategory}
+            />
+          </Selection>
+        </FormWrapper>
+        <FormWrapper>
+          <Selection>
+            <DropDown
+              label="주소*"
+              categories={addressArray}
+              onCategoryChange={handleCategory}
+            />
+          </Selection>
+          <Selection>
+            <Input
+              onChange={(event) =>
+                handleInputChange("address2", event.target.value)
+              }
+              label="상세 주소*"
+            />
+          </Selection>
+        </FormWrapper>
+        <FormWrapper>
+          <Selection>
+            <Input
+              onChange={(event) =>
+                handleInputChange("originalHourlyPay", event.target.value)
+              }
+              label="기본 시급*"
+              includeText="원"
+            />
+          </Selection>
+        </FormWrapper>
+        <FormWrapper>
+          <ImageInput handleImg={handleInputChange} />
+        </FormWrapper>
+        <TextArea>
+          <Input
+            type="textarea"
+            onChange={(event) =>
+              handleInputChange("description", event.target.value)
+            }
+            label="가게 설명"
+          />
+        </TextArea>
 
-      <Button
-        handleClick={handleSubmit}
-        text={buttonText}
-        width={312}
-        type="button"
-      />
+        <Button
+          handleClick={handleSubmit}
+          text={buttonText}
+          width={312}
+          type="button"
+        />
+      </FormContainer>
       {isModalOpen && (
         <Dimmed>
           <Modal
@@ -176,18 +193,27 @@ export default function MyShopForm({
           />
         </Dimmed>
       )}
-    </FormContainer>
+    </Container>
   );
 }
 
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 32px 0;
-  gap: 24px;
+const Container = styled.form`
+  position: relative;
+  max-width: 964px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 60px 0;
+`;
+
+const FormContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+width: 100%;
+margin: 32px 0;
+gap: 24px;
+}
 `;
 
 const FormWrapper = styled.div`
@@ -196,6 +222,24 @@ const FormWrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   width: 100%;
+`;
+
+const Selection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+`;
+
+const TextArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 153px;
 `;
 
 const Dimmed = styled.div`
