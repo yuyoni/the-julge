@@ -37,10 +37,6 @@ export default function Employer({
     }
   }, [shopId, userInfo, noticeHref]);
 
-  console.log(isMyNotice);
-  console.log(userInfo?.item.shop?.item.id);
-  console.log(`shopId: ${shopId}`);
-
   return (
     <Wrapper>
       <PostDetail
