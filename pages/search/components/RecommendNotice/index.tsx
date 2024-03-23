@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 import PostList from "../PostList";
 import { h1, h3 } from "@/styles/fontsStyle";
 import useCookie from "@/hooks/useCookies";
-import { BASE_ADDRESS } from "./constants/constants";
 
 export default function RecommendNotice() {
   const { id, userType } = useCookie();
@@ -23,16 +22,25 @@ export default function RecommendNotice() {
   const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return (
-    <RecommendList>
-      <Header>추천 공고</Header>
-      <CustomPostContent>
-        <PostList isRecommend={true} noticeArray={noticeArray} />
-      </CustomPostContent>
-    </RecommendList>
+    <Wrapper>
+      <RecommendList>
+        <Header>추천 공고</Header>
+        <CustomPostContent>
+          <PostList
+            isRecommend={true}
+            noticeArray={noticeArray}
+            address={address}
+          />
+        </CustomPostContent>
+      </RecommendList>
+    </Wrapper>
   );
 }
+const Wrapper = styled.section`
+  background-color: var(--The-julge-purple-05);
+`;
 
-const RecommendList = styled.section`
+const RecommendList = styled.div`
   padding: 30px 0;
   max-width: 968px;
   margin: 0 auto;
