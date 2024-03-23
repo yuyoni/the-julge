@@ -14,7 +14,7 @@ jobs:
       - name: Install mustache (to update the date)
         run: apk add ruby && gem install mustache
       - name: creates output
-        run: sh /build.sh
+        run: sh ./build.sh
       - name: Pushes to another repository
         if: github.event.pull_request.merged == true
         id: push_directory
@@ -22,7 +22,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.AUTO_DEPLOY_TOKEN }}
         with:
-          source-directory: 'output'
+          source-directory: "output"
           destination-github-username: yuyoni
           destination-repository-name: the-julge
           user-email: ${{ secrets.DEPLOY_EMAIL }}
