@@ -1,28 +1,41 @@
 import styled from "@emotion/styled";
 import PostList from "../PostList";
 import { h1, h3 } from "@/styles/fontsStyle";
-import useUserAndNoticesData from "../../hooks/useUserAndNoticeData";
 import { css } from "@emotion/react";
+import { useNoticesData, useUserData } from "../../hooks/useQuery";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 
 export default function RecommendNotice({ id }: { id: string }) {
-  const { noticeArray, address, isLoading, isSuccess } =
-    useUserAndNoticesData(id);
+  const { data: userData, isLoading: isUserDataLoading } = useUserData(id);
+
+  const {
+    data: noticesData,
+    isLoading,
+    isSuccess,
+  } = useNoticesData(userData?.item?.address, id);
+
+  const notices = noticesData ? noticesData.items : [];
+  const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return (
     <Wrapper>
       <RecommendList>
         <Header>추천 공고</Header>
         <CustomPostContent isLoading={isLoading}>
-          {isLoading &&
-            Array.from(new Array(3)).map((_, index) => <div key={index} />)}
-
-          {isSuccess && (
-            <PostList
-              isRecommend={true}
-              noticeArray={noticeArray}
-              address={address}
-            />
-          )}
+          {isLoading
+            ? Array.from(new Array(3)).map((_, index) => <div key={index} />)
+            : !isUserDataLoading &&
+              isSuccess && (
+                <PostList
+                  isRecommend={true}
+                  noticeArray={
+                    id && userData?.item?.address === undefined
+                      ? []
+                      : noticeArray
+                  }
+                  address={userData?.item?.address}
+                />
+              )}
         </CustomPostContent>
       </RecommendList>
     </Wrapper>

@@ -16,12 +16,7 @@ export const useUserData = (userId: string) => {
   return useQuery("user", () => fetchUser(userId), { enabled: !!userId });
 };
 
-export const useNoticesData = (address: string, userId: string) => {
-  if (userId) {
-    return useQuery(["notices", address], () => fetchNotices(address), {
-      enabled: !!address,
-    });
-  }
+export const useNoticesData = (address = "", userId: string) => {
   return useQuery(["notices", address], () => fetchNotices(address));
 };
 
