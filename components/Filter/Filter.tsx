@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Button from "../Button/Button";
-import ImageButton from "../Button/ImageButton";
 import LocationBadgeBox from "./LocationBadgeBox";
 import LocationOption from "./LocationOption";
 import {
@@ -42,11 +41,7 @@ export default function Filter({
       <Wrapper>
         <Header>
           <Title>상세 필터</Title>
-          <ImageButton
-            src="/images/close_icon.svg"
-            alt="close_icon"
-            handleClick={handleModalClose}
-          />
+          <svg></svg>
         </Header>
         <Subtitle>위치</Subtitle>
         <LocationOption

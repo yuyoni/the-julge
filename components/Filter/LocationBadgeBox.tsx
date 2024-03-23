@@ -1,7 +1,6 @@
-import closeIcon from "@/public/images/purple_close_icon.svg";
 import styled from "@emotion/styled";
-import Image from "next/image";
 import { LocationBadgeBoxProps } from "./types/types";
+import CloseButton from "../Button/CloseButton";
 
 export default function LocationBadgeBox({
   selectedLocations,
@@ -12,7 +11,7 @@ export default function LocationBadgeBox({
       {selectedLocations.map((location) => (
         <LocationBadge key={location} onClick={() => toggleLocation(location)}>
           <span>{location}</span>
-          <Image src={closeIcon} alt="close_icon" />
+          <CloseButton size={16} color="#905cb9" />
         </LocationBadge>
       ))}
     </Wrapper>
