@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
 //TODO handleClick 확인 필요! ()에서 (e:any)로 변경해도 되는지?
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   handleClick?: (e: any) => void;
   color?: "colored" | "white" | "gray" | "reject" | "accept";
