@@ -2,9 +2,10 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { body2Regular } from "@/styles/fontsStyle";
 
+//TODO handleClick 확인 필요! ()에서 (e:any)로 변경해도 되는지?
 export interface ButtonProps {
   text: string;
-  handleClick?: () => void;
+  handleClick?: (e: any) => void;
   color?: "colored" | "white" | "gray" | "reject" | "accept";
   width?: number;
   type?: "button" | "submit" | "reset";
