@@ -27,7 +27,7 @@ export default function PostInformation({
       <Wrapper>
         <Wage>시급</Wage>
         <WageContainer>
-          <HourlyPay>{hourlyPay}원</HourlyPay>
+          <HourlyPay>{Number(hourlyPay).toLocaleString()}원</HourlyPay>
           {wageIncrease && (
             <WageFlagStyle>
               <span>시급 {wageIncrease}% ▲</span>
