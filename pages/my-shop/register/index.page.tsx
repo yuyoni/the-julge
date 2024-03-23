@@ -7,7 +7,6 @@ export default function Register() {
     <>
       <Gnb />
       <StyledDiv>
-        <h1>가게 정보</h1>
         <MyShopForm param="/shops" method="post" />
       </StyledDiv>
     </>

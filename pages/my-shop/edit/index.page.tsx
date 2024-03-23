@@ -41,7 +41,6 @@ export default function Edit() {
     <>
       <Gnb />
       <StyledDiv>
-        <h1>가게 정보</h1>
         <MyShopForm
           param={`/shops/${shopId}`}
           method="put"
