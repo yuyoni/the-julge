@@ -12,7 +12,7 @@ import {
 
 export default function Filter({
   isModalVisible,
-  handleModalClose,
+  handleToggleModal,
   onApplyFilter,
 }: FilterProps) {
   const [selectedLocations, setSelectedLocations] =
@@ -42,7 +42,7 @@ export default function Filter({
       <Wrapper>
         <Header>
           <Title>상세 필터</Title>
-          <CloseButton handleClick={handleModalClose} />
+          <CloseButton handleClick={handleToggleModal} />
         </Header>
         <Subtitle>위치</Subtitle>
         <LocationOption

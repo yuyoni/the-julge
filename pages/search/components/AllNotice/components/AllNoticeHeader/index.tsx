@@ -9,7 +9,6 @@ interface AllNoticeHeaderProps {
   sortStr: string;
   handleToggleModal: () => void;
   isModalVisible: boolean;
-  handleModalClose: () => void;
   onApplyFilter: (
     locations: SelectedLocationList,
     startsAt: string,
@@ -23,7 +22,6 @@ export default function AllNoticeHeader({
   sortStr,
   handleToggleModal,
   isModalVisible,
-  handleModalClose,
   onApplyFilter,
   keyword,
 }: AllNoticeHeaderProps) {
@@ -37,7 +35,7 @@ export default function AllNoticeHeader({
       />
       <Filter
         isModalVisible={isModalVisible}
-        handleModalClose={handleModalClose}
+        handleToggleModal={handleToggleModal}
         onApplyFilter={onApplyFilter}
       />
     </Header>
