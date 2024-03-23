@@ -14,18 +14,18 @@ const useUserAndNoticesData = (id: string) => {
 
   const {
     data: noticesData,
-    isLoading: isNoticesLoading,
-    error: noticesError,
-  } = useNoticesData(address);
+    isLoading,
+    isSuccess,
+  } = useNoticesData(address, id);
 
-  const notices = noticesData?.items ?? [];
+  const notices = noticesData ? noticesData.items : [];
   const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return {
     address,
     noticeArray,
-    isLoading: isNoticesLoading,
-    error: noticesError,
+    isLoading,
+    isSuccess,
   };
 };
 

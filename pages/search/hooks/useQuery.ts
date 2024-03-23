@@ -1,10 +1,5 @@
 import { useQuery } from "react-query";
-import {
-  fetchUser,
-  fetchNotices,
-  fetchAllNotices,
-  getNotices,
-} from "./useRequestApi";
+import { fetchUser, fetchNotices, getNotices } from "./useRequestApi";
 import { SelectedLocationList } from "@/components/Filter/types/types";
 
 interface GetNoticesProp {
@@ -21,14 +16,13 @@ export const useUserData = (userId: string) => {
   return useQuery("user", () => fetchUser(userId), { enabled: !!userId });
 };
 
-export const useNoticesData = (address: string) => {
-  return useQuery(["notices", address], () => fetchNotices(address), {
-    onSuccess: (data) => {
-      if (data?.items?.length === 0) {
-        fetchAllNotices();
-      }
-    },
-  });
+export const useNoticesData = (address: string, userId: string) => {
+  if (userId) {
+    return useQuery(["notices", address], () => fetchNotices(address), {
+      enabled: !!address,
+    });
+  }
+  return useQuery(["notices", address], () => fetchNotices(address));
 };
 
 export const useFilteredNoticesData = ({

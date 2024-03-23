@@ -5,16 +5,18 @@ import useUserAndNoticesData from "../../hooks/useUserAndNoticeData";
 import { css } from "@emotion/react";
 
 export default function RecommendNotice({ id }: { id: string }) {
-  const { noticeArray, address, isLoading } = useUserAndNoticesData(id);
+  const { noticeArray, address, isLoading, isSuccess } =
+    useUserAndNoticesData(id);
 
   return (
     <Wrapper>
       <RecommendList>
         <Header>추천 공고</Header>
         <CustomPostContent isLoading={isLoading}>
-          {isLoading ? (
-            Array.from(new Array(3)).map((_, index) => <div key={index} />)
-          ) : (
+          {isLoading &&
+            Array.from(new Array(3)).map((_, index) => <div key={index} />)}
+
+          {isSuccess && (
             <PostList
               isRecommend={true}
               noticeArray={noticeArray}
