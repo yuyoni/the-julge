@@ -17,8 +17,9 @@ const renderRecommendedPosts = (
     .filter((item) => new Date(item.startsAt) > new Date())
     .slice(0, 3);
 
+  const hasItemDatasItems = Boolean(itemDatas.length > 0);
   return filteredItemDatas.length === 0 ? (
-    <NoPost isRecommend={isRecommend} />
+    <NoPost isRecommend={isRecommend} hasItemDatasItems={hasItemDatasItems} />
   ) : (
     renderPostList(filteredItemDatas)
   );
