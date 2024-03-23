@@ -1,21 +1,8 @@
 import styled from "@emotion/styled";
 import Filter from "@/components/Filter/Filter";
 import HeaderButtons from "@/pages/search/components/AllNotice/components/HeaderButtons";
-import type { SelectedLocationList } from "@/components/Filter/types/types";
 import HeaderText from "../HeaderText";
-
-interface AllNoticeHeaderProps {
-  handleCategoryChange: (category: string) => void;
-  sortStr: string;
-  handleToggleModal: () => void;
-  isModalVisible: boolean;
-  onApplyFilter: (
-    locations: SelectedLocationList,
-    startsAt: string,
-    hourlyPay: string,
-  ) => void;
-  keyword?: string;
-}
+import { AllNoticeHeaderProps } from "@/pages/search/types/type";
 
 export default function AllNoticeHeader({
   handleCategoryChange,

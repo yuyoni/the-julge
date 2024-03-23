@@ -4,10 +4,7 @@ import { h1, h3 } from "@/styles/fontsStyle";
 import useUserAndNoticesData from "../../hooks/useUserAndNoticeData";
 import { css } from "@emotion/react";
 
-interface RecommendNoticeProp {
-  id: string;
-}
-export default function RecommendNotice({ id }: RecommendNoticeProp) {
+export default function RecommendNotice({ id }: { id: string }) {
   const { noticeArray, address, isLoading } = useUserAndNoticesData(id);
 
   return (

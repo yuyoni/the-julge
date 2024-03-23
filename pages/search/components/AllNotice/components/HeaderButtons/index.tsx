@@ -1,13 +1,9 @@
 import styled from "@emotion/styled";
 import { body2Bold } from "@/styles/fontsStyle";
-import { ChangeEvent } from "react";
 import DropDown from "@/components/DropDown";
+import { categoryMap } from "@/pages/search/constants/category";
+import { HeaderButtonsProps } from "@/pages/search/types/type";
 
-export interface HeaderButtonsProps {
-  handleCategoryChange: (category: string) => void;
-  sortStr: string;
-  handleToggleModal: () => void;
-}
 export default function HeaderButtons({
   handleCategoryChange,
   handleToggleModal,
@@ -15,7 +11,7 @@ export default function HeaderButtons({
   return (
     <Buttons>
       <DropDown
-        categories={["마감임박순", "시급많은순", "시간적은순", "가나다순"]}
+        categories={Array.from(categoryMap.keys())}
         width={120}
         onCategoryChange={handleCategoryChange}
       />

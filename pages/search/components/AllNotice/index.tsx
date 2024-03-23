@@ -5,11 +5,7 @@ import Pagination from "@/components/Pagination";
 import PostList from "@/pages/search/components/PostList";
 import AllNoticeHeader from "@/pages/search/components/AllNotice/components/AllNoticeHeader";
 import useAllNotices from "../../hooks/useAllNotices";
-
-interface AllNoticeProps {
-  keyword: string;
-  initialPage: number;
-}
+import { AllNoticeProps } from "../../types/type";
 
 export default function AllNotice({
   keyword,
