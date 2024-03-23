@@ -5,7 +5,7 @@ import Post, { PostProps } from "@/components/Post";
 export const renderPosts = (
   itemDatas: PostProps[],
   isRecommend: boolean,
-  address: string,
+  address?: string,
 ) => {
   return isRecommend
     ? renderRecommendedPosts(itemDatas, isRecommend, address)
@@ -15,7 +15,7 @@ export const renderPosts = (
 const renderRecommendedPosts = (
   itemDatas: PostProps[],
   isRecommend: boolean,
-  address: string,
+  address?: string,
 ) => {
   const filteredItemDatas = itemDatas
     .filter((item) => !item.closed)

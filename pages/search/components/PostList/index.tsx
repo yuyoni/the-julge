@@ -5,7 +5,7 @@ import { renderPosts } from "./util/renderPosts";
 interface PostListProps {
   isRecommend: boolean;
   noticeArray: NoticeItem[];
-  address: string;
+  address?: string;
 }
 
 export default function PostList({
