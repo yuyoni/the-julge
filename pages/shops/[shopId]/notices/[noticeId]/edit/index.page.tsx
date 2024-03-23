@@ -1,7 +1,9 @@
 import Button from "@/components/Button/Button";
+import CloseButton from "@/components/Button/CloseButton";
 import Layout from "@/components/Layout";
 import PostForm from "@/components/PostForm";
 import { useToast } from "@/contexts/ToastContext";
+import { useUser } from "@/contexts/UserContext";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import TOAST_MESSAGES from "@/lib/constants/toastMessage";
@@ -11,11 +13,9 @@ import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import validateFormData from "../../../utils/validateFormData";
-import { useUser } from "@/contexts/UserContext";
 import FormModalContent from "../../../components/FormModalContent";
+import validateFormData from "../../../utils/validateFormData";
 import ModalContent from "../components/ModalContent";
-import ImageButton from "@/components/Button/ImageButton";
 
 export default function NoticeEditPage() {
   const router = useRouter();
@@ -94,10 +94,8 @@ export default function NoticeEditPage() {
       <Wrapper>
         <Header>
           <Title>공고 편집</Title>
-          <ImageButton
-            src="/images/close_icon.svg"
-            alt="close"
-            width={32}
+          <CloseButton
+            size={32}
             handleClick={() => {
               router.back();
             }}

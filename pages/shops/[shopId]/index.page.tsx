@@ -1,7 +1,10 @@
 import Button from "@/components/Button/Button";
+import CloseButton from "@/components/Button/CloseButton";
 import Layout from "@/components/Layout";
 import PostForm from "@/components/PostForm/index";
 import { useToast } from "@/contexts/ToastContext";
+import { useUser } from "@/contexts/UserContext";
+import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import TOAST_MESSAGES from "@/lib/constants/toastMessage";
 import { NoticeList } from "@/lib/types/NoticeTypes";
@@ -9,13 +12,10 @@ import convertToISODate from "@/lib/utils/formatDateString";
 import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import validateFormData from "./utils/validateFormData";
-import useCookie from "@/hooks/useCookies";
+import { useState } from "react";
 import FormModalContent from "./components/FormModalContent";
 import ModalContent from "./notices/[noticeId]/components/ModalContent";
-import { useUser } from "@/contexts/UserContext";
-import ImageButton from "@/components/Button/ImageButton";
+import validateFormData from "./utils/validateFormData";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
@@ -96,10 +96,8 @@ export default function NoticeRegistrationPage() {
       <Wrapper>
         <Header>
           <Title>공고 등록</Title>
-          <ImageButton
-            src="/images/close_icon.svg"
-            alt="close"
-            width={32}
+          <CloseButton
+            size={32}
             handleClick={() => {
               router.back();
             }}

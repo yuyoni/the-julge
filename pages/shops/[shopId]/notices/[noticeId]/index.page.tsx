@@ -16,23 +16,30 @@ export default function NoticeDetailPage() {
     isLoading,
     error,
     data: noticeData,
-  } = useFetchData<NoticeList>(
-    `/shops/${shopId}/notices/${noticeId}`,
-    "NoticeInfo",
-  );
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Notice Detail fetching error</p>;
-  if (!noticeData) return <p>Noticedata not found</p>;
+  } = useFetchData<NoticeList>({
+    href: `/shops/${shopId}/notices/${noticeId}`,
+    queryKey: "NoticeInfo",
+    conditionValue: !!noticeId,
+  });
 
   return (
     <Layout>
       <Wrapper>
         <Container>
           {userType === "employee" ? (
-            <Employee noticeData={noticeData} token={token} />
+            <Employee
+              isLoading={isLoading}
+              error={error as boolean} // 수정해야함
+              noticeData={noticeData}
+              token={token}
+            />
           ) : (
-            <Employer noticeData={noticeData} token={token} />
+            <Employer
+              isLoading={isLoading}
+              error={error as boolean} // 수정해야함
+              noticeData={noticeData}
+              token={token}
+            />
           )}
         </Container>
       </Wrapper>
