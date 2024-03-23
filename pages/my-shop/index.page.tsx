@@ -76,25 +76,26 @@ export default function MyShop() {
   );
 }
 
-const Container = styled.div`
-  display: flex;
-  width: 1440px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 458px;
-`;
+const Container = styled.div``;
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
+const Header = styled.div``;
 
 const StyledDiv = styled.div`
+  max-width: 964px;
+  margin: 0 auto;
   display: flex;
-  padding: 60px 237px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  justify-content: flex-start;
+  padding: 60px 0;
+  gap: 41px;
+
+  @media (max-width: 1023px) {
+    padding: 60px 32px;
+    gap: 23px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 40px 12px;
+    gap: 15px;
+  }
 `;
