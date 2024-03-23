@@ -1,10 +1,12 @@
 import React, { useCallback, useState, ChangeEvent } from "react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import createPresinedURL from "./imageRequest";
 import Image from "next/image";
 import cameraIcon from "@/public/images/camera-icon.svg";
 import useCookie from "@/hooks/useCookies";
 import { useMutation } from "react-query";
+import { body1Regular } from "@/styles/fontsStyle";
 
 type ImgProps = { handleImg: (key: string, value: string | number) => void };
 
@@ -49,9 +51,9 @@ export default function ImageInput({ handleImg }: ImgProps) {
 
   return (
     <Container>
-      <div id="upload_pop_wrapper">
-        <header>Upload Files</header>
-        <main id="have_border_line">
+      <ImageInputWrapper>
+        <StyledLabel>가게 이미지</StyledLabel>
+        <SelectImage>
           {!fileInfo ? (
             <>
               <Image src={cameraIcon} alt="카메라 아이콘" />
@@ -63,7 +65,7 @@ export default function ImageInput({ handleImg }: ImgProps) {
           ) : (
             <div>
               {previewUrl && (
-                <Image
+                <StyledImage
                   src={previewUrl}
                   alt="Preview"
                   width={400}
@@ -73,7 +75,8 @@ export default function ImageInput({ handleImg }: ImgProps) {
               <p>{fileInfo?.name}</p>
             </div>
           )}
-        </main>
+        </SelectImage>
+
         <input
           type="file"
           accept="image/jpeg,image/png,image/tiff"
@@ -81,14 +84,23 @@ export default function ImageInput({ handleImg }: ImgProps) {
           hidden
           onChange={onSelectFile}
         />
-      </div>
+      </ImageInputWrapper>
     </Container>
   );
 }
 
+const customBody1Regular = css`
+  ${body1Regular};
+  color: var(--The-julge-black);
+`;
+
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 8px;
+
   header {
     width: 100%;
     height: 38px;
@@ -101,21 +113,9 @@ const Container = styled.div`
       cursor: pointer;
     }
   }
-  #upload_pop_wrapper {
-    height: auto;
-    background-color: #fff;
-    align-self: center;
-    header {
-      color: white;
-      background-color: var(--The-julge-purple-10);
-    }
-    main#have_border_line {
-      border: dashed 2px var(--The-julge-purple-10);
-      margin: 30px 60px;
-      height: 334px;
-    }
+
     main {
-      width: 400px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -145,4 +145,31 @@ const Container = styled.div`
       margin-bottom: 30px;
     }
   }
+`;
+
+const ImageInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 8px;
+`;
+
+const StyledLabel = styled.label`
+  ${customBody1Regular}
+`;
+
+const StyledImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+`;
+
+const SelectImage = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

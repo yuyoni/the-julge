@@ -177,13 +177,14 @@ export default function MyShopForm({
             label="가게 설명"
           />
         </TextArea>
-
-        <Button
-          handleClick={handleSubmit}
-          text={buttonText}
-          width={312}
-          type="button"
-        />
+        <ButtonWrapper>
+          <Button
+            handleClick={handleSubmit}
+            text={buttonText}
+            width={312}
+            type="button"
+          />
+        </ButtonWrapper>
       </FormContainer>
       {isModalOpen && (
         <Dimmed>
@@ -202,7 +203,6 @@ const Container = styled.form`
   max-width: 964px;
   height: 100%;
   margin: 0 auto;
-  padding: 60px 0;
 `;
 
 const FormContainer = styled.div`
@@ -240,6 +240,12 @@ const TextArea = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 153px;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 312px;
+  height: 48px;
+  margin: 50px auto;
 `;
 
 const Dimmed = styled.div`
