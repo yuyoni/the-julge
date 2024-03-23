@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import styled from "@emotion/styled";
-import ProfileEditForm from "./ProfileEditForm";
+import ProfileEditForm from "./components/ProfileEditForm";
 
 export default function ProfileEdit() {
   return (

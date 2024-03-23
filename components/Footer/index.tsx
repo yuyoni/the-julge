@@ -65,9 +65,9 @@ const Items = styled.div`
   display: grid;
   justify-content: space-between;
   grid-template: "copyright footer-links sns";
+  max-width: 1920px;
   width: 100%;
-  padding: 32px;
-
+  padding: 32px 104px 0;
   ${body1Regular}
 
   @media (max-width: 768px) {
@@ -75,10 +75,8 @@ const Items = styled.div`
       "footer-links sns"
       ". ." 1fr
       "copyright .";
-
     height: 100px;
-    max-width: 1920px;
-    padding: 32px 104px 0;
+    padding: 32px;
   }
 `;
 

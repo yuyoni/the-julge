@@ -22,7 +22,7 @@ export const fetchUser = async (userId: string) => {
 
 export const fetchNotices = async (address: string) => {
   const { data } = await axios.get(
-    `${URL}/notices?address=${encodeURIComponent(address)}`,
+    `${URL}/notices?limit=100&address=${encodeURIComponent(address)}`,
   );
   return data;
 };

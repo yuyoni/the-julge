@@ -7,12 +7,15 @@ import useCookie from "@/hooks/useCookies";
 import { BASE_ADDRESS } from "./constants/constants";
 
 export default function RecommendNotice() {
-  const { id } = useCookie();
+  const { id, userType } = useCookie();
   const { data: userData } = useUserData(id);
 
-  const address = userData?.item?.address
-    ? userData?.item?.address
-    : BASE_ADDRESS;
+  let address = "";
+  if (userType === "") {
+    address = "";
+  } else {
+    address = userData?.item?.address;
+  }
 
   const { data: noticesData } = useNoticesData(address);
 
@@ -22,7 +25,6 @@ export default function RecommendNotice() {
   return (
     <RecommendList>
       <Header>추천 공고</Header>
-
       <CustomPostContent>
         <PostList isRecommend={true} noticeArray={noticeArray} />
       </CustomPostContent>

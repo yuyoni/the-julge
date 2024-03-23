@@ -2,12 +2,12 @@ import Modal from "@/components/Modal";
 import styled from "@emotion/styled";
 
 interface ModalContentProps {
-  setModalState: (arg: boolean) => void;
   modalIcon: "alert" | "check" | undefined;
   modalText: string;
   handleYesClick: () => void;
   handleNoClick?: () => void;
   yesButtonText?: string;
+  setModalState?: (arg: boolean) => void;
 }
 
 export default function ModalContent({
@@ -21,7 +21,7 @@ export default function ModalContent({
   return (
     <Dimmed
       onClick={() => {
-        setModalState(false);
+        if (setModalState) setModalState(false);
       }}
     >
       {yesButtonText ? (

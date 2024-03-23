@@ -23,7 +23,6 @@ export const useUserData = (userId: string) => {
 
 export const useNoticesData = (address: string) => {
   return useQuery(["notices", address], () => fetchNotices(address), {
-    enabled: !!address,
     onSuccess: (data) => {
       if (data?.items?.length === 0) {
         fetchAllNotices();

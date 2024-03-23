@@ -5,14 +5,12 @@ import PostCard from "./PostCard";
 
 interface PostDetailProps {
   token: string;
-  userType: string;
   noticeData: NoticeList;
   isMyNotice?: boolean;
 }
 
 export default function PostDetail({
   token,
-  userType,
   noticeData,
   isMyNotice,
 }: PostDetailProps) {
@@ -24,12 +22,7 @@ export default function PostDetail({
         <Category>{noticeData.item.shop.item.category}</Category>
         <Title>{noticeData.item.shop.item.name}</Title>
       </ShopDetails>
-      <PostCard
-        token={token}
-        isMyNotice={isMyNotice}
-        userType={userType}
-        noticeData={noticeData}
-      />
+      <PostCard token={token} isMyNotice={isMyNotice} noticeData={noticeData} />
       <PostDescription>
         <DescriptionHeading>공고 설명</DescriptionHeading>
         <DescriptionText>{noticeData.item.description}</DescriptionText>

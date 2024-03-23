@@ -41,4 +41,11 @@ const FilterButton = styled.div`
   ${body2Bold}
   background: var(--The-julge-purple-30);
   cursor: pointer;
+
+  :hover {
+    background: #9f6cc5;
+  }
+  :active {
+    background: var(--The-julge-purple-40);
+  }
 `;

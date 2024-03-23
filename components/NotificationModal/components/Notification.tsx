@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import type { Notification } from "../types/types";
 import { body2Regular } from "@/styles/fontsStyle";
 import useCookie from "@/hooks/useCookies";
-import { useClearNoitification } from "../hooks/useUserQuery";
+import { useClearNotification } from "../hooks/useUserQuery";
 
 export default function Notification({
   alertId,
@@ -12,12 +12,14 @@ export default function Notification({
   formattedTime,
 }: Notification) {
   const { id, jwt } = useCookie();
+  const mutation = useClearNotification(id, alertId, jwt);
 
-  const handleclick = (alertId: string) => {
-    const response = useClearNoitification(id, alertId, jwt);
+  const handleDeleteNotification = () => {
+    mutation.mutate();
   };
+
   return (
-    <Wrapper onClick={() => handleclick(alertId)}>
+    <Wrapper onClick={handleDeleteNotification}>
       <Container>
         <Circle result={result}></Circle>
         <NotifiText>
