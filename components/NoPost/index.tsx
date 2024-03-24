@@ -2,46 +2,51 @@ import { body1Regular, h2, h3, h4 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Button from "../Button/Button";
 import { useRouter } from "next/router";
-import useCookie from "@/hooks/useCookies";
+import { ReactNode } from "react";
 
 interface NoPostProps {
   isRecommend: boolean;
-  hasItemDatasItems?: boolean;
+  address?: string;
 }
+const NO_RECOMMEND_MESSAGE = "등록된 공고가 없습니다.";
 
-export default function NoPost({
-  hasItemDatasItems,
-  isRecommend,
-}: NoPostProps) {
+export default function NoPost({ isRecommend, address }: NoPostProps) {
   const router = useRouter();
-  const moveProfile = () => {
+
+  const redirectToProfile = () => {
     router.push("/my-profile");
   };
-
-  if (isRecommend) {
+  const renderRecommendSection = (): ReactNode => {
     return (
-      <Wrapper>
-        <Container>
-          <Title>🙈 현재 준비된 맞춤공고가 없어요. 🙈</Title>
-          <SubTitle>🎉맞춤 공고란? </SubTitle>
-          설정된 선호 지역 기반 추천하는 공고입니다. <br />
-          {hasItemDatasItems || (
-            <>
-              프로필 페이지에서 선호지역을 설정하고 가까운 가게의 공고를
-              추천받아 보세요!
-              <Button
-                color="colored"
-                text="프로필로 이동"
-                handleClick={moveProfile}
-              />
-            </>
-          )}
-        </Container>
-      </Wrapper>
+      <Container>
+        <Title>🙈 현재 준비된 맞춤공고가 없어요. 🙈</Title>
+        <SubTitle>🎉맞춤 공고란? </SubTitle>
+        설정된 선호 지역 기반 추천하는 공고입니다. <br />
+        {address ? (
+          <>
+            아직 등록된 공고가 없어요. 🙈 <br />
+            공고가 등록되는대로 빠르게 안내드리도록 하겠습니다.
+          </>
+        ) : (
+          <>
+            프로필 페이지에서 선호지역을 설정하고 가까운 가게의 공고를 추천받아
+            보세요!
+            <Button
+              color="colored"
+              text="프로필로 이동"
+              handleClick={redirectToProfile}
+            />
+          </>
+        )}
+      </Container>
     );
-  } else {
-    return <Wrapper>등록된 공고가 없습니다</Wrapper>;
-  }
+  };
+
+  return (
+    <Wrapper>
+      {isRecommend ? renderRecommendSection() : NO_RECOMMEND_MESSAGE}
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`
@@ -49,6 +54,9 @@ const Wrapper = styled.div`
   text-align: center;
   width: 100%;
   color: var(--The-julge-black);
+  background-color: var(--The-julge-gray-00);
+  border-radius: 12px;
+  border: 1px dashed var(--The-julge-gray-40);
   ${h3};
 `;
 
@@ -58,8 +66,6 @@ const Container = styled.div`
   gap: 20px;
   padding: 30px;
   text-align: left;
-  border-radius: 4px;
-  border: 1px solid;
   ${body1Regular};
 `;
 

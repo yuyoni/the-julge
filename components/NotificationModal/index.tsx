@@ -2,7 +2,7 @@ import closeIcon from "@/public/images/close_icon.svg";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Notification from "./components/Notification";
-import { h4 } from "@/styles/fontsStyle";
+import { body2Regular, h4 } from "@/styles/fontsStyle";
 import extractNotificationInfo from "./utils/extractNotificationInfo";
 import { NotificationItem } from "./types/types";
 
@@ -30,9 +30,13 @@ export default function NotificationModal({
             onClick={handleClickNoti}
           />
         </Container>
-        {notifications.map((notification, index) => (
-          <Notification key={index} {...notification} />
-        ))}
+        {notificationList.length ? (
+          notifications.map((notification, index) => (
+            <Notification key={index} {...notification} />
+          ))
+        ) : (
+          <AlertDiv>알림이 없습니다.</AlertDiv>
+        )}
       </Wrapper>
     )
   );
@@ -41,6 +45,19 @@ export default function NotificationModal({
 const Title = styled.span`
   color: var(--The-julge-black, #111322);
   ${h4}
+`;
+
+const AlertDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  ${body2Regular}
+
+  @media only screen and (max-width: 768px) {
+    height: 100%;
+  }
 `;
 
 const StyledCloseIcon = styled(Image)`

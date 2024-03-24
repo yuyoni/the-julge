@@ -3,16 +3,23 @@ import RecommendNotice from "@/pages/search/components/RecommendNotice";
 import AllNotice from "@/pages/search/components/AllNotice";
 import { useRouter } from "next/router";
 import useCookie from "@/hooks/useCookies";
+import MetaHead from "@/components/MetaHead";
 
 export default function Home() {
   const router = useRouter();
   const keyword = router.query.keyword as string;
   const page = parseInt(router.query.page as string, 10);
-  const { userType } = useCookie();
+  const { id, userType, isSuccess } = useCookie();
+
   return (
-    <Layout>
-      {userType !== "employer" && <RecommendNotice />}
-      <AllNotice keyword={keyword} initialPage={page} />
-    </Layout>
+    isSuccess && (
+      <>
+        <MetaHead />
+        <Layout>
+          {userType !== "employer" && <RecommendNotice id={id} />}
+          <AllNotice keyword={keyword} initialPage={page} />
+        </Layout>
+      </>
+    )
   );
 }

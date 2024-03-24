@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Button from "../Button/Button";
-import ImageButton from "../Button/ImageButton";
+import CloseButton from "../Button/CloseButton";
 import LocationBadgeBox from "./LocationBadgeBox";
 import LocationOption from "./LocationOption";
 import {
@@ -12,7 +12,7 @@ import {
 
 export default function Filter({
   isModalVisible,
-  handleModalClose,
+  handleToggleModal,
   onApplyFilter,
 }: FilterProps) {
   const [selectedLocations, setSelectedLocations] =
@@ -42,11 +42,7 @@ export default function Filter({
       <Wrapper>
         <Header>
           <Title>상세 필터</Title>
-          <ImageButton
-            src="/images/close_icon.svg"
-            alt="close_icon"
-            handleClick={handleModalClose}
-          />
+          <CloseButton handleClick={handleToggleModal} />
         </Header>
         <Subtitle>위치</Subtitle>
         <LocationOption
@@ -60,8 +56,8 @@ export default function Filter({
         <BorderLine />
         <Subtitle>시작일</Subtitle>
         <Input
-          type="text"
-          placeholder="입력"
+          className="calendar_input"
+          type="datetime-local"
           value={startsAtValue}
           onChange={(e) => setStartsAtValue(e.target.value)}
         />
@@ -110,6 +106,25 @@ const Wrapper = styled.div`
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   background: var(--The-julge-white, #fff);
   box-shadow: 0px 2px 8px 0px rgba(120, 116, 134, 0.25);
+
+  .calendar_input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+
+    &::-webkit-calendar-picker-indicator:hover {
+      transform: scale(1.2);
+    }
+
+    &::-webkit-calendar-picker-indicator:active {
+      transform: scale(1);
+    }
+  }
 `;
 
 const Header = styled.div`

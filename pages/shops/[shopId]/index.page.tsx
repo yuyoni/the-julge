@@ -1,7 +1,11 @@
 import Button from "@/components/Button/Button";
+import CloseButton from "@/components/Button/CloseButton";
 import Layout from "@/components/Layout";
+import MetaHead from "@/components/MetaHead";
 import PostForm from "@/components/PostForm/index";
 import { useToast } from "@/contexts/ToastContext";
+import { useUser } from "@/contexts/UserContext";
+import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import TOAST_MESSAGES from "@/lib/constants/toastMessage";
 import { NoticeList } from "@/lib/types/NoticeTypes";
@@ -9,13 +13,10 @@ import convertToISODate from "@/lib/utils/formatDateString";
 import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import validateFormData from "./utils/validateFormData";
-import useCookie from "@/hooks/useCookies";
+import { useState } from "react";
 import FormModalContent from "./components/FormModalContent";
 import ModalContent from "./notices/[noticeId]/components/ModalContent";
-import { useUser } from "@/contexts/UserContext";
-import ImageButton from "@/components/Button/ImageButton";
+import validateFormData from "./utils/validateFormData";
 
 export default function NoticeRegistrationPage() {
   const router = useRouter();
@@ -23,7 +24,6 @@ export default function NoticeRegistrationPage() {
   const { showToast } = useToast();
   const { userInfo } = useUser();
   const { jwt: token } = useCookie();
-
   const [modalState, setModalState] = useState({
     isOpen: false,
     formData: {
@@ -33,6 +33,16 @@ export default function NoticeRegistrationPage() {
       description: "",
     },
   });
+
+  if (!userInfo) {
+    return (
+      <ModalContent
+        modalIcon="alert"
+        modalText="로그인이 필요합니다"
+        handleYesClick={() => router.push("/signin")}
+      />
+    );
+  }
 
   const handleInputChange = (key: string, value: string | number) => {
     setModalState((prevState) => ({
@@ -45,8 +55,19 @@ export default function NoticeRegistrationPage() {
   };
 
   const handleFormSubmit = async () => {
-    if (!validateFormData(modalState.formData, showToast)) return;
+    if (
+      !validateFormData(
+        modalState.formData,
+        showToast,
+        Number(userInfo.item.shop?.item.originalHourlyPay!),
+      )
+    )
+      return;
     setModalState((prevState) => ({ ...prevState, isOpen: true }));
+  };
+
+  const handleModalClose = () => {
+    setModalState((prevState) => ({ ...prevState, isOpen: false }));
   };
 
   const handleYesClick = async () => {
@@ -65,23 +86,21 @@ export default function NoticeRegistrationPage() {
       const { message } = error.response.data;
       alert(message);
     } finally {
-      setModalState((prevState) => ({ ...prevState, isOpen: false }));
+      handleModalClose();
     }
   };
 
-  const handleNoClick = () => {
-    setModalState((prevState) => ({ ...prevState, isOpen: false }));
-  };
-
-  if (!userInfo) {
+  if (!userInfo.item.shop) {
     return (
       <ModalContent
         modalIcon="alert"
-        modalText="로그인이 필요합니다"
-        handleYesClick={() => router.push("/signin")}
+        modalText="가게를 먼저 등록해주세요"
+        handleYesClick={() => router.push("/my-shop")}
       />
     );
-  } else if (!userInfo.item.shop || userInfo.item.shop.item.id !== shopId) {
+  }
+
+  if (userInfo.item.shop.item.id !== shopId) {
     return (
       <ModalContent
         modalIcon="alert"
@@ -92,38 +111,38 @@ export default function NoticeRegistrationPage() {
   }
 
   return (
-    <Layout>
-      <Wrapper>
-        <Header>
-          <Title>공고 등록</Title>
-          <ImageButton
-            src="/images/close_icon.svg"
-            alt="close"
-            width={32}
-            handleClick={() => {
-              router.back();
-            }}
-          />
-        </Header>
-        <PostForm handleInputChange={handleInputChange} />
-        <ButtonContainer>
-          <Button
-            text="등록하기"
-            color="colored"
-            handleClick={handleFormSubmit}
-          />
-        </ButtonContainer>
-        {modalState.isOpen && (
-          <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
-            <FormModalContent
-              formData={modalState.formData}
-              handleYesClick={handleYesClick}
-              handleNoClick={handleNoClick}
+    <>
+      <MetaHead
+        title={`+HE JULGE | ${userInfo.item.shop.item.name} 새 공고 등록`}
+      />
+      <Layout>
+        <Wrapper>
+          <Header>
+            <Title>공고 등록</Title>
+            <CloseButton
+              size={32}
+              handleClick={() => {
+                router.back();
+              }}
             />
-          </Dimmed>
-        )}
-      </Wrapper>
-    </Layout>
+          </Header>
+          <PostForm userInfo={userInfo} handleInputChange={handleInputChange} />
+          <ButtonContainer>
+            <Button
+              text="등록하기"
+              color="colored"
+              handleClick={handleFormSubmit}
+            />
+          </ButtonContainer>
+          <FormModalContent
+            modalState={modalState.isOpen}
+            formData={modalState.formData}
+            handleYesClick={handleYesClick}
+            handleNoClick={handleModalClose}
+          />
+        </Wrapper>
+      </Layout>
+    </>
   );
 }
 
@@ -161,17 +180,4 @@ const ButtonContainer = styled.div`
   @media only screen and (max-width: 767px) {
     width: 100%;
   }
-`;
-
-const Dimmed = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1;
 `;

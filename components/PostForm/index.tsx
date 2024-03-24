@@ -5,12 +5,17 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import FormContainer from "./FormContainer";
 import Tooltip from "./Tooltip";
+import { UserData } from "@/lib/types/userType";
 
 interface PostFormProps {
+  userInfo: UserData;
   handleInputChange: (key: string, value: string) => void;
 }
 
-export default function PostForm({ handleInputChange }: PostFormProps) {
+export default function PostForm({
+  userInfo,
+  handleInputChange,
+}: PostFormProps) {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
   return (
@@ -23,7 +28,7 @@ export default function PostForm({ handleInputChange }: PostFormProps) {
       />
       <Tooltip
         visible={isTooltipVisible}
-        message="기존 시급과 같거나 상향된 금액을 입력하세요"
+        message={`${userInfo.item.shop?.item.originalHourlyPay}이상 입력하세요`}
       />
       <FormContainer
         label="시급*"

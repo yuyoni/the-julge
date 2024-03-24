@@ -4,39 +4,53 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import updateRecentNotices from "../../utils/updateRecentNotices";
-import RecentNoticeContainer from "../Employee/RecentNoticeContainer";
 import PostDetail from "../PostDetail";
-import ApplicantList from "./ApplicantList";
+import ApplicantListContainer from "./ApplicantListContainer";
+import RecentNoticeContainer from "../Employee/RecentNoticeContainer";
+
+interface EmployerProps {
+  isLoading: boolean;
+  error: boolean;
+  noticeData: NoticeList | undefined;
+  token: string;
+}
 
 export default function Employer({
+  isLoading,
+  error,
   noticeData,
   token,
-}: {
-  noticeData: NoticeList;
-  token: string;
-}) {
+}: EmployerProps) {
   const { userInfo } = useUser();
   const { query } = useRouter();
   const { shopId } = query;
   const [isMyNotice, setIsMyNotice] = useState(false);
-  const noticeHref = noticeData.links[0].href.slice(18);
+  const noticeHref = noticeData?.links[0].href.slice(18);
 
   useEffect(() => {
-    if (userInfo?.item.shop?.item.id === shopId) {
+    if (userInfo && userInfo.item.shop?.item.id === shopId) {
       setIsMyNotice(true);
     } else {
-      updateRecentNotices(noticeHref);
+      if (noticeHref) {
+        updateRecentNotices(noticeHref);
+      }
     }
-  }, []);
+  }, [shopId, userInfo, noticeHref]);
 
   return (
     <Wrapper>
       <PostDetail
+        isLoading={isLoading}
+        error={error}
         token={token}
         isMyNotice={isMyNotice}
         noticeData={noticeData}
       />
-      {isMyNotice ? <ApplicantList token={token} /> : <RecentNoticeContainer />}
+      {isMyNotice ? (
+        <ApplicantListContainer token={token} />
+      ) : (
+        <RecentNoticeContainer />
+      )}
     </Wrapper>
   );
 }
