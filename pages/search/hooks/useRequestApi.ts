@@ -1,5 +1,4 @@
 import { SelectedLocationList } from "@/components/Filter/types/types";
-import convertDateNow from "../utils/convertDate";
 import axios from "axios";
 import { categoryMap } from "../constants/category";
 
