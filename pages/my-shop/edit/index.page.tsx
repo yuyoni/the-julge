@@ -32,30 +32,6 @@ export default function Edit() {
     enabled: !!userInfo,
   });
 
-  // useEffect(() => {
-  //   async function fetchShopData() {
-  //     if (shopId) {
-  //       try {
-  //         const data = await fetchData({
-  //           param: `/shops/${shopId}`,
-  //           method: "get",
-  //           token: token,
-  //         });
-  //         setShopData(data as ShopInfo);
-  //         console.log(`${userInfo}`);
-  //       } catch (error) {
-  //         console.error("Failed to fetch shop data:", error);
-  //       } finally {
-  //         setIsLoading(false);
-  //       }
-  //     } else {
-  //       setIsLoading(false);
-  //     }
-  //   }
-
-  //   fetchShopData();
-  // }, [userInfo, token]);
-
   return (
     <>
       {!isFetching && (
