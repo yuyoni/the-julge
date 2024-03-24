@@ -27,10 +27,6 @@ export const fetchNotices = async (address: string) => {
   return data;
 };
 
-export const fetchAllNotices = async () => {
-  fetchNotices("");
-};
-
 export const getNotices = async ({
   limit,
   offset,

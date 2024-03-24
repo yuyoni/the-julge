@@ -1,83 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { h3 } from "@/styles/fontsStyle";
 import Pagination from "@/components/Pagination";
 import PostList from "@/pages/search/components/PostList";
-import AllNoticeHeader from "@/pages/search/components/AllNoticeHeader";
-import { useFilteredNoticesData } from "@/pages/search/hooks/useUserQuery";
-import type { SelectedLocationList } from "@/components/Filter/types/types.js";
-import { NoticeList } from "@/lib/types/NoticeTypes";
-
-interface AllNoticeProps {
-  keyword: string;
-  initialPage?: number;
-}
+import AllNoticeHeader from "@/pages/search/components/AllNotice/components/AllNoticeHeader";
+import useAllNotices from "../../hooks/useAllNotices";
+import { AllNoticeProps } from "../../types/type";
 
 export default function AllNotice({
   keyword,
   initialPage = 1,
 }: AllNoticeProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [address, setAddress] = useState<SelectedLocationList>([]);
-  const [startsAtValue, setStartsAtValue] = useState<string>("");
-  const [hourlyPayValue, setHourlyPayValue] = useState<string>("");
-  const [sortStr, setSortStr] = useState("시급많은순");
-  const [page, setPage] = useState(initialPage);
+  const toggleModal = () => setIsModalVisible((prev) => !prev);
 
-  const TABLES_ITEMS_PER_PAGE = 6;
-  const limit = TABLES_ITEMS_PER_PAGE;
-  const offset = (page - 1) * TABLES_ITEMS_PER_PAGE;
-
-  useEffect(() => {
-    setPage(initialPage);
-  }, [initialPage]);
-
-  const handleCategoryChange = (category: string) => {
-    setSortStr(category);
-  };
-
-  const handleToggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
-
-  const handleApplyFilter = (
-    locations: SelectedLocationList,
-    startsAt: string,
-    hourlyPay: string,
-  ) => {
-    setAddress(locations);
-    setStartsAtValue(startsAt);
-    setHourlyPayValue(hourlyPay);
-  };
-
-  /**
-   * 데이터 요청 시작
-   * limit: 카드 개수
-   * offset: 페이지네이션을 위해 앞에 제외할 카드 숫자
-   * startsAtValue:날짜 (yyyy-mm-dd)
-   * hourlyPayValue: 시급
-   * address: 주소 배열
-   */
-  const { data: noticesData, isSuccess } = useFilteredNoticesData({
+  const {
     limit,
-    offset,
+    count,
     sortStr,
-    startsAtValue,
-    hourlyPayValue,
-    address,
-    keyword,
-  });
-  const notices = noticesData?.items ?? [];
-  const noticeArray = notices.map((notice: NoticeList) => notice.item);
+    isSuccess,
+    noticeArray,
+    handleCategoryChange,
+    handleApplyFilter,
+  } = useAllNotices({ keyword, initialPage });
 
   return (
     <AllNoticeList>
       <AllNoticeHeader
         handleCategoryChange={handleCategoryChange}
         sortStr={sortStr}
-        handleToggleModal={handleToggleModal}
+        handleToggleModal={toggleModal}
         isModalVisible={isModalVisible}
-        handleModalClose={handleToggleModal}
         onApplyFilter={handleApplyFilter}
         keyword={keyword}
       />
@@ -94,7 +47,7 @@ export default function AllNotice({
             </PostContent>
 
             <PaginationWrapper>
-              <Pagination count={noticesData?.count} limit={limit} />
+              <Pagination count={count} limit={limit} />
             </PaginationWrapper>
           </>
         ))}

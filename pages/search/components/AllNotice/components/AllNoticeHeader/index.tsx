@@ -1,30 +1,14 @@
-import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import Filter from "@/components/Filter/Filter";
-import HeaderButtons from "@/pages/search/components/HeaderButtons";
-import type { SelectedLocationList } from "@/components/Filter/types/types";
+import HeaderButtons from "@/pages/search/components/AllNotice/components/HeaderButtons";
 import HeaderText from "../HeaderText";
-
-interface AllNoticeHeaderProps {
-  handleCategoryChange: (category: string) => void;
-  sortStr: string;
-  handleToggleModal: () => void;
-  isModalVisible: boolean;
-  handleModalClose: () => void;
-  onApplyFilter: (
-    locations: SelectedLocationList,
-    startsAt: string,
-    hourlyPay: string,
-  ) => void;
-  keyword?: string;
-}
+import { AllNoticeHeaderProps } from "@/pages/search/types/type";
 
 export default function AllNoticeHeader({
   handleCategoryChange,
   sortStr,
   handleToggleModal,
   isModalVisible,
-  handleModalClose,
   onApplyFilter,
   keyword,
 }: AllNoticeHeaderProps) {
@@ -38,7 +22,7 @@ export default function AllNoticeHeader({
       />
       <Filter
         isModalVisible={isModalVisible}
-        handleModalClose={handleModalClose}
+        handleToggleModal={handleToggleModal}
         onApplyFilter={onApplyFilter}
       />
     </Header>

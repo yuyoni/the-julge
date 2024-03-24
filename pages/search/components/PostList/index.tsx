@@ -1,12 +1,7 @@
 import { NoticeItem } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
-import { renderPosts } from "./util/renderPosts";
-
-interface PostListProps {
-  isRecommend: boolean;
-  noticeArray: NoticeItem[];
-  address?: string;
-}
+import { renderPosts } from "../RecommendNotice/renderPosts";
+import { PostListProps } from "../../types/type";
 
 export default function PostList({
   isRecommend = false,
