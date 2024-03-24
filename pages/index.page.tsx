@@ -14,7 +14,6 @@ export default function Home() {
   return (
     isSuccess && (
       <>
-        <MetaHead />
         <Layout>
           {userType !== "employer" && <RecommendNotice id={id} />}
           <AllNotice keyword={keyword} initialPage={page} />

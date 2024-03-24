@@ -112,9 +112,6 @@ export default function NoticeRegistrationPage() {
 
   return (
     <>
-      <MetaHead
-        title={`+HE JULGE | ${userInfo.item.shop.item.name} 새 공고 등록`}
-      />
       <Layout>
         <Wrapper>
           <Header>

@@ -26,9 +26,6 @@ export default function NoticeDetailPage() {
 
   return (
     <>
-      <MetaHead
-        title={`+HE JULGE | ${noticeData?.item.shop.item.name}의 공고`}
-      />
       <Layout>
         <Wrapper>
           <Container>

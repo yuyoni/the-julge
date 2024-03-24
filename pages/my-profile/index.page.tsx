@@ -28,7 +28,6 @@ export default function MyProfile() {
 
   return (
     <>
-      <MetaHead title="+HE JULGE | 내 프로필" />
       <Layout>
         <UserProfile {...profileData} />
         <Wrapper>

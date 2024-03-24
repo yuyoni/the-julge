@@ -9,7 +9,6 @@ import MetaHead from "@/components/MetaHead";
 export default function Signup() {
   return (
     <>
-      <MetaHead title="+HE JULGE | 회원 가입" />
       <CenteredContainer>
         <Wrapper>
           <Link href="/">
