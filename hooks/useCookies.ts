@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQueries, useQuery } from "react-query";
+import { useRouter } from "next/router";
 
 export type AuthInfo = {
   jwt: string;
@@ -10,27 +11,19 @@ export type AuthInfo = {
 };
 
 export default function useCookie(): AuthInfo {
-  const [authInfo, setAuthInfo] = useState<AuthInfo>({
-    jwt: "",
-    userType: "",
-    id: "",
-    isSuccess: false,
-  });
-
   const getUserInfo = async () => {
-    const { data } = await axios.post(`/api/auth`);
-    return data;
+    try {
+      const { data } = await axios.get(`/api/auth`);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const { mutate } = useMutation("api/auth", () => getUserInfo(), {
-    onSuccess: (res) => {
-      setAuthInfo({ ...res, isSuccess: true });
-    },
+  const { data, isSuccess } = useQuery("apiauth", getUserInfo, {
+    staleTime: 10000,
+    cacheTime: 60000,
   });
 
-  useEffect(() => {
-    mutate();
-  }, []);
-
-  return authInfo;
+  return { ...data, isSuccess };
 }
