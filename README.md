@@ -83,11 +83,15 @@ npm run start
 
 ## 🗓️ 개발 일정
 
-2024.03.08 ~ 2024.03.25 (2주)
+### 2024.03.08 ~ 2024.03.25 (2주)
 <br>
-<img width="1200" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/f0c46c23-0f36-4c48-801a-1731f5c6743c">
-<img width="600" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/bdca6eef-58c1-436f-905d-828e23a09221">
-<img width="600" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/7da6f00d-61ef-4369-a282-0e24ad4cca16">
+<img width="1000" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/f0c46c23-0f36-4c48-801a-1731f5c6743c"><br><br>
+
+### 🔖 세부 일정 관리 및 깃허브 연동
+<img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/f1ae12f0-3257-4c94-b79d-441def931a7b"> &nbsp;&nbsp;
+<img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/7da6f00d-61ef-4369-a282-0e24ad4cca16">
+
+
 
 <br/>
 
