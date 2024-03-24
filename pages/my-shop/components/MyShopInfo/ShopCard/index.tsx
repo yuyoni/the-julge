@@ -51,12 +51,16 @@ export default function ShopCard({
           <p>{description}</p>
         </DescriptionDiv>
         <ButtonsWrapper>
-          <Link href="/my-shop/edit">
-            <Button text="편집하기" type="submit" color="white" />
-          </Link>
-          <Link href={`/shops/${id}`}>
-            <Button text="공고 등록하기" type="submit" />
-          </Link>
+          <div style={{ width: "100%" }}>
+            <Link href="/my-shop/edit">
+              <Button text="편집하기" type="submit" color="white" />
+            </Link>
+          </div>
+          <div style={{ width: "100%" }}>
+            <Link href={`/shops/${id}`}>
+              <Button text="공고 등록하기" type="submit" />
+            </Link>
+          </div>
         </ButtonsWrapper>
       </ShopInfoWrapper>
     </Section>
@@ -122,13 +126,18 @@ const MyShopDiv = styled.div`
   @media (max-width: 767px) {
     ${body2Regular}
   }
+
+  h3 {
+    color: var(--The-julge-gray-50);
+    margin-bottom: 10px;
+  }
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-around;
   width: 100%;
   gap: 8px;
 `;
