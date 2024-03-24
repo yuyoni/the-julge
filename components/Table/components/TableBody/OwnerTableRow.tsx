@@ -103,24 +103,22 @@ export default function OwnerTableRow({
         <Cell>{phone?.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")}</Cell>
         <Cell>{getStatusBadge(status)}</Cell>
       </TableRow>
-      {isShowAcceptModal && (
-        <ModalContent
-          modalIcon="check"
-          modalText="신청을 승인하시겠습니까?"
-          handleYesClick={sendAcceptRequest}
-          setModalState={setIsShowAcceptModal}
-          yesButtonText="승인하기"
-        />
-      )}
-      {isShowRejectModal && (
-        <ModalContent
-          modalIcon="check"
-          modalText="신청을 거절하시겠습니까?"
-          handleYesClick={sendRejectRequest}
-          setModalState={setIsShowRejectModal}
-          yesButtonText="거절하기"
-        />
-      )}
+      <ModalContent
+        modalState={isShowAcceptModal}
+        modalIcon="check"
+        modalText="신청을 승인하시겠습니까?"
+        handleYesClick={sendAcceptRequest}
+        setModalState={setIsShowAcceptModal}
+        yesButtonText="승인하기"
+      />
+      <ModalContent
+        modalState={isShowRejectModal}
+        modalIcon="check"
+        modalText="신청을 거절하시겠습니까?"
+        handleYesClick={sendRejectRequest}
+        setModalState={setIsShowRejectModal}
+        yesButtonText="거절하기"
+      />
     </>
   );
 }

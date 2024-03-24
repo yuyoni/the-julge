@@ -27,7 +27,7 @@ export default function PostInformation({
       <Wrapper>
         <Wage>시급</Wage>
         <WageContainer>
-          <HourlyPay>{hourlyPay}원</HourlyPay>
+          <HourlyPay>{Number(hourlyPay).toLocaleString()}원</HourlyPay>
           {wageIncrease && (
             <WageFlagStyle>
               <span>시급 {wageIncrease}% ▲</span>
@@ -54,7 +54,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
+  word-wrap: break-word;
 `;
 
 const Wage = styled.span`
@@ -97,4 +98,11 @@ const InfoStyle = styled.span`
 
 const DescriptionStyle = styled.span`
   ${body2Regular}
+  width: 100%;
+  height: 78px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

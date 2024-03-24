@@ -98,14 +98,14 @@ const Wrapper = styled.div`
   padding: 24px;
   gap: 30px;
   width: 100%;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
   border-radius: 12px;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   background: var(--The-julge-white, #fff);
   gap: 30px;
 
   @media only screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
   }
 `;
 
@@ -113,6 +113,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 `;
 
 const ImageContainer = styled.div`
@@ -121,12 +122,14 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 300px;
+  height: 560px;
+  height: 300px;
   border-radius: 20px;
+  overflow: hidden;
 
   img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 600px;
+    max-height: 542px;
   }
 `;
 

@@ -12,6 +12,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "search.pstatic.net",
+      },
+      {
+        protocol: "https",
         hostname: "codeit-images.codeit.com",
       },
       {

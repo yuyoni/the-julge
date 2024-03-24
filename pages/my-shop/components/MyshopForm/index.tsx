@@ -11,6 +11,7 @@ import { ShopInfo } from "../../type/shop-type";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import { AxiosError } from "axios";
+import { useToast } from "@/contexts/ToastContext";
 
 interface MyShopFormProps {
   value?: string | undefined;
@@ -25,6 +26,7 @@ export default function MyShopForm({
   method,
   initialData,
 }: MyShopFormProps) {
+  const { showToast } = useToast();
   const router = useRouter();
   const { jwt: token } = useCookie();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,13 +69,13 @@ export default function MyShopForm({
         description === "" ||
         originalHourlyPay === 0
       ) {
-        alert("모든 값을 채워주세요"); //TODO 모달로 바꾸기
+        showToast("모든 값을 채워주세요"); //TODO 모달로 바꾸기
         return;
       }
       if (method === "post") {
-        alert("가게 등록@");
+        showToast("가게 등록@");
       } else {
-        alert("편집이 완료됐습니당나귀");
+        showToast("편집이 완료됐습니당나귀");
       }
 
       const response = await fetchData({

@@ -4,18 +4,22 @@ import styled from "@emotion/styled";
 import SignupForm from "./components/SignupForm";
 import ToSignin from "./components/ToSignin";
 import Link from "next/link";
+import MetaHead from "@/components/MetaHead";
 
 export default function Signup() {
   return (
-    <CenteredContainer>
-      <Wrapper>
-        <Link href="/">
-          <Image src={logo} alt="logo_button" width={248} height={45} />
-        </Link>
-        <SignupForm />
-        <ToSignin />
-      </Wrapper>
-    </CenteredContainer>
+    <>
+      <MetaHead title="+HE JULGE | 회원 가입" />
+      <CenteredContainer>
+        <Wrapper>
+          <Link href="/">
+            <Image src={logo} alt="logo_button" width={248} height={45} />
+          </Link>
+          <SignupForm />
+          <ToSignin />
+        </Wrapper>
+      </CenteredContainer>
+    </>
   );
 }
 

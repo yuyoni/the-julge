@@ -5,13 +5,18 @@ import { FormDataType } from "@/lib/types/FormDataType";
 export default function validateFormData(
   formData: FormDataType,
   showToast: ShowToastType,
+  minimumWage: number,
 ) {
   const { hourlyPay, startsAt, workhour, description } = formData;
   const currentDateTime = new Date();
-  const MINIMUM_WAGE = 9860;
 
-  if (hourlyPay <= 0 || startsAt.trim() === "" || description.trim() === "") {
+  if (!hourlyPay || startsAt.trim() === "" || !workhour) {
     showToast(TOAST_MESSAGES.ALL_FIELDS_REQUIRED);
+    return false;
+  }
+
+  if (description.length >= 150) {
+    showToast(TOAST_MESSAGES.DESCRIPTION_LIMIT);
     return false;
   }
 
@@ -25,7 +30,7 @@ export default function validateFormData(
     return false;
   }
 
-  if (hourlyPay < MINIMUM_WAGE) {
+  if (hourlyPay <= minimumWage) {
     showToast(TOAST_MESSAGES.SUBMINIMUM_WAGE);
     return false;
   }
