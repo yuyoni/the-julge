@@ -54,7 +54,7 @@ export const getNotices = async ({
     query += `&keyword=${keyword}`;
   }
   if (startsAtValue) {
-    query += `&startsAtGte=${convertDateNow(startsAtValue)}`;
+    query += `&startsAtGte=${new Date(startsAtValue).toISOString()}`;
   }
   if (hourlyPayValue) {
     query += `&hourlyPayGte=${hourlyPayValue}`;
