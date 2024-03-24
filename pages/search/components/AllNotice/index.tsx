@@ -6,6 +6,8 @@ import PostList from "@/pages/search/components/PostList";
 import AllNoticeHeader from "@/pages/search/components/AllNotice/components/AllNoticeHeader";
 import useAllNotices from "../../hooks/useAllNotices";
 import { AllNoticeProps } from "../../types/type";
+import Post from "@/components/Post";
+import SkeletonUI from "@/components/Skeleton";
 
 export default function AllNotice({
   keyword,
@@ -34,7 +36,6 @@ export default function AllNotice({
         onApplyFilter={handleApplyFilter}
         keyword={keyword}
       />
-
       {isSuccess &&
         (noticeArray.length === 0 ? (
           <PostContent>
@@ -51,6 +52,14 @@ export default function AllNotice({
             </PaginationWrapper>
           </>
         ))}
+
+      {!isSuccess && (
+        <PostContent>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <SkeletonUI key={index} height={367} />
+          ))}
+        </PostContent>
+      )}
     </AllNoticeList>
   );
 }
@@ -72,13 +81,13 @@ const AllNoticeList = styled.section`
 
 const PostContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 294px);
+  grid-template-columns: repeat(3, 1fr);
   gap: 31px 18px;
   justify-content: center;
   align-items: center;
 
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, 250px);
+  @media only screen and (max-width: 1028px) {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

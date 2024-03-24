@@ -58,6 +58,7 @@ export default function Filter({
         <Input
           className="calendar_input"
           type="datetime-local"
+          max="9999-12-31T23:59"
           value={startsAtValue}
           onChange={(e) => setStartsAtValue(e.target.value)}
         />
