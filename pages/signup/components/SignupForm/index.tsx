@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import Input from "@/components/Input";
 import axios from "axios";
 import UserTypeSelect from "./UserTypeSelect";
+import { useToast } from "@/contexts/ToastContext";
 
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
@@ -16,6 +17,7 @@ const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function SignupForm() {
+  const { showToast } = useToast();
   const [type, setType] = useState<UserType>(UserType.PART_TIME);
   const router = useRouter();
   const {
@@ -37,14 +39,14 @@ export default function SignupForm() {
       const request = { email, password, type };
       await axios.post(`${BASE_URL}/users`, request);
 
-      alert("가입이 완료되었습니다!");
+      showToast("가입이 완료되었습니다!");
       router.push("/signin");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const { message } = error.response.data;
-        alert(message);
+        showToast(message);
       } else if (error instanceof TypeError) {
-        alert(error.message);
+        showToast(error.message);
       } else if (error instanceof ReferenceError) {
         setError("passwordCheck", { message: error.message });
       }
