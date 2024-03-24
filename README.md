@@ -68,7 +68,7 @@ npm run start
 
 ### 개발
 
-![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Typescript](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Emotion](https://img.shields.io/badge/emotion-DB7093?style=for-the-badge&logo=emotions&logoColor=white)
+![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Typescript](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Emotion](https://img.shields.io/badge/emotion-DB7093?style=for-the-badge&logo=emotions&logoColor=white) <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white">
 
 ### 협업
 
@@ -128,17 +128,9 @@ root
 
 <br/>
 
-### 📄 navigation bar 
+### 📄 로그인 및 회원가입 페이지
 
-- 로고 클릭 시 메인페이지로 이동
-- 특정 공고를 검색하는 기능
-- 일반회원의 경우 공고 신청에 대한 응답 알림을 받을 수 있는 기능
-
-
-### 📄 메인 페이지 - 전체 공고 리스트
-
-- 전체 공고를 렌더링하고 조건에 따라 특정 공고를 필터링하거나 정렬할 수 있는 기능
-- 일반 회원의 경우 유저의 지역 정보에 따라 맞춤 공고를 보여주는 기능
+- 일반회원 / 사장님 타입을 구분하여 회원가입 및 로그인 할 수 있는 기능
 
 ### 📄 일반회원 - 내 프로필 페이지
 
@@ -147,12 +139,16 @@ root
 
 ### 📄 일반회원 - 내 프로필 등록, 수정 페이지
 
-- 내 프로필을등록 및 수정하고 내 프로필 페이지로 이동
+- 내 프로필을 등록 및 수정하고 내 프로필 페이지로 이동
 
 ### 📄 일반회원 - 공고 상세 페이지
 
 - 공고 상세 페이지에서 최근에 본 공고 최대 6개를 브라우저 저장소를 활용해 불러오는 기능
 - 공고 신청 여부에 따른 신청/취소 요청
+
+### 📄 사장님 - 내 가게 등록, 수정 페이지
+
+- 가게 정보를 등록하고 조건에 맞는 정보를 작성하면 등록 완료 후 내 가게 페이지로 이동
  
 ### 📄 사장님 - 공고 등록, 수정 페이지
 
@@ -166,13 +162,16 @@ root
 - 내 공고가 아닐 경우
     - 일반회원과 마찬가지로 최근에 본 공고 띄우기
 
-### 📄 사장님 - 내 가게 등록, 수정 페이지
+### 📄 navigation bar 
 
-- 가게 정보를 등록하고 조건에 맞는 정보를 작성하면 등록 완료 후 내 가게 페이지로 이동
+- 로고 클릭 시 메인페이지로 이동
+- 특정 공고를 검색하는 기능
+- 일반회원의 경우 공고 신청에 대한 응답 알림을 받을 수 있는 기능
 
-### 📄 로그인 및 회원가입 페이지
+### 📄 메인 페이지 - 전체 공고 리스트
 
-- 일반회원 / 사장님 타입을 구분하여 회원가입 및 로그인 할 수 있는 기능
+- 전체 공고를 렌더링하고 조건에 따라 특정 공고를 필터링하거나 정렬할 수 있는 기능
+- 일반 회원의 경우 유저의 지역 정보에 따라 맞춤 공고를 보여주는 기능
 
 <br/><br/>
 
@@ -180,7 +179,8 @@ root
 ## ❗️ 문제 및 해결
 
 1. **로컬 스토리지 대신 쿠키 사용**
-   - SSR과 CSR의 차이 대충 설명하고 이러이러해서 쿠키를 사용함
+   - Next.js에서는 서버에서 HTML을 만들어서 반환하기 때문에 클라이언트의 브라우저 저장소에 바로 접근할 수 없음.
+   이에 따라 React와는 다른 방식으로 브라우저 저장소에 접근해야하기 때문에 쿠키를 사용하기로 결정.
 
 2. **데이터 캐싱을 위한 useQuery 쿼리키 활용**
    - 중복 요청을 줄이고 애플리케이션의 효율성을 높이기 위해 useQuery 쿼리키를 활용해 데이터 캐싱 사용   
@@ -220,5 +220,6 @@ root
 
 
 ## 💡 Q & A
+![image](https://github.com/the-julge/the-julge/assets/119824778/f056b4d6-398a-4322-a69f-1c056633b942)
 
   
