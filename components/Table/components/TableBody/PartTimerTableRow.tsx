@@ -49,7 +49,7 @@ const getStatusStyle = (status: string) => {
     case "rejected":
       return css`
         background: var(--The-julge-red);
-        color: var(--The-julge-gray--00);
+        color: var(--The-julge-gray-00);
       `;
     case "canceled":
       return css`

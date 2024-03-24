@@ -20,7 +20,7 @@ export default function RecommendNotice({ id }: { id: string }) {
   return (
     <Wrapper>
       <RecommendList>
-        <Header>추천 공고</Header>
+        <Header>맞춤 공고</Header>
         <CustomPostContent isLoading={isLoading}>
           {isLoading
             ? Array.from(new Array(3)).map((_, index) => <div key={index} />)

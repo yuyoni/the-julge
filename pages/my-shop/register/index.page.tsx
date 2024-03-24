@@ -1,8 +1,7 @@
-import Gnb from "@/components/Gnb";
-import styled from "@emotion/styled";
-import MyShopForm from "../components/MyshopForm";
 import Layout from "@/components/Layout";
 import MetaHead from "@/components/MetaHead";
+import styled from "@emotion/styled";
+import MyShopForm from "../components/MyshopForm";
 
 export default function Register() {
   return (

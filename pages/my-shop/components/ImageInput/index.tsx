@@ -1,16 +1,22 @@
 import React, { useCallback, useState, ChangeEvent } from "react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import createPresinedURL from "./imageRequest";
 import Image from "next/image";
 import cameraIcon from "@/public/images/camera-icon.svg";
 import useCookie from "@/hooks/useCookies";
 import { useMutation } from "react-query";
+import { body1Regular } from "@/styles/fontsStyle";
+import { useRef } from "react";
 
-type ImgProps = { handleImg: (key: string, value: string | number) => void };
+type ImgProps = {
+  handleImg: (key: string, value: string | number) => void;
+  value?: string;
+};
 
-export default function ImageInput({ handleImg }: ImgProps) {
-  const [fileInfo, setFileInfo] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+export default function ImageInput({ handleImg, value }: ImgProps) {
+  // const [fileInfo, setFileInfo] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(value || null);
   const { jwt: token } = useCookie();
 
   const fileCheck = useCallback((type: string) => {
@@ -22,7 +28,6 @@ export default function ImageInput({ handleImg }: ImgProps) {
   const mutation = useMutation({
     mutationFn: (selectedFile: File) => createPresinedURL(selectedFile, token),
     onSuccess: (data) => {
-      console.log(data);
       if (data) {
         const urlWithoutQueryParams = data.split("?")[0];
         handleImg("imageUrl", urlWithoutQueryParams);
@@ -40,19 +45,28 @@ export default function ImageInput({ handleImg }: ImgProps) {
       const url = URL.createObjectURL(selectedFile);
       setPreviewUrl(url);
       console.log(selectedFile);
-      setFileInfo(selectedFile);
+      // setFileInfo(selectedFile);
       mutation.mutate(selectedFile);
     } else {
       alert("jpeg, png, tiff 파일만 업로드 가능합니다.");
     }
   }, []);
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleUploadImg = useCallback(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.click();
+  }, []);
+
   return (
     <Container>
-      <div id="upload_pop_wrapper">
-        <header>Upload Files</header>
-        <main id="have_border_line">
-          {!fileInfo ? (
+      <ImageInputWrapper>
+        <StyledLabel>가게 이미지</StyledLabel>
+        <SelectImage>
+          {!previewUrl ? (
             <>
               <Image src={cameraIcon} alt="카메라 아이콘" />
               <span>이미지 추가하기</span>
@@ -61,34 +75,42 @@ export default function ImageInput({ handleImg }: ImgProps) {
               </label>
             </>
           ) : (
-            <div>
-              {previewUrl && (
-                <Image
-                  src={previewUrl}
-                  alt="Preview"
-                  width={400}
-                  height={400}
-                />
-              )}
-              <p>{fileInfo?.name}</p>
+            <div onClick={handleUploadImg} style={{ cursor: "pointer" }}>
+              <StyledImage
+                src={previewUrl}
+                alt="Preview"
+                width={400}
+                height={400}
+              />
             </div>
           )}
-        </main>
+        </SelectImage>
+
         <input
           type="file"
           accept="image/jpeg,image/png,image/tiff"
           id="fileUpload"
           hidden
-          onChange={onSelectFile}
+          onChange={(e) => onSelectFile(e)}
+          ref={inputRef}
         />
-      </div>
+      </ImageInputWrapper>
     </Container>
   );
 }
 
+const customBody1Regular = css`
+  ${body1Regular};
+  color: var(--The-julge-black);
+`;
+
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 8px;
+
   header {
     width: 100%;
     height: 38px;
@@ -101,21 +123,9 @@ const Container = styled.div`
       cursor: pointer;
     }
   }
-  #upload_pop_wrapper {
-    height: auto;
-    background-color: #fff;
-    align-self: center;
-    header {
-      color: white;
-      background-color: var(--The-julge-purple-10);
-    }
-    main#have_border_line {
-      border: dashed 2px var(--The-julge-purple-10);
-      margin: 30px 60px;
-      height: 334px;
-    }
+
     main {
-      width: 400px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -145,4 +155,31 @@ const Container = styled.div`
       margin-bottom: 30px;
     }
   }
+`;
+
+const ImageInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 8px;
+`;
+
+const StyledLabel = styled.label`
+  ${customBody1Regular}
+`;
+
+const StyledImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+`;
+
+const SelectImage = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

@@ -15,7 +15,7 @@ export default function MyProfile() {
   const profileData = useProfileData();
   const applicationHistory = useApplicationHistory();
 
-  if (userType !== "employee")
+  if (userType && userType !== "employee")
     return (
       <ModalContent
         modalIcon="alert"
