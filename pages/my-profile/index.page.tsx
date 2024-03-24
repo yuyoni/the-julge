@@ -1,19 +1,20 @@
+import { useRouter } from "next/router";
 import ApplicationHistory from "./components/ApplyHistory";
 import Layout from "@/components/Layout";
 import UserProfile from "./components/UserProfile";
 import styled from "@emotion/styled";
-import useProfileData from "./hooks/useProfileData";
 import useApplicationHistory from "./hooks/useApplicationHistory";
 import MetaHead from "@/components/MetaHead";
 import useCookie from "@/hooks/useCookies";
 import ModalContent from "../shops/[shopId]/notices/[noticeId]/components/ModalContent";
-import { useRouter } from "next/router";
+import useProfileData from "./hooks/useProfileData";
 
 export default function MyProfile() {
   const { userType } = useCookie();
   const router = useRouter();
-  const profileData = useProfileData();
-  const applicationHistory = useApplicationHistory();
+  const { data: historyData, isSuccess: isHistoryLoaded } =
+    useApplicationHistory();
+  const { data: profileData, isSuccess: isProfileLoaded } = useProfileData();
 
   if (userType && userType !== "employee")
     return (
@@ -30,9 +31,9 @@ export default function MyProfile() {
     <>
       <MetaHead title="+HE JULGE | 내 프로필" />
       <Layout>
-        <UserProfile {...profileData} />
+        <UserProfile data={profileData} isSuccess={isProfileLoaded} />
         <Wrapper>
-          <ApplicationHistory {...applicationHistory} />
+          <ApplicationHistory data={historyData} isSuccess={isHistoryLoaded} />
         </Wrapper>
       </Layout>
     </>

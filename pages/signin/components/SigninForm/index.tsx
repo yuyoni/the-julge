@@ -40,7 +40,6 @@ export default function SigninForm() {
       document.cookie = `id=${id}; path=/`;
       document.cookie = `userType=${type}; path=/`;
 
-      console.log("나는짱");
       router.push("/");
     } catch (error: any) {
       const { message } = error.response.data;

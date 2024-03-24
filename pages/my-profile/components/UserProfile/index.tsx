@@ -3,23 +3,35 @@ import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import ProfileCard from "../ProfileCard.tsx";
+import SkeletonUI from "@/components/Skeleton";
 
 type UserProfileProps = {
-  name: string;
-  phone: string;
-  address: string;
-  bio: string;
+  data: {
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
+  };
+  isSuccess: boolean;
 };
 
-export default function UserProfile(props: UserProfileProps) {
-  const { name, phone, address, bio } = props;
+export default function UserProfile({ data, isSuccess }: UserProfileProps) {
+  const { name, phone, address, bio } = data;
   const hasProfile = !!(name || phone || address || bio);
+
+  if (!isSuccess)
+    return (
+      <Wrapper>
+        <Title>내 프로필</Title>
+        <SkeletonUI height={260} />
+      </Wrapper>
+    );
   return (
-    <Wrapper hasProfile={hasProfile}>
+    <Wrapper>
       <Title>내 프로필</Title>
 
-      {hasProfile ? (
-        <ProfileCard {...props} />
+      {data && hasProfile ? (
+        <ProfileCard {...data} />
       ) : (
         <NoApplication>
           <Description>
@@ -36,7 +48,7 @@ export default function UserProfile(props: UserProfileProps) {
   );
 }
 
-const Wrapper = styled.div<{ hasProfile: boolean }>`
+const Wrapper = styled.div`
   max-width: 964px;
   margin: 0 auto;
   display: flex;

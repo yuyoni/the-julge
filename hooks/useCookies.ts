@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import axios from "axios";
-import { useMutation, useQueries, useQuery } from "react-query";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export type AuthInfo = {
   jwt: string;
@@ -20,10 +19,14 @@ export default function useCookie(): AuthInfo {
     }
   };
 
-  const { data, isSuccess } = useQuery("apiauth", getUserInfo, {
+  const { data, isSuccess, refetch } = useQuery("apiauth", getUserInfo, {
     staleTime: 10000,
     cacheTime: 60000,
   });
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return { ...data, isSuccess };
 }

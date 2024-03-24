@@ -3,26 +3,43 @@ import Table, { Data } from "@/components/Table";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import SkeletonUI from "@/components/Skeleton";
 
 export type ApplicationHistoryProps = {
-  type: "employer" | "employee";
-  limit: number;
-  count: number;
-  items: Data[];
+  data: {
+    type: string;
+    limit: number;
+    count: number;
+    items: Data[];
+  };
+  isSuccess: boolean;
 };
 
 export default function ApplicationHistory({
-  type,
-  limit,
-  count,
-  items,
+  data,
+  isSuccess,
 }: ApplicationHistoryProps) {
+  const { type, limit, count, items } = data;
+
+  if (!isSuccess) {
+    return (
+      <Wrapper>
+        <Title>신청 내역</Title>
+        <SkeletonUI height={480} />
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <Title>신청 내역</Title>
 
       {items.length > 0 ? (
-        <Table type={type} limit={limit} count={count} dataList={items} />
+        <Table
+          type={type as "employer" | "employee"}
+          limit={limit}
+          count={count}
+          dataList={items}
+        />
       ) : (
         <NoApplication>
           <Description>아직 신청 내역이 없어요</Description>
