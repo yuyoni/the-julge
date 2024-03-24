@@ -1,7 +1,8 @@
 import Button from "@/components/Button/Button";
 import CloseButton from "@/components/Button/CloseButton";
 import Layout from "@/components/Layout";
-import PostForm from "@/components/PostForm";
+import MetaHead from "@/components/MetaHead";
+import PostForm from "@/components/PostForm/index";
 import { useToast } from "@/contexts/ToastContext";
 import { useUser } from "@/contexts/UserContext";
 import useCookie from "@/hooks/useCookies";
@@ -13,10 +14,9 @@ import { h1 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import FormModalContent from "../../../components/FormModalContent";
-import validateFormData from "../../../utils/validateFormData";
 import ModalContent from "../components/ModalContent";
-import MetaHead from "@/components/MetaHead";
+import validateFormData from "../../../utils/validateFormData";
+import FormModalContent from "../../../components/FormModalContent";
 
 export default function NoticeEditPage() {
   const router = useRouter();
@@ -24,7 +24,6 @@ export default function NoticeEditPage() {
   const { showToast } = useToast();
   const { userInfo } = useUser();
   const { jwt: token } = useCookie();
-
   const [modalState, setModalState] = useState({
     isOpen: false,
     formData: {
@@ -34,6 +33,16 @@ export default function NoticeEditPage() {
       description: "",
     },
   });
+
+  if (!userInfo) {
+    return (
+      <ModalContent
+        modalIcon="alert"
+        modalText="로그인이 필요합니다"
+        handleYesClick={() => router.push("/signin")}
+      />
+    );
+  }
 
   const handleInputChange = (key: string, value: string | number) => {
     setModalState((prevState) => ({
@@ -46,8 +55,19 @@ export default function NoticeEditPage() {
   };
 
   const handleFormSubmit = async () => {
-    if (!validateFormData(modalState.formData, showToast)) return;
+    if (
+      !validateFormData(
+        modalState.formData,
+        showToast,
+        userInfo.item.shop?.item.originalHourlyPay!,
+      )
+    )
+      return;
     setModalState((prevState) => ({ ...prevState, isOpen: true }));
+  };
+
+  const handleModalClose = () => {
+    setModalState((prevState) => ({ ...prevState, isOpen: false }));
   };
 
   const handleYesClick = async () => {
@@ -58,29 +78,28 @@ export default function NoticeEditPage() {
         requestData: convertToISODate(modalState.formData),
         token: token,
       });
+
       router.push(`/shops/${shopId}/notices/${noticeId}`);
       showToast(TOAST_MESSAGES.EDIT_SUCCESSFUL);
     } catch (error: any) {
       const { message } = error.response.data;
       alert(message);
     } finally {
-      setModalState((prevState) => ({ ...prevState, isOpen: false }));
+      handleModalClose();
     }
   };
 
-  const handleNoClick = () => {
-    setModalState((prevState) => ({ ...prevState, isOpen: false }));
-  };
-
-  if (!userInfo) {
+  if (!userInfo.item.shop) {
     return (
       <ModalContent
         modalIcon="alert"
-        modalText="로그인이 필요합니다"
-        handleYesClick={() => router.push("/signin")}
+        modalText="가게를 먼저 등록해주세요"
+        handleYesClick={() => router.push("/my-shop")}
       />
     );
-  } else if (!userInfo.item.shop || userInfo.item.shop.item.id !== shopId) {
+  }
+
+  if (userInfo.item.shop.item.id !== shopId) {
     return (
       <ModalContent
         modalIcon="alert"
@@ -104,7 +123,7 @@ export default function NoticeEditPage() {
               }}
             />
           </Header>
-          <PostForm handleInputChange={handleInputChange} />
+          <PostForm userInfo={userInfo} handleInputChange={handleInputChange} />
           <ButtonContainer>
             <Button
               text="편집하기"
@@ -112,15 +131,12 @@ export default function NoticeEditPage() {
               handleClick={handleFormSubmit}
             />
           </ButtonContainer>
-          {modalState.isOpen && (
-            <Dimmed onClick={(prevState) => ({ ...prevState, isOpen: false })}>
-              <FormModalContent
-                formData={modalState.formData}
-                handleYesClick={handleYesClick}
-                handleNoClick={handleNoClick}
-              />
-            </Dimmed>
-          )}
+          <FormModalContent
+            modalState={modalState.isOpen}
+            formData={modalState.formData}
+            handleYesClick={handleYesClick}
+            handleNoClick={handleModalClose}
+          />
         </Wrapper>
       </Layout>
     </>
@@ -145,14 +161,14 @@ const Wrapper = styled.div`
   }
 `;
 
+const Title = styled.span`
+  ${h1}
+`;
+
 const Header = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-`;
-
-const Title = styled.span`
-  ${h1}
 `;
 
 const ButtonContainer = styled.div`
@@ -161,17 +177,4 @@ const ButtonContainer = styled.div`
   @media only screen and (max-width: 767px) {
     width: 100%;
   }
-`;
-
-const Dimmed = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1;
 `;
