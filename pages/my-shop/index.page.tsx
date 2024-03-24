@@ -62,7 +62,7 @@ export default function MyShop() {
                     />
                   </StyledDiv>
 
-                  <MyNotices shopImg={shopData.item.imageUrl} />
+                  <MyNotices shopData={shopData} />
                 </>
               ) : (
                 <CommonFrame frameType="MY_SHOP" />

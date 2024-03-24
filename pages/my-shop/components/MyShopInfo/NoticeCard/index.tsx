@@ -1,43 +1,36 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
 import { julgeBodyRegular, julgeH2 } from "@/components/Gnb/styles/fonstStyle";
-
+import { ShopData } from "@/pages/my-shop/type/shop-type";
+import { Notice } from "../../MyNotice";
+import UiPostContent from "@/components/Post/components/UiPostContent";
+import formatTimeRange from "@/lib/utils/formatTimeRange";
 interface MyNoticeProps {
-  hourly: number;
-  startsAt: string;
-  workhour: number;
-  description: string;
-  closed: boolean;
-  shopImg: string;
+  cardData: Notice;
+  shopData: ShopData;
 }
 
-export default function NoticeCard({
-  hourly,
-  startsAt,
-  workhour,
-  description,
-  closed,
-  shopImg,
-}: MyNoticeProps) {
+export default function NoticeCard({ cardData, shopData }: MyNoticeProps) {
+  const { hourlyPay, startsAt, workhour, description, closed } = cardData.item;
+  const { imageUrl, address1, address2 } = shopData.item;
+
   return (
     <>
-      <CardImageWrapper>
-        <CardImage width={200} height={200} src={shopImg} alt="가게 이미지" />
-      </CardImageWrapper>
+      <CardImage width={200} height={200} src={imageUrl} alt="가게 이미지" />
+
       <Section>
-        <StyledH2> 설명: {description}</StyledH2>
-        <StyledH2>시급 : {hourly} </StyledH2>
-        <StyledH2>시간: {startsAt}</StyledH2>
-        <StyledH2>근무시간: {workhour}</StyledH2>
+        <UiPostContent
+          name={description}
+          duration={formatTimeRange(startsAt, workhour)}
+          workhour={workhour}
+          address={address1 + address2}
+          hourlyPay={hourlyPay}
+        />
         <StyledH2>{closed}</StyledH2>
       </Section>
     </>
   );
 }
-
-const CardWrapper = styled.div``;
-
-const CardImageWrapper = styled.div``;
 
 const CardImage = styled(Image)`
   border-radius: 10px;

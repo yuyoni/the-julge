@@ -5,15 +5,15 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { useUser } from "@/contexts/UserContext";
 import useCookie from "@/hooks/useCookies";
-import useIntersectionObserver from "./useIntersectionObserver";
 import CommonFrame from "../MyShopInfo/Common";
-import NoticeCard from "../MyShopInfo/NoticeCard";
 import { h1Regular } from "@/styles/fontsStyle";
+import Post from "@/components/Post";
+import { ShopData } from "../../type/shop-type";
+import formatTimeRange from "@/lib/utils/formatTimeRange";
 
-interface Notice {
+export interface Notice {
   item: {
     id: string;
-    name: string;
     hourlyPay: number;
     startsAt: string;
     workhour: number;
@@ -27,15 +27,13 @@ interface MyNoticesProps {
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function MyNotices({ shopImg }: MyNoticesProps) {
+export default function MyNotices({ shopData }: { shopData: ShopData }) {
   const [isLast, setIsLast] = useState<boolean>(false);
-  const router = useRouter();
   const { userInfo } = useUser();
   const { jwt: token } = useCookie();
   const shopId = userInfo?.item.shop?.item.id;
 
   const getnotices = async ({ cursorId = 0 }: { cursorId: number }) => {
-    const shopId = userInfo?.item.shop?.item.id;
     const params = { offset: cursorId, limit: 2 };
 
     try {
@@ -94,22 +92,22 @@ export default function MyNotices({ shopImg }: MyNoticesProps) {
           <StyledH2>내가 등록한 공고</StyledH2>
           <NoticeWrapper>
             <Notices>
-              {noticesData.map((notice) => (
-                <CardsWrapper
-                  key={notice.item.id}
-                  onClick={() =>
-                    router.push(`/shops/${shopId}/notices/${notice.item.id}`)
-                  }
-                >
-                  <NoticeCard
-                    hourly={notice.item.hourlyPay}
-                    startsAt={notice.item.startsAt}
-                    workhour={notice.item.workhour}
-                    description={notice.item.description}
-                    closed={notice.item.closed}
-                    shopImg={shopImg}
-                  />
-                </CardsWrapper>
+              {noticesData.map(({ item }) => (
+                <Post
+                  item={{
+                    shopId: shopData.item.id,
+                    id: item.id,
+                    name: item.description,
+                    duration: formatTimeRange(item.startsAt, item.workhour),
+                    address: shopData.item.address1 + shopData.item.address2,
+                    hourlyPay: item.hourlyPay,
+                    originalHourlyPay: shopData.item.originalHourlyPay,
+                    imageUrl: shopData.item.imageUrl,
+                    closed: item.closed,
+                    startsAt: item.startsAt,
+                    workhour: item.workhour,
+                  }}
+                />
               ))}
             </Notices>
           </NoticeWrapper>
@@ -175,24 +173,4 @@ const Notices = styled.div`
   margin: 0 auto;
   grid-gap: 31px 14px;
   gap: 31px 14px;
-`;
-
-const CardsWrapper = styled.div`
-  @media (max-width: 768px) {
-    width: 171px;
-    padding: 12px;
-    gap: 12px;
-  }
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 312px;
-  padding: 16px;
-  border: 1px solid #e5e4e7;
-  border-radius: 12px;
-  background: #fff;
-  cursor: pointer;
-  margin: 0;
-  gap: 20px;
 `;
