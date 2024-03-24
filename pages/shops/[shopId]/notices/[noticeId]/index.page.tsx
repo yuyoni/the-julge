@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
+import MetaHead from "@/components/MetaHead";
+import { useUser } from "@/contexts/UserContext";
 
 export default function NoticeDetailPage() {
   const { query } = useRouter();
@@ -16,27 +18,39 @@ export default function NoticeDetailPage() {
     isLoading,
     error,
     data: noticeData,
-  } = useFetchData<NoticeList>(
-    `/shops/${shopId}/notices/${noticeId}`,
-    "NoticeInfo",
-  );
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Notice Detail fetching error</p>;
-  if (!noticeData) return <p>Noticedata not found</p>;
+  } = useFetchData<NoticeList>({
+    href: `/shops/${shopId}/notices/${noticeId}`,
+    queryKey: "NoticeInfo",
+    conditionValue: !!noticeId,
+  });
 
   return (
-    <Layout>
-      <Wrapper>
-        <Container>
-          {userType === "employee" ? (
-            <Employee noticeData={noticeData} token={token} />
-          ) : (
-            <Employer noticeData={noticeData} token={token} />
-          )}
-        </Container>
-      </Wrapper>
-    </Layout>
+    <>
+      <MetaHead
+        title={`+HE JULGE | ${noticeData?.item.shop.item.name}의 공고`}
+      />
+      <Layout>
+        <Wrapper>
+          <Container>
+            {userType === "employee" ? (
+              <Employee
+                isLoading={isLoading}
+                error={error as boolean}
+                noticeData={noticeData}
+                token={token}
+              />
+            ) : (
+              <Employer
+                isLoading={isLoading}
+                error={error as boolean}
+                noticeData={noticeData}
+                token={token}
+              />
+            )}
+          </Container>
+        </Wrapper>
+      </Layout>
+    </>
   );
 }
 

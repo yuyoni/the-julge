@@ -1,15 +1,12 @@
 import { NoticeItem } from "@/lib/types/NoticeTypes";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
-import { renderPosts } from "./util/renderPosts";
-
-interface PostListProps {
-  isRecommend: boolean;
-  noticeArray: NoticeItem[];
-}
+import { renderPosts } from "../RecommendNotice/renderPosts";
+import { PostListProps } from "../../types/type";
 
 export default function PostList({
   isRecommend = false,
   noticeArray,
+  address,
 }: PostListProps) {
   const itemDatas = noticeArray.map((notice: NoticeItem) => ({
     name: notice.shop.item.name,
@@ -25,5 +22,5 @@ export default function PostList({
     startsAt: notice.startsAt,
   }));
 
-  return renderPosts(itemDatas, isRecommend);
+  return renderPosts(itemDatas, isRecommend, address);
 }

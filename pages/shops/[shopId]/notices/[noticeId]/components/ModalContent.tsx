@@ -1,7 +1,9 @@
+import Dimmed from "@/components/Dimmed";
 import Modal from "@/components/Modal";
 import styled from "@emotion/styled";
 
 interface ModalContentProps {
+  modalState?: boolean;
   modalIcon: "alert" | "check" | undefined;
   modalText: string;
   handleYesClick: () => void;
@@ -11,6 +13,7 @@ interface ModalContentProps {
 }
 
 export default function ModalContent({
+  modalState = true,
   modalIcon,
   modalText,
   handleYesClick,
@@ -19,39 +22,28 @@ export default function ModalContent({
   yesButtonText,
 }: ModalContentProps) {
   return (
-    <Dimmed
-      onClick={() => {
-        if (setModalState) setModalState(false);
-      }}
-    >
-      {yesButtonText ? (
-        <Modal
-          modalIcon={modalIcon}
-          modalText={modalText}
-          handleYesClick={handleYesClick}
-          handleNoClick={handleNoClick}
-          yesButtonText={yesButtonText}
-        />
-      ) : (
-        <Modal
-          modalIcon={modalIcon}
-          modalText={modalText}
-          handleConfirmClick={handleYesClick}
-        />
-      )}
-    </Dimmed>
+    modalState && (
+      <Dimmed
+        onClick={() => {
+          if (setModalState) setModalState(false);
+        }}
+      >
+        {yesButtonText ? (
+          <Modal
+            modalIcon={modalIcon}
+            modalText={modalText}
+            handleYesClick={handleYesClick}
+            handleNoClick={handleNoClick}
+            yesButtonText={yesButtonText}
+          />
+        ) : (
+          <Modal
+            modalIcon={modalIcon}
+            modalText={modalText}
+            handleConfirmClick={handleYesClick}
+          />
+        )}
+      </Dimmed>
+    )
   );
 }
-
-const Dimmed = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 2;
-`;

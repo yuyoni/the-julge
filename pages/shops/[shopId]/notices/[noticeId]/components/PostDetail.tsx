@@ -2,19 +2,23 @@ import { NoticeList } from "@/lib/types/NoticeTypes";
 import { body1Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import PostCard from "./PostCard";
+import NoticeDetailSkeleton from "./Employer/NoticeDetailSkeleton";
 
 interface PostDetailProps {
   token: string;
-  noticeData: NoticeList;
+  noticeData: NoticeList | undefined;
   isMyNotice?: boolean;
+  isLoading: boolean;
+  error: boolean;
 }
 
 export default function PostDetail({
   token,
   noticeData,
   isMyNotice,
+  isLoading,
 }: PostDetailProps) {
-  if (!noticeData) return <div>loading...</div>;
+  if (isLoading || !noticeData) return <NoticeDetailSkeleton />;
 
   return (
     <Container>
@@ -68,6 +72,16 @@ const PostDescription = styled.div`
   ${body1Regular}
 `;
 
-const DescriptionHeading = styled.span``;
+const DescriptionHeading = styled.span`
+  ${h1Regular}
+  font-size: 20px;
+`;
 
-const DescriptionText = styled.p``;
+const DescriptionText = styled.p`
+  max-height: 148px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;

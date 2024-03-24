@@ -3,11 +3,13 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import RecentNotice from "./RecentNotice";
 import Button from "@/components/Button/Button";
+import { useRouter } from "next/router";
 
 export type NoticeHref = string;
 type RecentNoticeHrefList = NoticeHref[];
 
 export default function RecentNoticeContainer() {
+  const router = useRouter();
   const [recentNoticeList, setRecentNoticeList] =
     useState<RecentNoticeHrefList>([]);
 
@@ -26,14 +28,24 @@ export default function RecentNoticeContainer() {
       {recentNoticeList.length ? (
         <Container>
           {recentNoticeList.map((notice, index) => (
-            <RecentNotice key={notice} noticeHref={notice} index={index} />
+            <RecentNotice
+              key={index + notice}
+              noticeHref={notice}
+              index={index}
+            />
           ))}
         </Container>
       ) : (
         <NoRecentNotice>
           최근에 본 공고가 없습니다.
           <ButtonWrapper>
-            <Button color="colored" text="공고 보러가기" />
+            <Button
+              color="colored"
+              text="공고 보러가기"
+              handleClick={() => {
+                router.push("/");
+              }}
+            />
           </ButtonWrapper>
         </NoRecentNotice>
       )}

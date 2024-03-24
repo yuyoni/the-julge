@@ -1,19 +1,16 @@
-import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import DropDown from "../../../../components/DropDown";
-import Input from "../Input";
-import { addressArray, categoriesArray } from "@/lib/constants/options";
 import Button from "@/components/Button/Button";
-import ImageInput from "../ImageInput";
-import Modal from "@/components/Modal";
-import { ShopInfo } from "../../type/shop-type";
-import useCookie from "@/hooks/useCookies";
-import fetchData from "@/lib/apis/fetchData";
-import { AxiosError } from "axios";
 import { useToast } from "@/contexts/ToastContext";
-import axios from "axios";
+import useCookie from "@/hooks/useCookies";
+import { addressArray, categoriesArray } from "@/lib/constants/options";
+import styled from "@emotion/styled";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useMutation } from "react-query";
+import DropDown from "../../../../components/DropDown";
+import { ShopInfo } from "../../type/shop-type";
+import ImageInput from "../ImageInput";
+import Input from "../Input";
 
 interface MyShopFormProps {
   value?: string | undefined;
@@ -32,7 +29,6 @@ export default function MyShopForm({
 }: MyShopFormProps) {
   const router = useRouter();
   const { jwt: token } = useCookie();
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: initialData?.name || "",
     category: initialData?.category || "",
@@ -43,15 +39,6 @@ export default function MyShopForm({
     originalHourlyPay: initialData?.originalHourlyPay || 0,
   });
   const { showToast } = useToast();
-  //TODO 편집페이지 기존값 유지하고 싶음 ㅡ_ㅡ
-  // useEffect(() => {
-  //   console.log("initialData", initialData);
-  //   if (initialData) {
-  //     setFormData(initialData);
-  //   }
-  // }, [initialData]);
-
-  //TODO formData type 선언 필요
   const handleDataCheck = (formData: any) => {
     const {
       name,
@@ -122,37 +109,6 @@ export default function MyShopForm({
     submitMutation.mutate();
   };
 
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event?.preventDefault();
-  //   try {
-  //     const isValidData = handleDataCheck(formData);
-  //     if (!isValidData) return;
-  //     // if (method === "post") {
-  //     //   alert("가게 등록@");
-  //     // } else {
-  //     //   alert("편집이 완료됐습니당나귀");
-  //     // }
-
-  //     const response = await axios.post(`${BASE_URL}/shops`, formData, {
-  //       headers: {
-  //         Authorization: `${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (response) {
-  //       setIsModalOpen(true);
-  //       return;
-  //     }
-
-  //     throw new Error();
-  //   } catch (error: unknown) {
-  //     if (error instanceof AxiosError) {
-  //       showToast(error.response?.data.message);
-  //     }
-  //   }
-  // };
-
   const handleInputChange = (key: string, value: string | number) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -161,12 +117,6 @@ export default function MyShopForm({
     console.log(`${key}:${value}`);
   };
 
-  // const handleConfirmClick = () => {
-  //   setIsModalOpen(false);
-  //   console.log("클릭");
-  //   router.push("/my-shop");
-  // };
-
   const handleCategory = (category: string) => {
     if (categoriesArray.some((e) => e === category)) {
       handleInputChange("category", category);
@@ -174,8 +124,6 @@ export default function MyShopForm({
     }
     handleInputChange("address1", category);
   };
-
-  // const buttonText = method === "put" ? "편집하기" : "등록하기";
 
   return (
     <Container>
@@ -254,14 +202,6 @@ export default function MyShopForm({
           />
         </ButtonWrapper>
       </FormContainer>
-      {/* {isModalOpen && (
-        <Dimmed>
-          <Modal
-            modalText="등록되었지비~"
-            handleConfirmClick={handleConfirmClick}
-          />
-        </Dimmed>
-      )} */}
     </Container>
   );
 }
@@ -274,14 +214,13 @@ const Container = styled.form`
 `;
 
 const FormContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-justify-content: center;
-width: 100%;
-margin: 32px 0;
-gap: 24px;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin: 32px 0;
+  gap: 24px;
 `;
 
 const FormWrapper = styled.div`
@@ -314,15 +253,4 @@ const ButtonWrapper = styled.div`
   width: 312px;
   height: 48px;
   margin: 50px auto;
-`;
-
-const Dimmed = styled.div`
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
 `;
