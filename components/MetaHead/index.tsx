@@ -24,7 +24,10 @@ export default function MetaHead({
         }
       />
       <meta property="og:title" content={title || "+HE JULGE"} />
-      <meta property="og:url" content={url || "https://jungleehabit.com"} />
+      <meta
+        property="og:url"
+        content={url || "https://soyeon-jjang.vercel.app/"}
+      />
       <meta
         property="og:image"
         content={
