@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import WageFlag from "./WageFlag";
 import Overlay from "./Overlay";
+import Image from "next/image";
 
 interface UiImageProps {
   imageUrl: string;
@@ -24,7 +25,12 @@ export default function UiImage({
   return (
     <ImageContent>
       <ImageWrapper>
-        <PostImage src={imageUrl} className="card-image" alt="shop-image" />
+        <PostImage
+          src={imageUrl}
+          className="card-image"
+          alt="shop-image"
+          fill
+        />
         <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
         {overlayText && <Overlay overlayText={overlayText} />}
       </ImageWrapper>
@@ -42,13 +48,8 @@ const ImageWrapper = styled.div`
   padding-bottom: 200px;
 `;
 
-const PostImage = styled.img`
+const PostImage = styled(Image)`
   overflow: hidden;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;

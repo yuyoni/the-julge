@@ -84,7 +84,11 @@ export default function PostCard({
     <Wrapper>
       <ImageContainer>
         {showImageOnText(isClosed, isOutdated)}
-        <Image src={noticeData.item.shop.item.imageUrl} alt="shop_image" />
+        <Image
+          priority
+          src={noticeData.item.shop.item.imageUrl}
+          alt="shop_image"
+        />
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />

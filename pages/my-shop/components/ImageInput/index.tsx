@@ -68,7 +68,7 @@ export default function ImageInput({ handleImg, value }: ImgProps) {
         <SelectImage>
           {!previewUrl ? (
             <>
-              <Image src={cameraIcon} alt="카메라 아이콘" />
+              <Image priority src={cameraIcon} alt="카메라 아이콘" />
               <span>이미지 추가하기</span>
               <label htmlFor="fileUpload">
                 <div id="upload_button">SELECT</div>

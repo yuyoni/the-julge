@@ -35,11 +35,11 @@ export default function PostInformation({
           )}
         </WageContainer>
         <Container>
-          <Image src={clockIcon} alt="clock_icon" />
+          <Image priority src={clockIcon} alt="clock_icon" />
           <InfoStyle>{duration}</InfoStyle>
         </Container>
         <Container>
-          <Image src={locationIcon} alt="location_icon" />
+          <Image priority src={locationIcon} alt="location_icon" />
           <InfoStyle>{address}</InfoStyle>
         </Container>
         <DescriptionStyle>{shopDescription}</DescriptionStyle>

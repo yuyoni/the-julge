@@ -32,7 +32,13 @@ export default function UiGnb({ userType, handleClickMovePage }: GnbProps) {
     <Wrapper scrolled={scrolled}>
       <GnbContainer>
         <Logo href="/">
-          <Image src="/images/logo.svg" alt="더줄게" width={112} height={40} />
+          <Image
+            priority
+            src="/images/logo.svg"
+            alt="더줄게"
+            width={112}
+            height={40}
+          />
         </Logo>
         <SearchBar />
         <HeaderButtons

@@ -13,7 +13,13 @@ export default function Signin() {
       <CenteredContainer>
         <Wrapper>
           <Link href="/">
-            <Image src={logo} alt="logo_button" width={248} height={45} />
+            <Image
+              priority
+              src={logo}
+              alt="logo_button"
+              width={248}
+              height={45}
+            />
           </Link>
           <SigninForm />
           <ToSignup />
