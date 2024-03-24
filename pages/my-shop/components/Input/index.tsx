@@ -13,6 +13,7 @@ export default function Input({
   includeText,
   includeImage,
   handleClick,
+  onClick,
   error,
 }: InputProps) {
   const Input = type === "textarea" ? StyledTextarea : StyledInput;
@@ -26,6 +27,7 @@ export default function Input({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          onClick={handleClick}
         />
         <InputContent
           includeText={includeText}
