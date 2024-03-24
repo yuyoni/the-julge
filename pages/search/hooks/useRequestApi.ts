@@ -1,5 +1,4 @@
 import { SelectedLocationList } from "@/components/Filter/types/types";
-import convertDateNow from "../utils/convertDate";
 import axios from "axios";
 import { categoryMap } from "../constants/category";
 
@@ -54,7 +53,7 @@ export const getNotices = async ({
     query += `&keyword=${keyword}`;
   }
   if (startsAtValue) {
-    query += `&startsAtGte=${convertDateNow(startsAtValue)}`;
+    query += `&startsAtGte=${new Date(startsAtValue).toISOString()}`;
   }
   if (hourlyPayValue) {
     query += `&hourlyPayGte=${hourlyPayValue}`;
