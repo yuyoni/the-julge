@@ -23,6 +23,7 @@ export default function ProfileEdit() {
 
   return (
     <>
+      <MetaHead title="+HE JULGE | 내 프로필 편집" />
       <Layout>
         <Wrapper>
           <ProfileEditForm />

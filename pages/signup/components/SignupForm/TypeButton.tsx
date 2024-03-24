@@ -14,19 +14,14 @@ export default function TypeButton({
   text,
 }: TypeButtonProps) {
   return (
-    <ButtonWrapper>
+    <ButtonWrapper onClick={onClick}>
       <Image
         src={isChecked ? "/images/check-icon.svg" : "/images/uncheck-icon.svg"}
         alt="회원 유형"
         width={20}
         height={20}
       />
-      <Button
-        isChecked={isChecked}
-        color="white"
-        type="button"
-        onClick={onClick}
-      >
+      <Button isChecked={isChecked} color="white" type="button">
         {text}
       </Button>
     </ButtonWrapper>
@@ -64,6 +59,7 @@ const Button = styled.button<{ isChecked: boolean }>`
 const ButtonWrapper = styled.div`
   position: relative;
   display: flex;
+  cursor: pointer;
 
   img {
     position: absolute;

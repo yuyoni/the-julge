@@ -23,6 +23,7 @@ export default function NoticeRegistrationPage() {
   const { shopId } = router.query;
   const { showToast } = useToast();
   const { userInfo } = useUser();
+  const shopInfo = userInfo?.item.shop?.item;
   const { jwt: token } = useCookie();
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -59,7 +60,7 @@ export default function NoticeRegistrationPage() {
       !validateFormData(
         modalState.formData,
         showToast,
-        Number(userInfo.item.shop?.item.originalHourlyPay!),
+        Number(shopInfo?.originalHourlyPay!),
       )
     )
       return;
@@ -90,7 +91,7 @@ export default function NoticeRegistrationPage() {
     }
   };
 
-  if (!userInfo.item.shop) {
+  if (!shopInfo) {
     return (
       <ModalContent
         modalIcon="alert"
@@ -100,7 +101,7 @@ export default function NoticeRegistrationPage() {
     );
   }
 
-  if (userInfo.item.shop.item.id !== shopId) {
+  if (shopInfo.id !== shopId) {
     return (
       <ModalContent
         modalIcon="alert"
@@ -112,6 +113,7 @@ export default function NoticeRegistrationPage() {
 
   return (
     <>
+      <MetaHead title={`+HE JULGE | ${shopInfo.name} 새 공고 등록`} />
       <Layout>
         <Wrapper>
           <Header>

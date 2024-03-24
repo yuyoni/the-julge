@@ -58,6 +58,7 @@ export default function MyShop() {
 
   return (
     <>
+      <MetaHead title="+HE JULGE | 내 가게" />
       <Layout>
         <Container>
           <Header>

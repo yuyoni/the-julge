@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import MetaHead from "@/components/MetaHead";
 import useCookie from "@/hooks/useCookies";
 import useFetchData from "@/hooks/useFetchData";
 import { NoticeList } from "@/lib/types/NoticeTypes";
@@ -6,8 +7,6 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
-import MetaHead from "@/components/MetaHead";
-import { useUser } from "@/contexts/UserContext";
 
 export default function NoticeDetailPage() {
   const { query } = useRouter();
@@ -26,6 +25,9 @@ export default function NoticeDetailPage() {
 
   return (
     <>
+      <MetaHead
+        title={`+HE JULGE | ${noticeData?.item.shop.item.name}의 공고`}
+      />
       <Layout>
         <Wrapper>
           <Container>

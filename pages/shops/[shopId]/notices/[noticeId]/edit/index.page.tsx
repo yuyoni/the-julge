@@ -111,6 +111,7 @@ export default function NoticeEditPage() {
 
   return (
     <>
+      <MetaHead title="+HE JULGE | 공고 편집하기" />
       <Layout>
         <Wrapper>
           <Header>

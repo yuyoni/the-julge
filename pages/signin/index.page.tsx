@@ -9,6 +9,7 @@ import MetaHead from "@/components/MetaHead";
 export default function Signin() {
   return (
     <>
+      <MetaHead title="+HE JULGE | 로그인" />
       <CenteredContainer>
         <Wrapper>
           <Link href="/">

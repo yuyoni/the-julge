@@ -6,6 +6,7 @@ import MyShopForm from "../components/MyshopForm";
 export default function Register() {
   return (
     <>
+      <MetaHead title="+HE JULGE | 가게 등록" />
       <Layout>
         <Wrapper>
           <StyledDiv>

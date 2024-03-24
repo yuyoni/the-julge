@@ -24,7 +24,7 @@ export default function UiImage({
   return (
     <ImageContent>
       <ImageWrapper>
-        <PostImage src={imageUrl} className="card-image" />
+        <PostImage src={imageUrl} className="card-image" alt="shop-image" />
         <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
         {overlayText && <Overlay overlayText={overlayText} />}
       </ImageWrapper>
