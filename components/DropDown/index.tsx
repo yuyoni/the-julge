@@ -1,12 +1,8 @@
-import { useState, ChangeEvent } from "react";
+import { body1Regular } from "@/styles/fontsStyle";
+import styled from "@emotion/styled";
+import { ChangeEvent, useState } from "react";
 import Input from "../../pages/my-shop/components/Input";
 import DropDownList from "./components/DropDownList";
-import styled from "@emotion/styled";
-import { body1Regular } from "@/styles/fontsStyle";
-import {
-  InputContainer,
-  InputWrapper,
-} from "../../pages/my-shop/components/Input";
 interface DropDownProps {
   label?: string;
   categories: string[];

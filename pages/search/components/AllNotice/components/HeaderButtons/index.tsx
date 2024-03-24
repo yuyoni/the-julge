@@ -1,10 +1,9 @@
-import styled from "@emotion/styled";
-import { body2Bold } from "@/styles/fontsStyle";
-import DropDown from "@/components/DropDown";
+import DropDown, { StyledSpan } from "@/components/DropDown";
 import { InputContainer, InputWrapper } from "@/pages/my-shop/components/Input";
-import { StyledSpan } from "@/components/DropDown";
 import { categoryMap } from "@/pages/search/constants/category";
 import { HeaderButtonsProps } from "@/pages/search/types/type";
+import { body2Regular } from "@/styles/fontsStyle";
+import styled from "@emotion/styled";
 
 export default function HeaderButtons({
   handleCategoryChange,
@@ -59,7 +58,7 @@ const FilterButton = styled.div`
   align-items: center;
   border-radius: 5px;
   color: var(--The-julge-white, #fff);
-  ${body2Bold}
+  ${body2Regular}
   background: var(--The-julge-purple-30);
   cursor: pointer;
 

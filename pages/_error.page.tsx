@@ -2,20 +2,27 @@ import Button from "@/components/Button/Button";
 import Layout from "@/components/Layout";
 import { body1Regular, h2 } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function Custom404() {
   const router = useRouter();
 
+  const CANNOT_FIND_URL = "페이지를 찾을 수 없습니다";
+  const CANNOT_FIND_URL_DESCRIPTION =
+    "페이지의 주소가 잘못 입력되었거나 주소 변경 또는 삭제되어 요청하신 페이지를 찾을 수 없습니다.";
+
   return (
     <Layout>
       <Wrapper>
-        <img src="images/404.svg" alt="page-not-found" />
-        <Title>페이지를 찾을 수 없습니다</Title>
-        <Text>
-          페이지의 주소가 잘못 입력되었거나, 주소 변경 또는 삭제되어 요청하신
-          페이지를 찾을 수 없습니다
-        </Text>
+        <Image
+          src="images/404.svg"
+          alt="page-not-found"
+          width={100}
+          height={212}
+        />
+        <Title>{CANNOT_FIND_URL}</Title>
+        <Text>{CANNOT_FIND_URL_DESCRIPTION}</Text>
         <ButtonWrapper>
           <Button
             text="돌아가기"
@@ -43,12 +50,10 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   ${h2}
-  color: #757575;
 `;
 
 const Text = styled.div`
   ${body1Regular}
-  color: #757575;
   margin-top: -16px;
 `;
 

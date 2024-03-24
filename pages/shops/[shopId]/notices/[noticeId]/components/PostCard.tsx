@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ModalContent from "./ModalContent";
 import Button from "@/components/Button/Button";
+import Image from "next/image";
 
 interface PostCardType {
   token: string;
@@ -83,7 +84,7 @@ export default function PostCard({
     <Wrapper>
       <ImageContainer>
         {showImageOnText(isClosed, isOutdated)}
-        <img src={noticeData.item.shop.item.imageUrl} alt="shop_image" />
+        <Image src={noticeData.item.shop.item.imageUrl} alt="shop_image" />
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
