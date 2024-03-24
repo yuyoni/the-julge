@@ -90,28 +90,30 @@ export default function MyNotices({ shopImg }: MyNoticesProps) {
   return (
     <>
       {noticesData.length > 0 ? (
-        <>
+        <NoticeContainer>
           <StyledH2>내가 등록한 공고</StyledH2>
-          <NoticeContainer>
-            {noticesData.map((notice) => (
-              <div
-                key={notice.item.id}
-                onClick={() =>
-                  router.push(`/shops/${shopId}/notices/${notice.item.id}`)
-                }
-              >
-                <NoticeCard
-                  hourly={notice.item.hourlyPay}
-                  startsAt={notice.item.startsAt}
-                  workhour={notice.item.workhour}
-                  description={notice.item.description}
-                  closed={notice.item.closed}
-                  shopImg={shopImg}
-                />
-              </div>
-            ))}
-          </NoticeContainer>
-        </>
+          <NoticeWrapper>
+            <Notices>
+              {noticesData.map((notice) => (
+                <CardsWrapper
+                  key={notice.item.id}
+                  onClick={() =>
+                    router.push(`/shops/${shopId}/notices/${notice.item.id}`)
+                  }
+                >
+                  <NoticeCard
+                    hourly={notice.item.hourlyPay}
+                    startsAt={notice.item.startsAt}
+                    workhour={notice.item.workhour}
+                    description={notice.item.description}
+                    closed={notice.item.closed}
+                    shopImg={shopImg}
+                  />
+                </CardsWrapper>
+              ))}
+            </Notices>
+          </NoticeWrapper>
+        </NoticeContainer>
       ) : (
         <CommonFrame frameType="NOTICE" shopId={shopId} />
       )}
@@ -122,12 +124,75 @@ export default function MyNotices({ shopImg }: MyNoticesProps) {
 }
 
 const NoticeContainer = styled.div`
-  grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 768px) {
+    padding: 40px 12px;
+  }
+  @media (max-width: 1028px) {
+    width: 100%;
+    max-width: none;
+    padding: 60px 32px;
+  }
+
+  position: relative;
+  max-width: 964px;
+  height: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-gap: 3rem 1.5rem;
+  padding: 60px 0;
 `;
 
 const StyledH2 = styled.h2`
   ${h1Regular};
+  margin-bottom: 24px;
+`;
+
+const NoticeWrapper = styled.div`
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 32px;
+`;
+
+const Notices = styled.div`
+  @media (max-width: 593px) {
+    grid-template-columns: repeat(2, 171px);
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 171px);
+    gap: 16px 8px;
+  }
+  @media (max-width: 1028px) {
+    grid-template-columns: repeat(2, 312px);
+    margin: 0 auto;
+  }
+
+  display: grid;
+  grid-template-columns: repeat(3, 312px);
+  margin: 0 auto;
+  grid-gap: 31px 14px;
+  gap: 31px 14px;
+`;
+
+const CardsWrapper = styled.div`
+  @media (max-width: 768px) {
+    width: 171px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 312px;
+  padding: 16px;
+  border: 1px solid #e5e4e7;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  margin: 0;
+  gap: 20px;
 `;
