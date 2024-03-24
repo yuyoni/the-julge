@@ -10,7 +10,7 @@ export default function ProfileEdit() {
   const { userType } = useCookie();
   const router = useRouter();
 
-  if (userType !== "employee")
+  if (userType && userType !== "employee")
     return (
       <ModalContent
         modalIcon="alert"

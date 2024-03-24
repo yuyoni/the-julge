@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import locationIcon from "@/public/images/location.svg";
 import Button from "@/components/Button/Button";
-import { body1Regular, h1Regular } from "@/styles/fontsStyle";
+import { body1Regular, body2Regular, h1Regular } from "@/styles/fontsStyle";
 
 interface ShopCardProps {
   id: string;
@@ -52,10 +52,10 @@ export default function ShopCard({
         </DescriptionDiv>
         <ButtonsWrapper>
           <Link href="/my-shop/edit">
-            <Button text="편집하기" type="submit" color="white" width={170} />
+            <Button text="편집하기" type="submit" color="white" />
           </Link>
           <Link href={`/shops/${id}`}>
-            <Button text="공고 등록하기" type="submit" width={170} />
+            <Button text="공고 등록하기" type="submit" />
           </Link>
         </ButtonsWrapper>
       </ShopInfoWrapper>
@@ -65,77 +65,97 @@ export default function ShopCard({
 
 const Section = styled.div`
   display: flex;
-  width: 964px;
-  height: auto;
-  padding: 24px;
   justify-content: space-between;
-  align-items: flex-start;
+  padding: 32px;
   border-radius: 12px;
   background: var(--The-julge-purple-10);
+
+  @media (max-width: 1028px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+  }
 `;
 
 const ShopImageWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-shrink: 0;
+  @media (max-width: 1028px) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.75 / 1;
+  }
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   width: 539px;
   height: 308px;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
   border-radius: 12px;
+  overflow: hidden;
+  border-radius: 15px;
 `;
 
 const ShopImage = styled(Image)`
-  width: 596px;
-  height: auto;
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 
 const DescriptionDiv = styled.div`
   display: flex;
-  width: 346px;
-  gap: 12px;
   flex-direction: column;
   align-items: flex-start;
-  align-self: stretch;
-
-  p {
-    ${body1Regular};
-  }
+  justify-content: flex-start;
+  gap: 12px;
 `;
 
 const MyShopDiv = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 8px;
+  color: var(--The-julge-purple-40);
+  ${body1Regular}
+  line-height: 20px;
 
-  h3 {
-    ${body1Regular};
-    color: var(--The-julge-purple-40);
-  }
-
-  h2 {
-    ${h1Regular};
+  @media (max-width: 767px) {
+    ${body2Regular}
   }
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
   gap: 8px;
-  align-self: stretch;
 `;
 
 const ShopInfoWrapper = styled.div`
+  @media (max-width: 1028px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    gap: 40px;
+  }
+
   display: flex;
-  width: 346px;
-  padding-top: 16px;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
-  align-self: stretch;
+  justify-content: space-between;
+  width: 346px;
+  height: 308px;
+  padding-top: 16px;
+
+  @media (max-width: 768px) {
+    padding-top: 12px;
+    gap: 24px;
+  }
 `;
 
 const LocationDiv = styled.div`

@@ -54,6 +54,9 @@ const Wrapper = styled.div`
   text-align: center;
   width: 100%;
   color: var(--The-julge-black);
+  background-color: var(--The-julge-gray-00);
+  border-radius: 12px;
+  border: 1px dashed var(--The-julge-gray-40);
   ${h3};
 `;
 
@@ -63,8 +66,6 @@ const Container = styled.div`
   gap: 20px;
   padding: 30px;
   text-align: left;
-  border-radius: 4px;
-  border: 1px solid;
   ${body1Regular};
 `;
 

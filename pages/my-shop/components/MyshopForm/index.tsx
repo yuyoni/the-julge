@@ -1,17 +1,16 @@
-import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import DropDown from "../../../../components/DropDown";
-import Input from "../Input";
-import { addressArray, categoriesArray } from "@/lib/constants/options";
 import Button from "@/components/Button/Button";
-import ImageInput from "../ImageInput";
-import Modal from "@/components/Modal";
-import { ShopInfo } from "../../type/shop-type";
-import useCookie from "@/hooks/useCookies";
-import fetchData from "@/lib/apis/fetchData";
-import { AxiosError } from "axios";
 import { useToast } from "@/contexts/ToastContext";
+import useCookie from "@/hooks/useCookies";
+import { addressArray, categoriesArray } from "@/lib/constants/options";
+import styled from "@emotion/styled";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useMutation } from "react-query";
+import DropDown from "../../../../components/DropDown";
+import { ShopInfo } from "../../type/shop-type";
+import ImageInput from "../ImageInput";
+import Input from "../Input";
 
 interface MyShopFormProps {
   value?: string | undefined;
@@ -20,79 +19,94 @@ interface MyShopFormProps {
   initialData?: ShopInfo | null;
 }
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function MyShopForm({
   value,
   param,
   method,
   initialData,
 }: MyShopFormProps) {
-  const { showToast } = useToast();
   const router = useRouter();
   const { jwt: token } = useCookie();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    category: "",
-    address1: "",
-    imageUrl: "",
-    address2: "",
-    description: "",
-    originalHourlyPay: 0,
+    name: initialData?.name || "",
+    category: initialData?.category || "",
+    address1: initialData?.address1 || "",
+    imageUrl: initialData?.imageUrl || "",
+    address2: initialData?.address2 || "",
+    description: initialData?.description || "",
+    originalHourlyPay: initialData?.originalHourlyPay || 0,
   });
-  //TODO 편집페이지 기존값 유지하고 싶음 ㅡ_ㅡ
-  useEffect(() => {
-    console.log("initialData", initialData);
-    if (initialData) {
-      setFormData(initialData);
+  const { showToast } = useToast();
+  const handleDataCheck = (formData: any) => {
+    const {
+      name,
+      category,
+      address1,
+      address2,
+      imageUrl,
+      description,
+      originalHourlyPay,
+    } = formData;
+
+    if (
+      name === "" ||
+      category === "" ||
+      address1 === "" ||
+      address2 === "" ||
+      imageUrl === "" ||
+      description === "" ||
+      originalHourlyPay === 0
+    ) {
+      showToast("모든 값을 채워주세요");
+      return false;
     }
-  }, [initialData]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
-    try {
-      const {
-        name,
-        category,
-        address1,
-        address2,
-        imageUrl,
-        description,
-        originalHourlyPay,
-      } = formData;
+    return true;
+  };
 
-      if (
-        name === "" ||
-        category === "" ||
-        address1 === "" ||
-        address2 === "" ||
-        imageUrl === "" ||
-        description === "" ||
-        originalHourlyPay === 0
-      ) {
-        showToast("모든 값을 채워주세요"); //TODO 모달로 바꾸기
-        return;
-      }
-      if (method === "post") {
-        showToast("가게 등록@");
-      } else {
-        showToast("편집이 완료됐습니당나귀");
-      }
+  const postShops = async () => {
+    const response = await axios.post(`${BASE_URL}/shops`, formData, {
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-      const response = await fetchData({
-        param: param,
-        method: method,
-        requestData: formData,
-        token: token,
-      });
+    return response.data;
+  };
 
-      if (response) router.push("/my-shop");
+  const putShops = async () => {
+    const response = await axios.put(`${BASE_URL}${param}`, formData, {
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  };
 
-      throw new Error();
-    } catch (error: unknown) {
+  const submitMutation = useMutation({
+    mutationFn: () => (method === "post" ? postShops() : putShops()),
+    onSuccess: () => {
+      showToast(
+        method === "post" ? "가게가 등록되었습니다." : "수정이 완료되었습니다.",
+      );
+      router.push("/my-shop");
+    },
+    onError: (error: unknown) => {
       if (error instanceof AxiosError) {
-        alert(error.response?.data.message);
+        showToast(error.response?.data.message);
       }
-    }
+    },
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const isValidData = handleDataCheck(formData);
+    if (!isValidData) return;
+    submitMutation.mutate();
   };
 
   const handleInputChange = (key: string, value: string | number) => {
@@ -103,11 +117,6 @@ export default function MyShopForm({
     console.log(`${key}:${value}`);
   };
 
-  const handleConfirmClick = () => {
-    setIsModalOpen(false);
-    console.log("클릭");
-    router.push("/my-shop");
-  };
   const handleCategory = (category: string) => {
     if (categoriesArray.some((e) => e === category)) {
       handleInputChange("category", category);
@@ -116,76 +125,98 @@ export default function MyShopForm({
     handleInputChange("address1", category);
   };
 
-  const buttonText = method === "put" ? "편집하기" : "등록하기";
-
   return (
-    <FormContainer>
-      <FormWrapper>
-        <Input
-          onChange={(event) => handleInputChange("name", event.target.value)}
-          label="가게 이름*"
-        />
-        <DropDown
-          label="분류*"
-          categories={categoriesArray}
-          onCategoryChange={handleCategory}
-        />
-      </FormWrapper>
-      <FormWrapper>
-        <DropDown
-          label="주소*"
-          categories={addressArray}
-          onCategoryChange={handleCategory}
-        />
-        <Input
-          onChange={(event) =>
-            handleInputChange("address2", event.target.value)
-          }
-          label="상세 주소*"
-        />
-      </FormWrapper>
-      <FormWrapper>
-        <Input
-          onChange={(event) =>
-            handleInputChange("originalHourlyPay", event.target.value)
-          }
-          label="기본 시급*"
-          includeText="원"
-        />
-      </FormWrapper>
-      <FormWrapper>
-        <ImageInput handleImg={handleInputChange} />
-      </FormWrapper>
-      <Input
-        type="textarea"
-        onChange={(event) =>
-          handleInputChange("description", event.target.value)
-        }
-        label="가게 설명"
-      />
-
-      <Button
-        handleClick={handleSubmit}
-        text={buttonText}
-        width={312}
-        type="button"
-      />
-      {isModalOpen && (
-        <Dimmed>
-          <Modal
-            modalText="등록되었지비~"
-            handleConfirmClick={handleConfirmClick}
+    <Container>
+      <h1>가게 정보</h1>
+      <FormContainer>
+        <FormWrapper>
+          <Selection>
+            <Input
+              onChange={(event) =>
+                handleInputChange("name", event.target.value)
+              }
+              label="가게 이름*"
+              value={formData.name}
+            />
+          </Selection>
+          <Selection>
+            <DropDown
+              label="분류*"
+              categories={categoriesArray}
+              onCategoryChange={handleCategory}
+              value={formData.category}
+            />
+          </Selection>
+        </FormWrapper>
+        <FormWrapper>
+          <Selection>
+            <DropDown
+              label="주소*"
+              categories={addressArray}
+              onCategoryChange={handleCategory}
+              value={formData.address1}
+            />
+          </Selection>
+          <Selection>
+            <Input
+              onChange={(event) =>
+                handleInputChange("address2", event.target.value)
+              }
+              label="상세 주소*"
+              value={formData.address2}
+            />
+          </Selection>
+        </FormWrapper>
+        <FormWrapper>
+          <Selection>
+            <Input
+              onChange={(event) =>
+                handleInputChange("originalHourlyPay", event.target.value)
+              }
+              label="기본 시급*"
+              includeText="원"
+              type={"number"}
+              value={formData.originalHourlyPay}
+            />
+          </Selection>
+        </FormWrapper>
+        <FormWrapper>
+          <ImageInput handleImg={handleInputChange} value={formData.imageUrl} />
+        </FormWrapper>
+        <TextArea>
+          <Input
+            type="textarea"
+            onChange={(event) =>
+              handleInputChange("description", event.target.value)
+            }
+            label="가게 설명"
+            value={formData.description}
           />
-        </Dimmed>
-      )}
-    </FormContainer>
+        </TextArea>
+        <ButtonWrapper>
+          <Button
+            handleClick={handleSubmit}
+            text={method === "put" ? "편집하기" : "등록하기"}
+            width={312}
+            type="button"
+          />
+        </ButtonWrapper>
+      </FormContainer>
+    </Container>
   );
 }
 
-const FormContainer = styled.form`
+const Container = styled.form`
+  position: relative;
+  max-width: 964px;
+  height: 100%;
+  margin: 0 auto;
+`;
+
+const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
   margin: 32px 0;
@@ -200,13 +231,26 @@ const FormWrapper = styled.div`
   width: 100%;
 `;
 
-const Dimmed = styled.div`
-  position: fixed;
-  top: 0;
+const Selection = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+`;
+
+const TextArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 153px;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 312px;
+  height: 48px;
+  margin: 50px auto;
 `;

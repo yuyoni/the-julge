@@ -6,48 +6,46 @@ import useCookie from "@/hooks/useCookies";
 import { useUser } from "@/contexts/UserContext";
 import fetchData from "@/lib/apis/fetchData";
 import { ShopInfo } from "../type/shop-type";
+import { useQuery } from "react-query";
 
 export default function Edit() {
   const { jwt: token } = useCookie();
   const { userInfo } = useUser();
   const shopId = userInfo?.item?.shop?.item.id;
-  const [shopData, setShopData] = useState<ShopInfo | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchShopData() {
-      if (shopId) {
-        try {
-          const data = await fetchData({
-            param: `/shops/${shopId}`,
-            method: "get",
-            token: token,
-          });
-          setShopData(data as ShopInfo);
-          console.log(`${userInfo}`);
-        } catch (error) {
-          console.error("Failed to fetch shop data:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        setIsLoading(false);
-      }
-    }
+  const QUERY_KEYS = {
+    shop: "shop",
+  } as const;
 
-    fetchShopData();
-  }, [userInfo, token]);
+  const getShops = async () => {
+    const data: { item: ShopInfo } = await fetchData({
+      param: `/shops/${shopId}`,
+      method: "get",
+      token: token,
+    });
+    return data.item;
+  };
+
+  const { data: shopData, isFetching } = useQuery({
+    queryKey: [QUERY_KEYS.shop, userInfo],
+    queryFn: () => getShops(),
+    enabled: !!userInfo,
+  });
+
   return (
     <>
-      <Gnb />
-      <StyledDiv>
-        <h1>가게 정보</h1>
-        <MyShopForm
-          param={`/shops/${shopId}`}
-          method="put"
-          initialData={shopData}
-        />
-      </StyledDiv>
+      {!isFetching && (
+        <>
+          <Gnb />
+          <StyledDiv>
+            <MyShopForm
+              param={`/shops/${shopId}`}
+              method="put"
+              initialData={shopData}
+            />
+          </StyledDiv>
+        </>
+      )}
     </>
   );
 }
