@@ -41,6 +41,7 @@ export default function ShopCard({
           </MyShopDiv>
           <LocationDiv>
             <Image
+              priority
               src={locationIcon}
               alt="Location Icon"
               width={20}

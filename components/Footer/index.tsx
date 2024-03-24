@@ -15,6 +15,7 @@ export default function Footer() {
         <Sns>
           <Link href="/#" rel="noopener noreferrer">
             <Image
+              priority
               src="/images/envelop-square.svg"
               alt="이메일 로고 "
               height={25}
@@ -27,6 +28,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
+              priority
               src="/images/facebook-square.svg"
               alt="facebook 홈페이지로 연결된 facebook 로고"
               height={25}
@@ -40,6 +42,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
+              priority
               src="/images/instagram-square.svg"
               alt="instagram 홈페이지로 연결된 instagram 로고"
               height={25}

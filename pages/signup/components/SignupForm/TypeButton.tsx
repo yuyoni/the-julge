@@ -16,6 +16,7 @@ export default function TypeButton({
   return (
     <ButtonWrapper onClick={onClick}>
       <Image
+        priority
         src={isChecked ? "/images/check-icon.svg" : "/images/uncheck-icon.svg"}
         alt="회원 유형"
         width={20}

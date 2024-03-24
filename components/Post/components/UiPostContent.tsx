@@ -30,6 +30,7 @@ export default function UiPostContent({
       <PostName>{name}</PostName>
       <Time>
         <Image
+          priority
           src="/images/clock-icon 1.svg"
           alt="시계아이콘"
           height={20}
@@ -39,6 +40,7 @@ export default function UiPostContent({
       </Time>
       <Location>
         <Image
+          priority
           src="/images/location.svg"
           alt="지도아이콘"
           height={20}

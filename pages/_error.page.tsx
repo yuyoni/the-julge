@@ -16,6 +16,7 @@ export default function Custom404() {
     <Layout>
       <Wrapper>
         <Image
+          priority
           src="images/404.svg"
           alt="page-not-found"
           width={100}

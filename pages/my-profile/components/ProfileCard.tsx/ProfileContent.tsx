@@ -34,6 +34,7 @@ export default function ProfileContent({
       </PhoneContainer>
       <AddressContainer>
         <Image
+          priority
           src="/images/location.svg"
           alt="선호지역"
           width={20}

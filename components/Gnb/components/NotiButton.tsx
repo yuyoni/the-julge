@@ -30,6 +30,7 @@ export default function NotiButton() {
     <>
       <Button type="button" onClick={handleClickNoti}>
         <Image
+          priority
           src={`/images/notification-${activeStatus}.svg`}
           alt="notification"
           width={20}

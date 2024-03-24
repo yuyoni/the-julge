@@ -14,6 +14,7 @@ export default function Title({ children }: TitleProps) {
       {children}
       <Link href="/my-profile">
         <Image
+          priority
           src="/images/close_icon.svg"
           alt="닫기 버튼"
           width={32}

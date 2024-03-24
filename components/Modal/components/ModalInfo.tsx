@@ -9,6 +9,7 @@ export default function ModalInfo({ modalIcon, modalText }: ModalInfo) {
     <Container>
       {modalIcon && (
         <Image
+          priority
           width={24}
           height={24}
           src={modalIcon === "alert" ? alertIcon : checkIcon}

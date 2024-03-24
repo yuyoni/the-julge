@@ -19,6 +19,7 @@ export default function ArrowButton({
   return (
     <NextButton disabled={isDisabled} onClick={onClick}>
       <Image
+        priority
         src={getArrowImage(type, isDisabled)}
         alt="화살표 버튼"
         width={20}

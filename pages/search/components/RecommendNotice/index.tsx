@@ -72,7 +72,7 @@ const CustomPostContent = styled.div<{ isLoading: boolean }>`
   display: grid;
   grid-template-columns: repeat(3, 294px);
   gap: 31px 18px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 
   ${({ isLoading }) =>
@@ -87,6 +87,7 @@ const CustomPostContent = styled.div<{ isLoading: boolean }>`
 
   @media only screen and (max-width: 1028px) {
     grid-template-columns: repeat(3, 320px);
+    justify-content: flex-start;
     grid-auto-flow: column;
     flex-wrap: nowrap;
     overflow-x: auto;
