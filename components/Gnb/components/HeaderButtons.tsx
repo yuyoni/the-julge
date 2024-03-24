@@ -3,6 +3,7 @@ import UiButton from "./UiButton";
 import NotiButton from "./NotiButton";
 import { useRouter } from "next/router";
 import deleteCookie from "../hook/useLogout";
+import { julgeBodyBold } from "../styles/fonstStyle";
 
 interface HeaderButtonsProps {
   userType: string;
@@ -33,10 +34,10 @@ export default function HeaderButtons({
       )}
       {userType === "employer" && (
         <>
-          <UiButton
-            name="내 가게"
-            handleClickButton={() => handleClickMovePage("my-shop")}
-          />
+          <a href="/my-shop" className="uiButton">
+            내 가게
+          </a>
+
           <UiButton
             name="로그아웃"
             handleClickButton={() => deleteCookie(router)}
@@ -66,6 +67,12 @@ const Buttons = styled.div`
   align-items: center;
   justify-content: center;
   gap: 20px;
+
+  .uiButton {
+    background-color: transparent;
+    line-height: 20px;
+    ${julgeBodyBold};
+  }
 
   @media only screen and (max-width: 768px) {
     justify-content: flex-end;

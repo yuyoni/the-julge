@@ -3,12 +3,16 @@ import Input from "../../pages/my-shop/components/Input";
 import DropDownList from "./components/DropDownList";
 import styled from "@emotion/styled";
 import { body1Regular } from "@/styles/fontsStyle";
-
+import {
+  InputContainer,
+  InputWrapper,
+} from "../../pages/my-shop/components/Input";
 interface DropDownProps {
   label?: string;
   categories: string[];
   width?: number;
   onCategoryChange?: (category: string) => void | undefined;
+  value?: string;
 }
 
 export default function DropDown({
@@ -16,8 +20,9 @@ export default function DropDown({
   categories,
   width,
   onCategoryChange,
+  value,
 }: DropDownProps) {
-  const [selectOption, setSelectOption] = useState("");
+  const [selectOption, setSelectOption] = useState(value || "");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -30,7 +35,9 @@ export default function DropDown({
     if (onCategoryChange) onCategoryChange(category);
   };
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setSelectOption(event.target.value);
   };
 
@@ -43,7 +50,7 @@ export default function DropDown({
         value={selectOption}
         includeImage
         handleClick={handleClick}
-        onChange={handleInput}
+        onChange={(e) => handleInput(e)}
       />
 
       {isOpen && (
@@ -59,12 +66,14 @@ const DropDownContainer = styled.div<{ $width?: number }>`
   position: relative;
   flex-direction: column;
   align-items: flex-start;
+  height: 100%;
 `;
 
-const StyledSpan = styled.span<{ labelExists: boolean }>`
+export const StyledSpan = styled.span<{ labelExists: boolean }>`
   position: absolute;
   top: ${({ labelExists }) => (labelExists ? "52px" : "25px")};
   left: 20px;
   color: var(--The-julge-gray-40);
   ${body1Regular};
+  z-index: 1;
 `;
