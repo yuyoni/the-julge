@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
+import MetaHead from "@/components/MetaHead";
+import { useUser } from "@/contexts/UserContext";
 
 export default function NoticeDetailPage() {
   const { query } = useRouter();
@@ -23,27 +25,32 @@ export default function NoticeDetailPage() {
   });
 
   return (
-    <Layout>
-      <Wrapper>
-        <Container>
-          {userType === "employee" ? (
-            <Employee
-              isLoading={isLoading}
-              error={error as boolean} // 수정해야함
-              noticeData={noticeData}
-              token={token}
-            />
-          ) : (
-            <Employer
-              isLoading={isLoading}
-              error={error as boolean} // 수정해야함
-              noticeData={noticeData}
-              token={token}
-            />
-          )}
-        </Container>
-      </Wrapper>
-    </Layout>
+    <>
+      <MetaHead
+        title={`+HE JULGE | ${noticeData?.item.shop.item.name}의 공고`}
+      />
+      <Layout>
+        <Wrapper>
+          <Container>
+            {userType === "employee" ? (
+              <Employee
+                isLoading={isLoading}
+                error={error as boolean}
+                noticeData={noticeData}
+                token={token}
+              />
+            ) : (
+              <Employer
+                isLoading={isLoading}
+                error={error as boolean}
+                noticeData={noticeData}
+                token={token}
+              />
+            )}
+          </Container>
+        </Wrapper>
+      </Layout>
+    </>
   );
 }
 

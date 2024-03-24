@@ -66,12 +66,7 @@ export default function SigninForm() {
         label="비밀번호"
         error={passwordError}
         type="password"
-        register={register("password", {
-          pattern: {
-            value: passwordRegex,
-            message: INVALID_PASSWORD,
-          },
-        })}
+        register={register("password")}
       />
       <Button type="submit" text="로그인 하기" />
     </Form>

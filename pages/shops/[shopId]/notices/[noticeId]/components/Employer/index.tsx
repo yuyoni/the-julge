@@ -35,7 +35,7 @@ export default function Employer({
         updateRecentNotices(noticeHref);
       }
     }
-  }, [noticeHref]);
+  }, [shopId, userInfo, noticeHref]);
 
   return (
     <Wrapper>
