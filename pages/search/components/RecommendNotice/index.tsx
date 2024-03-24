@@ -1,36 +1,41 @@
-import { useNoticesData, useUserData } from "@/pages/search/hooks/useUserQuery";
-import { NoticeList } from "@/lib/types/NoticeTypes";
 import styled from "@emotion/styled";
 import PostList from "../PostList";
 import { h1, h3 } from "@/styles/fontsStyle";
-import useCookie from "@/hooks/useCookies";
+import { css } from "@emotion/react";
+import { useNoticesData, useUserData } from "../../hooks/useQuery";
+import { NoticeList } from "@/lib/types/NoticeTypes";
 
-export default function RecommendNotice() {
-  const { id, userType } = useCookie();
-  const { data: userData } = useUserData(id);
+export default function RecommendNotice({ id }: { id: string }) {
+  const { data: userData, isLoading: isUserDataLoading } = useUserData(id);
 
-  let address = "";
-  if (userType === "") {
-    address = "";
-  } else {
-    address = userData?.item?.address;
-  }
+  const {
+    data: noticesData,
+    isLoading,
+    isSuccess,
+  } = useNoticesData(userData?.item?.address, id);
 
-  const { data: noticesData } = useNoticesData(address);
-
-  const notices = noticesData?.items ?? [];
+  const notices = noticesData ? noticesData.items : [];
   const noticeArray = notices.map((notice: NoticeList) => notice.item);
 
   return (
     <Wrapper>
       <RecommendList>
         <Header>추천 공고</Header>
-        <CustomPostContent>
-          <PostList
-            isRecommend={true}
-            noticeArray={noticeArray}
-            address={address}
-          />
+        <CustomPostContent isLoading={isLoading}>
+          {isLoading
+            ? Array.from(new Array(3)).map((_, index) => <div key={index} />)
+            : !isUserDataLoading &&
+              isSuccess && (
+                <PostList
+                  isRecommend={true}
+                  noticeArray={
+                    id && userData?.item?.address === undefined
+                      ? []
+                      : noticeArray
+                  }
+                  address={userData?.item?.address}
+                />
+              )}
         </CustomPostContent>
       </RecommendList>
     </Wrapper>
@@ -63,14 +68,40 @@ const Header = styled.div`
   }
 `;
 
-const CustomPostContent = styled.div`
+const CustomPostContent = styled.div<{ isLoading: boolean }>`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 294px);
+  grid-template-columns: repeat(auto-fill, minmax(294px, 1fr));
   gap: 31px 18px;
   justify-content: center;
   align-items: center;
 
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      & > * {
+        height: 367px;
+        background-color: hsl(200, 20%, 80%);
+        ${loadingAnimation}
+      }
+    `}
+
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, 250px);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    & > * {
+      height: 367px;
+    }
   }
+`;
+
+const loadingAnimation = css`
+  @keyframes loading {
+    0% {
+      background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 90%);
+    }
+  }
+
+  animation: loading 1.5s ease-in-out infinite alternate;
 `;

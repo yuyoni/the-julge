@@ -29,7 +29,7 @@ export type SelectedLocationList = LocationString[];
 
 export interface FilterProps {
   isModalVisible: boolean;
-  handleModalClose: () => void;
+  handleToggleModal: () => void;
   onApplyFilter: (
     locations: SelectedLocationList,
     startsAt: string,
