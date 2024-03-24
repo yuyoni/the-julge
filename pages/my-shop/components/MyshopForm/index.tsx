@@ -11,6 +11,9 @@ import { ShopInfo } from "../../type/shop-type";
 import useCookie from "@/hooks/useCookies";
 import fetchData from "@/lib/apis/fetchData";
 import { AxiosError } from "axios";
+import { useToast } from "@/contexts/ToastContext";
+import axios from "axios";
+import { useMutation } from "react-query";
 
 interface MyShopFormProps {
   value?: string | undefined;
@@ -18,6 +21,8 @@ interface MyShopFormProps {
   method: "post" | "put";
   initialData?: ShopInfo | null;
 }
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function MyShopForm({
   value,
@@ -27,71 +32,126 @@ export default function MyShopForm({
 }: MyShopFormProps) {
   const router = useRouter();
   const { jwt: token } = useCookie();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    category: "",
-    address1: "",
-    imageUrl: "",
-    address2: "",
-    description: "",
-    originalHourlyPay: 0,
+    name: initialData?.name || "",
+    category: initialData?.category || "",
+    address1: initialData?.address1 || "",
+    imageUrl: initialData?.imageUrl || "",
+    address2: initialData?.address2 || "",
+    description: initialData?.description || "",
+    originalHourlyPay: initialData?.originalHourlyPay || 0,
   });
+  const { showToast } = useToast();
   //TODO 편집페이지 기존값 유지하고 싶음 ㅡ_ㅡ
-  useEffect(() => {
-    console.log("initialData", initialData);
-    if (initialData) {
-      setFormData(initialData);
+  // useEffect(() => {
+  //   console.log("initialData", initialData);
+  //   if (initialData) {
+  //     setFormData(initialData);
+  //   }
+  // }, [initialData]);
+
+  //TODO formData type 선언 필요
+  const handleDataCheck = (formData: any) => {
+    const {
+      name,
+      category,
+      address1,
+      address2,
+      imageUrl,
+      description,
+      originalHourlyPay,
+    } = formData;
+
+    if (
+      name === "" ||
+      category === "" ||
+      address1 === "" ||
+      address2 === "" ||
+      imageUrl === "" ||
+      description === "" ||
+      originalHourlyPay === 0
+    ) {
+      showToast("모든 값을 채워주세요");
+      return false;
     }
-  }, [initialData]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
-    try {
-      const {
-        name,
-        category,
-        address1,
-        address2,
-        imageUrl,
-        description,
-        originalHourlyPay,
-      } = formData;
-
-      if (
-        name === "" ||
-        category === "" ||
-        address1 === "" ||
-        address2 === "" ||
-        imageUrl === "" ||
-        description === "" ||
-        originalHourlyPay === 0
-      ) {
-        alert("모든 값을 채워주세요"); //TODO 모달로 바꾸기
-        return;
-      }
-      if (method === "post") {
-        alert("가게 등록@");
-      } else {
-        alert("편집이 완료됐습니당나귀");
-      }
-
-      const response = await fetchData({
-        param: param,
-        method: method,
-        requestData: formData,
-        token: token,
-      });
-
-      if (response) router.push("/my-shop");
-
-      throw new Error();
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data.message);
-      }
-    }
+    return true;
   };
+
+  const postShops = async () => {
+    const response = await axios.post(`${BASE_URL}/shops`, formData, {
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  };
+
+  const putShops = async () => {
+    const response = await axios.put(`${BASE_URL}${param}`, formData, {
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  };
+
+  const submitMutation = useMutation({
+    mutationFn: () => (method === "post" ? postShops() : putShops()),
+    onSuccess: () => {
+      showToast(
+        method === "post" ? "가게가 등록되었습니다." : "수정이 완료되었습니다.",
+      );
+      router.push("/my-shop");
+    },
+    onError: (error: unknown) => {
+      if (error instanceof AxiosError) {
+        showToast(error.response?.data.message);
+      }
+    },
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const isValidData = handleDataCheck(formData);
+    if (!isValidData) return;
+    submitMutation.mutate();
+  };
+
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event?.preventDefault();
+  //   try {
+  //     const isValidData = handleDataCheck(formData);
+  //     if (!isValidData) return;
+  //     // if (method === "post") {
+  //     //   alert("가게 등록@");
+  //     // } else {
+  //     //   alert("편집이 완료됐습니당나귀");
+  //     // }
+
+  //     const response = await axios.post(`${BASE_URL}/shops`, formData, {
+  //       headers: {
+  //         Authorization: `${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (response) {
+  //       setIsModalOpen(true);
+  //       return;
+  //     }
+
+  //     throw new Error();
+  //   } catch (error: unknown) {
+  //     if (error instanceof AxiosError) {
+  //       showToast(error.response?.data.message);
+  //     }
+  //   }
+  // };
 
   const handleInputChange = (key: string, value: string | number) => {
     setFormData((prevState) => ({
@@ -101,11 +161,12 @@ export default function MyShopForm({
     console.log(`${key}:${value}`);
   };
 
-  const handleConfirmClick = () => {
-    setIsModalOpen(false);
-    console.log("클릭");
-    router.push("/my-shop");
-  };
+  // const handleConfirmClick = () => {
+  //   setIsModalOpen(false);
+  //   console.log("클릭");
+  //   router.push("/my-shop");
+  // };
+
   const handleCategory = (category: string) => {
     if (categoriesArray.some((e) => e === category)) {
       handleInputChange("category", category);
@@ -114,7 +175,7 @@ export default function MyShopForm({
     handleInputChange("address1", category);
   };
 
-  const buttonText = method === "put" ? "편집하기" : "등록하기";
+  // const buttonText = method === "put" ? "편집하기" : "등록하기";
 
   return (
     <Container>
@@ -127,6 +188,7 @@ export default function MyShopForm({
                 handleInputChange("name", event.target.value)
               }
               label="가게 이름*"
+              value={formData.name}
             />
           </Selection>
           <Selection>
@@ -134,6 +196,7 @@ export default function MyShopForm({
               label="분류*"
               categories={categoriesArray}
               onCategoryChange={handleCategory}
+              value={formData.category}
             />
           </Selection>
         </FormWrapper>
@@ -143,6 +206,7 @@ export default function MyShopForm({
               label="주소*"
               categories={addressArray}
               onCategoryChange={handleCategory}
+              value={formData.address1}
             />
           </Selection>
           <Selection>
@@ -151,6 +215,7 @@ export default function MyShopForm({
                 handleInputChange("address2", event.target.value)
               }
               label="상세 주소*"
+              value={formData.address2}
             />
           </Selection>
         </FormWrapper>
@@ -162,11 +227,13 @@ export default function MyShopForm({
               }
               label="기본 시급*"
               includeText="원"
+              type={"number"}
+              value={formData.originalHourlyPay}
             />
           </Selection>
         </FormWrapper>
         <FormWrapper>
-          <ImageInput handleImg={handleInputChange} />
+          <ImageInput handleImg={handleInputChange} value={formData.imageUrl} />
         </FormWrapper>
         <TextArea>
           <Input
@@ -175,25 +242,26 @@ export default function MyShopForm({
               handleInputChange("description", event.target.value)
             }
             label="가게 설명"
+            value={formData.description}
           />
         </TextArea>
         <ButtonWrapper>
           <Button
             handleClick={handleSubmit}
-            text={buttonText}
+            text={method === "put" ? "편집하기" : "등록하기"}
             width={312}
             type="button"
           />
         </ButtonWrapper>
       </FormContainer>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Dimmed>
           <Modal
             modalText="등록되었지비~"
             handleConfirmClick={handleConfirmClick}
           />
         </Dimmed>
-      )}
+      )} */}
     </Container>
   );
 }

@@ -42,7 +42,7 @@ const customBody1Regular = css`
   color: var(--The-julge-black);
 `;
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -60,7 +60,7 @@ const StyledInput = styled.input`
   align-self: stretch;
   border-radius: 6px;
   border: 1px solid var(--The-julge-gray-30);
-  background: var(--The-julge-white);
+  background: var(--The-julge-gray-00);
 
   ::placeholder {
     color: var(--The-julge-gray-40);
@@ -90,7 +90,7 @@ const StyledLabel = styled.label`
   ${customBody1Regular}
 `;
 
-const InputWrapper = styled.div`
+export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
 `;

@@ -7,12 +7,16 @@ import cameraIcon from "@/public/images/camera-icon.svg";
 import useCookie from "@/hooks/useCookies";
 import { useMutation } from "react-query";
 import { body1Regular } from "@/styles/fontsStyle";
+import { useRef } from "react";
 
-type ImgProps = { handleImg: (key: string, value: string | number) => void };
+type ImgProps = {
+  handleImg: (key: string, value: string | number) => void;
+  value?: string;
+};
 
-export default function ImageInput({ handleImg }: ImgProps) {
-  const [fileInfo, setFileInfo] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+export default function ImageInput({ handleImg, value }: ImgProps) {
+  // const [fileInfo, setFileInfo] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(value || null);
   const { jwt: token } = useCookie();
 
   const fileCheck = useCallback((type: string) => {
@@ -24,7 +28,6 @@ export default function ImageInput({ handleImg }: ImgProps) {
   const mutation = useMutation({
     mutationFn: (selectedFile: File) => createPresinedURL(selectedFile, token),
     onSuccess: (data) => {
-      console.log(data);
       if (data) {
         const urlWithoutQueryParams = data.split("?")[0];
         handleImg("imageUrl", urlWithoutQueryParams);
@@ -42,11 +45,20 @@ export default function ImageInput({ handleImg }: ImgProps) {
       const url = URL.createObjectURL(selectedFile);
       setPreviewUrl(url);
       console.log(selectedFile);
-      setFileInfo(selectedFile);
+      // setFileInfo(selectedFile);
       mutation.mutate(selectedFile);
     } else {
       alert("jpeg, png, tiff 파일만 업로드 가능합니다.");
     }
+  }, []);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleUploadImg = useCallback(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.click();
   }, []);
 
   return (
@@ -54,7 +66,7 @@ export default function ImageInput({ handleImg }: ImgProps) {
       <ImageInputWrapper>
         <StyledLabel>가게 이미지</StyledLabel>
         <SelectImage>
-          {!fileInfo ? (
+          {!previewUrl ? (
             <>
               <Image src={cameraIcon} alt="카메라 아이콘" />
               <span>이미지 추가하기</span>
@@ -63,16 +75,13 @@ export default function ImageInput({ handleImg }: ImgProps) {
               </label>
             </>
           ) : (
-            <div>
-              {previewUrl && (
-                <StyledImage
-                  src={previewUrl}
-                  alt="Preview"
-                  width={400}
-                  height={400}
-                />
-              )}
-              <p>{fileInfo?.name}</p>
+            <div onClick={handleUploadImg} style={{ cursor: "pointer" }}>
+              <StyledImage
+                src={previewUrl}
+                alt="Preview"
+                width={400}
+                height={400}
+              />
             </div>
           )}
         </SelectImage>
@@ -82,7 +91,8 @@ export default function ImageInput({ handleImg }: ImgProps) {
           accept="image/jpeg,image/png,image/tiff"
           id="fileUpload"
           hidden
-          onChange={onSelectFile}
+          onChange={(e) => onSelectFile(e)}
+          ref={inputRef}
         />
       </ImageInputWrapper>
     </Container>
