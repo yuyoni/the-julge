@@ -1,7 +1,7 @@
 import { validateProfileData } from "../../utils/validateFormData";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Title from "./Title";
@@ -9,6 +9,7 @@ import FormContent from "./FormContent";
 import axios from "axios";
 import useCookie from "@/hooks/useCookies";
 import { useToast } from "@/contexts/ToastContext";
+import { useQueries, useQuery } from "react-query";
 
 type EditFormData = {
   name: string;
@@ -19,6 +20,8 @@ type EditFormData = {
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+const userInfoType = ["name", "phone", "address", "bio"];
+
 export default function ProfileEditForm() {
   const { showToast } = useToast();
   const router = useRouter();
@@ -28,9 +31,11 @@ export default function ProfileEditForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<EditFormData>({ mode: "onChange" });
 
   const onSubmit = async (formData: EditFormData) => {
+    console.log(formData);
     try {
       validateProfileData(formData);
       await axios.put(
@@ -54,6 +59,31 @@ export default function ProfileEditForm() {
       }
     }
   };
+
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/users/${id}`);
+      console.log(data.item);
+
+      return data.item;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const { message } = error.response.data;
+        alert(message);
+      } else if (error instanceof TypeError) {
+        alert(error.message);
+      }
+    }
+  };
+  const { data, isSuccess } = useQuery("userInfo", () => fetchData(), {
+    enabled: !!id,
+  });
+
+  if (isSuccess) {
+    userInfoType.forEach((key: any) => {
+      setValue(key, data[key]);
+    });
+  }
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
