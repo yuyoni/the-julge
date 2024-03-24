@@ -72,13 +72,13 @@ const AllNoticeList = styled.section`
 
 const PostContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 294px);
+  grid-template-columns: repeat(3, 1fr);
   gap: 31px 18px;
   justify-content: center;
   align-items: center;
 
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, 250px);
+  @media only screen and (max-width: 1028px) {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

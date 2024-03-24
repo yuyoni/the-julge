@@ -70,9 +70,9 @@ const Header = styled.div`
 
 const CustomPostContent = styled.div<{ isLoading: boolean }>`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(294px, 1fr));
+  grid-template-columns: repeat(3, 294px);
   gap: 31px 18px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   ${({ isLoading }) =>
@@ -85,11 +85,21 @@ const CustomPostContent = styled.div<{ isLoading: boolean }>`
       }
     `}
 
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  @media only screen and (max-width: 1028px) {
+    grid-template-columns: repeat(3, 320px);
+    grid-auto-flow: column;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
     & > * {
       height: 367px;
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
   }
 `;
 
