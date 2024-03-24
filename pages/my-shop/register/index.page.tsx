@@ -10,7 +10,6 @@ export default function Register() {
       <Layout>
         <Wrapper>
           <StyledDiv>
-            <h1>가게 정보</h1>
             <MyShopForm param="/shops" method="post" />
           </StyledDiv>
         </Wrapper>

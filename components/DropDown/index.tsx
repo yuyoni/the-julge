@@ -51,6 +51,7 @@ export default function DropDown({
         includeImage
         handleClick={handleClick}
         onChange={(e) => handleInput(e)}
+        onClick={handleClick}
       />
 
       {isOpen && (
@@ -67,6 +68,7 @@ const DropDownContainer = styled.div<{ $width?: number }>`
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
+  cursor: pointer;
 `;
 
 export const StyledSpan = styled.span<{ labelExists: boolean }>`
