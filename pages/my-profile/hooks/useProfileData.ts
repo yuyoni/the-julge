@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useCookie from "@/hooks/useCookies";
 import axios from "axios";
+import { useToast } from "@/contexts/ToastContext";
 
 type UserProfile = {
   name: string;
@@ -12,6 +13,7 @@ type UserProfile = {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function useProfileData() {
+  const { showToast } = useToast();
   const { id } = useCookie();
   const [profile, setProfile] = useState<UserProfile>({
     name: "",
@@ -30,7 +32,7 @@ export default function useProfileData() {
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           const { message } = error.response.data;
-          alert(message);
+          showToast(message);
         }
       }
     };
