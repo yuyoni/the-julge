@@ -94,6 +94,7 @@ export default function MyNotices({ shopData }: { shopData: ShopData }) {
             <Notices>
               {noticesData.map(({ item }) => (
                 <Post
+                  key={item.id}
                   item={{
                     shopId: shopData.item.id,
                     id: item.id,
