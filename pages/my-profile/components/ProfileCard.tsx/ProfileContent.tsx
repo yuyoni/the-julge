@@ -1,6 +1,7 @@
 import { body1Regular, body2Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Image from "next/image";
+import formatPhoneNumber from "../../utils/formatPhoneNumber";
 
 type ProfileContentProps = {
   name: string;
@@ -13,6 +14,7 @@ export default function ProfileContent({
   phone,
   address,
 }: ProfileContentProps) {
+  const formattedPhone = formatPhoneNumber(phone);
   return (
     <Wrapper>
       <NameContainer>
@@ -22,7 +24,7 @@ export default function ProfileContent({
       <PhoneContainer>
         <Image src="/images/phone.svg" alt="전화번호" width={20} height={20} />
 
-        {phone}
+        {formattedPhone}
       </PhoneContainer>
       <AddressContainer>
         <Image
