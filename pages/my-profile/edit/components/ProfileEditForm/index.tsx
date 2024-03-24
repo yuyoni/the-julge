@@ -1,15 +1,15 @@
 import { validateProfileData } from "../../utils/validateFormData";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useToast } from "@/contexts/ToastContext";
+import { useQuery } from "react-query";
 import Button from "@/components/Button/Button";
 import styled from "@emotion/styled";
 import Title from "./Title";
 import FormContent from "./FormContent";
 import axios from "axios";
 import useCookie from "@/hooks/useCookies";
-import { useToast } from "@/contexts/ToastContext";
-import { useQueries, useQuery } from "react-query";
 
 type EditFormData = {
   name: string;
@@ -32,10 +32,9 @@ export default function ProfileEditForm() {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<EditFormData>({ mode: "onChange" });
+  } = useForm<EditFormData>({ mode: "onSubmit" });
 
   const onSubmit = async (formData: EditFormData) => {
-    console.log(formData);
     try {
       validateProfileData(formData);
       await axios.put(
@@ -63,21 +62,26 @@ export default function ProfileEditForm() {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/users/${id}`);
-      console.log(data.item);
 
       return data.item;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const { message } = error.response.data;
-        alert(message);
+        showToast(message);
       } else if (error instanceof TypeError) {
-        alert(error.message);
+        showToast(error.message);
       }
     }
   };
-  const { data, isSuccess } = useQuery("userInfo", () => fetchData(), {
-    enabled: !!id,
-  });
+  const { data, isLoading, isSuccess } = useQuery(
+    "userInfo",
+    () => fetchData(),
+    {
+      enabled: !!id,
+    },
+  );
+
+  if (isLoading) return;
 
   if (isSuccess) {
     userInfoType.forEach((key: any) => {

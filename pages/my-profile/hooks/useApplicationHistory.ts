@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useToast } from "@/contexts/ToastContext";
 import { useQuery } from "react-query";
+import { useEffect } from "react";
 import useCookie from "@/hooks/useCookies";
 import axios from "axios";
 import formatTimeRange from "@/lib/utils/formatTimeRange";
@@ -33,6 +34,7 @@ export default function useApplicationHistory() {
       items: [],
     },
     isSuccess,
+    refetch,
   } = useQuery("applicationHistory", () => fetchData(), {
     enabled: !!id,
   });
@@ -69,6 +71,10 @@ export default function useApplicationHistory() {
       }
     }
   };
+
+  useEffect(() => {
+    refetch();
+  }, [page]);
 
   return { data, isSuccess };
 }
