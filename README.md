@@ -190,13 +190,11 @@ root
 
 4. **SEO 향상**
    - 각 페이지의 특성에 맞게 SEO 전략을 구현하고, 사용자 경험을 개선하기 위한 타이틀 및 메타 태그 설정 <br><br>
+    <img width="600" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/5233d631-4f4f-45c1-bbdd-6f1d3c495c94"><br>
+    <img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/3a143ed3-6b68-4f8a-ba4f-bc7be66eb2d7">
+    <img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/26c185eb-1144-4f61-8623-8b8e6ce5bfe9">
     
-    
-    <img width="300" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/57a9c8d1-b091-4e57-9695-271a62147c5e">
-    <img width="300" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/aaf46be0-6e43-4a26-8fec-33e020c4a677">
-    <img width="300" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/af6d2fd1-7242-4cb1-b762-beb641e0f868">
-    <br>
-    <img width="600" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/5233d631-4f4f-45c1-bbdd-6f1d3c495c94">
+
 
      
 5. **사용자 경험 개선**
@@ -218,6 +216,7 @@ root
          - <img width="800" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/d9794e8d-1b39-42d1-88b3-4befad0de1d6">
 
 
+<br><br>
 
 ## 💡 Q & A
 ![image](https://github.com/the-julge/the-julge/assets/119824778/f056b4d6-398a-4322-a69f-1c056633b942)
