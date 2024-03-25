@@ -190,9 +190,10 @@ root
 
 4. **SEO 향상**
    - 각 페이지의 특성에 맞게 SEO 전략을 구현하고, 사용자 경험을 개선하기 위한 타이틀 및 메타 태그 설정 <br><br>
-    <img width="600" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/5233d631-4f4f-45c1-bbdd-6f1d3c495c94"><br>
-    <img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/3a143ed3-6b68-4f8a-ba4f-bc7be66eb2d7">
-    <img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/26c185eb-1144-4f61-8623-8b8e6ce5bfe9">
+    <img width="600" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/5233d631-4f4f-45c1-bbdd-6f1d3c495c94"><br><br>
+    <img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/7344068b-cc21-4434-909c-36f8d4c83f41"><br>
+        <img width="400" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/24e31323-32fd-4e1b-a69a-3778b6ea9fd4">
+
     
 
 
@@ -201,6 +202,7 @@ root
    - 유저 정보에 따라 추천 공고의 UI를 다르게 해서 사용자 경험에 개선 <br><br>
          <img width="500" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/51c29581-9255-46f2-a8ac-579887da0af0">
          <img width="500" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/15dd5cd4-3b4c-4f0e-a9ac-d651cb95fbcc">
+         <img width="500" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/0083afbc-298a-4ad6-8308-9a3b2abb1df8">
 
 
    - 추가적인 확인이 필요한 경우(ex. 폼 제출)에만 모달을 이용하고, 그 외 경우(ex. 잘못된 입력값 확인)는 toast 알림이나 툴팁을 활용 <br><br>
@@ -212,8 +214,10 @@ root
          <img width="800" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/e8c6ed86-8c52-40af-9972-8c6b6bc5e798">
 
    - 사용자 편의를 위해 공고, 가게, 사용자 정보 수정의 경우 초기 데이터를 기본값으로 적용 <br><br>
-   - 데이터가 없는 페이지를 위해 404페이지 생성 <br>
-         - <img width="800" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/d9794e8d-1b39-42d1-88b3-4befad0de1d6">
+           <img width="800" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/79677dc4-3a04-4dab-9938-82b0662857e3">
+
+   - 데이터가 없는 페이지를 위해 404페이지 생성 <br><br>
+         <img width="800" alt="image" src="https://github.com/the-julge/the-julge/assets/127701092/d9794e8d-1b39-42d1-88b3-4befad0de1d6">
 
 
 <br><br>
