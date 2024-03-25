@@ -88,6 +88,7 @@ export default function PostCard({
           priority
           src={noticeData.item.shop.item.imageUrl}
           alt="shop_image"
+          fill
         />
       </ImageContainer>
       <Container>

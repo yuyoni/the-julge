@@ -4,6 +4,7 @@ import { h1, h3 } from "@/styles/fontsStyle";
 import { css } from "@emotion/react";
 import { useNoticesData, useUserData } from "../../hooks/useQuery";
 import { NoticeList } from "@/lib/types/NoticeTypes";
+import SkeletonUI from "@/components/Skeleton";
 
 export default function RecommendNotice({ id }: { id: string }) {
   const { data: userData, isLoading: isUserDataLoading } = useUserData(id);
@@ -23,7 +24,9 @@ export default function RecommendNotice({ id }: { id: string }) {
         <Header>맞춤 공고</Header>
         <CustomPostContent isLoading={isLoading}>
           {isLoading
-            ? Array.from(new Array(3)).map((_, index) => <div key={index} />)
+            ? Array.from(new Array(3)).map((_, index) => (
+                <SkeletonUI key={index} />
+              ))
             : !isUserDataLoading &&
               isSuccess && (
                 <PostList

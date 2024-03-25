@@ -17,10 +17,7 @@ const Skeleton = styled.svg`
   border-radius: 8px;
 
   rect {
-    width: 100%;
-    height: 100%;
-    animation: skeletonAnimation 1s infinite alternate;
-    fill: #cbc9cf;
+    animation: skeletonAnimation 0.8s infinite alternate;
 
     @keyframes skeletonAnimation {
       from {
