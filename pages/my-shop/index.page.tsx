@@ -1,5 +1,3 @@
-import Gnb from "@/components/Gnb";
-import Footer from "@/components/Footer";
 import styled from "@emotion/styled";
 import { useUser } from "@/contexts/UserContext";
 import CommonFrame from "./components/MyShopInfo/Common";
@@ -13,6 +11,7 @@ import Layout from "@/components/Layout";
 import MetaHead from "@/components/MetaHead";
 import ModalContent from "../shops/[shopId]/notices/[noticeId]/components/ModalContent";
 import { useRouter } from "next/router";
+import { h1Regular } from "@/styles/fontsStyle";
 
 export default function MyShop() {
   const router = useRouter();
@@ -80,7 +79,10 @@ export default function MyShop() {
                     <MyNotices shopData={shopData} />
                   </>
                 ) : (
-                  <CommonFrame frameType="MY_SHOP" />
+                  <>
+                    <CommonFrame frameType="MY_SHOP" />
+                    <StyledBox></StyledBox>
+                  </>
                 )}
               </>
             )}
@@ -113,4 +115,28 @@ const StyledDiv = styled.div`
     padding: 40px 12px;
     gap: 15px;
   }
+
+  h2 {
+    ${h1Regular}
+  }
+`;
+
+const StyledBox = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 330px;
+    padding: 40px 12px;
+  }
+  @media (max-width: 1028px) {
+    width: 100%;
+    max-width: none;
+    padding: 60px 32px;
+  }
+
+  position: relative;
+  max-width: 964px;
+  height: 300px;
+  margin: 0 auto;
+  padding: 60px 0;
+  background-color: #fff;
 `;

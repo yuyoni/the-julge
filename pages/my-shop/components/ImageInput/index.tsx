@@ -67,22 +67,22 @@ export default function ImageInput({ handleImg, value }: ImgProps) {
         <StyledLabel>가게 이미지</StyledLabel>
         <SelectImage>
           {!previewUrl ? (
-            <>
-              <Image priority src={cameraIcon} alt="카메라 아이콘" />
+            <NoImageBox>
+              <Image src={cameraIcon} alt="카메라 아이콘" />
               <span>이미지 추가하기</span>
               <label htmlFor="fileUpload">
-                <div id="upload_button">SELECT</div>
+                <StyledButton id="upload_button">SELECT</StyledButton>
               </label>
-            </>
+            </NoImageBox>
           ) : (
-            <div onClick={handleUploadImg} style={{ cursor: "pointer" }}>
+            <ImageBox onClick={handleUploadImg} style={{ cursor: "pointer" }}>
               <StyledImage
                 src={previewUrl}
                 alt="Preview"
                 width={400}
                 height={400}
               />
-            </div>
+            </ImageBox>
           )}
         </SelectImage>
 
@@ -110,57 +110,44 @@ const Container = styled.div`
   align-items: start;
   justify-content: start;
   gap: 8px;
+`;
 
-  header {
-    width: 100%;
-    height: 38px;
-    padding: 0 15px;
-    line-height: 38px;
-    font-size: 16px;
-    font-weight: 600;
-    #upload_pop_close {
-      float: right;
-      cursor: pointer;
-    }
-  }
+const NoImageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  ${body1Regular};
+`;
 
-    main {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      p {
-        font-size: 20px;
-        font-weight: 600;
-      }
-      span {
-        font-size: 17px;
-      }
-    }
-    #upload_button {
-      width: 200px;
-      height: 43px;
-      border-radius: 4px;
-      color: white;
-      background-color: var(--The-julge-purple-10);
-      text-align: center;
-      line-height: 43px;
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0 auto;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 30px;
-    }
-  }
+const ImageBox = styled.div`
+  display: flex;
+  width: 100%;
+  height: 300px;
+`;
+
+const StyledButton = styled.div`
+  width: 200px;
+  height: 43px;
+  border-radius: 4px;
+  color: white;
+  background-color: var(--The-julge-purple-10);
+  text-align: center;
+  line-height: 43px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 auto;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
 `;
 
 const ImageInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
+  width: 100%;
   justify-content: start;
   gap: 8px;
 `;
@@ -182,4 +169,7 @@ const SelectImage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 12px;
+  background-color: var(--The-julge-gray-05);
+  height: 300px;
 `;

@@ -1,7 +1,7 @@
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
-import { body1Regular, h1Regular } from "@/styles/fontsStyle";
+import { body1Regular, body2Regular, h1Regular } from "@/styles/fontsStyle";
 
 type frame = "MY_SHOP" | "NOTICE";
 
@@ -49,7 +49,7 @@ export default function CommonFrame({
   return (
     <Container frameType={frameType}>
       <StyledDiv>
-        <h2>{dataType.title}</h2>
+        <Title>{dataType.title}</Title>
         <StyledDes>
           <p>{dataType.description}</p>
           <Button
@@ -64,11 +64,6 @@ export default function CommonFrame({
 }
 
 const Container = styled.div<{ frameType: frame }>`
-  display: flex;
-  padding: 60px 237px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
   background: ${({ frameType }) =>
     frameType === "NOTICE"
       ? "var(--The-julge-gray-05)"
@@ -76,21 +71,34 @@ const Container = styled.div<{ frameType: frame }>`
 `;
 
 const StyledDiv = styled.div`
-  width: 965px;
-  height: 276px;
-
-  h2 {
-    ${h1Regular};
+  @media (max-width: 768px) {
+    padding: 40px 12px;
+    margin: 0 auto;
   }
+  @media (max-width: 1028px) {
+    width: 100%;
+    max-width: none;
+    padding: 60px 32px;
+    margin: 0 auto;
+  }
+
+  position: relative;
+  max-width: 964px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 60px 0;
 
   p {
     ${body1Regular};
   }
 `;
 
+const Title = styled.h2`
+  ${h1Regular};
+`;
+
 const StyledDes = styled.div`
   display: flex;
-  width: 965px;
   padding: 60px 24px;
   margin-top: 24px;
   flex-direction: column;
@@ -99,4 +107,8 @@ const StyledDes = styled.div`
   gap: 24px;
   border-radius: 12px;
   border: 1px solid var(--The-julge-gray-20);
+
+  @media (max-width: 767px) {
+    ${body2Regular}
+    white-space: nowrap;
 `;

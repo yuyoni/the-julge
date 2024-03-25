@@ -8,23 +8,14 @@ export default function Register() {
     <>
       <MetaHead title="+HE JULGE | 가게 등록" />
       <Layout>
-        <Wrapper>
-          <StyledDiv>
-            <MyShopForm param="/shops" method="post" />
-          </StyledDiv>
-        </Wrapper>
+        <StyledDiv>
+          <MyShopForm param="/shops" method="post" />
+        </StyledDiv>
       </Layout>
     </>
   );
 }
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const StyledDiv = styled.div`
   padding: 60px 32px;
-  max-width: 964px;
 `;
