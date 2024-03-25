@@ -81,6 +81,7 @@ export default function Filter({
             text="적용하기"
             handleClick={() => {
               onApplyFilter(selectedLocations, startsAtValue, hourlyPayValue);
+              handleToggleModal();
             }}
             color="colored"
             width={260}
