@@ -31,7 +31,7 @@ const Container = styled.div`
 const StyledText = styled.span`
   color: var(--The-julge-black);
   text-align: center;
-  font-family: Abel;
+  font-family: GmarketSans;
   font-size: var(--font-body3);
   font-style: normal;
   font-weight: var(--weight-regular);

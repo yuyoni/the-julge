@@ -29,10 +29,7 @@ export default function Input({
 
 const commonStyles = css`
   color: var(--The-julge-black);
-  font-family: Abel;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 26px;
 `;
 
@@ -73,8 +70,5 @@ const StyledWarning = styled.span`
   gap: 8px;
   color: var(--The-julge-rejected);
   font-size: 12px;
-  font-family: Abel;
-  font-style: normal;
-  font-weight: 400;
   line-height: 16px;
 `;

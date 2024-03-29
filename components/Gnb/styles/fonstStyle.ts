@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const julgeCaptionStyle = css`
-  font-family: "Spoqa Han Sans Neo";
+  font-family: GmarketSans;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -9,14 +9,14 @@ export const julgeCaptionStyle = css`
 `;
 
 export const julgeBodyRegular = css`
-  font-family: "Spoqa Han Sans Neo";
+  font-family: GmarketSans;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 157.143% */
 `;
 export const julgeBodyBold = css`
-  font-family: "Spoqa Han Sans Neo";
+  font-family: GmarketSans;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -25,7 +25,7 @@ export const julgeBodyBold = css`
 
 /* The julge/h2 */
 export const julgeH2 = css`
-  font-family: "Spoqa Han Sans Neo";
+  font-family: GmarketSans;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;

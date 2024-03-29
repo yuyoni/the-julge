@@ -52,7 +52,7 @@ const Warning = styled.span`
   gap: 8px;
   color: var(--The-julge-rejected);
   font-size: 12px;
-  font-family: Abel;
+  font-family: GmarketSans;
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
