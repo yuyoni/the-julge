@@ -74,6 +74,6 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-  color: var(--The-julge-purple-40);
+  color: var(--The-julge-green-40);
   ${h2};
 `;

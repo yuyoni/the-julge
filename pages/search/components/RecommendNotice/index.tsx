@@ -45,7 +45,7 @@ export default function RecommendNotice({ id }: { id: string }) {
   );
 }
 const Wrapper = styled.section`
-  background-color: var(--The-julge-purple-05);
+  background-color: var(--The-julge-green-05);
 `;
 
 const RecommendList = styled.div`

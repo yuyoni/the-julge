@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
 
-  background-color: #b182d5be;
+  background-color: var(--The-julge-green-10);
   color: var(--The-julge-gray-00);
   padding: 10px 20px;
   border-radius: 5px;

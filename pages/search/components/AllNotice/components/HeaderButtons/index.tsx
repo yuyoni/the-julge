@@ -59,13 +59,13 @@ const FilterButton = styled.div`
   border-radius: 5px;
   color: var(--The-julge-white, #fff);
   ${body2Regular}
-  background: var(--The-julge-purple-30);
+  background: var(--The-julge-green-20);
   cursor: pointer;
 
   :hover {
-    background: #9f6cc5;
+    background: var(--The-julge-green-30);
   }
   :active {
-    background: var(--The-julge-purple-40);
+    background: var(--The-julge-green-40);
   }
 `;

@@ -73,7 +73,8 @@ const Section = styled.div`
   justify-content: space-between;
   padding: 32px;
   border-radius: 12px;
-  background: var(--The-julge-purple-10);
+  background: var(--The-julge-green-05);
+  gap: 32px;
 
   @media (max-width: 1028px) {
     display: flex;
@@ -114,13 +115,17 @@ const DescriptionDiv = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 12px;
+
+  p {
+    line-height: 150%;
+  }
 `;
 
 const MyShopDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--The-julge-purple-40);
+  color: var(--The-julge-green-40);
   ${body1Regular}
   line-height: 20px;
 
@@ -128,8 +133,12 @@ const MyShopDiv = styled.div`
     ${body2Regular}
   }
 
+  h2 {
+    font-weight: 700;
+  }
+
   h3 {
-    color: var(--The-julge-gray-50);
+    color: gray;
     margin-bottom: 10px;
   }
 `;

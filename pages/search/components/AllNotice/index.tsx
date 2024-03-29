@@ -69,6 +69,7 @@ const AllNoticeList = styled.section`
   flex-direction: column;
   padding: 30px 0;
   max-width: 968px;
+  min-height: 72vh;
   margin: 0 auto;
 
   @media only screen and (max-width: 1028px) {
@@ -93,8 +94,12 @@ const PostContent = styled.div`
 
 const NoPost = styled.div`
   grid-column: 1 / 4;
+  border: 1px solid var(--The-julge-gray-10);
+  padding-top: 100px;
+  border-radius: 12px;
   text-align: center;
   width: 100%;
+  height: 220px;
   color: var(--The-julge-black);
   ${h3};
 `;

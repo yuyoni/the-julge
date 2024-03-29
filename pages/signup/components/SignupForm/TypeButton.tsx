@@ -32,7 +32,8 @@ export default function TypeButton({
 const getBorderColor = (isChecked: boolean) => {
   return isChecked
     ? css`
-        border: 1px solid var(--The-julge-purple-40);
+        border: 1px solid var(--The-julge-green-40);
+        background: var(--The-julge-green-00);
       `
     : css`
         border: 1px solid var(--The-julge-gray-30);
@@ -49,9 +50,11 @@ const Button = styled.button<{ isChecked: boolean }>`
   font-size: 14px;
   color: var(--The-julge-black);
 
-  :active,
   :hover {
-    background: var(--The-julge-purple-10);
+    background: var(--The-julge-green-00);
+  }
+  :active {
+    background: var(--The-julge-green-05);
   }
 
   ${({ isChecked }) => getBorderColor(isChecked)}

@@ -1,14 +1,7 @@
+import { body1Regular, body2Regular, h4, Caption } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import {
-  body1Bold,
-  body1Regular,
-  body2Regular,
-  caption,
-  h2,
-  h3,
-  h4,
-} from "@/styles/fontsStyle";
+import WageFlag from "./WageFlag";
 
 export interface PostUiPostContentProps {
   name: string;
@@ -16,6 +9,7 @@ export interface PostUiPostContentProps {
   workhour: number;
   address: string;
   hourlyPay: number;
+  originalHourlyPay: number;
 }
 
 export default function UiPostContent({
@@ -24,19 +18,23 @@ export default function UiPostContent({
   workhour,
   address,
   hourlyPay,
+  originalHourlyPay,
 }: PostUiPostContentProps) {
   return (
     <PostContent>
+      <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
       <PostName>{name}</PostName>
       <Time>
         <Image
           priority
-          src="/images/clock-icon 1.svg"
+          src="/images/clock-icon.svg"
           alt="시계아이콘"
           height={20}
           width={20}
         />
-        {duration} ({workhour}시간)
+        <p>
+          {duration} ({workhour}시간)
+        </p>
       </Time>
       <Location>
         <Image
@@ -46,7 +44,7 @@ export default function UiPostContent({
           height={20}
           width={20}
         />
-        {address}
+        <p>{address}</p>
       </Location>
       <Wage>{Number(hourlyPay).toLocaleString("ko-KR")}원</Wage>
     </PostContent>
@@ -54,48 +52,48 @@ export default function UiPostContent({
 }
 
 const PostContent = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 16px 20px;
+  gap: 8px;
+  padding-left: 4px;
 `;
 
 const Time = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   color: var(--The-julge-gray-50, #7d7986);
   ${body2Regular}
-
   @media only screen and (max-width: 768px) {
-    ${caption}
+    ${Caption}
   }
 `;
 
 const Location = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   color: var(--The-julge-gray-50, #7d7986);
   ${body2Regular}
 
   @media only screen and (max-width: 768px) {
-    ${caption}
+    ${Caption}
   }
 `;
 
 const PostName = styled.div`
-  margin-bottom: 8px;
-  ${h3}
+  ${body1Regular}
+  font-size: 20px;
   @media only screen and (max-width: 768px) {
-    ${body1Bold}
+    ${body1Regular}
   }
 `;
 
 const Wage = styled.div`
-  margin-top: 8px;
-  text-align: right;
-  ${h2}
+  margin-top: 16px;
+  ${body2Regular}
+  font-size: 20px;
   @media only screen and (max-width: 768px) {
     ${h4}
   }

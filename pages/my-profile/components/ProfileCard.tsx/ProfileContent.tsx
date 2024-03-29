@@ -61,7 +61,7 @@ const NameContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--The-julge-purple-40);
+  color: var(--The-julge-green-40);
   ${body1Regular}
   line-height: 20px;
 
@@ -79,7 +79,7 @@ const PhoneContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--The-julge-gray-50);
+  color: var(--The-julge-black);
   ${body1Regular}
 
   @media (max-width: 767px) {
@@ -91,7 +91,7 @@ const AddressContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--The-julge-gray-50);
+  color: var(--The-julge-black);
   ${body1Regular}
 
   @media (max-width: 767px) {

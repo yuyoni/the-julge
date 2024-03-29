@@ -23,7 +23,7 @@ export default function Filter({
   const toggleLocation = (location: LocationString) => {
     if (selectedLocations.includes(location)) {
       setSelectedLocations(
-        selectedLocations.filter((item) => item !== location),
+        selectedLocations.filter((item) => item !== location)
       );
     } else {
       setSelectedLocations([...selectedLocations, location]);
@@ -147,7 +147,7 @@ const BorderLine = styled.div`
   height: 2px;
   align-self: stretch;
 
-  background: var(--The-julge-gray-10, #f2f2f3);
+  background: var(--The-julge-gray-10);
 `;
 
 // Input 공통 컴포넌트로 변경예정
@@ -159,8 +159,8 @@ const Input = styled.input`
   align-self: stretch;
 
   border-radius: 6px;
-  border: 1px solid var(--The-julge-gray-30, #cbc9cf);
-  background: var(--The-julge-white, #fff);
+  border: 1px solid var(--The-julge-gray-30);
+  background: var(--The-julge-gray-00);
 `;
 
 const ButtonContainer = styled.div`

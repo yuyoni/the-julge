@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   gap: 5px;
 
   a {
-    color: var(--The-julge-purple-40);
+    color: var(--The-julge-green-40);
     text-decoration: underline;
   }
 `;

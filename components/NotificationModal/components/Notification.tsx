@@ -61,7 +61,7 @@ const Circle = styled.div<{ result: string }>`
   background: ${(props) =>
     props.result === "accepted"
       ? "var(--The-julge-blue-20, #0080FF)"
-      : "var(--The-julge-red, #EC5A46)"};
+      : "var(--The-julge-rejected, #EC5A46)"};
 
   border-radius: 50%;
   margin-top: 10px;
@@ -72,7 +72,7 @@ const Result = styled.span<{ result: string }>`
   color: ${(props) =>
     props.result === "accepted"
       ? "var(--The-julge-blue-20, #0080FF)"
-      : "var(--The-julge-red, #EC5A46)"};
+      : "var(--The-julge-rejected, #EC5A46)"};
 `;
 const NotifiText = styled.div`
   color: var(--The-julge-black, #111322);

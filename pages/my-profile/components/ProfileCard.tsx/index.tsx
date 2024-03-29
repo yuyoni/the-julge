@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 32px;
   border-radius: 12px;
-  background: var(--The-julge-purple-10, #e9dcf4);
+  background: var(--The-julge-green-05);
 
   @media (max-width: 767px) {
     padding: 20px;

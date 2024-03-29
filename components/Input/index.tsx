@@ -54,7 +54,7 @@ const StyledInput = styled.input<{ hasError: boolean }>`
   border-radius: 6px;
   border: 1px solid
     ${({ hasError }) =>
-      hasError ? "var(--The-julge-red)" : "var(--The-julge-gray-30)"};
+      hasError ? "var(--The-julge-rejected)" : "var(--The-julge-gray-30)"};
   background: var(--The-julge-gray-00);
 
   ::placeholder {
@@ -71,7 +71,7 @@ const StyledWarning = styled.span`
   padding-left: 8px;
   align-items: flex-start;
   gap: 8px;
-  color: var(--The-julge-red);
+  color: var(--The-julge-rejected);
   font-size: 12px;
   font-family: Abel;
   font-style: normal;

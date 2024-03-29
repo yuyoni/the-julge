@@ -40,7 +40,7 @@ const StyledButton = styled.button<{ isnow: boolean }>`
   ${({ isnow }) =>
     isnow
       ? css`
-          background: var(--The-julge-purple-30);
+          background: var(--The-julge-green-20);
           color: var(----The-julge-white, #fff);
         `
       : css`
@@ -52,7 +52,7 @@ const StyledButton = styled.button<{ isnow: boolean }>`
     ${({ isnow }) =>
       isnow ||
       css`
-        background: var(--The-julge-purple-10);
+        background: var(--The-julge-green-05);
       `}
   }
 `;

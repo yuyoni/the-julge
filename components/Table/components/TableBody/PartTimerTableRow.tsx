@@ -34,31 +34,6 @@ const getStatusText = (status: string) => {
   }
 };
 
-const getStatusStyle = (status: string) => {
-  switch (status) {
-    case "accepted":
-      return css`
-        background: var(--The-julge-blue-10);
-        color: var(--The-julge-blue-20);
-      `;
-    case "pending":
-      return css`
-        background: var(--The-julge-green-10);
-        color: var(--The-julge-green-20);
-      `;
-    case "rejected":
-      return css`
-        background: var(--The-julge-red);
-        color: var(--The-julge-gray-00);
-      `;
-    case "canceled":
-      return css`
-        background: var(--The-julge-gray-40);
-        color: var(--The-julge-gray-00);
-      `;
-  }
-};
-
 const TableRow = styled.tr`
   border-bottom: 1px solid var(--The-julge-gray-20);
 `;
@@ -66,6 +41,7 @@ const TableRow = styled.tr`
 const Cell = styled.td`
   background: var(--The-julge-gray-05);
   padding: 20px 12px;
+  background-color: white;
   ${body1Regular}
 `;
 
@@ -74,6 +50,6 @@ const Status = styled.div<{ status: string }>`
   border-radius: 20px;
   padding: 6px 10px;
   ${body2Regular}
-
-  ${({ status }) => getStatusStyle(status)}
+  color: var(--The-julge-gray-00);
+  background: ${({ status }) => `var(--The-julge-${status})`};
 `;

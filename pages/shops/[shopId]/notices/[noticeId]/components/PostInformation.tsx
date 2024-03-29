@@ -3,7 +3,7 @@ import formatTimeRange from "@/lib/utils/formatTimeRange";
 import { body1Regular, body2Regular, h1Regular } from "@/styles/fontsStyle";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import clockIcon from "@/public/images/clock-icon 1.svg";
+import clockIcon from "@/public/images/clock-icon.svg";
 import locationIcon from "@/public/images/location.svg";
 import { NoticeList } from "@/lib/types/NoticeTypes";
 
@@ -15,7 +15,7 @@ export default function PostInformation({
   if (noticeData) {
     const duration = formatTimeRange(
       noticeData.item.startsAt,
-      noticeData.item.workhour,
+      noticeData.item.workhour
     );
     const shopDescription = noticeData.item.shop.item.description;
     const address = `${noticeData.item.shop.item.address1} ${noticeData.item.shop.item.address2}`;
@@ -60,7 +60,7 @@ const Wrapper = styled.div`
 
 const Wage = styled.span`
   ${body1Regular}
-  color: var(--The-julge-purple-40, #905CB9);
+  color: var(--The-julge-green-40, #905CB9);
 `;
 
 const HourlyPay = styled.span`
@@ -75,7 +75,7 @@ const WageFlagStyle = styled.div`
   color: var(--The-julge-gray-00, #ffffff);
   border-radius: 20px;
   background: var(
-    --The-julge-purple-40,
+    --The-julge-green-40,
     #905cb9
   ); // 값에 따라 색상 변경하도록 추가하기
   ${body2Regular}

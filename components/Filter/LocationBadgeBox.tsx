@@ -11,7 +11,7 @@ export default function LocationBadgeBox({
       {selectedLocations.map((location) => (
         <LocationBadge key={location} onClick={() => toggleLocation(location)}>
           <span>{location}</span>
-          <CloseButton size={16} color="#905cb9" />
+          <CloseButton size={16} color="#fff" />
         </LocationBadge>
       ))}
     </Wrapper>
@@ -37,6 +37,6 @@ const LocationBadge = styled.div`
   cursor: pointer;
 
   border-radius: 20px;
-  background: var(--The-julge-purple-10, #e9dcf4);
-  color: var(--The-jungle-purple-40, #905cb9);
+  background: var(--The-julge-green-10);
+  color: var(--The-julge-gray-00);
 `;

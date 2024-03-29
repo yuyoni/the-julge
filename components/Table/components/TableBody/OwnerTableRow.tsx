@@ -132,7 +132,7 @@ const getStatusStyle = (status: string) => {
       `;
     case "rejected":
       return css`
-        background: var(--The-julge-red);
+        background: var(--The-julge-rejected);
         color: var(--The-julge-gray-00);
       `;
     case "canceled":
@@ -150,6 +150,7 @@ const TableRow = styled.tr`
 const Cell = styled.td`
   background: var(--The-julge-gray-05);
   padding: 20px 12px;
+  background-color: white;
   ${body1Regular}
 `;
 

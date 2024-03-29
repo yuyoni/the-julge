@@ -33,19 +33,14 @@ export default function Post({ item }: { item: PostProps }) {
 
   return (
     <CardLink href={`/shops/${shopId}/notices/${id}`}>
-      <UiImage
-        hourlyPay={hourlyPay}
-        originalHourlyPay={originalHourlyPay}
-        closed={closed}
-        imageUrl={imageUrl}
-        startsAt={startsAt}
-      />
+      <UiImage closed={closed} imageUrl={imageUrl} startsAt={startsAt} />
       <UiPostContent
         name={name}
         duration={duration}
         workhour={workhour}
         address={address}
         hourlyPay={hourlyPay}
+        originalHourlyPay={originalHourlyPay}
       />
     </CardLink>
   );
@@ -56,12 +51,14 @@ const CardLink = styled.a`
   flex-direction: column;
   color: rgb(51, 51, 51);
   cursor: pointer;
+  padding: 16px;
+  border-radius: 20px;
   border: 1px solid var(--The-julge-gray-20, #e5e4e7);
   background-color: var(--The-julge-gray-00);
+  gap: 20px;
 
   &:hover {
-    .card-image {
-      opacity: 0.7;
-    }
+    background-color: var(--The-julge-green-00);
+    box-shadow: 0px 2px 8px 0px rgba(120, 116, 134, 0.25);
   }
 `;

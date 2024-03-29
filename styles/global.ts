@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { body2Regular } from "./fontsStyle";
 
 export const globalStyles = css`
   :root {
@@ -16,22 +15,17 @@ export const globalStyles = css`
     --The-julge-black: #111322;
 
     /* purple */
-    --The-julge-purple-05: #f6effc;
-    --The-julge-purple-10: #e9dcf4;
-    --The-julge-purple-20: #d0aeeb;
-    --The-julge-purple-30: #b182d5;
-    --The-julge-purple-40: #905cb9;
+    --The-julge-green-00: #f0f4f2;
+    --The-julge-green-05: #cedad5;
+    --The-julge-green-10: #869b92;
+    --The-julge-green-20: #416753;
+    --The-julge-green-30: #2f6144;
+    --The-julge-green-40: #224634;
 
-    /* blue */
-    --The-julge-blue-10: #cce6ff;
-    --The-julge-blue-20: #0080ff;
-
-    /* green */
-    --The-julge-green-10: #d4f7d4;
-    --The-julge-green-20: #20a81e;
-
-    /* red */
-    --The-julge-red: #ec5a46;
+    --The-julge-accepted: #80afca;
+    --The-julge-rejected: #e27974;
+    --The-julge-pending: #96bd81;
+    --The-julge-canceled: #a4a1aa;
 
     /* kakao */
     --The-julge-kakao: #fee500;
@@ -76,6 +70,10 @@ export const globalStyles = css`
     cursor: pointer;
   }
 
+  p {
+    line-height: 100%;
+  }
+
   input,
   textarea {
     border: none;
@@ -87,8 +85,7 @@ export const globalStyles = css`
   input:focus,
   textarea:focus {
     outline: none;
-    border: 1px solid var(--The-julge-purple-30);
-    background-color: var(--The-julge-purple-05);
+    border: 1px solid var(--The-julge-green-30);
   }
 
   input[type="search"]::-webkit-search-decoration,

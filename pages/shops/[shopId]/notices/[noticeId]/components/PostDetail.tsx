@@ -52,7 +52,7 @@ const ShopDetails = styled.div`
 `;
 
 const Category = styled.span`
-  color: var(--The-julge-purple-40, #905cb9);
+  color: var(--The-julge-green-40, #905cb9);
   ${body1Regular}
 `;
 

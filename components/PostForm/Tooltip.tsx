@@ -21,7 +21,7 @@ const Wrapper = styled.span`
   background: var(--The-julge-gray-40);
   border-radius: 4px;
   position: absolute;
-  top: -34px;
+  top: -30px;
   left: 0;
 
   &::after {

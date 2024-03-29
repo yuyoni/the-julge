@@ -12,7 +12,7 @@ interface MyNoticeProps {
 
 export default function NoticeCard({ cardData, shopData }: MyNoticeProps) {
   const { hourlyPay, startsAt, workhour, description, closed } = cardData.item;
-  const { imageUrl, address1, address2 } = shopData.item;
+  const { imageUrl, address1, address2, originalHourlyPay } = shopData.item;
 
   return (
     <>
@@ -25,6 +25,7 @@ export default function NoticeCard({ cardData, shopData }: MyNoticeProps) {
           workhour={workhour}
           address={address1 + address2}
           hourlyPay={hourlyPay}
+          originalHourlyPay={originalHourlyPay}
         />
         <StyledH2>{closed}</StyledH2>
       </Section>

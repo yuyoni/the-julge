@@ -32,34 +32,35 @@ const getColorStyles = (color: string) => {
     case "reject":
       return css`
         background: var(--The-julge-gray-00);
-        color: var(--The-julge-red);
-        border: 1px solid var(--The-julge-red);
+        color: var(--The-julge-rejected);
+        border: 1px solid var(--The-julge-rejected);
 
         :active {
-          background: #fbb7af;
+          background: var(--The-julge-rejected);
         }
       `;
     case "accept":
       return css`
         background: var(--The-julge-gray-00);
-        color: var(--The-julge-blue-20);
-        border: 1px solid var(--The-julge-blue-20);
+        color: var(--The-julge-accepted);
+        border: 1px solid var(--The-julge-accepted);
 
         :active {
-          background: var(--The-julge-blue-10);
+          background: var(--The-julge-accepted);
         }
       `;
     case "white":
       return css`
         background: var(--The-julge-gray-00);
-        color: var(--The-julge-purple-40);
-        border: 1px solid var(--The-julge-purple-40);
+        color: var(--The-julge-green-30);
+        border: 1px solid var(--The-julge-green-30);
 
         :hover {
-          background: var(--The-julge-purple-05);
+          background: var(--The-julge-gray-10);
         }
         :active {
-          background: var(--The-julge-purple-10);
+          background: var(--The-julge-gray-10);
+          font-size: 13px;
         }
       `;
     case "gray":
@@ -71,15 +72,18 @@ const getColorStyles = (color: string) => {
       `;
     default:
       return css`
-        background: var(--The-julge-purple-40);
+        background: var(--The-julge-green-20);
         color: var(--The-julge-gray-00);
-        border: 1px solid var(--The-julge-purple-40);
+        border: 1px solid var(--The-julge-green-20);
 
         :hover {
-          background: #8355a6;
+          background: var(--The-julge-green-40);
+          border: 1px solid var(--The-julge-green-40);
         }
         :active {
-          background: #6a4487;
+          background: var(--The-julge-green-40);
+          border: 1px solid var(--The-julge-green-40);
+          font-size: 13px;
         }
       `;
   }

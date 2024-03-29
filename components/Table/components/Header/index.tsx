@@ -23,8 +23,10 @@ const HeadRow = styled.tr`
 `;
 
 const Cell = styled.th`
-  background: var(--The-julge-purple-10);
+  background: var(--The-julge-green-10);
   padding: 14px 12px;
   text-align: left;
-  ${body2Regular}
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
 `;

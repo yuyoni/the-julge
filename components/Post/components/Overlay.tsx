@@ -21,6 +21,7 @@ const OverlayWrapper = styled.div`
   height: 100%;
   background-color: var(--The-julge-overlay-box);
   display: flex;
+  border-radius: 12px;
   align-items: center;
   justify-content: center;
 `;

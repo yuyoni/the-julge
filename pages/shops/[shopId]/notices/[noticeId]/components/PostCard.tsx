@@ -84,12 +84,7 @@ export default function PostCard({
     <Wrapper>
       <ImageContainer>
         {showImageOnText(isClosed, isOutdated)}
-        <Image
-          priority
-          src={noticeData.item.shop.item.imageUrl}
-          alt="shop_image"
-          fill
-        />
+        <img src={noticeData.item.shop.item.imageUrl} alt="shop_image" />
       </ImageContainer>
       <Container>
         <PostInformation noticeData={noticeData} />
@@ -134,8 +129,9 @@ const ImageContainer = styled.div`
   overflow: hidden;
 
   img {
-    max-width: 600px;
-    max-height: 542px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 

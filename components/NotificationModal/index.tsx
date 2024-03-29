@@ -1,4 +1,4 @@
-import closeIcon from "@/public/images/close_icon.svg";
+import closeIcon from "@/public/images/close-icon.svg";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Notification from "./components/Notification";
@@ -26,7 +26,7 @@ export default function NotificationModal({
           <Title>{`알림 ${notificationList.length}개`}</Title>
           <StyledCloseIcon
             src={closeIcon}
-            alt="close_icon"
+            alt="close-icon"
             onClick={handleClickNoti}
           />
         </Container>

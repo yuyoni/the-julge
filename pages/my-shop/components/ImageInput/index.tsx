@@ -131,7 +131,7 @@ const StyledButton = styled.div`
   height: 43px;
   border-radius: 4px;
   color: white;
-  background-color: var(--The-julge-purple-10);
+  background-color: var(--The-julge-green-05);
   text-align: center;
   line-height: 43px;
   font-size: 18px;

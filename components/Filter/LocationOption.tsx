@@ -43,7 +43,7 @@ const Container = styled.div<{ $isSelected: boolean }>`
   text-align: center;
   border-radius: 16px;
   background-color: ${({ $isSelected }) =>
-    $isSelected ? "var(--The-julge-purple-40)" : "transparent"};
+    $isSelected ? "var(--The-julge-green-20)" : "transparent"};
   color: ${({ $isSelected }) =>
     $isSelected ? "var(--The-julge-gray-00)" : "var(--The-julge-black)"};
 `;
