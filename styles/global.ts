@@ -54,52 +54,19 @@ export const globalStyles = css`
     --The-julge-overlay-box: rgba(0, 0, 0, 0.7);
 
     @font-face {
-      font-family: "GmarketSans";
+      font-family: "Pretendard";
+      src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+        format("woff");
       font-weight: 400;
       font-style: normal;
-      src: url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot");
-      src:
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix")
-          format("embedded-opentype"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2")
-          format("woff2"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff")
-          format("woff"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf")
-          format("truetype");
-      font-display: swap;
     }
+
     @font-face {
-      font-family: "GmarketSans";
-      font-weight: 500;
-      font-style: normal;
-      src: url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot");
-      src:
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot?#iefix")
-          format("embedded-opentype"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2")
-          format("woff2"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff")
-          format("woff"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.ttf")
-          format("truetype");
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "GmarketSans";
+      font-family: "Pretendard-Bold";
+      src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
+        format("woff");
       font-weight: 700;
       font-style: normal;
-      src: url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot");
-      src:
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot?#iefix")
-          format("embedded-opentype"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2")
-          format("woff2"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff")
-          format("woff"),
-        url("https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.ttf")
-          format("truetype");
-      font-display: swap;
     }
   }
 
@@ -107,7 +74,7 @@ export const globalStyles = css`
     box-sizing: border-box;
     margin: 0;
     word-break: keep-all;
-    font-family: GmarketSans;
+    font-family: Pretendard;
     font-style: normal;
   }
 
