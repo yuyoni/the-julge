@@ -22,7 +22,6 @@ export default function UiPostContent({
 }: PostUiPostContentProps) {
   return (
     <PostContent>
-      <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
       <PostName>{name}</PostName>
       <Time>
         <Image
@@ -47,6 +46,9 @@ export default function UiPostContent({
         <p>{address}</p>
       </Location>
       <Wage>{Number(hourlyPay).toLocaleString("ko-KR")}원</Wage>
+      <WageContainer>
+        <WageFlag hourlyPay={hourlyPay} originalHourlyPay={originalHourlyPay} />
+      </WageContainer>
     </PostContent>
   );
 }
@@ -88,6 +90,11 @@ const PostName = styled.div`
   @media only screen and (max-width: 768px) {
     ${body1Regular}
   }
+`;
+
+const WageContainer = styled.div`
+  display: flex;
+  justify-content: right;
 `;
 
 const Wage = styled.div`
