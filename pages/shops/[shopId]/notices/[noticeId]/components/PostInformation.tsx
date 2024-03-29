@@ -33,7 +33,6 @@ export default function PostInformation({
             <WageFlag
               hourlyPay={hourlyPay}
               originalHourlyPay={originalHourlyPay}
-              position="relative"
             />
           )}
         </WageContainer>
