@@ -120,7 +120,7 @@ root
 
 ## 🔗 배포 링크
 
-[The-julge - 바로가기](https://soyeon-jjang.vercel.app)
+[The-julge - 바로가기](https://the-julge-team3.vercel.app/)
 
 <br/><br/>
 
