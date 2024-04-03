@@ -3,10 +3,10 @@ export interface IData {
     id: string;
     email: string;
     type: "employer" | "employee";
-    name: string; // optional
-    phone: string; // optional
-    address: string; // optional
-    bio: string; // optional
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
     shop: {
       item: {
         id: string;
@@ -18,6 +18,6 @@ export interface IData {
         imageUrl: string;
         originalHourlyPay: number;
       };
-    }; // 또는 null
+    };
   };
 }

@@ -13,7 +13,6 @@ export function validateSigninData(formData: SigninFormData) {
   return true;
 }
 
-// TODO: 커스텀 에러 만들기
 export function validateSignupData(formData: SignupFormData) {
   const { email, password, passwordCheck } = formData;
   if (email.length == 0 || password.length == 0 || passwordCheck.length == 0) {

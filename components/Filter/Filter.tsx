@@ -150,7 +150,6 @@ const BorderLine = styled.div`
   background: var(--The-julge-gray-10);
 `;
 
-// Input 공통 컴포넌트로 변경예정
 const Input = styled.input`
   display: flex;
   padding: 16px 20px;

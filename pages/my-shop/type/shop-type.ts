@@ -1,4 +1,3 @@
-// shopRequest body data
 interface Links {
   rel: string;
   description: string;
@@ -18,7 +17,6 @@ interface ShopInfo {
   originalHourlyPay: number;
 }
 
-// shopRequest Response data
 interface ShopData {
   item: {
     id: string;
@@ -34,10 +32,10 @@ interface ShopData {
         id: string;
         email: string;
         type: string;
-        name?: string; // optional
-        phone?: string; // optional
-        address?: string; // optional
-        bio?: string; // optional
+        name?: string;
+        phone?: string;
+        address?: string;
+        bio?: string;
       };
       href: string;
     };
@@ -45,10 +43,9 @@ interface ShopData {
   links: Links[];
 }
 
-// createPresigned의 response data
 interface CreatePresignedURLData {
   item: {
-    url: "string"; // Presigned URL
+    url: "string";
   };
   links: Links[];
 }

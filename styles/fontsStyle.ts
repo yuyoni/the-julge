@@ -5,7 +5,7 @@ export const Caption = css`
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 16px; /* 133.333% */
+  line-height: 16px;
 `;
 
 /* The julge/body 1 - regular */
@@ -13,7 +13,7 @@ export const body1Regular = css`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 162.5% */
+  line-height: 26px;
 `;
 
 /* The julge/body 1 - bold */
@@ -21,7 +21,7 @@ export const body1Bold = css`
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
 `;
 
 /* The julge/body 2 - regular */
@@ -29,7 +29,7 @@ export const body2Regular = css`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px; /* 157.143% */
+  line-height: 22px;
 `;
 
 /* The julge/body 2 - bold */

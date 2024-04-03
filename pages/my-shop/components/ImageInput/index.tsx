@@ -15,7 +15,6 @@ type ImgProps = {
 };
 
 export default function ImageInput({ handleImg, value }: ImgProps) {
-  // const [fileInfo, setFileInfo] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(value || null);
   const { jwt: token } = useCookie();
 
@@ -34,7 +33,7 @@ export default function ImageInput({ handleImg, value }: ImgProps) {
       }
     },
     onError: (error) => {
-      console.log(error);
+      console.error(error);
     },
   });
 
@@ -44,8 +43,6 @@ export default function ImageInput({ handleImg, value }: ImgProps) {
     if (selectedFile && fileCheck(selectedFile.type)) {
       const url = URL.createObjectURL(selectedFile);
       setPreviewUrl(url);
-      console.log(selectedFile);
-      // setFileInfo(selectedFile);
       mutation.mutate(selectedFile);
     } else {
       alert("jpeg, png, tiff 파일만 업로드 가능합니다.");

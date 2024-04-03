@@ -19,7 +19,7 @@ export default async function createPresinedURL(file: File, token: any) {
       throw new Error();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -31,7 +31,7 @@ async function uploadImageToS3(url: string, file: File) {
     }
     return false;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 }

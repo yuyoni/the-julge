@@ -14,7 +14,7 @@ export const globalStyles = css`
     --The-julge-gray-50: #7d7986;
     --The-julge-black: #111322;
 
-    /* purple */
+    /* green */
     --The-julge-green-00: #f0f4f2;
     --The-julge-green-05: #cedad5;
     --The-julge-green-10: #869b92;

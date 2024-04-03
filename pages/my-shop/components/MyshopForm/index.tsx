@@ -91,7 +91,7 @@ export default function MyShopForm({
     mutationFn: () => (method === "post" ? postShops() : putShops()),
     onSuccess: () => {
       showToast(
-        method === "post" ? "가게가 등록되었습니다." : "수정이 완료되었습니다.",
+        method === "post" ? "가게가 등록되었습니다." : "수정이 완료되었습니다."
       );
       router.push("/my-shop");
     },
@@ -114,7 +114,6 @@ export default function MyShopForm({
       ...prevState,
       [key]: value,
     }));
-    console.log(`${key}:${value}`);
   };
 
   const handleCategory = (category: string) => {
